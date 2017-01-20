@@ -1,0 +1,28 @@
+.topleft {
+  color: white;
+  position: absolute;
+  width            : 300px;
+  overflow         : hidden;
+  z-index: 10;
+  background-color : #696969;
+}
+
+.topleftText {
+  color: white;
+  padding-left: 15px;
+  position: relative;
+  width            : 300px;
+  overflow         : hidden;
+  z-index: 10;
+  background-color : #696969;
+}
+
+.topinfo {
+  background-color : rgba(255,255,255,0.2);
+  margin-bottom    : 5px;
+  width            : 100%;
+  overflow-x       : auto;
+  min-height:75vh;
+}
+
+
