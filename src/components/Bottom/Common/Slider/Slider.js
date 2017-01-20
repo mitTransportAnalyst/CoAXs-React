@@ -1,6 +1,4 @@
-/**
- * Created by xinzheng on 1/19/17.
- */
+
 
 import React from "react";
 import "./Slider.css";
