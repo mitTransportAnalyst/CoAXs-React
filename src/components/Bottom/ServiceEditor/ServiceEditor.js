@@ -2,6 +2,7 @@ import React from "react";
 import s from "./ServiceEditor.css";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import Slider from "../Common/Slider/Slider"
+import {RunningTime, Headway, DwellTime, RunningTimeMin, RunningTimeMax, DwellTimeMin, DwellTimeMax, HeadwayMin, HeadwayMax} from "../../../config"
 
 
 class ServiceEditor extends React.Component {
@@ -37,7 +38,7 @@ class ServiceEditor extends React.Component {
 
         <div>
 
-          <div className="setTimesTitle">
+          <div className="setTimesTitle" style={RunningTime? null : {display: "none"}}>
             <div className="subHead">
               Running time change (segment only)
             </div>
@@ -48,7 +49,7 @@ class ServiceEditor extends React.Component {
                   {/*<img src="public/media/runningtime.png" style={{height: 35}}/>*/}
                 </div>
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="running" min="0" max="60" value = "0" step="5" className="right"/>
+                  <Slider name="running" min={RunningTimeMin} max={RunningTimeMax} value = "0" step="5" className="right"/>
 
                   {/*<input type="range" min="0" max="60" value="0" step="5" style="margin-top: 10px;" className="right"/>*/}
                   <i className="fa fa-arrow-down"></i>
@@ -60,7 +61,7 @@ class ServiceEditor extends React.Component {
 
         </div>
 
-        <div style={{marginTop: 1}}>
+        <div style={DwellTime? {marginTop: 1} : {display: "none"}}>
 
           <div className="setTimesTitle">
 
@@ -74,7 +75,7 @@ class ServiceEditor extends React.Component {
                   {/*<img src="public/media/dwelltime.png" style="height:35px"/>*/}
                 </div>
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="dwell" min="0" max="75" value = "0" step="5" className="right"/>
+                  <Slider name="dwell" min={DwellTimeMin} max={DwellTimeMax} value = "0" step="5" className="right"/>
 
                   <i className="fa fa-arrow-down"></i>
                   {/*{{currentParam[tabnav].dwell}}%*/}
@@ -87,7 +88,7 @@ class ServiceEditor extends React.Component {
 
         </div>
 
-        <div style={{marginTop: 1}}>
+        <div style={Headway? {marginTop: 1} : {display: "none"}}>
 
           <div className="setTimesTitle">
 
@@ -101,8 +102,7 @@ class ServiceEditor extends React.Component {
                   {/*<img src="public/media/frequency.png" style={{height: 35}}/>*/}
                 </div>
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="dwell" min="0" max="75" value = "0" step="5" className="right"/>
-
+                  <Slider name="headway" min={HeadwayMin} max={HeadwayMax} value = "0" step="5" className="right"/>
                   <i className="fa fa-arrow-down"></i>
                   {/*{{currentParam[tabnav].headway}}%*/}
                 </div>

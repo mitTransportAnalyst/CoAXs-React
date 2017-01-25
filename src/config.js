@@ -17,7 +17,65 @@ export const PointToPoint = true;
 export const Accessibility = true;
 
 
+//Service Editor
+//Running Time
+export const RunningTime = false;
+export const RunningTimeMin = 0;
+export const RunningTimeMax = 60;
+export function modifySpeed(corridorId,scale,cb) {
+  $http.get('/load/scenario/' + corridorId)
+    .success(function (data, status) {
+      var scenarioJSON = [];
+      data.modifications.forEach(function (route) {
+          if (route.type === "adjust-speed") {
+            route.scale = scale;
+            scenarioJSON.push(route);
+          }
+        }
+      );
+      cb(scenarioJSON)
+    })
+}
 
+//Dwell Time
+export const DwellTime = true;
+export const DwellTimeMin = 0;
+export const DwellTimeMax = 70;
+export function ModifyDwells(corridorId,scale,cb){
+  $http.get('/load/scenario/'+corridorId)
+    .success(function (data, status) {
+      var scenarioJSON = [];
+      data.modifications.forEach(function(route){
+          if (route.type === "adjust-dwell-time"){
+            route.scale = scale;
+            scenarioJSON.push(route);
+          }
+        }
+      );
+      cb(scenarioJSON)
+    })
+}
+
+//Headway
+export const Headway = true;
+export const HeadwayMin = 0;
+export const HeadwayMax = 80;
+export function modifyHeadway(corridorId,scale,cb) {
+  $http.get('/load/scenario/'+corridorId)
+    .success(function (data, status) {
+      var scenarioJSON = [];
+      data.modifications.forEach(function(route){
+          if (route.type === "adjust-frequency"){
+            route.entries.forEach(function (entry) {
+              entry.headwaySecs = entry.headwaySecs*scale ;
+            });
+            scenarioJSON.push(route);
+          }
+        }
+      );
+      cb(scenarioJSON)
+    })
+};
 
 
 

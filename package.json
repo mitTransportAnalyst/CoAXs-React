@@ -1,19 +1,18 @@
 {
-  "name": "redux-minimal",
+  "name": "CoAXs-React",
   "version": "1.0.0",
-  "description": "Start building complex react-redux apps today, with this minimalist easy to understand starter kit (boilerplate)",
+  "description": "CoAXs | Bus Priority",
   "keywords": [
     "react",
     "redux",
-    "minimal",
-    "starter kit",
-    "boilerplate"
+    "CoAXs",
+    "Bus Priority"
   ],
   "main": "index.js",
-  "homepage": "http://redux-minimal.js.org/",
+  "homepage": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/catalin-luntraru/redux-minimal"
+    "url": "https://github.com/mitTransportAnalyst/CoAXs-React"
   },
   "scripts": {
     "start": "webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080",
@@ -29,9 +28,10 @@
       "stage-3"
     ]
   },
-  "author": "Catalin Luntraru",
+  "author": "Xin Zheng",
   "license": "MIT",
   "dependencies": {
+    "browsochrones": "^0.11.0",
     "leaflet": "^1.0.0-rc.2",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
@@ -44,8 +44,10 @@
     "react-router-bootstrap": "^0.23.1",
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
+    "redux-actions": "^1.2.0",
     "redux-form": "^6.4.3",
-    "redux-saga": "^0.14.3"
+    "redux-saga": "^0.14.3",
+    "transitive-js": "^0.9.2"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
