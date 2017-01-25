@@ -10,7 +10,7 @@ class Home extends React.Component {
     return (
       <div className="page-home">
         <TopleftPanel/>
-        <Map/>
+        <Map style={{height:500, width:500}}/>
         <Bottom/>
       </div>
 

@@ -3,13 +3,12 @@ import { render } from 'react-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import s from "./RouteMap.css"
 
-
 class RouteMap extends React.Component {
   constructor() {
     super();
     this.state = {
-      lat: 5,
-      lng: 5,
+      lat: 42.36,
+      lng: -71,
       zoom: 13,
     };
   }
@@ -17,12 +16,15 @@ class RouteMap extends React.Component {
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
-      <Map center={position} zoom={this.state.zoom} className={s.map}>
-        <TileLayer
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
+      <div className={s.map}>
+        <Map center={position} zoom={13}>
+          <TileLayer
+            url='https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg'
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
 
-      </Map>
+        </Map>
+      </div>
     );
   }
 }
