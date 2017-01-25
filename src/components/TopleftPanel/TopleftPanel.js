@@ -1,17 +1,18 @@
 
 import React from "react";
 import "./TopleftPanel.css"
+import {IntroTitle, IntroDescription} from "../../config.js"
 
 class lefttopPanel extends React.Component {
   render() {
     return (
       <div className="topleft">
         <h4 className="topleftText">
-          <b>CoAXs</b> | Bus Priority
+          {IntroTitle}
         </h4>
         <div className="topinfo container">
           <div>
-            <h5>Showing door-to-door travel, with MBTA weekday morning schedule as baseline.</h5>
+            <h5>{IntroDescription}</h5>
           </div>
         </div>
       </div>

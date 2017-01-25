@@ -1,13 +1,23 @@
-
-
 import React from "react";
 import Fa from "react-fontawesome";
 import "./TimeFilter.css";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import Slider from "../Common/Slider/Slider"
-
+import {PointToPoint, Accessibility} from "../../../config"
 
 class TimeFilter extends React.Component {
+  renderMode(){
+    if (PointToPoint && Accessibility){
+      console.log("run")
+      return <div style={{color:"black", marginTop:30}}>
+        Point-to-point mode:
+        {/*<i className="fa fa-check-square"></i>*/}
+        <i style={{color:"white", paddingLeft:6}} className="fa fa-square"></i>
+      </div>
+    }
+  }
+
+
   render() {
     return (
       <div className="colBody">
@@ -56,11 +66,7 @@ class TimeFilter extends React.Component {
             </div>
           </div>
 
-          <div style={{color:"black", marginTop:30}}>
-            Point-to-point mode:
-            {/*<i className="fa fa-check-square"></i>*/}
-            <i style={{color:"white", paddingLeft:6}} className="fa fa-square"></i>
-          </div>
+          {this.renderMode()};
 
         </div>
       </div>
