@@ -1,0 +1,15 @@
+.leaflet-container{
+  /*left: 300px;*/
+  /*bottom: 300px;*/
+  /*right: 0px;*/
+  /*top: 500px;*/
+
+  height: 75vh;
+
+  /*width: 50%;*/
+  /*width: -moz-calc(100% - 300px);*/
+  width: calc(100vw - 300px);
+  position: absolute;
+  left : 300px;
+  z-index 		   : 99
+}

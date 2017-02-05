@@ -6,10 +6,26 @@ import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 
 
 class Scenario extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: true,
+    };
+
+    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
+
+  }
+
+  handlePlaceHolder() {
+    this.setState({
+      isOpen : !this.state.isOpen
+    })
+  }
+
   render() {
     return (
       <div className="colBody" id="leftDynamic">
-        <div className="colHead" >
+        <div className="colHead" onClick={this.handlePlaceHolder}>
           <i className="fa fa-random"></i>
           <span>Scenario: Existing MBTA</span>
           {/*<span>*/}
@@ -21,22 +37,27 @@ class Scenario extends React.Component {
       {/*</span>*/}
         </div>
 
+        { this.state.isOpen?
+          <div className="placeHolder">
+            <div className="bigText">
+              <i className="fa fa-random"></i>
+            </div>
+          </div>
+          :
+          null
+        }
 
-        {/*<div className="placeHolder">*/}
-          {/*<div className="bigText">*/}
-            {/*<i className="fa fa-random"></i>*/}
-          {/*</div>*/}
-        {/*</div>*/}
+
 
         <div className="showToggle">
 
           <div className="btn-group btn-group-justified">
 
-            <label className="btn" style={{backgroundColor:"grey"}}><i className="fa fa-balance-scale"></i> Compare
+            <label className="btn" style={{backgroundColor:"grey", color:"white"}}><i className="fa fa-balance-scale"></i> Compare
             </label>
 
 
-            <label className="btn" style={{backgroundColor:"grey"}}><i className="fa fa-plus-square"></i> Rename
+            <label className="btn" style={{backgroundColor:"grey", color:"white"}}><i className="fa fa-plus-square"></i> Rename
             </label>
 
 

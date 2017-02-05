@@ -1,9 +1,10 @@
 /* this css is exclusively to customize the range sliders so that they can look consistent across browsers */
 
 input[type=range] {
+  display: inline;
   -webkit-appearance: none;
   margin: 10px 0;
-  width: 75%;
+  width: 85%;
 }
 input[type=range]:focus {
   outline: none;

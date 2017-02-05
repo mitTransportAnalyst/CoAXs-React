@@ -33,7 +33,29 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
-      }
+      },
+      {
+        test: /\.geojson$/,
+        loaders: ['json-loader'],
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json-loader'],
+      },
+      // {
+      //   test: /\.(jpe?g|png|gif|svg)$/i,
+      //   loaders: [
+      //     'file?hash=sha512&digest=hex&name=[hash].[ext]',
+      //     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+      //   ],
+      // },
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 25000,
+        },
+      },
     ],
   },
   devServer: {

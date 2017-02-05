@@ -7,8 +7,8 @@ export const IntroTitle = "CoAXs | Bus Priority";
 export const IntroDescription = "Showing door-to-door travel, with MBTA weekday morning schedule as baseline.";
 
 //Map
-export const MapLat = 42.36;
-export const MapLng = -71;
+export const MapLat = 45.36;
+export const MapLng = -71.1;
 export const ZoomLevel = 13;
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
@@ -18,8 +18,8 @@ export const Accessibility = true;
 
 
 //Service Editor
-//Running Time
-export const RunningTime = false;
+//Running Time (add more modification function)
+export const RunningTime = true;
 export const RunningTimeMin = 0;
 export const RunningTimeMax = 60;
 export function modifySpeed(corridorId,scale,cb) {
@@ -75,7 +75,7 @@ export function modifyHeadway(corridorId,scale,cb) {
       );
       cb(scenarioJSON)
     })
-};
+}
 
 
 

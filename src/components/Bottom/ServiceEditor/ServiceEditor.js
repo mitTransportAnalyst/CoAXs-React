@@ -2,30 +2,71 @@ import React from "react";
 import s from "./ServiceEditor.css";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import Slider from "../Common/Slider/Slider"
-import {RunningTime, Headway, DwellTime, RunningTimeMin, RunningTimeMax, DwellTimeMin, DwellTimeMax, HeadwayMin, HeadwayMax} from "../../../config"
+import {
+  RunningTime,
+  Headway,
+  DwellTime,
+  RunningTimeMin,
+  RunningTimeMax,
+  DwellTimeMin,
+  DwellTimeMax,
+  HeadwayMin,
+  HeadwayMax
+} from "../../../config"
+
+
+import runningPic from '../../../img/runningtime.png'
+import dwellPic from '../../../img/dwelltime.png'
+import headwayPic from '../../../img/frequency.png'
+
+
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../../reducers/action';
 
 
 class ServiceEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: true,
+    };
+
+    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
+
+  }
+
+  handlePlaceHolder() {
+    this.setState({
+      isOpen : !this.state.isOpen
+    })
+  }
+
   render() {
     return (
       <div className="colBody" id="service-tab">
-        <div className="colHead">
+        <div className="colHead" onClick={
+          () => {
+            this.handlePlaceHolder();
+        this.props.changeMap(!this.props.currentMap);
+        }}>
           <i className="fa fa-pencil-square-o"></i>
           Service Editor
         </div>
 
 
-        {/*// <div className="placeHolder">*/}
-        {/*//   <div className="bigText">*/}
-        {/*//   <i className="fa fa-pencil-square-o"></i>*/}
-        {/*//   </div>*/}
-        {/*//   </div>*/}
-
-        {/*// <div className="showToggle">*/}
-
+        { this.state.isOpen ?
+          <div className="placeHolder">
+            <div className="bigText">
+              <i className="fa fa-pencil-square-o"></i>
+            </div>
+          </div>
+          :
+          null
+        }
 
         <div className="btn-group btn-group-justified">
-          <div className="btn" >
+          <div className="btn">
             {/*style="width:300px; color:{{variants[tabnav].color}}; background-color:{{variants[tabnav].color}}"*/}
             <i className="fa fa-level-down "/>
           </div>
@@ -38,7 +79,7 @@ class ServiceEditor extends React.Component {
 
         <div>
 
-          <div className="setTimesTitle" style={RunningTime? null : {display: "none"}}>
+          <div className="setTimesTitle" style={RunningTime ? null : {display: "none"}}>
             <div className="subHead">
               Running time change (segment only)
             </div>
@@ -46,13 +87,15 @@ class ServiceEditor extends React.Component {
               <div style={{marginTop: -2}}>
 
                 <div style={{width: 60, display: "inline-block"}}>
-                  {/*<img src="public/media/runningtime.png" style={{height: 35}}/>*/}
+                  <img src={runningPic} style={{height: 35}}/>
                 </div>
+                <i className="fa fa-arrow-down" style={{color: "black"}}></i>
+
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="running" min={RunningTimeMin} max={RunningTimeMax} value = "0" step="5" className="right"/>
+                  <Slider name="running" min={RunningTimeMin} max={RunningTimeMax} value="0" step="5"
+                          className="right"/>
 
                   {/*<input type="range" min="0" max="60" value="0" step="5" style="margin-top: 10px;" className="right"/>*/}
-                  <i className="fa fa-arrow-down"></i>
                   {/*{{currentParam[tabnav].runningTime}}%*/}
                 </div>
               </div>
@@ -61,7 +104,7 @@ class ServiceEditor extends React.Component {
 
         </div>
 
-        <div style={DwellTime? {marginTop: 1} : {display: "none"}}>
+        <div style={DwellTime ? {marginTop: 1} : {display: "none"}}>
 
           <div className="setTimesTitle">
 
@@ -72,12 +115,13 @@ class ServiceEditor extends React.Component {
             <div>
               <div style={{paddingTop: 1}}>
                 <div style={{width: 60, display: "inline-block"}}>
-                  {/*<img src="public/media/dwelltime.png" style="height:35px"/>*/}
+                  <img src={dwellPic} style={{height: 30}}/>
                 </div>
-                <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="dwell" min={DwellTimeMin} max={DwellTimeMax} value = "0" step="5" className="right"/>
+                <i className="fa fa-arrow-down" style={{color: "black"}}></i>
 
-                  <i className="fa fa-arrow-down"></i>
+                <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
+                  <Slider name="dwell" min={DwellTimeMin} max={DwellTimeMax} value="0" step="5" className="right"/>
+
                   {/*{{currentParam[tabnav].dwell}}%*/}
                 </div>
               </div>
@@ -88,7 +132,7 @@ class ServiceEditor extends React.Component {
 
         </div>
 
-        <div style={Headway? {marginTop: 1} : {display: "none"}}>
+        <div style={Headway ? {marginTop: 1} : {display: "none"}}>
 
           <div className="setTimesTitle">
 
@@ -99,12 +143,12 @@ class ServiceEditor extends React.Component {
             <div>
               <div style={{paddingTop: 1}}>
                 <div style={{width: 60, display: "inline-block"}}>
-                  {/*<img src="public/media/frequency.png" style={{height: 35}}/>*/}
+                  <img src={headwayPic} style={{height: 35}}/>
                 </div>
+                <i className="fa fa-arrow-down" style={{color: "black"}}></i>
+
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="headway" min={HeadwayMin} max={HeadwayMax} value = "0" step="5" className="right"/>
-                  <i className="fa fa-arrow-down"></i>
-                  {/*{{currentParam[tabnav].headway}}%*/}
+                  <Slider name="headway" min={HeadwayMin} max={HeadwayMax} value="0" step="5" className="right"/>
                 </div>
               </div>
             </div>
@@ -123,4 +167,19 @@ class ServiceEditor extends React.Component {
   }
 }
 
-export default ServiceEditor
+
+function mapStateToProps(state) {
+  return {
+    currentCorridor: state.reducer.currentCor,
+    currentMap: state.reducer.currentMap,
+  }
+}
+
+function mapDispachToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispachToProps)(ServiceEditor);
+
+

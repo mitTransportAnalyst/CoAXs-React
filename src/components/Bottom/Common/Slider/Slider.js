@@ -5,7 +5,7 @@ import "./Slider.css";
 class Slider extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: this.props.min};
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -18,9 +18,7 @@ class Slider extends React.Component {
   render() {
     return (
       <div>
-      <span style={{color: "black"}}>{this.state.value}</span>
-       <span> <input type="range" name={this.props.name} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
-
+        <span style={{color: "black"}}>{this.state.value}   <input type="range" name={this.props.name} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
       </div>
     );
   }

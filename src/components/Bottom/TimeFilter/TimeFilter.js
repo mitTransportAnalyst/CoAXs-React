@@ -6,9 +6,18 @@ import Slider from "../Common/Slider/Slider"
 import {PointToPoint, Accessibility} from "../../../config"
 
 class TimeFilter extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isOpen: true,
+    };
+
+    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
+  }
+
+
   renderMode(){
     if (PointToPoint && Accessibility){
-      console.log("run")
       return <div style={{color:"black", marginTop:30}}>
         Point-to-point mode:
         {/*<i className="fa fa-check-square"></i>*/}
@@ -17,24 +26,33 @@ class TimeFilter extends React.Component {
     }
   }
 
+  handlePlaceHolder(){
+    this.setState({
+      isOpen : !this.state.isOpen
+    })
+  }
 
   render() {
     return (
       <div className="colBody">
-        <div className="colHead">
+        <div className="colHead" onClick={this.handlePlaceHolder}>
           <i><Fa name="clock-o"></Fa></i>
           Time Map
         </div>
 
-
-        {/*<div className="placeHolder">*/}
-        {/*<div className="bigText">*/}
-        {/*<i className="fa fa-clock-o"></i>*/}
-        {/*</div>*/}
-        {/*</div>*/}
+        { this.state.isOpen?
+          <div className="placeHolder">
+            <div className="bigText">
+              <i className="fa fa-clock-o"></i>
+            </div>
+          </div>
+          :
+          null
+        }
 
 
         <div className="showToggle">
+
           <ButtonGroup className="updateStart">
             <Button bsStyle="info" className="update">
               <i><Fa name="refresh"></Fa></i>

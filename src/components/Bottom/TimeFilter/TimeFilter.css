@@ -3,7 +3,7 @@
   background-color: #F5F5F3;
   position: absolute;
   width: 300px;
-  color: white;
+  color: grey;
   z-index: 0;
 }
 
@@ -60,3 +60,18 @@
 }
 
 
+
+.colBody .placeHolder {
+  font-size: 7em;
+  height:100%;
+  width:100%;
+  display: table;
+  overflow-y: hidden;
+}
+
+
+.placeHolder .bigText {
+  display: table-cell;
+  vertical-align: middle;
+  text-align:center;
+}
