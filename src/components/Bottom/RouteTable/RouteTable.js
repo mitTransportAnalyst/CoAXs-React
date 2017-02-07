@@ -26,7 +26,7 @@ class RouteTable extends React.Component {
           <div className="btn-group btn-group-justified">
             <label className="btn" style={{color: "white", backgroundColor: "grey"}}>
               {/*style="background-color: {{variants[tabnav].color}}; color: #FFF"*/}
-              <i className="fa fa-line-chart"></i>
+              <i className="fa fa-line-chart"/>
               {/*<span >Hide Data</span>*/}
               <span >Show Data</span>
             </label>

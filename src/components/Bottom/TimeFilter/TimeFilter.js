@@ -21,7 +21,7 @@ class TimeFilter extends React.Component {
       return <div style={{color:"black", marginTop:30}}>
         Point-to-point mode:
         {/*<i className="fa fa-check-square"></i>*/}
-        <i style={{color:"white", paddingLeft:6}} className="fa fa-square"></i>
+        <i style={{color:"white", paddingLeft:6}} className="fa fa-square"/>
       </div>
     }
   }
@@ -36,14 +36,14 @@ class TimeFilter extends React.Component {
     return (
       <div className="colBody">
         <div className="colHead" onClick={this.handlePlaceHolder}>
-          <i><Fa name="clock-o"></Fa></i>
+          <i><Fa name="clock-o"/></i>
           Time Map
         </div>
 
         { this.state.isOpen?
-          <div className="placeHolder">
+          <div className="placeHolder" onClick={this.handlePlaceHolder}>
             <div className="bigText">
-              <i className="fa fa-clock-o"></i>
+              <i className="fa fa-clock-o"/>
             </div>
           </div>
           :
@@ -55,12 +55,12 @@ class TimeFilter extends React.Component {
 
           <ButtonGroup className="updateStart">
             <Button bsStyle="info" className="update">
-              <i><Fa name="refresh"></Fa></i>
+              <i><Fa name="refresh"/></i>
               <span> Update</span>
             </Button>
 
             <Button className="start">
-              <i><Fa name="play"></Fa></i>
+              <i><Fa name="play"/></i>
               <span> Start</span>
             </Button>
           </ButtonGroup>
@@ -72,11 +72,11 @@ class TimeFilter extends React.Component {
 
                 <div>
                   <span style={{position: "absolute", left:10, color:"black"}}>
-                    <i><Fa name="step-backward" size="2x"></Fa></i>
+                    <i><Fa name="step-backward" size="2x"/></i>
                   </span>
 
                   <span style={{position: "absolute", right:10, color:"black"}}>
-                    <i><Fa name="step-forward" size="2x"></Fa></i>
+                    <i><Fa name="step-forward" size="2x"/></i>
                   </span>
 
                 </div>

@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import "./Bottom.css"
 import TimeFilter from "./TimeFilter/TimeFilter"

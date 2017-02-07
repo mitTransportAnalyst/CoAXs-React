@@ -1,7 +1,8 @@
 import React from "react";
 import s from "./ServiceEditor.css";
-import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
-import Slider from "../Common/Slider/Slider"
+import cloneDeep from 'lodash/cloneDeep'
+
+//import configuration file
 import {
   RunningTime,
   Headway,
@@ -11,15 +12,20 @@ import {
   DwellTimeMin,
   DwellTimeMax,
   HeadwayMin,
-  HeadwayMax
+  HeadwayMax,
+  CorridorInfo,
 } from "../../../config"
 
+//import slider component
+import Slider from "../Common/Slider/Slider"
 
+
+//import pictures
 import runningPic from '../../../img/runningtime.png'
 import dwellPic from '../../../img/dwelltime.png'
 import headwayPic from '../../../img/frequency.png'
 
-
+//bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
@@ -30,17 +36,58 @@ class ServiceEditor extends React.Component {
     super(props);
     this.state = {
       isOpen: true,
+      resetAdjust: {},
+      currentAdjust: {},
     };
 
-    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
+    this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
+    this.handleSaveButton = this.handleSaveButton.bind(this);
+    this.changeFeature = this.changeFeature.bind(this);
+
 
   }
+
+  componentWillMount() {
+    let model = {};
+    Object.keys(CorridorInfo).map(
+      (id)=> {
+        model[id] = {
+          "runningTime": 0,
+          "dwellTime": 0,
+          "headway": 0,
+        }
+      }
+    );
+    this.setState({
+      "resetAdjust": model,
+      "currentAdjust": model,
+    })
+
+
+  }
+
 
   handlePlaceHolder() {
     this.setState({
-      isOpen : !this.state.isOpen
+      isOpen: !this.state.isOpen
     })
   }
+
+
+  handleSaveButton() {
+    this.props.saveScenario(this.state.currentAdjust)
+
+  }
+
+
+  changeFeature(feature, value) {
+    let temp = cloneDeep(this.state.currentAdjust);
+    temp[this.props.currentCorridor][feature] = value;
+    this.setState({
+      currentAdjust: temp,
+    })
+  }
+
 
   render() {
     return (
@@ -48,17 +95,21 @@ class ServiceEditor extends React.Component {
         <div className="colHead" onClick={
           () => {
             this.handlePlaceHolder();
-        this.props.changeMap(!this.props.currentMap);
-        }}>
-          <i className="fa fa-pencil-square-o"></i>
+            this.props.changeMap(!this.props.currentMap);
+          }}>
+          <i className="fa fa-pencil-square-o"/>
           Service Editor
         </div>
 
 
         { this.state.isOpen ?
-          <div className="placeHolder">
+          <div className="placeHolder" onClick={
+            () => {
+              this.handlePlaceHolder();
+              this.props.changeMap(!this.props.currentMap);
+            }}>
             <div className="bigText">
-              <i className="fa fa-pencil-square-o"></i>
+              <i className="fa fa-pencil-square-o"/>
             </div>
           </div>
           :
@@ -71,7 +122,8 @@ class ServiceEditor extends React.Component {
             <i className="fa fa-level-down "/>
           </div>
 
-          <div className="btn btn-info" style={{width: 150, position: "absolute", right: 0}}>
+          <div className="btn btn-info" style={{width: 150, position: "absolute", right: 0}}
+               onClick={this.handleSaveButton}>
             <i className="fa fa-save"/> Save
           </div>
         </div>
@@ -89,14 +141,13 @@ class ServiceEditor extends React.Component {
                 <div style={{width: 60, display: "inline-block"}}>
                   <img src={runningPic} style={{height: 35}}/>
                 </div>
-                <i className="fa fa-arrow-down" style={{color: "black"}}></i>
+                <i className="fa fa-arrow-down" style={{color: "black"}}/>
 
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="running" min={RunningTimeMin} max={RunningTimeMax} value="0" step="5"
-                          className="right"/>
+                  <Slider name="runningTime" min={RunningTimeMin} max={RunningTimeMax} value={this.state.currentAdjust[this.props.currentCorridor]["runningTime"]} step={5}
+                          className="right" changeFunction={this.changeFeature}  />
 
-                  {/*<input type="range" min="0" max="60" value="0" step="5" style="margin-top: 10px;" className="right"/>*/}
-                  {/*{{currentParam[tabnav].runningTime}}%*/}
+
                 </div>
               </div>
             </div>
@@ -117,12 +168,11 @@ class ServiceEditor extends React.Component {
                 <div style={{width: 60, display: "inline-block"}}>
                   <img src={dwellPic} style={{height: 30}}/>
                 </div>
-                <i className="fa fa-arrow-down" style={{color: "black"}}></i>
+                <i className="fa fa-arrow-down" style={{color: "black"}}/>
 
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="dwell" min={DwellTimeMin} max={DwellTimeMax} value="0" step="5" className="right"/>
+                  <Slider name="dwellTime" min={DwellTimeMin} max={DwellTimeMax} value={this.state.currentAdjust[this.props.currentCorridor]["dwellTime"]}  step="5" className="right" changeFunction={this.changeFeature}/>
 
-                  {/*{{currentParam[tabnav].dwell}}%*/}
                 </div>
               </div>
             </div>
@@ -145,10 +195,10 @@ class ServiceEditor extends React.Component {
                 <div style={{width: 60, display: "inline-block"}}>
                   <img src={headwayPic} style={{height: 35}}/>
                 </div>
-                <i className="fa fa-arrow-down" style={{color: "black"}}></i>
+                <i className="fa fa-arrow-down" style={{color: "black"}}/>
 
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="headway" min={HeadwayMin} max={HeadwayMax} value="0" step="5" className="right"/>
+                  <Slider name="headway" min={HeadwayMin} max={HeadwayMax} value={this.state.currentAdjust[this.props.currentCorridor]["headway"]}  step="5" className="right" changeFunction={this.changeFeature}/>
                 </div>
               </div>
             </div>

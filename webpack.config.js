@@ -2,7 +2,7 @@
 // http://webpack.github.io/docs/webpack-dev-server.html
 const app_root = 'src'; // the app root folder: src, src_users, etc
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   app_root: app_root, // the app root folder, needed by the other webpack configs
@@ -42,13 +42,6 @@ module.exports = {
         test: /\.json$/,
         loaders: ['json-loader'],
       },
-      // {
-      //   test: /\.(jpe?g|png|gif|svg)$/i,
-      //   loaders: [
-      //     'file?hash=sha512&digest=hex&name=[hash].[ext]',
-      //     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-      //   ],
-      // },
       {
         test: /\.(jpg|png)$/,
         loader: 'url-loader',
@@ -61,11 +54,16 @@ module.exports = {
   devServer: {
     contentBase: __dirname + '/public',
   },
-  plugins: [
-    new CleanWebpackPlugin(['css/main.css', 'js/bundle.js'], {
-      root: __dirname + '/public',
-      verbose: true,
-      dry: false, // true for simulation
-    }),
-  ],
+  // plugins: [
+  //   new CleanWebpackPlugin(['css/main.css', 'js/bundle.js'], {
+  //     root: __dirname + '/public',
+  //     verbose: true,
+  //     dry: false, // true for simulation
+  //   }),
+  // ],
+  resolve: {
+    alias: {
+      webworkify: 'webworkify-webpack'
+    }
+  },
 };

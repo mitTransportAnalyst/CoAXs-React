@@ -27,6 +27,16 @@ function reducer(state = initialState, action) {
   }
 }
 
+function scenarioStore(state = [], action) {
+  switch (action.type) {
+    case 'saveScenario':
+      return [...state, action.res];
+        // "currentCor": JSON.parse(action.res)
+
+    default:
+      return state
+  }
+}
 
 
 
@@ -34,6 +44,6 @@ function reducer(state = initialState, action) {
 export const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
-  reducer
-  // your reducer here
+  reducer,
+  scenarioStore,
 });

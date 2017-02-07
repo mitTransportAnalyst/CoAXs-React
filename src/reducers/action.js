@@ -24,3 +24,9 @@ export function changeMap(res) {
 }
 
 
+export function saveScenario(res) {
+  return {
+    type: "saveScenario",
+    res
+  }
+}

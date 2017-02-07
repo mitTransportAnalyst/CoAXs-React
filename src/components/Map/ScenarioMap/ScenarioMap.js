@@ -5,7 +5,7 @@ import s from "./ScenarioMap.css"
 import {MapLat, MapLng, ZoomLevel, Tile} from "../../../config"
 
 import uuid from 'uuid'
-// import Browsochrones from 'browsochrones'
+import Browsochrones from 'browsochrones'
 
 
 
@@ -80,6 +80,8 @@ class ScenarioMap extends React.Component {
 
   async fetchMetadata() {
 
+    const bs = new Browsochrones();
+
 
     let {staticRequest} = this.state;
 
@@ -97,8 +99,6 @@ class ScenarioMap extends React.Component {
     console.log(accessToken);
 
     this.setState({...this.state, accessToken});
-
-
 
 
     Promise.all([
@@ -133,10 +133,10 @@ class ScenarioMap extends React.Component {
       .then(([metadata, stopTrees, grid]) => {
 
         Promise.all([
-          this.browsochrones.setQuery(metadata),
-          this.browsochrones.setStopTrees(stopTrees),
-          this.browsochrones.setTransitiveNetwork(metadata.transitiveData),
-          this.browsochrones.putGrid('grid', grid)
+          bs.setQuery(metadata),
+          bs.setStopTrees(stopTrees),
+          bs.setTransitiveNetwork(metadata.transitiveData),
+          bs.putGrid('grid', grid)
         ]).then(this.setState({...this.state, loaded: true}))
       })
   };

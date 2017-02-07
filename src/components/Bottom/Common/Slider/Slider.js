@@ -13,12 +13,15 @@ class Slider extends React.Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
+    if (this.props.changeFunction){
+      this.props.changeFunction(this.props.name,event.target.value)
+    }
   }
 
   render() {
     return (
       <div>
-        <span style={{color: "black"}}>{this.state.value}   <input type="range" name={this.props.name} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
+        <span style={{color: "black"}}>{this.props.value}   <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
       </div>
     );
   }
