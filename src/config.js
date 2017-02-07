@@ -4,21 +4,54 @@
 
 
 //Intro panel
+/** Introduction title on the left
+ * @type {string} IntroTitle
+ */
 export const IntroTitle = "CoAXs | Bus Priority";
+
+/** Introduction description on the left
+ * @type {string} IntroDescription
+ */
 export const IntroDescription = "Showing door-to-door travel, with MBTA weekday morning schedule as baseline.";
 
 //Map
+/** Center latitude of map
+ * @type {number} MapLat
+ */
 export const MapLat = 42.36;
+
+/** Center longitude of map
+ * @type {number} MapLat
+ */
 export const MapLng = -71.1;
+
+/** zoom level of map
+ * @type {number} ZoomLevel
+ */
 export const ZoomLevel = 13;
+
+/** Map base tile
+ * @type {string} Tile
+ */
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
 //Mode
+/** Point to point mode switch
+ * @type {boolean} PointToPoint - true: enable point to point mode, false: disable
+ */
 export const PointToPoint = true;
+
+/** Accessibility mode switch
+ * @type {boolean} Accessibility - true: enable accessibility mode, false: disable
+ */
 export const Accessibility = true;
 
 
 //Corridor info
+/** Corridor info
+ * @type {object} CorridorInfo
+ * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
+ */
 export const CorridorInfo = {
   "A": {"name": "Mass Ave", "color": "#555555", "id": "A"},
   "B": {"name": "N. Washington St", "color": "#7DD5ED", "id": "B"},

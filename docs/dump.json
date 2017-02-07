@@ -3087,7 +3087,7 @@
     "__docId__": 132,
     "kind": "file",
     "name": "src/config.js",
-    "content": "/**\n * Created by xinzheng on 1/21/17.\n */\n\n\n//Intro panel\nexport const IntroTitle = \"CoAXs | Bus Priority\";\nexport const IntroDescription = \"Showing door-to-door travel, with MBTA weekday morning schedule as baseline.\";\n\n//Map\nexport const MapLat = 42.36;\nexport const MapLng = -71.1;\nexport const ZoomLevel = 13;\nexport const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';\n\n//Mode\nexport const PointToPoint = true;\nexport const Accessibility = true;\n\n\n//Corridor info\nexport const CorridorInfo = {\n  \"A\": {\"name\": \"Mass Ave\", \"color\": \"#555555\", \"id\": \"A\"},\n  \"B\": {\"name\": \"N. Washington St\", \"color\": \"#7DD5ED\", \"id\": \"B\"},\n  \"C\": {\"name\": \"HuntingTon Ave\", \"color\": \"#F3E05E\", \"id\": \"C\"},\n  \"D\": {\"name\": \"Roslindale/Forest Hills\", \"color\": \"#E092DF\", \"id\": \"D\"},\n  \"E\": {\"name\": \"Blue Hill Ave\", \"color\": \"#8D6AA8\", \"id\": \"E\"},\n};\n\n\n//Service Editor\n//Running Time (add more modification function)\nexport const RunningTime = true;\nexport const RunningTimeMin = 0;\nexport const RunningTimeMax = 60;\nexport function modifySpeed(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-speed\") {\n            route.scale = scale;\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n//Dwell Time\nexport const DwellTime = true;\nexport const DwellTimeMin = 0;\nexport const DwellTimeMax = 70;\nexport function ModifyDwells(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-dwell-time\") {\n            route.scale = scale;\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n//Headway\nexport const Headway = true;\nexport const HeadwayMin = 0;\nexport const HeadwayMax = 80;\nexport function modifyHeadway(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-frequency\") {\n            route.entries.forEach(function (entry) {\n              entry.headwaySecs = entry.headwaySecs * scale;\n            });\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n\n\n",
+    "content": "/**\n * Created by xinzheng on 1/21/17.\n */\n\n\n//Intro panel\n/** Introduction title on the left\n * @type {string} IntroTitle\n */\nexport const IntroTitle = \"CoAXs | Bus Priority\";\n\n/** Introduction description on the left\n * @type {string} IntroDescription\n */\nexport const IntroDescription = \"Showing door-to-door travel, with MBTA weekday morning schedule as baseline.\";\n\n//Map\n/** Center latitude of map\n * @type {number} MapLat\n */\nexport const MapLat = 42.36;\n\n/** Center longitude of map\n * @type {number} MapLat\n */\nexport const MapLng = -71.1;\n\n/** zoom level of map\n * @type {number} ZoomLevel\n */\nexport const ZoomLevel = 13;\n\n/** Map base tile\n * @type {string} Tile\n */\nexport const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';\n\n//Mode\n/** Point to point mode switch\n * @type {boolean} PointToPoint - true: enable point to point mode, false: disable\n */\nexport const PointToPoint = true;\n\n/** Accessibility mode switch\n * @type {boolean} Accessibility - true: enable accessibility mode, false: disable\n */\nexport const Accessibility = true;\n\n\n//Corridor info\nexport const CorridorInfo = {\n  \"A\": {\"name\": \"Mass Ave\", \"color\": \"#555555\", \"id\": \"A\"},\n  \"B\": {\"name\": \"N. Washington St\", \"color\": \"#7DD5ED\", \"id\": \"B\"},\n  \"C\": {\"name\": \"HuntingTon Ave\", \"color\": \"#F3E05E\", \"id\": \"C\"},\n  \"D\": {\"name\": \"Roslindale/Forest Hills\", \"color\": \"#E092DF\", \"id\": \"D\"},\n  \"E\": {\"name\": \"Blue Hill Ave\", \"color\": \"#8D6AA8\", \"id\": \"E\"},\n};\n\n\n//Service Editor\n//Running Time (add more modification function)\nexport const RunningTime = true;\nexport const RunningTimeMin = 0;\nexport const RunningTimeMax = 60;\nexport function modifySpeed(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-speed\") {\n            route.scale = scale;\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n//Dwell Time\nexport const DwellTime = true;\nexport const DwellTimeMin = 0;\nexport const DwellTimeMax = 70;\nexport function ModifyDwells(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-dwell-time\") {\n            route.scale = scale;\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n//Headway\nexport const Headway = true;\nexport const HeadwayMin = 0;\nexport const HeadwayMax = 80;\nexport function modifyHeadway(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-frequency\") {\n            route.entries.forEach(function (entry) {\n              entry.headwaySecs = entry.headwaySecs * scale;\n            });\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n\n\n",
     "static": true,
     "longname": "src/config.js",
     "access": null,
@@ -3105,12 +3105,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{IntroTitle}",
-    "description": "Created by xinzheng on 1/21/17.",
-    "lineNumber": 7,
+    "description": "Introduction title on the left",
+    "lineNumber": 10,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3124,19 +3127,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{IntroDescription}",
-    "description": null,
-    "lineNumber": 8,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
+    "description": "Introduction description on the left",
+    "lineNumber": 15,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3150,19 +3149,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{MapLat}",
-    "description": null,
-    "lineNumber": 11,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
+    "description": "Center latitude of map",
+    "lineNumber": 21,
     "type": {
+      "nullable": null,
       "types": [
         "number"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3176,19 +3171,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{MapLng}",
-    "description": null,
-    "lineNumber": 12,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
+    "description": "Center longitude of map",
+    "lineNumber": 26,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "number"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3202,19 +3193,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{ZoomLevel}",
-    "description": null,
-    "lineNumber": 13,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
+    "description": "zoom level of map",
+    "lineNumber": 31,
     "type": {
+      "nullable": null,
       "types": [
         "number"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3228,19 +3215,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{Tile}",
-    "description": null,
-    "lineNumber": 14,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
+    "description": "Map base tile",
+    "lineNumber": 36,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3254,19 +3237,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{PointToPoint}",
-    "description": null,
-    "lineNumber": 17,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
+    "description": "Point to point mode switch",
+    "lineNumber": 42,
     "type": {
+      "nullable": null,
       "types": [
         "boolean"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3280,19 +3259,15 @@
     "export": true,
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{Accessibility}",
-    "description": null,
-    "lineNumber": 18,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
+    "description": "Accessibility mode switch",
+    "lineNumber": 47,
     "type": {
+      "nullable": null,
       "types": [
         "boolean"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -3307,7 +3282,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{CorridorInfo}",
     "description": null,
-    "lineNumber": 22,
+    "lineNumber": 51,
     "undocument": true,
     "unknown": [
       {
@@ -3333,7 +3308,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{RunningTime}",
     "description": null,
-    "lineNumber": 33,
+    "lineNumber": 62,
     "undocument": true,
     "unknown": [
       {
@@ -3359,7 +3334,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{RunningTimeMin}",
     "description": null,
-    "lineNumber": 34,
+    "lineNumber": 63,
     "undocument": true,
     "unknown": [
       {
@@ -3385,7 +3360,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{RunningTimeMax}",
     "description": null,
-    "lineNumber": 35,
+    "lineNumber": 64,
     "undocument": true,
     "unknown": [
       {
@@ -3413,7 +3388,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{modifySpeed}",
     "description": null,
-    "lineNumber": 36,
+    "lineNumber": 65,
     "undocument": true,
     "unknown": [
       {
@@ -3454,7 +3429,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{DwellTime}",
     "description": null,
-    "lineNumber": 52,
+    "lineNumber": 81,
     "undocument": true,
     "unknown": [
       {
@@ -3480,7 +3455,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{DwellTimeMin}",
     "description": null,
-    "lineNumber": 53,
+    "lineNumber": 82,
     "undocument": true,
     "unknown": [
       {
@@ -3506,7 +3481,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{DwellTimeMax}",
     "description": null,
-    "lineNumber": 54,
+    "lineNumber": 83,
     "undocument": true,
     "unknown": [
       {
@@ -3534,7 +3509,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{ModifyDwells}",
     "description": null,
-    "lineNumber": 55,
+    "lineNumber": 84,
     "undocument": true,
     "unknown": [
       {
@@ -3575,7 +3550,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{Headway}",
     "description": null,
-    "lineNumber": 71,
+    "lineNumber": 100,
     "undocument": true,
     "unknown": [
       {
@@ -3601,7 +3576,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{HeadwayMin}",
     "description": null,
-    "lineNumber": 72,
+    "lineNumber": 101,
     "undocument": true,
     "unknown": [
       {
@@ -3627,7 +3602,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{HeadwayMax}",
     "description": null,
-    "lineNumber": 73,
+    "lineNumber": 102,
     "undocument": true,
     "unknown": [
       {
@@ -3655,7 +3630,7 @@
     "importPath": "CoAXs-React/src/config.js",
     "importStyle": "{modifyHeadway}",
     "description": null,
-    "lineNumber": 74,
+    "lineNumber": 103,
     "undocument": true,
     "unknown": [
       {
