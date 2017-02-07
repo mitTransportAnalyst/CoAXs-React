@@ -13,10 +13,6 @@ import {CorridorInfo} from '../config'
 
 const corridorInfo = CorridorInfo ;
 
-
-
-
-
 //load trunk and push them into a dict by corridor ID
 const TrunkByID = {};
 let counter = 0;

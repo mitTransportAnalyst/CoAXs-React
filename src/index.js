@@ -5,6 +5,11 @@ import { Provider } from "react-redux";
 import { store } from "./store.js";
 import { router } from "./router.js";
 
+/**
+ * The root container.
+ */
+
+
 // render the main component
 ReactDOM.render(
   <Provider store={store}>

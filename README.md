@@ -6,7 +6,7 @@
 
 Then open your [http://localhost:8080/](http://localhost:8080/) to see the app.
 
-# files structure
+# Files structure
 
 ```
 src
@@ -29,7 +29,6 @@ src
 │   ├── stops.geojson
 │   └── trunks.geojson
 ├── components
-│   ├── App.js
 │   ├── Bottom
 │   │   ├── Bottom.css
 │   │   ├── Bottom.js

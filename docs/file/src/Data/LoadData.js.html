@@ -59,16 +59,20 @@
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Data</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RouteByID">RouteByID</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TrunkByID">TrunkByID</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-corridorInfo">corridorInfo</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/App.js~App.html">App</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/NotFound.js~NotFound.html">NotFound</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Bottom</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Bottom/Bottom.js~Bottom.html">Bottom</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Bottom/Common/Slider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Bottom/Common/Slider/Slider.js~Slider.html">Slider</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Bottom/TimeFilter</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter.html">TimeFilter</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Map/RouteMap</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/RouteMap/RouteMap.js~RouteMap.html">RouteMap</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Map/ScenarioMap</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap.html">ScenarioMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer.html">TransitiveLayer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Map/ScenarioMap/lib</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample.html">BrowsochronesExample</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer.html">TransitiveLayer</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/TopleftPanel</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/TopleftPanel/TopleftPanel.js~lefttopPanel.html">lefttopPanel</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reducers</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-changeMap">changeMap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-clickCorridor">clickCorridor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-saveScenario">saveScenario</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-reducers">reducers</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">sagas</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sagas">sagas</a></span></span></li>
 </ul>
 </div>
@@ -89,10 +93,6 @@ import CorridorData from &apos;./corridors.json&apos;
 import {CorridorInfo} from &apos;../config&apos;
 
 const corridorInfo = CorridorInfo ;
-
-
-
-
 
 //load trunk and push them into a dict by corridor ID
 const TrunkByID = {};

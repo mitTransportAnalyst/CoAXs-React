@@ -2,15 +2,28 @@ import React from "react";
 import "./Slider.css";
 
 
+/**
+ * slider component
+ */
 class Slider extends React.Component {
+  /**
+   * constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
+    /**
+     * @type {object}
+     * @property {number} [value=this.props.min] - save the slider value, set it to minimal at default
+     */
     this.state = {value: this.props.min};
-
     this.handleChange = this.handleChange.bind(this);
   }
 
-
+  /**
+   * handle move the slider
+   * @param {SytheticEvent} event
+   */
   handleChange(event) {
     this.setState({value: event.target.value});
     if (this.props.changeFunction){
@@ -18,6 +31,10 @@ class Slider extends React.Component {
     }
   }
 
+  /**
+   * render
+   * @return {ReactElement} input slider
+   */
   render() {
     return (
       <div>

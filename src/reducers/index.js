@@ -3,11 +3,25 @@ import { routerReducer } from "react-router-redux";
 import { reducer as formReducer } from "redux-form";
 
 
+/**
+ * reducer
+ *
+ */
 
+
+/**
+ * initialState
+ * @type {object}
+ * @property {string} currentCor - initial clicked corridor {number} currentMap - initial map displayed 0: scenario map 1: route map
+ */
 const initialState = {currentCor:"A", currentMap: 0};
 
 
-
+/**
+ * main reducer
+ * @param {object} state {string} action - dispatched in component
+ * @return {object} store - new store
+ */
 function reducer(state = initialState, action) {
   switch (action.type) {
     case 'clickCorridor':
@@ -27,6 +41,11 @@ function reducer(state = initialState, action) {
   }
 }
 
+/**
+ * scenario reducer
+ * @param {object} state {string} action - dispatched in component
+ * @return {object} store - new scenario store
+ */
 function scenarioStore(state = [], action) {
   switch (action.type) {
     case 'saveScenario':
@@ -39,8 +58,6 @@ function scenarioStore(state = [], action) {
 }
 
 
-
-// main reducers
 export const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
