@@ -8,6 +8,7 @@ Then open your [http://localhost:8080/](http://localhost:8080/) to see the app.
 
 # files structure
 
+```
 src
 ├── Data
 │   ├── LoadData.js
@@ -108,3 +109,4 @@ src
 ├── store.js
 └── style
     └── main.css
+```
