@@ -1,5 +1,10 @@
 import React from "react";
 
+
+/**
+ * this is MyClass.
+ */
+
 // app component
 class App extends React.Component {
   // render

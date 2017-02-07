@@ -10,7 +10,6 @@ import Browsochrones from 'browsochrones'
 
 
 
-
 const BOSTON = [42.358056, -71.063611];
 const BOSTON_COMMON = [42.355, -71.065556];
 const LIFE_ALIVE = [42.366639, -71.105435];

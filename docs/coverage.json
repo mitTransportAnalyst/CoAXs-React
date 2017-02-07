@@ -1,0 +1,138 @@
+{
+  "coverage": "3.63%",
+  "expectCount": 55,
+  "actualCount": 2,
+  "files": {
+    "src/config.js": {
+      "expectCount": 21,
+      "actualCount": 1,
+      "undocumentLines": [
+        18,
+        22,
+        52,
+        54,
+        53,
+        71,
+        73,
+        72,
+        8,
+        11,
+        12,
+        55,
+        17,
+        33,
+        35,
+        34,
+        14,
+        13,
+        74,
+        36
+      ]
+    },
+    "src/components/App.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/components/Bottom/Bottom.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        10
+      ]
+    },
+    "src/components/NotFound.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        5
+      ]
+    },
+    "src/Data/LoadData.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        36,
+        21,
+        14
+      ]
+    },
+    "src/components/Map/RouteMap/RouteMap.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        22,
+        13,
+        27,
+        15
+      ]
+    },
+    "src/components/Bottom/Common/Slider/Slider.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        6,
+        14,
+        21,
+        8
+      ]
+    },
+    "src/components/Bottom/TimeFilter/TimeFilter.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        29,
+        35,
+        19,
+        11
+      ]
+    },
+    "src/reducers/action.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        19,
+        11,
+        27
+      ]
+    },
+    "src/store.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        34,
+        33
+      ]
+    },
+    "src/components/TopleftPanel/TopleftPanel.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        7
+      ]
+    },
+    "src/router.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/sagas/index.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    }
+  }
+}
