@@ -43,3 +43,11 @@ export function saveScenario(res) {
     res
   }
 }
+
+
+export function changeTimeFilter(res) {
+  return {
+    type: "changeTimeFilter",
+    res
+  }
+}

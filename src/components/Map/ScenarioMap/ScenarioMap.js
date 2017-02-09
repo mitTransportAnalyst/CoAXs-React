@@ -1,19 +1,25 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Map, Marker, Popup, TileLayer, GeoJSON} from 'react-leaflet';
+import {Map, Marker, Popup, TileLayer, GeoJson} from 'react-leaflet';
 import s from "./ScenarioMap.css"
 import {MapLat, MapLng, ZoomLevel, Tile} from "../../../config"
-
+import TransitiveLayer from './transitive-layer'
 import uuid from 'uuid'
 import Browsochrones from 'browsochrones'
+import debounce from 'debounce'
 
 
+//bind redux
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../../reducers/action';
 
 
 const BOSTON = [42.358056, -71.063611];
 const BOSTON_COMMON = [42.355, -71.065556];
 const LIFE_ALIVE = [42.366639, -71.105435];
-const WORKER_VERSION = 'v1.5.0-65-g1c86762';
+// const WORKER_VERSION = 'v1.5.0-65-g1c86762';
+const WORKER_VERSION = 'v2.0.0-SNAPSHOT';
 
 const API_KEY_ID = "3158ID11NHODSZ2BZX1WY1R4G";
 const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
@@ -27,12 +33,14 @@ const MAX_UPDATE_INTERVAL_MS = 20; // seems smooth on 2015 Macbook Pro
 
 
 class ScenarioMap extends React.Component {
+
+
   constructor() {
     super();
     this.state = {
       transitive: null,
       isochrone: null,
-      isochroneCutoff: 60,
+      isochroneCutoff: 5,
       key: null,
       loaded: false,
       origin: BOSTON_COMMON,
@@ -41,9 +49,9 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2016-09-27',
-          fromTime: 27000,
-          toTime: 30600,
+          date: '2015-10-19',
+          fromTime: 25200,
+          toTime: 32400,
           accessModes: 'WALK',
           directModes: 'WALK',
           egressModes: 'WALK',
@@ -52,7 +60,7 @@ class ScenarioMap extends React.Component {
           bikeSpeed: 4.166666666666667,
           carSpeed: 20,
           streetTime: 90,
-          maxWalkTime: 20,
+          maxWalkTime: 60,
           maxBikeTime: 20,
           maxCarTime: 45,
           minBikeTime: 10,
@@ -65,7 +73,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 220,
+          monteCarloDraws: 120,
           scenario: process.env.SCENARIO || {
             id: uuid.v4(),
             modifications: []
@@ -73,13 +81,29 @@ class ScenarioMap extends React.Component {
         }
       }
     };
-    this.fetchMetadata = this.fetchMetadata.bind(this)
+
+
+    this.fetchMetadata = this.fetchMetadata.bind(this);
+    this.moveOrigin = this.moveOrigin.bind(this);
+    this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
+    // this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff,MAX_UPDATE_INTERVAL_MS);
+    this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this)
+
+    this.bs = new Browsochrones({webpack: true});
+
+
   }
 
 
-  async fetchMetadata() {
+  async changeIsochroneCutoff(isochroneCutoff) {
+    isochroneCutoff = parseInt(isochroneCutoff);
+    console.log(isochroneCutoff);
+    let data = await this.getIsochroneAndAccessibility(isochroneCutoff);
+    this.setState({...this.state, ...data, isochroneCutoff})
+  };
 
-    const bs = new Browsochrones();
+
+  async fetchMetadata() {
 
 
     let {staticRequest} = this.state;
@@ -110,9 +134,9 @@ class ScenarioMap extends React.Component {
           request: staticRequest
         })
       }).then(res => {
-        console.log(res);
-        return res.json()}
-
+          console.log(res);
+          return res.json()
+        }
       ),
       fetch(`${BASE_URL}?accessToken=${accessToken}`, {
         method: 'POST',
@@ -124,25 +148,89 @@ class ScenarioMap extends React.Component {
         })
       }).then(res => {
         console.log(res);
-        return res.arrayBuffer()}),
+        return res.arrayBuffer()
+      }),
       fetch(GRID_URL).then(res => {
         console.log(res);
-        return res.arrayBuffer()})
+        return res.arrayBuffer()
+      })
     ])
       .then(([metadata, stopTrees, grid]) => {
 
         Promise.all([
-          bs.setQuery(metadata),
-          bs.setStopTrees(stopTrees),
-          bs.setTransitiveNetwork(metadata.transitiveData),
-          bs.putGrid('grid', grid)
-        ]).then(this.setState({...this.state, loaded: true}))
+          this.bs.setQuery(metadata),
+          this.bs.setStopTrees(stopTrees),
+          this.bs.setTransitiveNetwork(metadata.transitiveData),
+          this.bs.putGrid('grid', grid)
+        ]).then(() => {
+            console.log("done fetch");
+
+            this.setState({...this.state, loaded: true});
+          }
+        )
       })
   };
 
 
+  moveOrigin(e) {
+    let origin = e.target.getLatLng();
+    let {x, y} = this.bs.latLonToOriginPoint(origin);
+    let {staticRequest, accessToken, isochroneCutoff} = this.state;
+
+    this.setState({
+      ...this.state,
+      origin,
+      isochrone: null,
+      transitive: null,
+      inVehicleTravelTime: null,
+      travelTime: null,
+      waitTime: null,
+      accessibility: null
+    })
+
+    return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'static',
+        request: staticRequest,
+        workerVersion: WORKER_VERSION,
+        graphId: TRANSPORT_NETWORK_ID,
+        x,
+        y
+      })
+    }).then(res => res.arrayBuffer())
+      .then(async(buff) => {
+        console.log("generate surface");
+        await this.bs.setOrigin(buff, {x, y});
+        await this.bs.generateSurface("grid");
+        let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff);
 
 
+        console.log("done isochrone and accessibility");
+
+        this.setState({
+          ...this.state,
+          isochrone,
+          key: uuid.v4(),
+          origin,
+          accessibility,
+          transitive: null,
+          inVehicleTravelTime: null,
+          travelTime: null,
+          waitTime: null
+        })
+      })
+  };
+
+
+  /** get an isochrone and an accessibility figure */
+  async getIsochroneAndAccessibility(isochroneCutoff) {
+    let [accessibility, isochrone] = await Promise.all([
+      this.bs.getAccessibilityForGrid('grid', isochroneCutoff),
+      this.bs.getIsochrone(isochroneCutoff)
+    ]);
+    return {accessibility, isochrone, key: uuid.v4()}
+  }
 
 
   componentDidMount() {
@@ -151,25 +239,43 @@ class ScenarioMap extends React.Component {
 
   }
 
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentTimeFilter !== nextProps.currentTimeFilter) {
+      this.changeIsochroneCutoff(nextProps.currentTimeFilter);
+    }
+  }
+
+
   render() {
-    let { transitive, isochrone, key, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, isochroneCutoff } = this.state
+    let {transitive, isochrone, key, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, isochroneCutoff} = this.state;
 
     const position = [MapLat, MapLng];
     return (
       <div className={s.map}>
-        <Map ref="foo" center={position} zoom={13} detectRetina>
+        <Map center={position} zoom={13} detectRetina>
           <TileLayer
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
 
+
           { isochrone && <GeoJson
-            style={{ fill: '#dfe', fillOpacity: 0.5 }}
+            style={{fill: '#dfe', fillOpacity: 0.5}}
             data={isochrone}
             key={`iso-${key}`}
           />}
 
-          { transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`} /> }
+          { transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`}/> }
+
+
+          <Marker
+            position={origin}
+            draggable={true}
+            onDragend={this.moveOrigin}
+            ref='marker'
+          />
+
 
         </Map>
       </div>
@@ -177,4 +283,17 @@ class ScenarioMap extends React.Component {
   }
 }
 
-export default ScenarioMap;
+function mapStateToProps(state) {
+  return {
+    currentTimeFilter: state.timeFilterStore.currentTimeFilter,
+  }
+}
+
+function mapDispachToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispachToProps)(ScenarioMap);
+
+

@@ -16,25 +16,50 @@ class RouteMap extends React.Component {
       lat: MapLat,
       lng: MapLng,
       zoom: ZoomLevel,
+      marker: {
+        lat: 42.355,
+        lng: -71.065556,
+      },
     };
+
+    this.updatePosition = this.updatePosition.bind(this)
   }
+
+
 
   componentDidMount(){
     // console.log(this.refs.foo);
 
   }
 
+
+  updatePosition ()  {
+    console.log("fafaf");
+    const { lat, lng } = this.refs.marker.leafletElement.getLatLng();
+    this.setState({
+      marker: {lat, lng},
+    })
+  }
+
   render() {
     const allTrunk = Object.values(TrunkByID);
-
     const position = [this.state.lat, this.state.lng];
+    const markerPosition = [this.state.marker.lat, this.state.marker.lng]
+
     return (
-      <div className={s.map}>
+      <div >
         <Map ref="foo" center={position} zoom={ZoomLevel}>
           <TileLayer
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
+
+
+
+
+
+
+
 
           {allTrunk.map((value) => value )}
 

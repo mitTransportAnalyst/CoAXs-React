@@ -5,16 +5,36 @@ import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import Slider from "../Common/Slider/Slider"
 import {PointToPoint, Accessibility} from "../../../config"
 
+
+//bind redux
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../../reducers/action';
+
+
 class TimeFilter extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       isOpen: true,
+      currentTimeFilter:5,
+
     };
 
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
+    this.changeFeature = this.changeFeature.bind(this)
+
+
   }
 
+
+
+  changeFeature(feature, value) {
+    this.setState({
+      currentTimeFilter: value,
+    });
+    this.props.changeTimeFilter(value);
+  }
 
   renderMode(){
     if (PointToPoint && Accessibility){
@@ -68,8 +88,8 @@ class TimeFilter extends React.Component {
           <div className="slideContainer">
             <div className="text-center">
               <span>
-                <Slider name="timeSlider" min={5} max={115} step={5}/>
-
+             <Slider name="timeSlider" min={5} max={115} value={this.state.currentTimeFilter} step={5}
+                     className="right" changeFunction={this.changeFeature}  />
                 <div>
                   <span style={{position: "absolute", left:10, color:"black"}}>
                     <i><Fa name="step-backward" size="2x"/></i>
@@ -93,4 +113,16 @@ class TimeFilter extends React.Component {
   }
 }
 
-export default TimeFilter
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+function mapDispachToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispachToProps)(TimeFilter);
+

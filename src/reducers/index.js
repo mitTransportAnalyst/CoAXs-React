@@ -58,9 +58,24 @@ function scenarioStore(state = [], action) {
 }
 
 
+function timeFilterStore(state = [], action) {
+  switch (action.type) {
+    case 'changeTimeFilter':
+      return {...state,
+        "currentTimeFilter": action.res,
+      };
+    default:
+      return state
+  }
+}
+
+
+
 export const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
   reducer,
   scenarioStore,
+  timeFilterStore,
+
 });
