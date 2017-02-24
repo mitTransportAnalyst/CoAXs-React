@@ -18,7 +18,7 @@ class TimeFilter extends React.Component {
     this.state = {
       isOpen: true,
       currentTimeFilter:5,
-
+      pointToPointSelect : false,
     };
 
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
@@ -40,8 +40,8 @@ class TimeFilter extends React.Component {
     if (PointToPoint && Accessibility){
       return <div style={{color:"black", marginTop:30}}>
         Point-to-point mode:
-        {/*<i className="fa fa-check-square"></i>*/}
-        <i style={{color:"white", paddingLeft:6}} className="fa fa-square"/>
+        {this.state.pointToPointSelect?  <i className="fa fa-check-square" onClick={() => {this.setState({pointToPointSelect:!this.state.pointToPointSelect}); this.props.changeMode("pointToPoint")}}/> : null }
+        {this.state.pointToPointSelect? null : <i style={{color:"white"}} className="fa fa-square" onClick={() => {this.setState({pointToPointSelect:!this.state.pointToPointSelect}); this.props.changeMode("accessibility") }}/>}
       </div>
     }
   }
@@ -104,7 +104,7 @@ class TimeFilter extends React.Component {
             </div>
           </div>
 
-          {this.renderMode()};
+          {this.renderMode()}
 
         </div>
       </div>

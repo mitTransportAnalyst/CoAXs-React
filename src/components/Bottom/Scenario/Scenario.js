@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./Scenario.css";
+import _ from 'lodash';
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -9,15 +10,22 @@ import * as actionCreators from '../../../reducers/action';
 //import configuration file
 import {CorridorInfo} from "../../../config"
 
+import ScenarioEntry from "./ScenarioEntry"
+
 class Scenario extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: true,
-      baseScenario: {}
+      baseScenario: {},
+      isCompareMode: false,
+      selectedScenario: [],
     };
 
-    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
+    this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
+    this.handleClickCompare = this.handleClickCompare.bind(this);
+    this.selectScenario = this.selectScenario.bind(this);
+
 
   }
 
@@ -44,7 +52,40 @@ class Scenario extends React.Component {
     })
   }
 
+  handleClickCompare() {
+    this.setState({
+      isCompareMode: !this.state.isCompareMode,
+    })
+  }
+
+  selectScenario(scenarioID) {
+    let newSelectedScenario = [...this.state.selectedScenario];
+
+    if (this.state.isCompareMode === true) {
+      if (_.includes(newSelectedScenario, scenarioID)) {
+        _.pull(newSelectedScenario, scenarioID);
+      }
+      else {
+        newSelectedScenario.push(scenarioID);
+      }
+    }
+    else{
+      newSelectedScenario = [scenarioID];
+    }
+    this.setState(
+      {...this.state, selectedScenario: newSelectedScenario}
+    )
+
+  }
+
   render() {
+
+
+    let scenario = this.props.newScenario.map((scenario, index) => {
+      return <ScenarioEntry data={scenario} index={index} key={index} name="scenario"
+                            isCompareMode={this.state.isCompareMode} selectScenario={this.selectScenario} />
+    });
+
     return (
       <div className="colBody" id="leftDynamic">
         <div className="colHead" onClick={this.handlePlaceHolder}>
@@ -74,9 +115,12 @@ class Scenario extends React.Component {
 
           <div className="btn-group btn-group-justified">
 
-            <label className="btn" style={{backgroundColor: "grey", color: "white"}}><i
+            {this.state.isCompareMode ? <label className="btn tiny" onClick={this.handleClickCompare}><i
               className="fa fa-balance-scale"/> Compare
-            </label>
+            </label> : <label className="btn" style={{backgroundColor: "grey", color: "white"}}
+                              onClick={this.handleClickCompare}><i
+              className="fa fa-balance-scale"/> Compare
+            </label>}
 
 
             <label className="btn" style={{backgroundColor: "grey", color: "white"}}><i
@@ -86,49 +130,18 @@ class Scenario extends React.Component {
 
           </div>
 
-          <div className={s.scenariosTable} style={{marginTop: -18, paddingTop: 18}}>
-            <div className={s.scenario} style={{position: "absolute", zIndex: 10, width: 24}}>
+          <div className="scenariosTable" style={{marginTop: -18, paddingTop: 18}}>
+            <div className="scenario" style={{position: "absolute", zIndex: 10, width: 24}}>
 
               {/*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*/}
 
               <i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>
             </div>
 
-            <div className={s.scenarioEntries}>
-              <div className={s.scenario} style={{display: "inline-block", whiteSpace: "nowrap"}}>
-                <div className={s.subHead}>
-                  {/*{{combo.name }}*/}
-                </div>
-
-                {/*<input type="text" className="subHead">*/}
-                {/*</input>*/}
-
-
-                <div style={{width: 20, position: "absolute"}}>
-                  <div className="square" style={{color: "#FFF"}}>
-                    {/*"color:#FFF;background-color:{{variant.color}};"*/}
-                  </div>
-                </div>
-
-                <div style={{width: "100%", position: "absolute", left: 22}}>
-                  <div>
-                    {/*<span className="text-success">*/}
-                    <small>R: | D:
-                      | H:
-                    </small>
-                  </div>
-
-                </div>
-
-                <div className="text-center" style={{position: "absolute", width: "100%", zIndex: 10, bottom: 2}}>
-                  <i className="fa fa-circle-o faa-pulse animated"/>
-                  <i className="fa fa-circle-o"/>
-                </div>
-                <div className="text-center" style={{position: "absolute", width: "100%", zIndex: 10, bottom: 2}}>
-                  <i className="fa fa-check-circle"/>
-                </div>
-              </div>
+            <div className="scenarioEntries">
+              {scenario}
             </div>
+
           </div>
         </div>
       </div>
@@ -139,7 +152,7 @@ class Scenario extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    newScenario: state.scenarioStore.newScenario,
+    newScenario: state.scenarioStore,
   }
 }
 

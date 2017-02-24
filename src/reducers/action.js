@@ -51,3 +51,24 @@ export function changeTimeFilter(res) {
     res
   }
 }
+
+export function changeMode(res) {
+  return {
+    type: "changeMode",
+    res
+  }
+}
+
+export function selectScenario(res) {
+  return {
+    type: "selectScenario",
+    res
+  }
+}
+
+export function selectScenario(res) {
+  return {
+    type: "selectScenario",
+    res
+  }
+}

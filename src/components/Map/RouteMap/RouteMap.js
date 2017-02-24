@@ -28,7 +28,7 @@ class RouteMap extends React.Component {
 
 
   componentDidMount(){
-    // console.log(this.refs.foo);
+    this.refs.routeMap.leafletElement.invalidateSize(true);
 
   }
 
@@ -41,6 +41,12 @@ class RouteMap extends React.Component {
     })
   }
 
+
+  invalidateMap()  {
+      console.log("fjiao");
+      this.refs.routeMap.leafletElement.invalidateSize(true);
+  }
+
   render() {
     const allTrunk = Object.values(TrunkByID);
     const position = [this.state.lat, this.state.lng];
@@ -48,17 +54,11 @@ class RouteMap extends React.Component {
 
     return (
       <div >
-        <Map ref="foo" center={position} zoom={ZoomLevel}>
+        <Map ref="routeMap" center={position} zoom={ZoomLevel} onResize={ this.invalidateMap.bind(this)}>
           <TileLayer
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-
-
-
-
-
-
 
 
           {allTrunk.map((value) => value )}

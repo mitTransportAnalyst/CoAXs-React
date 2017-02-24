@@ -14,19 +14,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
+//import configuration file
+import {INIT_ORIGIN, INIT_DESTINATION, WORKER_VERSION, API_KEY_ID, API_KEY_SECRET, TRANSPORT_NETWORK_ID, BASE_URL, AUTH_URL, GRID_URL  } from '../../../config'
 
-const BOSTON = [42.358056, -71.063611];
-const BOSTON_COMMON = [42.355, -71.065556];
-const LIFE_ALIVE = [42.366639, -71.105435];
-// const WORKER_VERSION = 'v1.5.0-65-g1c86762';
-const WORKER_VERSION = 'v2.0.0-SNAPSHOT';
-
-const API_KEY_ID = "3158ID11NHODSZ2BZX1WY1R4G";
-const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
-const TRANSPORT_NETWORK_ID = "709b3861891d5ea98975ab8317f8f270";
-const BASE_URL = "http://coaxs.mit.edu:9090/api/single";
-const AUTH_URL = "http://coaxs.mit.edu/oauth/token";
-const GRID_URL = "https://analyst-static.s3.amazonaws.com/grids/boston/Jobs_with_earnings__1250_per_month_or_less.grid";
 
 /** how often will we allow the isochrone to update, in milliseconds */
 const MAX_UPDATE_INTERVAL_MS = 20; // seems smooth on 2015 Macbook Pro
@@ -43,8 +33,8 @@ class ScenarioMap extends React.Component {
       isochroneCutoff: 5,
       key: null,
       loaded: false,
-      origin: BOSTON_COMMON,
-      destination: LIFE_ALIVE,
+      origin: INIT_ORIGIN,
+      destination: INIT_DESTINATION,
       staticRequest: {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
@@ -87,9 +77,10 @@ class ScenarioMap extends React.Component {
     this.moveOrigin = this.moveOrigin.bind(this);
     this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
     // this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff,MAX_UPDATE_INTERVAL_MS);
-    this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this)
+    this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
 
     this.bs = new Browsochrones({webpack: true});
+    this.bs2 = new Browsochrones({webpack: true});
 
 
   }
@@ -186,7 +177,7 @@ class ScenarioMap extends React.Component {
       travelTime: null,
       waitTime: null,
       accessibility: null
-    })
+    });
 
     return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
       method: 'POST',
@@ -261,10 +252,17 @@ class ScenarioMap extends React.Component {
 
 
           { isochrone && <GeoJson
-            style={{fill: '#dfe', fillOpacity: 0.5}}
+            style={{fill: '#dfe', fillOpacity: 0.1}}
             data={isochrone}
             key={`iso-${key}`}
           />}
+
+          { isochrone && <GeoJson
+            style={{fill: '#ceb', fillOpacity: 0.1}}
+            data={isochrone}
+            key={`iso2-${key}`}
+          />}
+
 
           { transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`}/> }
 

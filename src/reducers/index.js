@@ -69,6 +69,16 @@ function timeFilterStore(state = [], action) {
   }
 }
 
+function modeStore(state = [], action) {
+  switch (action.type) {
+    case 'changeMode':
+      return {
+        "mode": action.res,
+      };
+    default:
+      return state
+  }
+}
 
 
 export const reducers = combineReducers({
@@ -77,5 +87,6 @@ export const reducers = combineReducers({
   reducer,
   scenarioStore,
   timeFilterStore,
+  modeStore,
 
 });

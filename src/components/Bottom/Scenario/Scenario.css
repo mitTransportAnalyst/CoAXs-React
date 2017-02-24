@@ -9,6 +9,11 @@
   text-align: left;
 }
 
+.tiny {
+  background-color: #959595;
+  width: 100%
+}
+
 .colBody .scenariosTable {
   overflow-y: hidden;
   overflow-x: auto;

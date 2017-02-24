@@ -25,7 +25,14 @@ class Home extends React.Component {
       <div className="page-home">
         <TopleftPanel/>
         {/*change map when click subhead*/}
-        {this.props.currentMap ? <RouteMap /> : <ScenarioMap />}
+        {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}
+        <div className={this.props.currentMap ? "" : 'hidden2' }>
+          <RouteMap  />
+        </div>
+
+        <div className={this.props.currentMap ? 'hidden2' : ""}>
+          <ScenarioMap />
+        </div>
         <Bottom/>
       </div>
 

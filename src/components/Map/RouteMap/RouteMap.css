@@ -13,3 +13,8 @@
   left : 300px;
   z-index 		   : 99
 }
+
+.hidden2 {     visibility: hidden;
+}
+
+
