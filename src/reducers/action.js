@@ -66,9 +66,4 @@ export function selectScenario(res) {
   }
 }
 
-export function selectScenario(res) {
-  return {
-    type: "selectScenario",
-    res
-  }
-}
+

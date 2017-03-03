@@ -3,6 +3,8 @@ import { Router, Route, IndexRoute } from "react-router";
 import { history } from "./store.js";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
+import LandingPage from "./components/LandingPage/LandingPage";
+
 
 /**
  * The router.

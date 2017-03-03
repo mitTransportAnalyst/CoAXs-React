@@ -64,10 +64,7 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 120,
-          scenario: process.env.SCENARIO || {
-            id: uuid.v4(),
-            modifications: []
-          }
+          scenario: {id: 999},
         }
       }
     };
@@ -80,7 +77,7 @@ class ScenarioMap extends React.Component {
     this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
 
     this.bs = new Browsochrones({webpack: true});
-    this.bs2 = new Browsochrones({webpack: true});
+    // this.bs2 = new Browsochrones({webpack: true});
 
 
   }
