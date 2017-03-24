@@ -17,11 +17,11 @@ class TimeFilter extends React.Component {
     super(props);
     this.state = {
       isOpen: true,
-      currentTimeFilter:5,
+      currentTimeFilter:30,
       pointToPointSelect : false,
     };
 
-    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)
+    this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
     this.changeFeature = this.changeFeature.bind(this)
 
 
@@ -60,15 +60,15 @@ class TimeFilter extends React.Component {
           Time Map
         </div>
 
-        { this.state.isOpen?
-          <div className="placeHolder" onClick={this.handlePlaceHolder}>
-            <div className="bigText">
-              <i className="fa fa-clock-o"/>
-            </div>
-          </div>
-          :
-          null
-        }
+        {/*{ this.state.isOpen?*/}
+          {/*<div className="placeHolder" onClick={this.handlePlaceHolder}>*/}
+            {/*<div className="bigText">*/}
+              {/*<i className="fa fa-clock-o"/>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+          {/*:*/}
+          {/*null*/}
+        {/*}*/}
 
 
         <div className="showToggle">
@@ -104,7 +104,7 @@ class TimeFilter extends React.Component {
             </div>
           </div>
 
-          {this.renderMode()}
+          {/*{this.renderMode()}*/}
 
         </div>
       </div>

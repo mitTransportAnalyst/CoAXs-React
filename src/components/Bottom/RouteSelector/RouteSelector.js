@@ -31,7 +31,7 @@ class RouteSelector extends React.Component {
           </div>
         </div>
 
-        { this.props.isOpen ? null : <div className="placeHolder"/> }
+        {/*{ this.props.isOpen ? null : <div className="placeHolder"/> }*/}
 
 
         <div className="showToggle">
@@ -45,8 +45,8 @@ class RouteSelector extends React.Component {
             {
               Object.values(corridorInfo).map((corridor) => {
                 return (
-                  <div className="smallColVal" key={corridor.id}
-                       style={{"color": "#FFF", "backgroundColor": corridor.color, "fontSize": 16, "padding": 8}}
+                  <div className="smallColVal btn" key={corridor.id}
+                       style={{"color": "#FFF", "backgroundColor": corridor.color, "fontSize": 16, "padding": 8, "width":"100%"}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
                     {corridor.name}
                   </div>

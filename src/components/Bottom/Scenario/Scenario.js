@@ -100,15 +100,15 @@ class Scenario extends React.Component {
           {/*</span>*/}
         </div>
 
-        { this.state.isOpen ?
-          <div className="placeHolder" onClick={this.handlePlaceHolder}>
-            <div className="bigText">
-              <i className="fa fa-random"/>
-            </div>
-          </div>
-          :
-          null
-        }
+        {/*{ this.state.isOpen ?*/}
+          {/*<div className="placeHolder" onClick={this.handlePlaceHolder}>*/}
+            {/*<div className="bigText">*/}
+              {/*<i className="fa fa-random"/>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+          {/*:*/}
+          {/*null*/}
+        {/*}*/}
 
 
         <div className="showToggle">

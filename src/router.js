@@ -13,7 +13,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 // build the router
 const router = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
-    <Route path="/" component={Home}>
+    <Route path="/" >
       <IndexRoute component={Home}/>
       <Route path="*" component={NotFound}/>
     </Route>

@@ -62,6 +62,8 @@ export const CorridorInfo = {
 
 
 
+
+
 //Browsochrone configuration
 export const INIT_ORIGIN = [42.358056, -71.063611];
 export const INIT_DESTINATION = [42.355, -71.065556];

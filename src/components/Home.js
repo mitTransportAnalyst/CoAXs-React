@@ -7,6 +7,9 @@ import TopleftPanel from "./TopleftPanel/TopleftPanel"
 import Bottom from "./Bottom/Bottom"
 import RouteMap from "./Map/RouteMap/RouteMap"
 import ScenarioMap from "./Map/ScenarioMap/ScenarioMap"
+import { Router, Route, IndexRoute } from "react-router";
+
+
 
 //import redux
 import {bindActionCreators} from 'redux';
@@ -29,7 +32,6 @@ class Home extends React.Component {
         <div className={this.props.currentMap ? "" : 'hidden2' }>
           <RouteMap  />
         </div>
-
         <div className={this.props.currentMap ? 'hidden2' : ""}>
           <ScenarioMap />
         </div>

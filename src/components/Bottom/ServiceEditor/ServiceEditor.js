@@ -102,19 +102,19 @@ class ServiceEditor extends React.Component {
         </div>
 
 
-        { this.state.isOpen ?
-          <div className="placeHolder" onClick={
-            () => {
-              this.handlePlaceHolder();
-              this.props.changeMap(!this.props.currentMap);
-            }}>
-            <div className="bigText">
-              <i className="fa fa-pencil-square-o"/>
-            </div>
-          </div>
-          :
-          null
-        }
+        {/*{ this.state.isOpen ?*/}
+          {/*<div className="placeHolder" onClick={*/}
+            {/*() => {*/}
+              {/*this.handlePlaceHolder();*/}
+              {/*this.props.changeMap(!this.props.currentMap);*/}
+            {/*}}>*/}
+            {/*<div className="bigText">*/}
+              {/*<i className="fa fa-pencil-square-o"/>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+          {/*:*/}
+          {/*null*/}
+        {/*}*/}
 
         <div className="btn-group btn-group-justified">
           <div className="btn">

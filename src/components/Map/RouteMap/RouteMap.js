@@ -43,7 +43,6 @@ class RouteMap extends React.Component {
 
 
   invalidateMap()  {
-      console.log("fjiao");
       this.refs.routeMap.leafletElement.invalidateSize(true);
   }
 

@@ -4,7 +4,7 @@
     npm start
 
 
-Then open your [http://localhost:8080/](http://localhost:8080/) to see the app.
+Then open your [http://localhost:3000/](http://localhost:3000/) to see the app.
 
 # Files structure
 

@@ -18,7 +18,7 @@ class RouteTable extends React.Component {
         </div>
 
 
-        { this.props.isOpen ? null : <div className="placeHolder"/> }
+        {/*{ this.props.isOpen ? null : <div className="placeHolder"/> }*/}
 
 
         <div className="showToggle">

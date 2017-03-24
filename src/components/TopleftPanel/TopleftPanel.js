@@ -1,6 +1,7 @@
 
 import React from "react";
 import "./TopleftPanel.css"
+import Graph from "./Graph"
 import {IntroTitle, IntroDescription} from "../../config.js"
 
 
@@ -15,6 +16,8 @@ class lefttopPanel extends React.Component {
           <div>
             <h5>{IntroDescription}</h5>
           </div>
+          <Graph/>
+
         </div>
       </div>
     );

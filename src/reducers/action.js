@@ -66,4 +66,10 @@ export function selectScenario(res) {
   }
 }
 
+export function changeGridNumber(res) {
+  return {
+    type: "changeGridNumber",
+    res
+  }
+}
 

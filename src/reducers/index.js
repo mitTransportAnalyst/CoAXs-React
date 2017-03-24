@@ -80,6 +80,17 @@ function modeStore(state = [], action) {
   }
 }
 
+function GridNumberStore(state = [], action) {
+  switch (action.type) {
+    case 'changeGridNumber':
+      return {
+        "gridNumber": action.res,
+      };
+    default:
+      return state
+  }
+}
+
 
 export const reducers = combineReducers({
   routing: routerReducer,
@@ -88,5 +99,5 @@ export const reducers = combineReducers({
   scenarioStore,
   timeFilterStore,
   modeStore,
-
+  GridNumberStore,
 });
