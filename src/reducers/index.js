@@ -46,7 +46,32 @@ function reducer(state = initialState, action) {
  * @param {object} state {string} action - dispatched in component
  * @return {object} store - new scenario store
  */
-function scenarioStore(state = [], action) {
+function scenarioStore(state = [{A: {
+  runningTime: '0',
+  dwellTime: '0',
+  headway: 0
+},
+  B: {
+    runningTime: 0,
+    dwellTime: 0,
+    headway: 0
+  },
+  C: {
+    runningTime: 0,
+    dwellTime: 0,
+    headway: 0
+  },
+  D: {
+    runningTime: 0,
+    dwellTime: 0,
+    headway: 0
+  },
+  E: {
+    runningTime: 0,
+    dwellTime: 0,
+    headway: 0
+  }}], action)
+  {
   switch (action.type) {
     case 'saveScenario':
       return [...state, action.res];
@@ -84,12 +109,38 @@ function GridNumberStore(state = [], action) {
   switch (action.type) {
     case 'changeGridNumber':
       return {
-        "gridNumber": action.res,
+        "gridNumber": action.res[0],
+        "gridNumber1": action.res[1],
+
       };
     default:
       return state
   }
 }
+
+
+function fireUpdate(state = [], action) {
+  switch (action.type) {
+    case 'fireUpdate':
+      return {
+        "fireScenario": action.res,
+      };
+    default:
+      return state
+  }
+}
+
+function isCompare(state = false, action) {
+  switch (action.type) {
+    case 'isCompare':
+      return {
+        "isCompare": action.res,
+      };
+    default:
+      return state
+  }
+}
+
 
 
 export const reducers = combineReducers({
@@ -100,4 +151,6 @@ export const reducers = combineReducers({
   timeFilterStore,
   modeStore,
   GridNumberStore,
+  fireUpdate,
+  isCompare,
 });

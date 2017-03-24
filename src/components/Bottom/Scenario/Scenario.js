@@ -2,6 +2,14 @@ import React from "react";
 import s from "./Scenario.css";
 import _ from 'lodash';
 
+//TODO for loop
+
+import Ajson from "../../../Data/scenario/A.json"
+import Bjson from "../../../Data/scenario/A.json"
+import Cjson from "../../../Data/scenario/A.json"
+import Djson from "../../../Data/scenario/A.json"
+import Ejson from "../../../Data/scenario/A.json"
+
 //bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -19,12 +27,14 @@ class Scenario extends React.Component {
       isOpen: true,
       baseScenario: {},
       isCompareMode: false,
-      selectedScenario: [],
+      selectedScenario: 0,
+      firedScenario: [],
     };
 
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
     this.handleClickCompare = this.handleClickCompare.bind(this);
     this.selectScenario = this.selectScenario.bind(this);
+    this.handleUpdate= this.handleUpdate.bind(this);
 
 
   }
@@ -53,37 +63,86 @@ class Scenario extends React.Component {
   }
 
   handleClickCompare() {
+    this.props.isCompare(!this.state.isCompareMode);
     this.setState({
       isCompareMode: !this.state.isCompareMode,
     })
   }
 
+
+
+
+
   selectScenario(scenarioID) {
     let newSelectedScenario = [...this.state.selectedScenario];
 
-    if (this.state.isCompareMode === true) {
-      if (_.includes(newSelectedScenario, scenarioID)) {
-        _.pull(newSelectedScenario, scenarioID);
-      }
-      else {
-        newSelectedScenario.push(scenarioID);
-      }
-    }
-    else{
-      newSelectedScenario = [scenarioID];
-    }
+    newSelectedScenario = scenarioID;
+
     this.setState(
       {...this.state, selectedScenario: newSelectedScenario}
     )
 
   }
 
+
+
+
+  handleUpdate(){
+    const corridorObject = {"A": JSON.parse(JSON.stringify(Ajson)), "B": JSON.parse(JSON.stringify(Bjson)), "C": JSON.parse(JSON.stringify(Cjson)), "D": JSON.parse(JSON.stringify(Djson)), "E": JSON.parse(JSON.stringify(Ejson))};
+    const selectScenarioNum = this.props.newScenario[this.state.selectedScenario];
+    let firedScenario = [];
+
+    //Running Time
+    Object.keys(corridorObject).map((key) =>{
+        corridorObject[key].modifications.forEach(function (route) {
+        if (route.type === "adjust-speed") {
+          route.scale = route.scale * (1 + 0.01 * Number(selectScenarioNum[key].runningTime));
+          firedScenario.push(route);
+        }
+      })
+    });
+
+    //Dwell Time
+    Object.keys(corridorObject).map((key) =>{
+      corridorObject[key].modifications.forEach(function (route) {
+        if (route.type === "adjust-dwell-time") {
+          route.scale = route.scale * (0.01 * Number(selectScenarioNum[key].dwellTime));
+          firedScenario.push(route);
+        }
+      })
+    });
+
+    //Headway
+    Object.keys(corridorObject).map((key) =>{
+      corridorObject[key].modifications.forEach(function (route) {
+        if (route.type === "adjust-frequency") {
+          route.entries.forEach((entry) => {
+            entry.headwaySecs = entry.headwaySecs * Number(selectScenarioNum[key].headway);
+          });
+          firedScenario.push(route);
+        }
+      })
+    });
+
+
+    this.props.fireUpdate(firedScenario);
+
+
+
+
+
+
+
+  }
+
+
+
   render() {
 
 
     let scenario = this.props.newScenario.map((scenario, index) => {
       return <ScenarioEntry data={scenario} index={index} key={index} name="scenario"
-                            isCompareMode={this.state.isCompareMode} selectScenario={this.selectScenario} />
+                            isCompareMode={this.state.isCompareMode} selectScenario={this.selectScenario} selectNum = {this.state.selectedScenario}/>
     });
 
     return (
@@ -123,8 +182,8 @@ class Scenario extends React.Component {
             </label>}
 
 
-            <label className="btn" style={{backgroundColor: "grey", color: "white"}}><i
-              className="fa fa-plus-square"/> Rename
+            <label className="btn" style={{backgroundColor: "grey", color: "white"}} onClick={this.handleUpdate}>
+              <i className="fa fa-plus-square"/> Update
             </label>
 
 

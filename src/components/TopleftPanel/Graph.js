@@ -25,13 +25,25 @@ class Graph extends React.Component {
 
 
   render() {
+    if (this.props.isCompareMode){
+      var data =[
+        {name: 'Job A', job:null},
+        {name: 'Job B', job:null},
+      ];
+    }
+    else{
+      var data =[
+        {name: 'Job A', job:null},
+      ];
+    }
 
-    let data =[
-      {name: 'Job A', job:null},
-      {name: ''},
-    ];
 
     data[0].job = this.props.gridNumber;
+
+    if (this.props.isCompareMode){
+      data[1].job = this.props.gridNumber1;
+    }
+
 
     const scale = 'ordinal';
     return (
@@ -56,6 +68,9 @@ class Graph extends React.Component {
 function mapStateToProps(state) {
   return {
     gridNumber: state.GridNumberStore.gridNumber,
+    gridNumber1: state.GridNumberStore.gridNumber1,
+
+    isCompareMode: state.isCompare.isCompare,
   }
 }
 

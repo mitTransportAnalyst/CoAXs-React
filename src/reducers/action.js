@@ -73,3 +73,16 @@ export function changeGridNumber(res) {
   }
 }
 
+export function fireUpdate(res) {
+  return {
+    type: "fireUpdate",
+    res
+  }
+}
+
+export function isCompare(res) {
+  return {
+    type: "isCompare",
+    res
+  }
+}
