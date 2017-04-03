@@ -1,10 +1,12 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Map, Marker, Popup, TileLayer, GeoJson} from 'react-leaflet';
+import Leaflet from 'leaflet'
+
 import s from "./ScenarioMap.css"
 import {MapLat, MapLng, ZoomLevel, Tile} from "../../../config"
-import TransitiveLayer from './transitive-map-layer'
-import transitiveStyle from './transitive-style'
+// import TransitiveLayer from './transitive-map-layer'
+// import transitiveStyle from './transitive-style'
 import uuid from 'uuid'
 import Browsochrones from 'browsochrones'
 import debounce from 'debounce'
@@ -52,8 +54,8 @@ class ScenarioMap extends React.Component {
           directModes: 'WALK',
           egressModes: 'WALK',
           transitModes: 'TRANSIT',
-          walkSpeed: 1.3888888888888888,
-          bikeSpeed: 4.166666666666667,
+          walkSpeed: 1.11,
+          bikeSpeed: 4.1,
           carSpeed: 20,
           streetTime: 90,
           maxWalkTime: 60,
@@ -70,7 +72,6 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 120,
-          // monteCarloDraws: 120,
           scenario: {id: 999},
         }
       },
@@ -85,8 +86,8 @@ class ScenarioMap extends React.Component {
           directModes: 'WALK',
           egressModes: 'WALK',
           transitModes: 'TRANSIT',
-          walkSpeed: 1.3888888888888888,
-          bikeSpeed: 4.166666666666667,
+          walkSpeed: 1.11,
+          bikeSpeed: 4.1,
           carSpeed: 20,
           streetTime: 90,
           maxWalkTime: 60,
@@ -103,7 +104,6 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 120,
-          // monteCarloDraws: 120,
           scenario: {id: uuid.v4(),modifications: []},
         }
       },
@@ -118,8 +118,8 @@ class ScenarioMap extends React.Component {
           directModes: 'WALK',
           egressModes: 'WALK',
           transitModes: 'TRANSIT',
-          walkSpeed: 1.3888888888888888,
-          bikeSpeed: 4.166666666666667,
+          walkSpeed: 1.11,
+          bikeSpeed: 4.1,
           carSpeed: 20,
           streetTime: 90,
           maxWalkTime: 60,
@@ -136,7 +136,6 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 120,
-          // monteCarloDraws: 120,
           scenario: {id: uuid.v4(),modifications: []},
         }
       },
@@ -434,9 +433,21 @@ class ScenarioMap extends React.Component {
 
   async moveDestination(e) {
     let destination = e.target.getLatLng();
-    let { x, y } = this.bs.latLonToOriginPoint(destination);
+    let zoom = e.target._map._zoom;
+    // let { x, y } = this.bs.latLonToOriginPoint(destination);
 
-    let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.origin || null, to:{x, y} });
+    // const point = this.bs.pixelToOriginPoint(destination, zoom);
+    const point = this.bs.pixelToOriginPoint(Leaflet.CRS.EPSG3857.latLngToPoint(destination, zoom), zoom);
+
+    console.log(point);
+
+    // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData(point);
+
+    let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.origin, to:point});
+
+    console.log(await this.bs.generateDestinationData({from: this.state.origin, to:point}));
+    // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.origin, to:{x, y}});
+
 
     this.setState({ ...this.state, transitive, travelTime, waitTime, inVehicleTravelTime, key: uuid.v4() })
   }
@@ -521,12 +532,12 @@ class ScenarioMap extends React.Component {
             ref='markerOrigin'
           />
 
-          {/*<Marker*/}
-            {/*position={destination}*/}
-            {/*draggable = {true}*/}
-            {/*onDragend={this.moveDestination}*/}
-            {/*ref='markerDestination'*/}
-          {/*/>*/}
+          <Marker
+            position={destination}
+            draggable = {true}
+            onDragend={this.moveDestination}
+            ref='markerDestination'
+          />
         </Map>
       </div>
     );
