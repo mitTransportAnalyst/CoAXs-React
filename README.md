@@ -51,7 +51,7 @@ src
 │   │   └── TimeFilter
 │   │       ├── TimeFilter.css
 │   │       └── TimeFilter.js
-│   ├── Home.js
+│   ├── IntroModal.js
 │   ├── Map
 │   │   ├── RouteMap
 │   │   │   ├── RouteMap.css

@@ -7,8 +7,7 @@ import TopleftPanel from "./TopleftPanel/TopleftPanel"
 import Bottom from "./Bottom/Bottom"
 import RouteMap from "./Map/RouteMap/RouteMap"
 import ScenarioMap from "./Map/ScenarioMap/ScenarioMap"
-import { Router, Route, IndexRoute } from "react-router";
-
+import Navbar from "./Teaching/Navbar/Navbar"
 
 
 //import redux
@@ -21,11 +20,10 @@ import * as actionCreators from '../reducers/action';
  */
 
 class Home extends React.Component {
-
-
   render() {
     return (
       <div className="page-home">
+        <Navbar/>
         <TopleftPanel/>
         {/*change map when click subhead*/}
         {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}

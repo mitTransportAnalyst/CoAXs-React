@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Map, Marker, Popup, TileLayer, GeoJson} from 'react-leaflet';
+import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl} from 'react-leaflet';
 import Leaflet from 'leaflet'
 
 import s from "./ScenarioMap.css"
@@ -501,7 +501,9 @@ class ScenarioMap extends React.Component {
     const position = [MapLat, MapLng];
     return (
       <div className={s.map}>
-        <Map center={position} zoom={13} detectRetina>
+        <Map center={position} zoom={13} detectRetina zoomControl={false} >
+          <ZoomControl position="bottomright" />
+
           <TileLayer
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
