@@ -342,6 +342,7 @@ class ScenarioMap extends React.Component {
 
 
           console.log("done isochrone and accessibility");
+          this.props.doneCompareScenario(" ");
 
           this.setState({
             ...this.state,
@@ -355,6 +356,7 @@ class ScenarioMap extends React.Component {
             waitTime2: null
           })
         })
+
     }
 
 
@@ -394,6 +396,7 @@ class ScenarioMap extends React.Component {
 
 
         console.log("done isochrone and accessibility");
+        this.props.doneOneScenario(" ");
 
         this.setState({
           ...this.state,
@@ -406,12 +409,15 @@ class ScenarioMap extends React.Component {
           travelTime: null,
           waitTime: null
         })
-      })
+      });
+
+
   };
 
 
   /** get an isochrone and an accessibility figure */
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
+
     if (isBased){
       let [accessibility2, isochrone2] = await Promise.all([
         this.bs2.getAccessibilityForGrid('grid', isochroneCutoff),
@@ -534,12 +540,12 @@ class ScenarioMap extends React.Component {
             ref='markerOrigin'
           />
 
-          <Marker
-            position={destination}
-            draggable = {true}
-            onDragend={this.moveDestination}
-            ref='markerDestination'
-          />
+          {/*<Marker*/}
+            {/*position={destination}*/}
+            {/*draggable = {true}*/}
+            {/*onDragend={this.moveDestination}*/}
+            {/*ref='markerDestination'*/}
+          {/*/>*/}
         </Map>
       </div>
     );

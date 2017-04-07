@@ -141,6 +141,30 @@ function isCompare(state = false, action) {
   }
 }
 
+const initialNavState = {isdoneOneScenario:false, isdoneCompareScenario: false, isdoneExitSurvey: false};
+
+function navState(state = initialNavState, action) {
+  switch (action.type) {
+    case 'doneOneScenario':
+      return {
+        ...state,
+        isdoneOneScenario: true,
+      };
+    case 'doneCompareScenario':
+      return {
+        ...state,
+        isdoneCompareScenario: true,
+      };
+    case 'doneExitSurvey':
+      return {
+        ...state,
+        isdoneExitSurvey: true,
+      };
+    default:
+      return state
+  }
+}
+
 
 
 export const reducers = combineReducers({
@@ -153,4 +177,5 @@ export const reducers = combineReducers({
   GridNumberStore,
   fireUpdate,
   isCompare,
+  navState,
 });

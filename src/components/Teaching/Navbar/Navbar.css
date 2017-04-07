@@ -34,8 +34,14 @@
   background-color: #111;
 }
 
+.navitem a:hover:not(.active) {
+  background-color: #111;
+}
+
 .active {
-  background-color: #4CAF50;
+
+  color: black;
+  background-color: #cccccc;
 }
 
 

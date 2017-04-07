@@ -5,6 +5,7 @@
 import React from "react";
 import { Modal, Tooltip } from 'react-bootstrap';
 import s from "./Navbar.css"
+import classNames from "classnames"
 import IntroModal from "../Modal/IntroModal"
 import ScenarioCreationModal from "../Modal/ScenarioCreationModal"
 import ExitSurveyModal from "../Modal/ExitSurveyModal"
@@ -62,28 +63,49 @@ class Navbar extends React.Component {
   }
 
   handleClickSurvey(){
+    this.props.doneExitSurvey(" ");
     this.setState({ showSurvey: true });
   }
 
 
   render() {
+    let introClass = classNames({
+      "navitem": true,
+      "active": !this.props.isdoneOneScenario,
+      "blink":!this.props.isdoneOneScenario,
+    });
+
+    let compareClass = classNames({
+      "navitem": true,
+      "active": !this.props.isdoneCompareScenario,
+      "blink": this.props.isdoneOneScenario & !this.props.isdoneCompareScenario,
+    });
+
+    let exitClass = classNames({
+      "navitem": true,
+      "active": !this.props.isdoneExitSurvey,
+      "blink": this.props.isdoneCompareScenario & !this.props.isdoneExitSurvey,
+    });
+
+
+
     return (
       <div>
         <ul className="navbarTop">
-          <li className="navitem blink">
+          <li className="navitem">
             <a href="http://coaxs.mit.edu/" target="_blank" >Landing Page</a>
           </li>
           <li className="navitem">
             <a href="https://goo.gl/forms/3NEShdeKfTCBs0W22" target="_blank">Pre-survey</a>
           </li>
-          <li className="navitem">
-            <a href="#" onClick={this.handleClickIntro} >Intro to CoAXs</a>
+          <li className={introClass}>
+            <a  className="" href="#" onClick={this.handleClickIntro} >Intro to CoAXs</a>
           </li>
-          <li className="navitem">
-            <a href="#" onClick={this.handleClickScenario}>Scenario Creation</a>
+          <li className={compareClass}>
+            <a className="" href="#" onClick={this.handleClickScenario}>Scenario Creation</a>
           </li>
-          <li className="navitem">
-            <a className="active" href="#" onClick={this.handleClickSurvey}>Post-survey</a>
+          <li className={exitClass}>
+            <a className="" href="#" onClick={this.handleClickSurvey}>Post-survey</a>
           </li>
 
         </ul>
@@ -102,7 +124,12 @@ class Navbar extends React.Component {
 
 //bind store and function to props
 function mapStateToProps(state) {
+
   return {
+    isdoneOneScenario: state.navState.isdoneOneScenario,
+    isdoneCompareScenario: state.navState.isdoneCompareScenario,
+    isdoneExitSurvey: state.navState.isdoneExitSurvey,
+
   }
 }
 

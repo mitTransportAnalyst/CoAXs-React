@@ -106,7 +106,7 @@ class Scenario extends React.Component {
     Object.keys(corridorObject).map((key) =>{
       corridorObject[key].modifications.forEach(function (route) {
         if (route.type === "adjust-dwell-time") {
-          route.scale = route.scale * (0.01 * Number(selectScenarioNum[key].dwellTime));
+          route.scale = route.scale * (1 + 0.01 * Number(selectScenarioNum[key].dwellTime));
           firedScenario.push(route);
         }
       })
@@ -117,7 +117,7 @@ class Scenario extends React.Component {
       corridorObject[key].modifications.forEach(function (route) {
         if (route.type === "adjust-frequency") {
           route.entries.forEach((entry) => {
-            entry.headwaySecs = entry.headwaySecs * Number(selectScenarioNum[key].headway);
+            entry.headwaySecs = entry.headwaySecs * (1 + 0.01 * Number(selectScenarioNum[key].headway));
           });
           firedScenario.push(route);
         }

@@ -86,3 +86,28 @@ export function isCompare(res) {
     res
   }
 }
+
+
+export function doneOneScenario(res) {
+  return {
+    type: "doneOneScenario",
+    res
+  }
+}
+
+
+export function doneCompareScenario(res) {
+  return {
+    type: "doneCompareScenario",
+    res
+  }
+}
+
+
+export function doneExitSurvey(res) {
+  return {
+    type: "doneExitSurvey",
+    res
+  }
+}
+
