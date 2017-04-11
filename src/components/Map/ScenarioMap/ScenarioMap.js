@@ -517,14 +517,15 @@ class ScenarioMap extends React.Component {
 
 
           { isochrone && <GeoJson
-            style={{fill: '#dfe', fillOpacity: 0.5}}
+            style={{fill: '#dfe', fillOpacity: 0.1}}
             data={isochrone}
             key={`iso-${key}`}
           />}
 
 
           { isochrone2 && <GeoJson
-            style={{fill: 'black', fillOpacity: 0.5}}
+            style={{color: "#fd8",
+              fill: '#fd8', fillOpacity: 0.4}}
             data={isochrone2}
             key={`iso-${key2}`}
           />}

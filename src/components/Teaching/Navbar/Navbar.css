@@ -18,7 +18,7 @@
 .navitem {
 
   float: left;
-  width: calc(20%);
+  width: calc(100%/5);
 }
 
 
@@ -30,6 +30,15 @@
   text-decoration: none;
 }
 
+.navitem a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+}
+
+
 .navitem a:hover:not(.active) {
   background-color: #111;
 }
@@ -39,11 +48,15 @@
 }
 
 .active {
-
   color: black;
   background-color: #cccccc;
 }
 
+.active a{
+
+  color: black;
+  background-color: #cccccc;
+}
 
 @-webkit-keyframes blinker {
   from {opacity: 1.0;}

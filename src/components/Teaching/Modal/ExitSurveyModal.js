@@ -28,7 +28,7 @@ class ExitSurveyModal extends React.Component {
           <Modal.Header closeButton>
             <Modal.Title>Post-survey</Modal.Title>
           </Modal.Header>
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfiFUUF-09ahOgVqZSpD7EbS9NNQRki3kNMbvDSIv6su_yPSw/viewform?embedded=true" width="900" height="760" frameBorder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfiFUUF-09ahOgVqZSpD7EbS9NNQRki3kNMbvDSIv6su_yPSw/viewform?embedded=true" width="900" height="760" frameBorder="0" marginHeight="0">Loading...</iframe>
         </Modal>
       </div>
 

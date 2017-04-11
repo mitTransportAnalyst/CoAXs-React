@@ -69,19 +69,19 @@ class Navbar extends React.Component {
 
 
   render() {
-    let introClass = classNames({
+    const introClass = classNames({
       "navitem": true,
       "active": !this.props.isdoneOneScenario,
       "blink":!this.props.isdoneOneScenario,
     });
 
-    let compareClass = classNames({
+    const compareClass = classNames({
       "navitem": true,
       "active": !this.props.isdoneCompareScenario,
       "blink": this.props.isdoneOneScenario & !this.props.isdoneCompareScenario,
     });
 
-    let exitClass = classNames({
+    const exitClass = classNames({
       "navitem": true,
       "active": !this.props.isdoneExitSurvey,
       "blink": this.props.isdoneCompareScenario & !this.props.isdoneExitSurvey,
@@ -99,11 +99,14 @@ class Navbar extends React.Component {
             <a href="https://goo.gl/forms/3NEShdeKfTCBs0W22" target="_blank">Pre-survey</a>
           </li>
           <li className={introClass}>
-            <a  className="" href="#" onClick={this.handleClickIntro} >Intro to CoAXs</a>
+            <a  className="" href="#" onClick={this.handleClickIntro} >Intro video</a>
           </li>
+
+
           <li className={compareClass}>
             <a className="" href="#" onClick={this.handleClickScenario}>Scenario Creation</a>
           </li>
+
           <li className={exitClass}>
             <a className="" href="#" onClick={this.handleClickSurvey}>Post-survey</a>
           </li>

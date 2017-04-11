@@ -2,13 +2,12 @@ import React from "react";
 import s from "./Scenario.css";
 import _ from 'lodash';
 
-//TODO for loop
 
 import Ajson from "../../../Data/scenario/A.json"
-import Bjson from "../../../Data/scenario/A.json"
-import Cjson from "../../../Data/scenario/A.json"
-import Djson from "../../../Data/scenario/A.json"
-import Ejson from "../../../Data/scenario/A.json"
+import Bjson from "../../../Data/scenario/B.json"
+import Cjson from "../../../Data/scenario/C.json"
+import Djson from "../../../Data/scenario/D.json"
+import Ejson from "../../../Data/scenario/E.json"
 
 //bind redux
 import {bindActionCreators} from 'redux';

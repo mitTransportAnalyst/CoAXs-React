@@ -38,10 +38,10 @@ class Graph extends React.Component {
     }
 
 
-    data[1].job = this.props.gridNumber;
+    data[0].job = this.props.gridNumber1;
 
     if (this.props.isCompareMode){
-      data[0].job = this.props.gridNumber1;
+      data[1].job = this.props.gridNumber;
     }
 
 
