@@ -18,12 +18,12 @@ export const IntroDescription = "Showing door-to-door travel, with MBTA weekday 
 /** Center latitude of map
  * @type {number} MapLat
  */
-export const MapLat = 42.36;
+export const MapLat =  29.951065;
 
 /** Center longitude of map
  * @type {number} MapLat
  */
-export const MapLng = -71.1;
+export const MapLng = -90.071533;
 
 /** zoom level of map
  * @type {number} ZoomLevel
@@ -53,11 +53,11 @@ export const Accessibility = true;
  * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
  */
 export const CorridorInfo = {
-  "A": {"name": "Mass Ave", "color": "#555555", "id": "A"},
-  "B": {"name": "N. Washington St", "color": "#7DD5ED", "id": "B"},
-  "C": {"name": "HuntingTon Ave", "color": "#F3E05E", "id": "C"},
-  "D": {"name": "Roslindale/Forest Hills", "color": "#E092DF", "id": "D"},
-  "E": {"name": "Blue Hill Ave", "color": "#8D6AA8", "id": "E"},
+  "A": {"name": "16", "color": "#555555", "id": "A"},
+  "B": {"name": "E3", "color": "#7DD5ED", "id": "B"},
+  "C": {"name": "E5", "color": "#F3E05E", "id": "C"},
+  "D": {"name": "", "color": "f5f5f3", "id": "D"},
+  "E": {"name": "", "color": "#f5f5f3", "id": "E"},
 };
 
 

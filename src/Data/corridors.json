@@ -1,5 +1,5 @@
 {"A" : { "sel" : 0, "all" : {}, "color": "#555555",
-	  "buslines":["1", "CT1", "64"],
+	  "buslines":["16A - Current Route", "16B - Ext to Ochsner", "16C - Ext to Clearview"],
 	  "corName": "Mass Ave",
 	  "segmentData":{"length":2.6},
 	  "routeData": {
@@ -26,8 +26,8 @@
 		}
 	  }
 },
-"B" : { "sel" : null, "all" : {}, "color": "#7DD5ED", 
-	  "buslines":["111", "426", "428"],
+"B" : { "sel" : null, "all" : {}, "color": "#7DD5ED",
+	  "buslines":["E3A - Current route", "E3B - Ext to Orleans", "E3C - COA Re-route", "E3D - Short turn to Ochsner"],
 	  "corName":"N. Washington St",
 	  "segmentData":{"length":0.6},
 	  "routeData": {
@@ -54,8 +54,8 @@
 		}
 	  }
 },
-"C" : { "sel" : null, "all" : {}, "color": "#F3E05E", 
-	"buslines":["39", "66"],
+"C" : { "sel" : null, "all" : {}, "color": "#F3E05E",
+	"buslines":["E5A - Current route", "E5B - Ext to Ochsner"],
 	"corName":"Huntington Ave",
 	"segmentData":{"length":0.4},
 	  "routeData": {
@@ -75,7 +75,7 @@
 		}
 	  }
 },
-"D" : { "sel" : null, "all" : {}, "color": "#E092DF" , 
+"D" : { "sel" : null, "all" : {}, "color": "#E092DF" ,
 	"buslines":["30", "34", "35", "36", "37", "40", "50", "51"],
 	"corName":"Roslindale/Forest Hills",
 	  "segmentData":{"length":1.2},
@@ -138,7 +138,7 @@
 		}
 	  }
 	},
-"E" : { "sel" : 0 , "all" : {}, "color": "#8D6AA8", 
+"E" : { "sel" : 0 , "all" : {}, "color": "#8D6AA8",
 	"buslines":["14", "19", "22", "23", "28", "29", "44", "45"], "corName":"Blue Hill Ave",
 	"segmentData":{"length": 2.4},
      "routeData": {

@@ -155,58 +155,8 @@ class ServiceEditor extends React.Component {
 
         </div>
 
-        <div style={DwellTime ? {marginTop: 1} : {display: "none"}}>
-
-          <div className="setTimesTitle">
-
-            <div className="subHead">
-              Dwell time change (all stops for all corridor routes)
-            </div>
-
-            <div>
-              <div style={{paddingTop: 1}}>
-                <div style={{width: 60, display: "inline-block"}}>
-                  <img src={dwellPic} style={{height: 30}}/>
-                </div>
-                <i className="fa fa-arrow-down" style={{color: "black"}}/>
-
-                <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="dwellTime" min={DwellTimeMin} max={DwellTimeMax} value={this.state.currentAdjust[this.props.currentCorridor]["dwellTime"]}  step="5" className="right" changeFunction={this.changeFeature}/>
-
-                </div>
-              </div>
-            </div>
 
 
-          </div>
-
-        </div>
-
-        <div style={Headway ? {marginTop: 1} : {display: "none"}}>
-
-          <div className="setTimesTitle">
-
-            <div className="subHead">
-              Headway change (all corridor routes)
-            </div>
-
-            <div>
-              <div style={{paddingTop: 1}}>
-                <div style={{width: 60, display: "inline-block"}}>
-                  <img src={headwayPic} style={{height: 35}}/>
-                </div>
-                <i className="fa fa-arrow-down" style={{color: "black"}}/>
-
-                <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="headway" min={HeadwayMin} max={HeadwayMax} value={this.state.currentAdjust[this.props.currentCorridor]["headway"]}  step="5" className="right" changeFunction={this.changeFeature}/>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-
-        </div>
       </div>
 
 

@@ -13,18 +13,18 @@ import {CorridorInfo} from '../config'
 
 const corridorInfo = CorridorInfo ;
 
-//load trunk and push them into a dict by corridor ID
-const TrunkByID = {};
-let counter = 0;
-for (let trunk of TrunkData.features){
-    TrunkByID[trunk.properties.corridorId] =
-    <GeoJson data={trunk} key = {counter} style={{
-      color : corridorInfo[trunk.properties.corridorId].color,
-      weight: 10,
-      opacity: 0.4 }}
-    />;
-  counter++;
-}
+// load trunk and push them into a dict by corridor ID
+// const TrunkByID = {};
+// let counter = 0;
+// for (let trunk of TrunkData.features){
+//     TrunkByID[trunk.properties.corridorId] =
+//     <GeoJson data={trunk} key = {counter} style={{
+//       color : corridorInfo[trunk.properties.corridorId].color,
+//       weight: 10,
+//       opacity: 0.4 }}
+//     />;
+//   counter++;
+// }
 
 
 
@@ -34,8 +34,9 @@ for (let key of Object.keys(CorridorData)){
   RouteByID[key] = CorridorData[key];
 }
 
+// export {TrunkByID, RouteByID, corridorInfo};
 
-export {TrunkByID, RouteByID, corridorInfo};
+export {RouteByID, corridorInfo};
 
 
 

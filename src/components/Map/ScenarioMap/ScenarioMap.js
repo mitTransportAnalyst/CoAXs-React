@@ -4,7 +4,19 @@ import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl} from 'react-leaflet
 import Leaflet from 'leaflet'
 
 import s from "./ScenarioMap.css"
-import {MapLat, MapLng, ZoomLevel, Tile} from "../../../config"
+import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo} from "../../../config"
+import Geojson16A from '../../../Data/busline/16A.geojson'
+import Geojson16B from '../../../Data/busline/16B.geojson'
+import Geojson16C from '../../../Data/busline/16C.geojson'
+import GeojsonE3A from '../../../Data/busline/E3A.geojson'
+import GeojsonE3B from '../../../Data/busline/E3B.geojson'
+import GeojsonE3C from '../../../Data/busline/E3C.geojson'
+import GeojsonE3D from '../../../Data/busline/E3D.geojson'
+import GeojsonE5A from '../../../Data/busline/E5A.geojson'
+import GeojsonE5B from '../../../Data/busline/E5B.geojson'
+
+
+
 // import TransitiveLayer from './transitive-map-layer'
 // import transitiveStyle from './transitive-style'
 import uuid from 'uuid'
@@ -541,6 +553,199 @@ class ScenarioMap extends React.Component {
             ref='markerOrigin'
           />
 
+          {
+            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
+            <GeoJson data={Geojson16A} key = {"16A1"} style={{
+            color : CorridorInfo["A"].color,
+            weight: 10,
+            opacity: 0.5 }}
+            />
+
+          }
+
+          {
+            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16A" &&
+            <GeoJson data={Geojson16A} key = {"16A2"} style={{
+              color : CorridorInfo["A"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+          {
+            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16B" &&
+            <GeoJson data={Geojson16B} key = {"16B1"} style={{
+              color : CorridorInfo["A"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+          {
+            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16B" &&
+            <GeoJson data={Geojson16B} key = {"16B2"} style={{
+              color : CorridorInfo["A"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+          {
+            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16C" &&
+            <GeoJson data={Geojson16C} key = {"16C1"} style={{
+              color : CorridorInfo["A"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+          {
+            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16C" &&
+            <GeoJson data={Geojson16C} key = {"16C2"} style={{
+              color : CorridorInfo["A"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3A" &&
+            <GeoJson data={GeojsonE3A} key = {"E3A1"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3A" &&
+            <GeoJson data={GeojsonE3A} key = {"E3A2"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+          {
+            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3B" &&
+            <GeoJson data={GeojsonE3B} key = {"E3B1"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3B" &&
+            <GeoJson data={GeojsonE3B} key = {"E3B2"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3C" &&
+            <GeoJson data={GeojsonE3C} key = {"E3C1"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3C" &&
+            <GeoJson data={GeojsonE3C} key = {"E3C2"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3D" &&
+            <GeoJson data={GeojsonE3D} key = {"E3D1"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3D" &&
+            <GeoJson data={GeojsonE3D} key = {"E3D2"} style={{
+              color : CorridorInfo["B"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+
+
+          {
+            this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5A" &&
+            <GeoJson data={GeojsonE5A} key = {"E5A1"} style={{
+              color : CorridorInfo["C"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5A" &&
+            <GeoJson data={GeojsonE5A} key = {"E5A2"} style={{
+              color : CorridorInfo["C"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5B" &&
+            <GeoJson data={GeojsonE5B} key = {"E5B1"} style={{
+              color : CorridorInfo["C"].color,
+              weight: 10,
+              opacity: 0.5 }}
+            />
+
+          }
+
+
+          {
+            this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5B" &&
+            <GeoJson data={GeojsonE5B} key = {"E5B2"} style={{
+              color : CorridorInfo["C"].color,
+              weight: 5,
+              opacity: 1 }}
+            />
+
+          }
+
+
           {/*<Marker*/}
             {/*position={destination}*/}
             {/*draggable = {true}*/}
@@ -558,6 +763,8 @@ function mapStateToProps(state) {
     currentTimeFilter: state.timeFilterStore.currentTimeFilter,
     fireScenario : state.fireUpdate.fireScenario,
     isCompareMode: state.isCompare.isCompare,
+    currentCorridor: state.reducer.currentCor,
+    currentBusline: state.changeBusline,
   }
 }
 

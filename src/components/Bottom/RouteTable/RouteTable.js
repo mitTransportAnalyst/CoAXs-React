@@ -10,6 +10,20 @@ import {RouteByID} from '../../../Data/LoadData'
 
 
 class RouteTable extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.handleBuslineClick = this.handleBuslineClick.bind(this);
+
+  }
+
+
+
+  handleBuslineClick(busline){
+    console.log({corridor: this.props.currentCorridor, busline: busline});
+    this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
+  }
+
   render() {
 
     return (
@@ -36,7 +50,7 @@ class RouteTable extends React.Component {
           {
             RouteByID[this.props.currentCorridor].buslines.map((busline, index) => {
               return (
-                <label className="btn btn-xs card" key={busline}>
+                <label className="btn btn-xs card" key={busline} onClick={() => this.handleBuslineClick(busline)}>
                   {busline}
                 </label>
               )

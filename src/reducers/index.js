@@ -141,6 +141,22 @@ function isCompare(state = false, action) {
   }
 }
 
+const initialBuslineState = {A:"16A", B:"E3A", C:"E5A"};
+
+function changeBusline(state = initialBuslineState, action) {
+  switch (action.type) {
+    case 'changeBusline':
+      return {
+        ...state,
+        [action.res.corridor]: action.res.busline.slice(0, 3),
+      };
+    default:
+      return state
+  }
+}
+
+
+
 const initialNavState = {isdoneOneScenario:false, isdoneCompareScenario: false, isdoneExitSurvey: false};
 
 function navState(state = initialNavState, action) {
@@ -178,4 +194,5 @@ export const reducers = combineReducers({
   fireUpdate,
   isCompare,
   navState,
+  changeBusline,
 });
