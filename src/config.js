@@ -75,7 +75,8 @@ export const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
 export const TRANSPORT_NETWORK_ID = "709b3861891d5ea98975ab8317f8f270";
 export const BASE_URL = "http://coaxs.mit.edu/api/single";
 export const AUTH_URL = "http://coaxs.mit.edu/oauth/token";
-export const GRID_URL = "https://analyst-static.s3.amazonaws.com/grids/boston/Jobs_with_earnings__1250_per_month_or_less.grid";
+// export const GRID_URL = "https://analyst-static.s3.amazonaws.com/grids/boston/Jobs_with_earnings__1250_per_month_or_less.grid";
+export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/test.grid";
 
 
 
