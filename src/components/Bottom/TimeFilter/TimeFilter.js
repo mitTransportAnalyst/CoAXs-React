@@ -88,7 +88,7 @@ class TimeFilter extends React.Component {
           <div className="slideContainer">
             <div className="text-center">
               <span>
-             <Slider name="timeSlider" min={5} max={115} value={this.state.currentTimeFilter} step={5}
+             <Slider name="timeSlider" min={5} max={90} value={this.state.currentTimeFilter} step={5}
                      className="right" changeFunction={this.changeFeature}  />
                 <div>
                   <span style={{position: "absolute", left:10, color:"black"}}>

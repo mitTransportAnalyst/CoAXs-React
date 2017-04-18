@@ -59,7 +59,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2015-10-19',
+          date: '2017-01-01',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -91,7 +91,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2015-10-19',
+          date: '2017-01-01',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -116,14 +116,20 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 120,
-          scenario: {id: uuid.v4(),modifications: []},
+          scenario: {id: uuid.v4(),modifications: [
+
+
+
+
+
+          ]},
         }
       },
       staticRequestBase: {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2015-10-19',
+          date: '2017-01-01',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
