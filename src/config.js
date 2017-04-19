@@ -57,7 +57,6 @@ export const CorridorInfo = {
   "B": {"name": "E3", "color": "#7DD5ED", "id": "B"},
   "C": {"name": "E5", "color": "#F3E05E", "id": "C"},
   "D": {"name": "", "color": "f5f5f3", "id": "D"},
-  "E": {"name": "", "color": "#f5f5f3", "id": "E"},
 };
 
 
@@ -77,9 +76,7 @@ export const TRANSPORT_NETWORK_ID = "e2a7898e7c77962d8f747da221ee34dd";  // New 
 
 export const BASE_URL = "http://coaxs.mit.edu/api/single";
 export const AUTH_URL = "http://coaxs.mit.edu/oauth/token";
-// export const GRID_URL = "https://analyst-static.s3.amazonaws.com/grids/boston/Jobs_with_earnings__1250_per_month_or_less.grid";
-// export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAr_health.grid";
-export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAr_health.grid";
+export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAw_totjobs.grid";
 
 
 

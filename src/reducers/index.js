@@ -61,16 +61,7 @@ function scenarioStore(state = [{A: {
     dwellTime: 0,
     headway: 0
   },
-  D: {
-    runningTime: 0,
-    dwellTime: 0,
-    headway: 0
-  },
-  E: {
-    runningTime: 0,
-    dwellTime: 0,
-    headway: 0
-  }}], action)
+  }], action)
   {
   switch (action.type) {
     case 'saveScenario':

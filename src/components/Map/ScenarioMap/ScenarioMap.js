@@ -59,7 +59,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-01-01',
+          date: '2017-04-18',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -91,7 +91,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-01-01',
+          date: '2017-04-18',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -531,7 +531,7 @@ class ScenarioMap extends React.Component {
           <TileLayer
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          />
+             />
 
 
           { isochrone && <GeoJson
@@ -557,7 +557,7 @@ class ScenarioMap extends React.Component {
             draggable={true}
             onDragend={this.moveOrigin}
             ref='markerOrigin'
-          />
+             />
 
           {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
