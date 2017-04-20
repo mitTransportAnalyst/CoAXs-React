@@ -21,6 +21,9 @@ const public_path = express.static(path.join(__dirname + '/public'));
 const index_path = express.static(path.join(__dirname + '/public/index.html')) ;
 
 app.use(public_path);
+app.get('/hello', function (request, response) {
+  response.send('GET request to the homepage')
+});
 app.get('/', function (request, response) {
   response.sendFile(index_path, function (error) {
     if (error) {
