@@ -20,17 +20,15 @@ const port = process.env.PORT || 3000;
 const public_path = express.static(path.join(__dirname + '/public'));
 const index_path = express.static(path.join(__dirname + '/public/index.html')) ;
 
-// app.use(public_path);
-app.get('/', function (request, response) {
-  response.send('GET request to the homepage')
+app.use(public_path);
+
+app.get('*', function (request, response) {
+  response.sendFile(index_path, function (error) {
+    if (error) {
+      console.log(error);
+    }
+  });
 });
-// app.get('/', function (request, response) {
-//   response.sendFile(index_path, function (error) {
-//     if (error) {
-//       console.log(error);
-//     }
-//   });
-// });
 
 app.listen(port, function() {
   console.log("App is running on port " + port);
