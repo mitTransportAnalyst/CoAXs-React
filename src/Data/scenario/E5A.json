@@ -1,0 +1,54 @@
+{
+  "id": 0,
+  "description": "2017_4_12_NOLA_MegaGTFS_v2",
+  "feedChecksums": {
+    "NORTA": 378916123,
+    "RideNOLA": 4255186909,
+    "Jefferson Transit": 3313038634
+  },
+  "modifications": [
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E5B"
+      ],
+      "comment": "Remove JeT E5B - Extension to Ochsner"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "Jefferson Transit:E5",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "sourceTrip": "Jefferson Transit:E5WE07",
+          "headwaySecs": 1620,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "E5A - OB"
+        },
+        {
+          "sourceTrip": "Jefferson Transit:E5XMWE04",
+          "headwaySecs": 1620,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "E5A - IB"
+        }
+      ],
+      "comment": "E5A"
+    }
+  ]
+}

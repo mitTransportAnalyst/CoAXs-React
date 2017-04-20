@@ -46,20 +46,20 @@ function reducer(state = initialState, action) {
  * @param {object} state {string} action - dispatched in component
  * @return {object} store - new scenario store
  */
-function scenarioStore(state = [{A: {
-  runningTime: '0',
-  dwellTime: '0',
-  headway: 0
+function scenarioStore(state = [{
+  A: {
+  headway: 0,
+  alternative: "16A"
 },
   B: {
-    runningTime: 0,
-    dwellTime: 0,
-    headway: 0
+    headway: 0,
+    alternative: "E3A"
+
   },
   C: {
-    runningTime: 0,
-    dwellTime: 0,
-    headway: 0
+    headway: 0,
+    alternative: "E5A"
+
   },
   }], action)
   {

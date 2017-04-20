@@ -1,0 +1,68 @@
+{
+  "id": 0,
+  "description": "2017_4_12_NOLA_MegaGTFS_v2",
+  "feedChecksums": {
+    "NORTA": 378916123,
+    "RideNOLA": 4255186909,
+    "Jefferson Transit": 3313038634
+  },
+  "modifications": [
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E3B"
+      ],
+      "comment": "Remove JeT E3B - Extension to Orleans"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E3C"
+      ],
+      "comment": "Remove JeT E3C - COA plan re-route"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E3D"
+      ],
+      "comment": "Remove JeT E3D - Short turn to Ochsner"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "Jefferson Transit:E3",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "sourceTrip": "Jefferson Transit:E3XMWE37",
+          "headwaySecs": 1440,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "E3A - IB"
+        },
+        {
+          "sourceTrip": "Jefferson Transit:E3WE46",
+          "headwaySecs": 1440,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "E3A - OB"
+        }
+      ],
+      "comment": "E3A"
+    }
+  ]
+}

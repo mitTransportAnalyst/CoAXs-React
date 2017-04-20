@@ -1,13 +1,19 @@
 import React from "react";
 import s from "./Scenario.css";
 import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep'
 
 
-import Ajson from "../../../Data/scenario/A.json"
-import Bjson from "../../../Data/scenario/B.json"
-import Cjson from "../../../Data/scenario/C.json"
-import Djson from "../../../Data/scenario/D.json"
-import Ejson from "../../../Data/scenario/E.json"
+import json16A from "../../../Data/scenario/16A.json"
+import json16B from "../../../Data/scenario/16B.json"
+import json16C from "../../../Data/scenario/16C.json"
+import jsonE3A from "../../../Data/scenario/E3A.json"
+import jsonE3B from "../../../Data/scenario/E3B.json"
+import jsonE3C from "../../../Data/scenario/E3C.json"
+import jsonE3D from "../../../Data/scenario/E3D.json"
+import jsonE5A from "../../../Data/scenario/E5A.json"
+import jsonE5B from "../../../Data/scenario/E5B.json"
+
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -87,50 +93,34 @@ class Scenario extends React.Component {
 
 
   handleUpdate(){
-    const corridorObject = {"A": JSON.parse(JSON.stringify(Ajson)), "B": JSON.parse(JSON.stringify(Bjson)), "C": JSON.parse(JSON.stringify(Cjson)), "D": JSON.parse(JSON.stringify(Djson)), "E": JSON.parse(JSON.stringify(Ejson))};
+    const corridorObject = {
+      "16A": JSON.parse(JSON.stringify(json16A)),
+      "16B": JSON.parse(JSON.stringify(json16B)),
+      "16C": JSON.parse(JSON.stringify(json16C)),
+      "E3A": JSON.parse(JSON.stringify(jsonE3A)),
+      "E3B": JSON.parse(JSON.stringify(jsonE3B)),
+      "E3C": JSON.parse(JSON.stringify(jsonE3C)),
+      "E3D": JSON.parse(JSON.stringify(jsonE3D)),
+      "E5A": JSON.parse(JSON.stringify(jsonE5A)),
+      "E5B": JSON.parse(JSON.stringify(jsonE5B)),
+    };
     const selectScenarioNum = this.props.newScenario[this.state.selectedScenario];
     let firedScenario = [];
 
-    //Running Time
-    Object.keys(corridorObject).map((key) =>{
-        corridorObject[key].modifications.forEach(function (route) {
-        if (route.type === "adjust-speed") {
-          route.scale = route.scale * (1 + 0.01 * Number(selectScenarioNum[key].runningTime));
-          firedScenario.push(route);
-        }
-      })
-    });
-
-    //Dwell Time
-    Object.keys(corridorObject).map((key) =>{
-      corridorObject[key].modifications.forEach(function (route) {
-        if (route.type === "adjust-dwell-time") {
-          route.scale = route.scale * (1 + 0.01 * Number(selectScenarioNum[key].dwellTime));
-          firedScenario.push(route);
-        }
-      })
-    });
-
-    //Headway
-    Object.keys(corridorObject).map((key) =>{
-      corridorObject[key].modifications.forEach(function (route) {
+    for (let key in selectScenarioNum){
+      let temp = cloneDeep(corridorObject[selectScenarioNum[key].alternative].modifications);
+      temp.forEach(function (route) {
         if (route.type === "adjust-frequency") {
           route.entries.forEach((entry) => {
-            entry.headwaySecs = entry.headwaySecs * (1 + 0.01 * Number(selectScenarioNum[key].headway));
+            entry.headwaySecs = entry.headwaySecs * (1 - 0.01 * Number(selectScenarioNum[key].headway));
           });
-          firedScenario.push(route);
         }
+        firedScenario.push(route);
       })
-    });
+    }
 
 
     this.props.fireUpdate(firedScenario);
-
-
-
-
-
-
 
   }
 
@@ -193,7 +183,7 @@ class Scenario extends React.Component {
 
               {/*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*/}
 
-              <i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>
+              {/*<i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>*/}
             </div>
 
             <div className="scenarioEntries">

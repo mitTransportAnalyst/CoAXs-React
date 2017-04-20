@@ -56,7 +56,6 @@ export const CorridorInfo = {
   "A": {"name": "16", "color": "#555555", "id": "A"},
   "B": {"name": "E3", "color": "#7DD5ED", "id": "B"},
   "C": {"name": "E5", "color": "#F3E05E", "id": "C"},
-  "D": {"name": "", "color": "f5f5f3", "id": "D"},
 };
 
 

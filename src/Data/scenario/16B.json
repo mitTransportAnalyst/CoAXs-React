@@ -1,0 +1,68 @@
+{
+  "id": 0,
+  "description": "2017_4_12_NOLA_MegaGTFS_v2",
+  "feedChecksums": {
+    "NORTA": 378916123,
+    "RideNOLA": 4255186909,
+    "Jefferson Transit": 3313038634
+  },
+  "modifications": [
+    {
+      "type": "remove-trips",
+      "routes": [
+        "NORTA:10464"
+      ],
+      "comment": "Remove NORTA 16A - baseline"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "NORTA:10343"
+      ],
+      "comment": "Remove NORTA 16A - baseline [2]"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:16C"
+      ],
+      "comment": "Remove NORTA 16C - ext to Clearview"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "RideNOLA:16B",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "sourceTrip": "RideNOLA:9072f405-a3ae-4159-b221-5f90d0b31f58",
+          "headwaySecs": 1800,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "16B - IB"
+        },
+        {
+          "sourceTrip": "RideNOLA:f10af0f0-78ad-4955-8152-1f9afe8a7378",
+          "headwaySecs": 1800,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "16B - OB"
+        }
+      ],
+      "comment": "16B"
+    }
+  ]
+}

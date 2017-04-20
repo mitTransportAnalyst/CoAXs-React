@@ -41,7 +41,9 @@ class Graph extends React.Component {
     data[0].job = this.props.gridNumber;
 
     if (this.props.isCompareMode){
-      data[1].job = this.props.gridNumber1;
+      data[0].job = this.props.gridNumber1;
+      data[1].job = this.props.gridNumber;
+
     }
 
 

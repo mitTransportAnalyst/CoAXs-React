@@ -154,7 +154,164 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 120,
-          scenario: {id: uuid.v4(),modifications: []},
+          scenario: {id: uuid.v4(),modifications: [][
+            {
+              "type": "adjust-frequency",
+              "route": "NORTA:10464",
+              "retainTripsOutsideFrequencyEntries": false,
+              "entries": [
+                {
+                  "sourceTrip": "NORTA:2584422",
+                  "headwaySecs": 1800,
+                  "startTime": 18000,
+                  "endTime": 79200,
+                  "monday": true,
+                  "tuesday": true,
+                  "wednesday": true,
+                  "thursday": true,
+                  "friday": true,
+                  "saturday": true,
+                  "sunday": true
+                },
+                {
+                  "sourceTrip": "NORTA:2584389",
+                  "headwaySecs": 1800,
+                  "startTime": 18000,
+                  "endTime": 79200,
+                  "monday": true,
+                  "tuesday": true,
+                  "wednesday": true,
+                  "thursday": true,
+                  "friday": true,
+                  "saturday": true,
+                  "sunday": true,
+                  "name": "16B - OB"
+                }
+              ],
+              "comment": "16A"
+            },
+            {
+              "type": "remove-trips",
+              "routes": [
+                "NORTA:10343"
+              ],
+              "comment": "Remove NORTA 16A - baseline [2]"
+            },
+            {
+              "type": "remove-trips",
+              "routes": [
+                "RideNOLA:16B"
+              ],
+              "comment": "Remove NORTA 16B - ext to Ocshner"
+            },
+            {
+              "type": "remove-trips",
+              "routes": [
+                "RideNOLA:16C"
+              ],
+              "comment": "Remove NORTA 16C - ext to Clearview"
+            },
+            {
+              "type": "remove-trips",
+              "routes": [
+                "RideNOLA:E3B"
+              ],
+              "comment": "Remove JeT E3B - Extension to Orleans"
+            },
+            {
+              "type": "remove-trips",
+              "routes": [
+                "RideNOLA:E3C"
+              ],
+              "comment": "Remove JeT E3C - COA plan re-route"
+            },
+            {
+              "type": "remove-trips",
+              "routes": [
+                "RideNOLA:E3D"
+              ],
+              "comment": "Remove JeT E3D - Short turn to Ochsner"
+            },
+            {
+              "type": "remove-trips",
+              "routes": [
+                "RideNOLA:E5B"
+              ],
+              "comment": "Remove JeT E5B - Extension to Ochsner"
+            },
+            {
+              "type": "adjust-frequency",
+              "route": "Jefferson Transit:E3",
+              "retainTripsOutsideFrequencyEntries": false,
+              "entries": [
+                {
+                  "sourceTrip": "Jefferson Transit:E3XMWE37",
+                  "headwaySecs": 1440,
+                  "startTime": 18000,
+                  "endTime": 79200,
+                  "monday": true,
+                  "tuesday": true,
+                  "wednesday": true,
+                  "thursday": true,
+                  "friday": true,
+                  "saturday": true,
+                  "sunday": true,
+                  "name": "E3A - IB"
+                },
+                {
+                  "sourceTrip": "Jefferson Transit:E3WE46",
+                  "headwaySecs": 1440,
+                  "startTime": 18000,
+                  "endTime": 79200,
+                  "monday": true,
+                  "tuesday": true,
+                  "wednesday": true,
+                  "thursday": true,
+                  "friday": true,
+                  "saturday": true,
+                  "sunday": true,
+                  "name": "E3A - OB"
+                }
+              ],
+              "comment": "E3A"
+            },
+            {
+              "type": "adjust-frequency",
+              "route": "Jefferson Transit:E5",
+              "retainTripsOutsideFrequencyEntries": false,
+              "entries": [
+                {
+                  "sourceTrip": "Jefferson Transit:E5WE07",
+                  "headwaySecs": 1620,
+                  "startTime": 18000,
+                  "endTime": 79200,
+                  "monday": true,
+                  "tuesday": true,
+                  "wednesday": true,
+                  "thursday": true,
+                  "friday": true,
+                  "saturday": true,
+                  "sunday": true,
+                  "name": "E5A - OB"
+                },
+                {
+                  "sourceTrip": "Jefferson Transit:E5XMWE04",
+                  "headwaySecs": 1620,
+                  "startTime": 18000,
+                  "endTime": 79200,
+                  "monday": true,
+                  "tuesday": true,
+                  "wednesday": true,
+                  "thursday": true,
+                  "friday": true,
+                  "saturday": true,
+                  "sunday": true,
+                  "name": "E5A - IB"
+                }
+              ],
+              "comment": "E5A"
+            }
+            ]},
         }
       },
     };
@@ -514,8 +671,6 @@ class ScenarioMap extends React.Component {
     if (this.props.fireScenario !== nextProps.fireScenario ) {
       this.state.staticRequest.request.scenario.modifications = nextProps.fireScenario
     }
-
-
   }
 
 

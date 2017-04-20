@@ -20,12 +20,11 @@ class ScenarioEntry extends React.Component {
 
     var ScenarioValue = Object.keys(this.props.data).map((corridorKey) =>{
 
-        return (<div style={{width: 150, position: "relative"}} key={corridorKey}>
+        return (<div style={{width: 150, position: "relative", marginTop:2}} key={corridorKey}>
           <div className="square" style={{padding: 3,fontSize: 17, color: "white", backgroundColor:CorridorInfo[corridorKey].color}}>
             {corridorKey}
           </div>
-            <small style={{fontSize: 16,}}>R: {this.props.data[corridorKey].runningTime} | D:{this.props.data[corridorKey].dwellTime}   | H:{this.props.data[corridorKey].headway}  </small>
-            <div></div>
+            <small style={{fontSize: 16,}}>R: {this.props.data[corridorKey].alternative}  | H:{this.props.data[corridorKey].headway}  </small>
         </div>
         )
       }
@@ -35,7 +34,7 @@ class ScenarioEntry extends React.Component {
 
         if (this.props.selectNum === this.props.index) {
           return (
-            <div className="" style={{display: "inline-block", whiteSpace: "nowrap", width:150, fontSize: 20, backgroundColor:"#eec16f"}} onClick={() => this.props.selectScenario(this.props.index)}>
+            <div className="" style={{display: "inline-block", whiteSpace: "nowrap", width:150, fontSize: 20, backgroundColor:"#eec16f", height: "100%"}} onClick={() => this.props.selectScenario(this.props.index)}>
               <div className="btn" style={{margin: 0, padding: 0}}>
                 <div className="subHead" style={{width:"100%", color: "white", backgroundColor:"#eec16f"}}>
                   Scenario {this.props.index + 1}
@@ -49,7 +48,7 @@ class ScenarioEntry extends React.Component {
         }
         else{
           return (
-            <div className="" style={{display: "inline-block", whiteSpace: "nowrap", width:150, fontSize: 20}} onClick={() => this.props.selectScenario(this.props.index)}>
+            <div className="" style={{display: "inline-block", whiteSpace: "nowrap", width:150, fontSize: 20, height: "100%"}} onClick={() => this.props.selectScenario(this.props.index)}>
               <div className="btn" style={{margin: 0, padding: 0}}>
                 <div className="subHead" style={{width:"100%", color: "white", backgroundColor:"#eec16f"}}>
                   Scenario {this.props.index + 1}

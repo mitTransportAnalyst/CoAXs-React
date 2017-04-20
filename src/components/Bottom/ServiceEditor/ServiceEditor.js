@@ -47,14 +47,29 @@ class ServiceEditor extends React.Component {
 
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentBusAlternative !== nextProps.currentBusAlternative) {
+      let temp = cloneDeep(this.state.currentAdjust);
+      for (let key in nextProps.currentBusAlternative){
+        temp[key].alternative = nextProps.currentBusAlternative[key];
+      }
+      this.setState({
+        ...this.state,
+        currentAdjust: temp
+
+      })
+
+
+    }
+  }
+
   componentWillMount() {
     let model = {};
     Object.keys(CorridorInfo).map(
       (id)=> {
         model[id] = {
-          "runningTime": 0,
-          "dwellTime": 0,
           "headway": 0,
+          "alternative":this.props.currentBusAlternative[id],
         }
       }
     );
@@ -90,6 +105,7 @@ class ServiceEditor extends React.Component {
 
 
   render() {
+    let currentCorridor = CorridorInfo[this.props.currentCorridor];
     return (
       <div className="colBody" id="service-tab">
         <div className="colHead" onClick={
@@ -98,7 +114,7 @@ class ServiceEditor extends React.Component {
             this.props.changeMap(!this.props.currentMap);
           }}>
           <i className="fa fa-pencil-square-o"/>
-          Service Editor
+          Service Editor - Editing Route {CorridorInfo[this.props.currentCorridor].name}
         </div>
 
 
@@ -117,9 +133,9 @@ class ServiceEditor extends React.Component {
         {/*}*/}
 
         <div className="btn-group btn-group-justified">
-          <div className="btn">
+          <div >
             {/*style="width:300px; color:{{variants[tabnav].color}}; background-color:{{variants[tabnav].color}}"*/}
-            <i className="fa fa-level-down "/>
+            {/*<i className="fa fa-level-down "/>*/}
           </div>
 
           <div className="btn btn-info" style={{width: 150, position: "absolute", right: 0}}
@@ -129,36 +145,37 @@ class ServiceEditor extends React.Component {
         </div>
 
 
-        <div>
 
-          <div className="setTimesTitle" style={RunningTime ? null : {display: "none"}}>
+        <div style={{marginTop: 35}}>
+
+          <div className="setTimesTitle">
+
             <div className="subHead">
-              Running time change (segment only)
+              Headway change
             </div>
-            <div>
-              <div style={{marginTop: -2}}>
 
+            <div>
+              <div style={{paddingTop: 1}}>
                 <div style={{width: 60, display: "inline-block"}}>
-                  <img src={runningPic} style={{height: 35}}/>
+                  <img src={headwayPic} style={{height: 35}}/>
                 </div>
                 <i className="fa fa-arrow-down" style={{color: "black"}}/>
 
                 <div style={{width: "75%", display: "inline-block", marginTop: 2}}>
-                  <Slider name="runningTime" min={RunningTimeMin} max={RunningTimeMax} value={this.state.currentAdjust[this.props.currentCorridor]["runningTime"]} step={5}
-                          className="right" changeFunction={this.changeFeature}  />
-
-
+                  <Slider name="headway" min={HeadwayMin} max={HeadwayMax} value={this.state.currentAdjust[this.props.currentCorridor]["headway"]}  step="5" className="right" changeFunction={this.changeFeature}/>
                 </div>
               </div>
             </div>
+
+
           </div>
+
+
 
         </div>
 
 
-
-      </div>
-
+        </div>
 
 
 
@@ -172,6 +189,7 @@ function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
     currentMap: state.reducer.currentMap,
+    currentBusAlternative: state.changeBusline,
   }
 }
 
