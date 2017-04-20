@@ -15,6 +15,8 @@ const router = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
     <Route path="/" >
       <IndexRoute component={Home}/>
+      <Route path="/hello" component={Home}/>
+
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>
