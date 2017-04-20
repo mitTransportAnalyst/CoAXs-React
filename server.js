@@ -16,7 +16,7 @@ const express = require('express');
 
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const public_path = express.static(path.join(__dirname + '/public'));
 const index_path = express.static(path.join(__dirname + '/public/index.html')) ;
 

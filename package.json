@@ -14,9 +14,9 @@
     "type": "git",
     "url": "https://github.com/mitTransportAnalyst/CoAXs-React"
   },
-  "engines" : {
-    "node" : "6.9.2",
-    "npm" : "3.10.9"
+  "engines": {
+    "node": "6.9.2",
+    "npm": "3.10.9"
   },
   "scripts": {
     "start": "node server.js",
@@ -42,11 +42,13 @@
     "debounce": "^1.0.0",
     "debug": "^2.2.0",
     "elemental": "^0.6.1",
+    "express": "^4.15.2",
     "leaflet": "^0.7.7",
     "leaflet-transitivelayer": "^0.2.0",
     "lodash": "^4.17.4",
     "lonlng": "0.1.0",
     "neal-react": "^0.2.5",
+    "path": "^0.12.7",
     "react": "^15.2.0",
     "react-addons-css-transition-group": "^0.14.8",
     "react-bootstrap": "^0.30.7",
