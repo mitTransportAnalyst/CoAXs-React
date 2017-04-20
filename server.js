@@ -28,5 +28,8 @@ app.get('/', function (request, response) {
     }
   });
 });
-app.listen(port);
-console.log("Listening at http://localhost:" + port);
+
+app.listen(port, function() {
+  console.log("App is running on port " + port);
+});
+
