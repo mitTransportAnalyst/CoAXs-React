@@ -819,7 +819,7 @@ class ScenarioMap extends React.Component {
     const position = [MapLat, MapLng];
     return (
       <div className={s.map}>
-        <Map center={position} zoom={13} detectRetina zoomControl={false} >
+        <Map center={position} zoom={12} detectRetina zoomControl={false} >
           <ZoomControl position="bottomright" />
 
           <TileLayer

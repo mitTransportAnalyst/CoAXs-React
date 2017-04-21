@@ -18,12 +18,12 @@ export const IntroDescription = "Showing door-to-door travel, with MBTA weekday 
 /** Center latitude of map
  * @type {number} MapLat
  */
-export const MapLat =  29.951065;
+export const MapLat =  29.971065;
 
 /** Center longitude of map
  * @type {number} MapLat
  */
-export const MapLng = -90.071533;
+export const MapLng = -90.111533;
 
 /** zoom level of map
  * @type {number} ZoomLevel
