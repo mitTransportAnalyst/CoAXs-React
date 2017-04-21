@@ -14,7 +14,7 @@ import * as actionCreators from '../../../reducers/action';
  * The main view which include TopleftPanel, map and Bottom component
  */
 
-class ExitSurveyModal extends React.Component {
+class PreSurveyModal extends React.Component {
   constructor(){
     super();
   }
@@ -26,9 +26,9 @@ class ExitSurveyModal extends React.Component {
       <div>
         <Modal show={this.props.isShow} onHide={this.props.closeModal} bsSize="large" >
           <Modal.Header closeButton>
-            <Modal.Title>Post-survey</Modal.Title>
+            <Modal.Title>Consent and Entrance Survey</Modal.Title>
           </Modal.Header>
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffkyOt2AjhVVe_1Ize9R2kQtbqnd5fIQg8knxhZGF8buiqpw/viewform?embedded=true" width="100%" height="760" frameBorder="0" marginHeight="0">Loading...</iframe>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfq1Wr8Gigug7lUXWaHv8Xi8VjvHij74krf_y5vuIbF3LPhRQ/viewform?embedded=true" width="100%" height="760" frameBorder="0" marginHeight="0">Loading...</iframe>
         </Modal>
       </div>
 
@@ -48,7 +48,7 @@ function mapDispachToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispachToProps)(ExitSurveyModal);
+export default connect(mapStateToProps, mapDispachToProps)(PreSurveyModal);
 
 
 

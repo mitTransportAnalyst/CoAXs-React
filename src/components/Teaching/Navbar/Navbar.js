@@ -9,7 +9,7 @@ import classNames from "classnames"
 import IntroModal from "../Modal/IntroModal"
 import ScenarioCreationModal from "../Modal/ScenarioCreationModal"
 import ExitSurveyModal from "../Modal/ExitSurveyModal"
-
+import PreSurveyModal from "../Modal/PreSurveyModal"
 
 
 //import redux
@@ -28,14 +28,17 @@ class Navbar extends React.Component {
       showIntro: false,
       showScenario: false,
       showSurvey: false,
+      showPreSurvey: true,
     };
     this.closeScenario = this.closeScenario.bind(this);
     this.closeIntro = this.closeIntro.bind(this);
     this.closeExitSurvey = this.closeExitSurvey.bind(this);
+    this.closePreSurvey = this.closePreSurvey.bind(this);
 
     this.handleClickScenario = this.handleClickScenario.bind(this);
     this.handleClickIntro = this.handleClickIntro.bind(this);
     this.handleClickSurvey = this.handleClickSurvey.bind(this);
+    this.handleClickPreSurvey = this.handleClickPreSurvey.bind(this);
 
 
   }
@@ -53,6 +56,12 @@ class Navbar extends React.Component {
     this.setState({ showSurvey: false });
   }
 
+  closePreSurvey(){
+    this.props.donePreSurvey(" ");
+    this.setState({ showPreSurvey: false, showIntro: true });
+
+  }
+
 
   handleClickScenario(){
     this.setState({ showScenario: true });
@@ -67,12 +76,30 @@ class Navbar extends React.Component {
     this.setState({ showSurvey: true });
   }
 
+  handleClickPreSurvey(){
+    this.setState({ showPreSurvey: true });
+
+  }
+
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.isdoneOneScenario !== this.props.isdoneOneScenario){
+      this.setState({ showScenario: true });
+    }
+  }
+
 
   render() {
+    const preClass = classNames({
+      "navitem": true,
+      "active": !this.props.isdonePreSurvey,
+      "blink":!this.props.isdonePreSurvey,
+    });
+
     const introClass = classNames({
       "navitem": true,
       "active": !this.props.isdoneOneScenario,
-      "blink":!this.props.isdoneOneScenario,
+      "blink": this.props.isdonePreSurvey & !this.props.isdoneOneScenario,
     });
 
     const compareClass = classNames({
@@ -93,13 +120,14 @@ class Navbar extends React.Component {
       <div>
         <ul className="navbarTop">
           <li className="navitem">
-            <a href="http://coaxs.mit.edu/" target="_blank" >Landing Page</a>
+            <a href="https://coaxs-landing-nola.herokuapp.com/" target="_blank" >Landing Page</a>
           </li>
-          <li className="navitem">
-            <a href="https://goo.gl/forms/3NEShdeKfTCBs0W22" target="_blank">Pre-survey</a>
+          <li className={preClass}>
+            <a className="" href="#" onClick={this.handleClickPreSurvey} >Pre-survey</a>
+
           </li>
           <li className={introClass}>
-            <a  className="" href="#" onClick={this.handleClickIntro} >Intro video</a>
+            <a  className="" href="#" onClick={this.handleClickIntro} >Intro to CoAXs</a>
           </li>
 
 
@@ -118,6 +146,8 @@ class Navbar extends React.Component {
         <IntroModal isShow={this.state.showIntro} closeModal={this.closeIntro}/>
         <ScenarioCreationModal isShow={this.state.showScenario} closeModal={this.closeScenario}/>
         <ExitSurveyModal isShow={this.state.showSurvey} closeModal={this.closeExitSurvey}/>
+        <PreSurveyModal isShow={this.state.showPreSurvey} closeModal={this.closePreSurvey}/>
+
       </div>
 
     );
@@ -132,7 +162,7 @@ function mapStateToProps(state) {
     isdoneOneScenario: state.navState.isdoneOneScenario,
     isdoneCompareScenario: state.navState.isdoneCompareScenario,
     isdoneExitSurvey: state.navState.isdoneExitSurvey,
-
+    isdonePreSurvey: state.navState.isdonePreSurvey,
   }
 }
 

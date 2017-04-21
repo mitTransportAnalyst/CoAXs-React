@@ -24,14 +24,14 @@ class IntroModal extends React.Component {
   render() {
     return (
       <div>
-        <Modal show={this.props.isShow} onHide={this.props.closeModal}>
+        <Modal show={this.props.isShow} onHide={this.props.closeModal} >
           <Modal.Header>
             <Modal.Title>INTRO TO COAXs</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <h4>Text in a modal</h4>
             <p>fewfewmfoewmfomewofmewofm/f ajfiewojfo/. jfewiojfoiew.</p>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/80WEPwPkkWk" frameBorder="0" allowFullScreen></iframe>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/uNswES3tTPs" frameBorder="0" allowFullScreen></iframe>
 
             <hr />
 

@@ -148,7 +148,7 @@ function changeBusline(state = initialBuslineState, action) {
 
 
 
-const initialNavState = {isdoneOneScenario:false, isdoneCompareScenario: false, isdoneExitSurvey: false};
+const initialNavState = {isdonePreSurvey:false, isdoneOneScenario:false, isdoneCompareScenario: false, isdoneExitSurvey: false};
 
 function navState(state = initialNavState, action) {
   switch (action.type) {
@@ -166,6 +166,11 @@ function navState(state = initialNavState, action) {
       return {
         ...state,
         isdoneExitSurvey: true,
+      };
+    case 'donePreSurvey':
+      return {
+        ...state,
+        isdonePreSurvey: true,
       };
     default:
       return state

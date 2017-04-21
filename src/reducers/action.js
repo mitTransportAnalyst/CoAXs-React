@@ -111,6 +111,13 @@ export function doneExitSurvey(res) {
   }
 }
 
+export function donePreSurvey(res) {
+  return {
+    type: "donePreSurvey",
+    res
+  }
+}
+
 export function changeBusline(res) {
   return {
     type: "changeBusline",
