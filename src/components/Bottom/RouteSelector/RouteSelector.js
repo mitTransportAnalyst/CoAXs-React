@@ -44,13 +44,27 @@ class RouteSelector extends React.Component {
 
             {
               Object.values(corridorInfo).map((corridor) => {
+                if (this.props.currentCorridor === corridor.id){
                 return (
                   <div className="smallColVal btn" key={corridor.id}
-                       style={{"color": "#FFF", "backgroundColor": corridor.color, "fontSize": 16, "padding": 8, "width":"100%"}}
+                       style={{border:"3px solid #eec16f", "color": "#FFF", "backgroundColor": corridor.color, "fontSize": 16, "padding": 8, "width":"100%"}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
-                    {corridor.name}
+                    {corridor.name} <i className="fa fa-bus" style={{marginLeft: 12}}/>  {Math.ceil(this.props.scorecardData[corridor.id])}
                   </div>
                 )
+                }
+                else{
+                  return (
+                    <div className="smallColVal btn" key={corridor.id}
+                         style={{"color": "#FFF", "backgroundColor": corridor.color, "fontSize": 16, "padding": 8, "width":"100%"}}
+                         onClick={()=>this.props.clickCorridor(corridor.id)}>
+                      {corridor.name}  <i className="fa fa-bus" style={{marginLeft: 12}}/> {Math.ceil(this.props.scorecardData[corridor.id])}
+                    </div>
+                  )
+
+
+
+                }
               })
             }
 
@@ -66,6 +80,7 @@ class RouteSelector extends React.Component {
 function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
+    scorecardData: state.ScorecardData,
     isOpen: state.reducer.currentMap,
   }
 }

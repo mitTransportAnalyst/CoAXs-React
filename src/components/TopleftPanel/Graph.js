@@ -7,7 +7,6 @@ import Fa from "react-fontawesome";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "Recharts";
 
-
 //bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -25,7 +24,8 @@ class Graph extends React.Component {
 
 
   render() {
-    console.log(this.props.gridNumber1);
+
+
     if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
       var data =[
         {name: 'Base Scenario', job:null},
@@ -50,12 +50,18 @@ class Graph extends React.Component {
 
     const scale = 'ordinal';
     return (
+
+
+
+
+
     <div style={{fontcolor: "white"}}>
+
       { this.props.gridNumber != null ?
-      <BarChart width={300} height={500} data={data}
+      <BarChart width={300} height={window.innerHeight * 0.55} data={data}
                 margin={{top: 50, right: 30, left: 0, bottom: 5}} style={{color: "white"}}>
         <XAxis dataKey="name" stroke="white"/>
-        <YAxis stroke="white" type="number" domain={[0, 200000]}/>
+        <YAxis stroke="white" type="number" domain={[0, 300000]}/>
         <CartesianGrid strokeDasharray="3 3"/>
         {/*<Tooltip/>*/}
         {/*<Legend />*/}

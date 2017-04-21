@@ -118,3 +118,21 @@ export function changeBusline(res) {
 
   }
 }
+
+
+export function changeProgress(res) {
+  return {
+    type: "changeProgress",
+    res
+
+  }
+}
+
+
+export function changeScorecard(res) {
+  return {
+    type: "changeScorecard",
+    res
+
+  }
+}

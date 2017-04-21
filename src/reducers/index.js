@@ -172,6 +172,25 @@ function navState(state = initialNavState, action) {
   }
 }
 
+function loadingProgress(state = 0, action) {
+  switch (action.type) {
+    case 'changeProgress':
+      return action.res;
+    default:
+      return state
+  }
+}
+
+
+function ScorecardData(state = 0, action) {
+  switch (action.type) {
+    case 'changeScorecard':
+      return action.res;
+    default:
+      return state
+  }
+}
+
 
 
 export const reducers = combineReducers({
@@ -186,4 +205,6 @@ export const reducers = combineReducers({
   isCompare,
   navState,
   changeBusline,
+  loadingProgress,
+  ScorecardData,
 });

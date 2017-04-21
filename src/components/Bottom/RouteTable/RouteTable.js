@@ -20,11 +20,14 @@ class RouteTable extends React.Component {
 
 
   handleBuslineClick(busline){
-    console.log({corridor: this.props.currentCorridor, busline: busline});
     this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
   }
 
   render() {
+    let totalbuses = 0;
+    for (let key in this.props.scorecardData ){
+      totalbuses += this.props.scorecardData[key]
+    }
 
     return (
       <div className="colBody routeTable">
@@ -42,18 +45,27 @@ class RouteTable extends React.Component {
               {/*style="background-color: {{variants[tabnav].color}}; color: #FFF"*/}
               <i className="fa fa-line-chart"/>
               {/*<span >Hide Data</span>*/}
-              <span >Show Data</span>
+              <span>Total number of buses: {Math.ceil(totalbuses)}</span>
             </label>
           </div>
 
 
           {
             RouteByID[this.props.currentCorridor].buslines.map((busline, index) => {
-              return (
-                <label className="btn btn-xs card" key={busline} onClick={() => this.handleBuslineClick(busline)}>
-                  {busline}
-                </label>
-              )
+              if (this.props.BuslineProps[this.props.currentCorridor] === busline.slice(0,3)){
+                return (
+                  <label className="btn btn-xs card" style={{border:"3px solid #eec16f"}} key={busline} onClick={() => this.handleBuslineClick(busline)}>
+                    {busline}
+                  </label>
+                )
+              }
+              else{
+                return (
+                  <label className="btn btn-xs card" key={busline} onClick={() => this.handleBuslineClick(busline)}>
+                    {busline}
+                  </label>
+                )
+              }
             })
           }
 
@@ -70,7 +82,9 @@ class RouteTable extends React.Component {
 function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
-    isOpen: state.reducer.currentMap,
+    BuslineProps: state.changeBusline,
+    scorecardData: state.ScorecardData,
+
   }
 }
 

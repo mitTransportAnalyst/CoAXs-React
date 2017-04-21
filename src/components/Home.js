@@ -8,6 +8,7 @@ import Bottom from "./Bottom/Bottom"
 import RouteMap from "./Map/RouteMap/RouteMap"
 import ScenarioMap from "./Map/ScenarioMap/ScenarioMap"
 import Navbar from "./Teaching/Navbar/Navbar"
+import LoadingPage from "./LoadingPage/LoadingPage"
 
 
 //import redux
@@ -25,6 +26,7 @@ class Home extends React.Component {
       <div className="page-home">
         <Navbar/>
         <TopleftPanel/>
+        {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
         {/*change map when click subhead*/}
         {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}
         {/*<div className={this.props.currentMap ? "" : 'hidden2' }>*/}
@@ -45,6 +47,8 @@ class Home extends React.Component {
 function mapStateToProps(state) {
   return {
     currentMap: state.reducer.currentMap,
+    loadingProgress: state.loadingProgress,
+
   }
 }
 

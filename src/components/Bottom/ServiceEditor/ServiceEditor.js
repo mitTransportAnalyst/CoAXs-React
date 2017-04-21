@@ -16,6 +16,8 @@ import {
   CorridorInfo,
 } from "../../../config"
 
+import ScoreCard from "../../../Data/Scorecard.json"
+
 //import slider component
 import Slider from "../Common/Slider/Slider"
 
@@ -63,6 +65,27 @@ class ServiceEditor extends React.Component {
     }
   }
 
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.currentAdjust !== this.state.currentAdjust){
+      let tempScore = {A:0, B:0, C:0};     // change to dynamic
+      for (let key in tempScore){
+        tempScore[key] = ScoreCard[this.state.currentAdjust[key].alternative].totalTime/(ScoreCard[this.state.currentAdjust[key].alternative].baseHeadway * (1 - Number(this.state.currentAdjust[key].headway)/100))
+      }
+      this.props.changeScorecard(tempScore);
+    }
+
+  }
+
+  componentDidMount(){
+    let tempScore = {A:0, B:0, C:0};     // change to dynamic
+    for (let key in tempScore){
+      tempScore[key] = ScoreCard[this.state.currentAdjust[key].alternative].totalTime/(ScoreCard[this.state.currentAdjust[key].alternative].baseHeadway * (1 - Number(this.state.currentAdjust[key].headway)/100))
+    }
+    this.props.changeScorecard(tempScore);
+
+  }
+
   componentWillMount() {
     let model = {};
     Object.keys(CorridorInfo).map(
@@ -76,7 +99,9 @@ class ServiceEditor extends React.Component {
     this.setState({
       "resetAdjust": model,
       "currentAdjust": model,
-    })
+    });
+
+
 
 
   }

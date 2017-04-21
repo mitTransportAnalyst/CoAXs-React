@@ -428,6 +428,7 @@ class ScenarioMap extends React.Component {
 
     let accessToken = response.access_token;
     console.log(accessToken);
+    this.props.changeProgress(0.2);
 
     this.setState({...this.state, accessToken});
 
@@ -442,7 +443,9 @@ class ScenarioMap extends React.Component {
         })
       }).then(res => {
           console.log(res);
-          return res.json()
+          this.props.changeProgress(0.4);
+
+        return res.json()
         }
       ),
       fetch(`${BASE_URL}?accessToken=${accessToken}`, {
@@ -455,10 +458,14 @@ class ScenarioMap extends React.Component {
         })
       }).then(res => {
         console.log(res);
+        this.props.changeProgress(0.6);
+
         return res.arrayBuffer()
       }),
       fetch(GRID_URL).then(res => {
         console.log(res);
+        this.props.changeProgress(0.8);
+
         return res.arrayBuffer()
       })
     ])
@@ -472,7 +479,9 @@ class ScenarioMap extends React.Component {
 
         ]).then(() => {
             console.log("done fetch");
-            this.setState({...this.state, loaded: true});
+           this.props.changeProgress(1);
+
+          this.setState({...this.state, loaded: true});
           }
         )
       })
@@ -550,6 +559,8 @@ class ScenarioMap extends React.Component {
       accessibility: null
     });
 
+    this.props.changeProgress(0.2);
+
 
     // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
     fetch(`${BASE_URL}?accessToken=${accessToken}`, {
@@ -565,10 +576,13 @@ class ScenarioMap extends React.Component {
     }).then(res => res.arrayBuffer())
       .then(async(buff) => {
         console.log("generate surface");
+        this.props.changeProgress(0.8);
+
         await this.bs.setOrigin(buff, {x, y});
         await this.bs.generateSurface("grid");
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
+        this.props.changeProgress(0.9);
 
         console.log("done isochrone and accessibility");
         this.props.doneOneScenario(" ");
@@ -584,6 +598,9 @@ class ScenarioMap extends React.Component {
           travelTime: null,
           waitTime: null
         })
+
+        this.props.changeProgress(1);
+
       });
 
 
@@ -690,15 +707,15 @@ class ScenarioMap extends React.Component {
 
 
           { isochrone && <GeoJson
-            style={{fill: '#dfe', fillOpacity: 0.1}}
+            style={{color: "#fd8", fill: '#fd8', fillOpacity: 0.4}}
             data={isochrone}
             key={`iso-${key}`}
           />}
 
 
           { isochrone2 && <GeoJson
-            style={{color: "#fd8",
-              fill: '#fd8', fillOpacity: 0.4}}
+            style={{color: "#2eadd3",
+              fill: '#2eadd3', fillOpacity: 0.4}}
             data={isochrone2}
             key={`iso-${key2}`}
           />}

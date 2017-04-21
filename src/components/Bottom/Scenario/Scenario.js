@@ -138,7 +138,7 @@ class Scenario extends React.Component {
       <div className="colBody" id="leftDynamic">
         <div className="colHead" onClick={this.handlePlaceHolder}>
           <i className="fa fa-random"/>
-          <span>Scenario: Existing MBTA</span>
+          <span>Scenario Selector</span>
           {/*<span>*/}
           {/*Scenario<span> Comparison</span>:*/}
           {/*<span>*/}
@@ -163,7 +163,7 @@ class Scenario extends React.Component {
 
           <div className="btn-group btn-group-justified">
 
-            {this.state.isCompareMode ? <label className="btn tiny" onClick={this.handleClickCompare}><i
+            {this.state.isCompareMode ? <label className="btn tiny" style={{backgroundColor: "grey", color: "white", border:"3px solid #eec16f"}} onClick={this.handleClickCompare}><i
               className="fa fa-balance-scale"/> Compare
             </label> : <label className="btn" style={{backgroundColor: "grey", color: "white"}}
                               onClick={this.handleClickCompare}><i
