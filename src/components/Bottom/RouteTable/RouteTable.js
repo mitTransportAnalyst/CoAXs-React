@@ -26,7 +26,7 @@ class RouteTable extends React.Component {
   render() {
     let totalbuses = 0;
     for (let key in this.props.scorecardData ){
-      totalbuses += this.props.scorecardData[key]
+      totalbuses += Math.ceil(this.props.scorecardData[key])
     }
 
     return (
@@ -45,7 +45,7 @@ class RouteTable extends React.Component {
               {/*style="background-color: {{variants[tabnav].color}}; color: #FFF"*/}
               <i className="fa fa-line-chart"/>
               {/*<span >Hide Data</span>*/}
-              <span>Total number of buses: {Math.ceil(totalbuses)}</span>
+              <span>Total number of buses: {totalbuses}</span>
             </label>
           </div>
 
