@@ -22,7 +22,7 @@ class ScenarioEntry extends React.Component {
 
         return (<div style={{width: 150, position: "relative", marginTop:2}} key={corridorKey}>
           <div className="square" style={{padding: 3,fontSize: 17, color: "white", backgroundColor:CorridorInfo[corridorKey].color}}>
-            {corridorKey}
+            {CorridorInfo[corridorKey].name}
           </div>
             <small style={{fontSize: 16,}}>R: {this.props.data[corridorKey].alternative}  | H:{this.props.data[corridorKey].headway}  </small>
         </div>
@@ -36,9 +36,14 @@ class ScenarioEntry extends React.Component {
           return (
             <div className="" style={{display: "inline-block", whiteSpace: "nowrap", width:150, fontSize: 20, backgroundColor:"#eec16f", height: "100%"}} onClick={() => this.props.selectScenario(this.props.index)}>
               <div className="btn" style={{margin: 0, padding: 0}}>
-                <div className="subHead" style={{width:"100%", color: "white", backgroundColor:"#eec16f"}}>
-                  Scenario {this.props.index + 1}
-                </div>
+
+
+
+                    <div className="subHead" style={{width: "100%", color: "white", backgroundColor: "#eec16f"}}>
+                    {this.props.index === 0 ? `Base Scenario` : `New Scenario ${this.props.index}`   }
+                    </div>
+
+
 
                 {ScenarioValue}
 
@@ -51,7 +56,7 @@ class ScenarioEntry extends React.Component {
             <div className="" style={{display: "inline-block", whiteSpace: "nowrap", width:150, fontSize: 20, height: "100%"}} onClick={() => this.props.selectScenario(this.props.index)}>
               <div className="btn" style={{margin: 0, padding: 0}}>
                 <div className="subHead" style={{width:"100%", color: "white", backgroundColor:"#eec16f"}}>
-                  Scenario {this.props.index + 1}
+                  {this.props.index === 0 ? `Base Scenario` : `New Scenario ${this.props.index}`   }
                 </div>
 
                 {ScenarioValue}

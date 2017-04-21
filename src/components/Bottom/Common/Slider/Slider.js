@@ -36,11 +36,22 @@ class Slider extends React.Component {
    * @return {ReactElement} input slider
    */
   render() {
+    if (this.props.name === "timeSlider"){
+      return (
+        <div>
+          <span style={{color: "black"}}>  <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
+        </div>
+      );
+
+
+    }
+    else{
     return (
       <div>
-        <span style={{color: "black"}}>{this.props.value}   <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
+        <span style={{color: "black"}}>{this.props.value}%   <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
       </div>
     );
+    }
   }
 }
 

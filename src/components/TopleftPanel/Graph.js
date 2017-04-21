@@ -25,7 +25,8 @@ class Graph extends React.Component {
 
 
   render() {
-    if (this.props.isCompareMode){
+    console.log(this.props.gridNumber1);
+    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
       var data =[
         {name: 'Base Scenario', job:null},
         {name: 'New Scenario', job:null},
@@ -40,7 +41,7 @@ class Graph extends React.Component {
 
     data[0].job = this.props.gridNumber;
 
-    if (this.props.isCompareMode){
+    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
       data[0].job = this.props.gridNumber1;
       data[1].job = this.props.gridNumber;
 

@@ -31,7 +31,13 @@
 
 .colBody .showToggle .updateStart{
   width: 100%;
-
+  background-color: #2eadd3;
+  height: 32px;
+  color: #FFFFFF;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  padding-top: 6px;
 }
 
 

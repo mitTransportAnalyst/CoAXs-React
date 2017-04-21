@@ -72,32 +72,36 @@ class TimeFilter extends React.Component {
 
 
         <div className="showToggle">
+          <div className="updateStart">
+            {this.state.currentTimeFilter} min
+          </div>
 
-          <ButtonGroup className="updateStart">
-            <Button bsStyle="info" className="update">
-              <i><Fa name="refresh"/></i>
-              <span> Update</span>
-            </Button>
 
-            <Button className="start">
-              <i><Fa name="play"/></i>
-              <span> Start</span>
-            </Button>
-          </ButtonGroup>
+          {/*<ButtonGroup className="updateStart">*/}
+            {/*<Button bsStyle="info" className="update">*/}
+              {/*/!*<i><Fa name="refresh"/></i>*!/*/}
+              {/*<span> </span>*/}
+            {/*</Button>*/}
 
-          <div className="slideContainer">
+            {/*<Button className="start">*/}
+              {/*/!*<i><Fa name="play"/></i>*!/*/}
+              {/*<span> </span>*/}
+            {/*</Button>*/}
+          {/*</ButtonGroup>*/}
+
+          <div className="slideContainer" style={{marginTop: 20}}>
             <div className="text-center">
-              <span>
+              <span >
              <Slider name="timeSlider" min={5} max={90} value={this.state.currentTimeFilter} step={5}
                      className="right" changeFunction={this.changeFeature}  />
                 <div>
-                  <span style={{position: "absolute", left:10, color:"black"}}>
-                    <i><Fa name="step-backward" size="2x"/></i>
-                  </span>
+                  {/*<span style={{position: "absolute", left:10, color:"black"}}>*/}
+                    {/*<i><Fa name="step-backward" size="2x"/></i>*/}
+                  {/*</span>*/}
 
-                  <span style={{position: "absolute", right:10, color:"black"}}>
-                    <i><Fa name="step-forward" size="2x"/></i>
-                  </span>
+                  {/*<span style={{position: "absolute", right:10, color:"black"}}>*/}
+                    {/*<i><Fa name="step-forward" size="2x"/></i>*/}
+                  {/*</span>*/}
 
                 </div>
               </span>
