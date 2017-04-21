@@ -324,6 +324,8 @@ class ScenarioMap extends React.Component {
     this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
     this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff,MAX_UPDATE_INTERVAL_MS);
     this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
+    this.updateScneario = this.updateScneario.bind(this);
+
 
     this.bs = new Browsochrones({webpack: true});
     this.bs2 = new Browsochrones({webpack: true});
@@ -607,6 +609,125 @@ class ScenarioMap extends React.Component {
   };
 
 
+  updateScneario() {
+    if (this.props.isCompareMode){
+      let origin = this.state.origin;
+      let {x, y} = this.bs.latLonToOriginPoint(origin);
+      let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
+
+      this.setState({
+        ...this.state,
+        origin,
+        isochrone2: null,
+        transitive2: null,
+        inVehicleTravelTime2: null,
+        travelTime2: null,
+        waitTime2: null,
+        accessibility2: null
+      });
+
+
+      // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          type: 'static',
+          request: staticRequestBase,
+          workerVersion: WORKER_VERSION,
+          graphId: TRANSPORT_NETWORK_ID,
+          x,
+          y
+        })
+      }).then(res => res.arrayBuffer())
+        .then(async(buff) => {
+          console.log("generate surface");
+          await this.bs2.setOrigin(buff, {x, y});
+          await this.bs2.generateSurface("grid");
+          let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
+
+
+          console.log("done isochrone and accessibility");
+          this.props.doneCompareScenario(" ");
+
+          this.setState({
+            ...this.state,
+            isochrone2,
+            key2: uuid.v4(),
+            origin,
+            accessibility2,
+            transitive2: null,
+            inVehicleTravelTime2: null,
+            travelTime2: null,
+            waitTime2: null
+          })
+        })
+
+    }
+
+
+    let origin = this.state.origin;
+    let {x, y} = this.bs.latLonToOriginPoint(origin);
+    let {staticRequest, accessToken, isochroneCutoff} = this.state;
+
+    this.setState({
+      ...this.state,
+      origin,
+      isochrone: null,
+      transitive: null,
+      inVehicleTravelTime: null,
+      travelTime: null,
+      waitTime: null,
+      accessibility: null
+    });
+
+    this.props.changeProgress(0.2);
+
+
+    // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+    fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'static',
+        request: staticRequest,
+        workerVersion: WORKER_VERSION,
+        graphId: TRANSPORT_NETWORK_ID,
+        x,
+        y
+      })
+    }).then(res => res.arrayBuffer())
+      .then(async(buff) => {
+        console.log("generate surface");
+        this.props.changeProgress(0.8);
+
+        await this.bs.setOrigin(buff, {x, y});
+        await this.bs.generateSurface("grid");
+        let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
+
+        this.props.changeProgress(0.9);
+
+        console.log("done isochrone and accessibility");
+        this.props.doneOneScenario(" ");
+
+        this.setState({
+          ...this.state,
+          isochrone,
+          key: uuid.v4(),
+          origin,
+          accessibility,
+          transitive: null,
+          inVehicleTravelTime: null,
+          travelTime: null,
+          waitTime: null
+        })
+
+        this.props.changeProgress(1);
+
+      });
+
+
+  };
+
+
   /** get an isochrone and an accessibility figure */
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
 
@@ -686,7 +807,8 @@ class ScenarioMap extends React.Component {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
     if (this.props.fireScenario !== nextProps.fireScenario ) {
-      this.state.staticRequest.request.scenario.modifications = nextProps.fireScenario
+      this.state.staticRequest.request.scenario.modifications = nextProps.fireScenario;
+      this.updateScneario();
     }
   }
 
