@@ -133,11 +133,7 @@ class ServiceEditor extends React.Component {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
     return (
       <div className="colBody" id="service-tab">
-        <div className="colHead" onClick={
-          () => {
-            this.handlePlaceHolder();
-            this.props.changeMap(!this.props.currentMap);
-          }}>
+        <div className="colHead">
           <i className="fa fa-pencil-square-o"/>
           Service Editor - Editing Route {CorridorInfo[this.props.currentCorridor].name}
         </div>

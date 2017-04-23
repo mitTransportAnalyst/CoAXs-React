@@ -20,8 +20,10 @@ import GeojsonE5B from '../../../Data/busline/E5B.geojson'
 // import TransitiveLayer from './transitive-map-layer'
 // import transitiveStyle from './transitive-style'
 import uuid from 'uuid'
-import Browsochrones from 'browsochrones'
+import Browsochrones from './NewBrowsochrones/lib'
 import debounce from 'debounce'
+import debug from 'debug'
+
 
 
 //bind redux
@@ -154,7 +156,7 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 120,
-          scenario: {id: uuid.v4(),modifications: [][
+          scenario: {id: uuid.v4(),modifications: [
             {
               "type": "adjust-frequency",
               "route": "NORTA:10464",
@@ -337,11 +339,11 @@ class ScenarioMap extends React.Component {
 
   async changeIsochroneCutoff(isochroneCutoff) {
     isochroneCutoff = parseInt(isochroneCutoff);
+
     if (this.props.isCompareMode){
       var data = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
     }
     var data1 = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
-
     this.setState({...this.state, ...data,...data1, isochroneCutoff})
   };
 
@@ -404,7 +406,8 @@ class ScenarioMap extends React.Component {
             this.bs2.setQuery(metadata),
             this.bs2.setStopTrees(stopTrees),
             this.bs2.setTransitiveNetwork(metadata.transitiveData),
-            this.bs2.putGrid('grid', grid),
+            this.bs2.putGrid({id: 'jobs', grid: grid}),
+
 
           ]).then(() => {
               console.log("done fetch");
@@ -430,7 +433,8 @@ class ScenarioMap extends React.Component {
 
     let accessToken = response.access_token;
     console.log(accessToken);
-    this.props.changeProgress(0.2);
+    // this.props.changeProgress(0.2);
+    this.props.changeProgress(1);
 
     this.setState({...this.state, accessToken});
 
@@ -445,7 +449,7 @@ class ScenarioMap extends React.Component {
         })
       }).then(res => {
           console.log(res);
-          this.props.changeProgress(0.4);
+          // this.props.changeProgress(0.4);
 
         return res.json()
         }
@@ -460,13 +464,13 @@ class ScenarioMap extends React.Component {
         })
       }).then(res => {
         console.log(res);
-        this.props.changeProgress(0.6);
+        // this.props.changeProgress(0.6);
 
         return res.arrayBuffer()
       }),
       fetch(GRID_URL).then(res => {
         console.log(res);
-        this.props.changeProgress(0.8);
+        // this.props.changeProgress(0.8);
 
         return res.arrayBuffer()
       })
@@ -477,11 +481,11 @@ class ScenarioMap extends React.Component {
           this.bs.setQuery(metadata),
           this.bs.setStopTrees(stopTrees),
           this.bs.setTransitiveNetwork(metadata.transitiveData),
-          this.bs.putGrid('grid', grid),
+          this.bs.putGrid({id: 'jobs', grid: grid}),
 
         ]).then(() => {
             console.log("done fetch");
-           this.props.changeProgress(1);
+           // this.props.changeProgress(1);
 
           this.setState({...this.state, loaded: true});
           }
@@ -580,8 +584,8 @@ class ScenarioMap extends React.Component {
         console.log("generate surface");
         this.props.changeProgress(0.8);
 
-        await this.bs.setOrigin(buff, {x, y});
-        await this.bs.generateSurface("grid");
+        await this.bs.setOrigin({arrayBuffer: buff,point:{x, y}});
+        await this.bs.generateSurface({gridId: 'jobs'});
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
         this.props.changeProgress(0.9);
@@ -599,7 +603,7 @@ class ScenarioMap extends React.Component {
           inVehicleTravelTime: null,
           travelTime: null,
           waitTime: null
-        })
+        });
 
         this.props.changeProgress(1);
 
@@ -730,10 +734,11 @@ class ScenarioMap extends React.Component {
 
   /** get an isochrone and an accessibility figure */
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
-
+    console.log(isochroneCutoff, isBased);
     if (isBased){
       let [accessibility2, isochrone2] = await Promise.all([
-        this.bs2.getAccessibilityForGrid('grid', isochroneCutoff),
+        this.bs2.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
+
         this.bs2.getIsochrone(isochroneCutoff)
       ]);
       return {accessibility2, isochrone2, key2: uuid.v4()}
@@ -741,8 +746,8 @@ class ScenarioMap extends React.Component {
 
     else{
       let [accessibility, isochrone] = await Promise.all([
-        this.bs.getAccessibilityForGrid('grid', isochroneCutoff),
-        this.bs.getIsochrone(isochroneCutoff)
+        this.bs.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
+        this.bs.getIsochrone({cutoff: isochroneCutoff})
       ]);
       return {accessibility, isochrone, key: uuid.v4()}
     }
