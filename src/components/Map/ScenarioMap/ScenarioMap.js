@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl} from 'react-leaflet';
+import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer} from 'react-leaflet';
 import Leaflet from 'leaflet'
 
 import s from "./ScenarioMap.css"
@@ -17,8 +17,17 @@ import GeojsonE5B from '../../../Data/busline/E5B.geojson'
 
 
 
-// import TransitiveLayer from './transitive-map-layer'
-// import transitiveStyle from './transitive-style'
+import Transitive from 'transitive-js'
+import 'leaflet-transitivelayer'
+
+// old
+//import TransitiveLayer from './transitive-layer'
+//import transitiveStyle from './transitive-style'
+// import 'leaflet-transitivelayer'
+
+
+
+
 import uuid from 'uuid'
 import Browsochrones from './NewBrowsochrones/lib'
 import debounce from 'debounce'
@@ -56,6 +65,7 @@ class ScenarioMap extends React.Component {
       loaded: false,
       origin: INIT_ORIGIN,
       destination: INIT_DESTINATION,
+      originGrid: null,
 
       preRequest: {
         jobId: uuid.v4(),
@@ -498,6 +508,11 @@ class ScenarioMap extends React.Component {
     if (this.props.isCompareMode){
       let origin = e.target.getLatLng();
       let {x, y} = this.bs.latLonToOriginPoint(origin);
+      this.setState({
+        ...this.state,
+        originGrid: {x, y}
+      });
+
       let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
 
       this.setState({
@@ -553,6 +568,10 @@ class ScenarioMap extends React.Component {
     let origin = e.target.getLatLng();
     let {x, y} = this.bs.latLonToOriginPoint(origin);
     let {staticRequest, accessToken, isochroneCutoff} = this.state;
+    this.setState({
+      ...this.state,
+      originGrid: {x, y}
+    });
 
     this.setState({
       ...this.state,
@@ -612,7 +631,7 @@ class ScenarioMap extends React.Component {
 
   };
 
-
+  //TODO change API
   updateScneario() {
     if (this.props.isCompareMode){
       let origin = this.state.origin;
@@ -758,22 +777,29 @@ class ScenarioMap extends React.Component {
   async moveDestination(e) {
     let destination = e.target.getLatLng();
     let zoom = e.target._map._zoom;
-    // let { x, y } = this.bs.latLonToOriginPoint(destination);
-
+    let { x, y } = this.bs.latLonToOriginPoint(destination);
     // const point = this.bs.pixelToOriginPoint(destination, zoom);
-    const point = this.bs.pixelToOriginPoint(Leaflet.CRS.EPSG3857.latLngToPoint(destination, zoom), zoom);
+    // const point = this.bs.pixelToOriginPoint(Leaflet.CRS.EPSG3857.latLngToPoint(destination, zoom), zoom);
 
-    console.log(point);
+    // console.log(point);
 
     // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData(point);
 
-    let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.origin, to:point});
+    let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.originGrid, to:{x, y}});
 
-    console.log(await this.bs.generateDestinationData({from: this.state.origin, to:point}));
+    console.log(await this.bs.generateDestinationData({from: this.state.originGrid, to:{x, y}}));
     // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.origin, to:{x, y}});
 
+    const transitiveLayer = new Leaflet.TransitiveLayer(new Transitive({
+      data: transitive
+    }));
 
-    this.setState({ ...this.state, transitive, travelTime, waitTime, inVehicleTravelTime, key: uuid.v4() })
+    console.log(transitiveLayer);
+
+
+    this.setState({ ...this.state, transitive, travelTime, waitTime, inVehicleTravelTime, transitiveLayer, key: uuid.v4() })
+
+
   }
 
 
@@ -819,7 +845,7 @@ class ScenarioMap extends React.Component {
 
 
   render() {
-    let {transitive, transitive2, isochrone, isochrone2, key, key2, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, accessibility2, isochroneCutoff} = this.state;
+    let {transitive, transitive2, transitiveLayer, isochrone, isochrone2, key, key2, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, accessibility2, isochroneCutoff} = this.state;
 
     const position = [MapLat, MapLng];
     return (
@@ -847,9 +873,8 @@ class ScenarioMap extends React.Component {
             key={`iso-${key2}`}
           />}
 
-
-          {/*{ transitive && <TransitiveLayer data={transitive} styles={transitiveStyle} key={`transitive-${key}`}/> }*/}
-
+          { transitive && {transitiveLayer}  }
+          {/*{ transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`}/> }*/}
 
           <Marker
             position={origin}
@@ -857,6 +882,13 @@ class ScenarioMap extends React.Component {
             onDragend={this.moveOrigin}
             ref='markerOrigin'
              />
+
+          <Marker
+            position={destination}
+            draggable = {true}
+            onDragend={this.moveDestination}
+            ref='markerDestination'
+          />
 
           {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
@@ -1051,12 +1083,7 @@ class ScenarioMap extends React.Component {
           }
 
 
-          {/*<Marker*/}
-            {/*position={destination}*/}
-            {/*draggable = {true}*/}
-            {/*onDragend={this.moveDestination}*/}
-            {/*ref='markerDestination'*/}
-          {/*/>*/}
+
         </Map>
       </div>
     );
