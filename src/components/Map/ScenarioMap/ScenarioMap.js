@@ -17,10 +17,18 @@ import GeojsonE5B from '../../../Data/busline/E5B.geojson'
 
 
 
-import Transitive from 'transitive-js'
-import 'leaflet-transitivelayer'
 
-// old
+// TAUI
+import TransitiveMapLayer from './transitive-map-layer'
+import transitiveStyle from './transitive-style'
+
+
+
+
+import Transitive from 'transitive-js'
+// import 'leaflet-transitivelayer'
+
+// old browsochrone example
 //import TransitiveLayer from './transitive-layer'
 //import transitiveStyle from './transitive-style'
 // import 'leaflet-transitivelayer'
@@ -850,8 +858,17 @@ class ScenarioMap extends React.Component {
     const position = [MapLat, MapLng];
     return (
       <div className={s.map}>
-        <Map center={position} zoom={12} detectRetina zoomControl={false} >
+        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map'>
           <ZoomControl position="bottomright" />
+
+          {transitive &&
+          <TransitiveMapLayer
+            data={transitive}
+            styles={transitiveStyle}
+            key={`transitive-${key}`}
+          />
+          }
+
 
           <TileLayer
             url={Tile}
@@ -873,8 +890,10 @@ class ScenarioMap extends React.Component {
             key={`iso-${key2}`}
           />}
 
-          { transitive && {transitiveLayer}  }
+          {/*{ transitive && {transitiveLayer}  }*/}
           {/*{ transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`}/> }*/}
+
+
 
           <Marker
             position={origin}
