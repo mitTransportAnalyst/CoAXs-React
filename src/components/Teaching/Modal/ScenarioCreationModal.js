@@ -24,14 +24,15 @@ class ScenarioCreationModal extends React.Component {
   render() {
     return (
       <div>
-        <Modal show={this.props.isShow} onHide={this.props.closeModal} >
+        <Modal show={this.props.isShow} onHide={this.props.closeModal} keyboard={false} backdrop="static">
           <Modal.Header>
             <Modal.Title>SCENARIO CREATION</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <h4>Text in a modal</h4>
             <p>fewfewmfoewmfomewofmewofm/f ajfiewojfo/. jfewiojfoiew.</p>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/gPhlnZG-pRY" frameBorder="0" allowFullScreen></iframe>            <hr />
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/gPhlnZG-pRY" frameBorder="0" allowFullScreen></iframe>
+            <hr />
 
             <h4>Overflowing text to show scroll behavior</h4>
             <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>

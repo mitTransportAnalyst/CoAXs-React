@@ -71,7 +71,10 @@ export const WORKER_VERSION = 'v2.0.0-SNAPSHOT';
 export const API_KEY_ID = "3158ID11NHODSZ2BZX1WY1R4G";
 export const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
 // export const TRANSPORT_NETWORK_ID = "709b3861891d5ea98975ab8317f8f270";    //boston
-export const TRANSPORT_NETWORK_ID = "e2a7898e7c77962d8f747da221ee34dd";  // New Orlean
+// export const TRANSPORT_NETWORK_ID = "e2a7898e7c77962d8f747da221ee34dd";  // New Orlean
+export const TRANSPORT_NETWORK_ID = "55d0ff78bbb333cac809636c87a973c1";  // SF
+
+
 
 export const BASE_URL = "http://coaxs.mit.edu/api/single";
 export const AUTH_URL = "http://coaxs.mit.edu/oauth/token";

@@ -24,7 +24,7 @@ class IntroModal extends React.Component {
   render() {
     return (
       <div>
-        <Modal show={this.props.isShow} onHide={this.props.closeModal} >
+        <Modal show={this.props.isShow} onHide={this.props.closeModal} keyboard={false} backdrop="static">
           <Modal.Header>
             <Modal.Title>INTRO TO COAXs</Modal.Title>
           </Modal.Header>
