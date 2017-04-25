@@ -12,7 +12,7 @@ export const IntroTitle = "CoAXs | Bus Priority";
 /** Introduction description on the left
  * @type {string} IntroDescription
  */
-export const IntroDescription = "Showing door-to-door travel, with MBTA weekday morning schedule as baseline.";
+export const IntroDescription = "Showing door-to-door travel, with public transit Wednesday morning schedule as the baseline";
 
 //Map
 /** Center latitude of map

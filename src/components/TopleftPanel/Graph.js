@@ -49,6 +49,11 @@ class Graph extends React.Component {
 
 
     const scale = 'ordinal';
+    // const tooltipFormatter = (value) => ( `${Math.round(value / 1000)}K` );
+    // function numberWithCommas(x) {
+    //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // }
+
     return (
 
 
@@ -61,7 +66,9 @@ class Graph extends React.Component {
       <BarChart width={300} height={window.innerHeight * 0.55} data={data}
                 margin={{top: 50, right: 30, left: 0, bottom: 5}} style={{color: "white"}}>
         <XAxis dataKey="name" stroke="white"/>
-        <YAxis stroke="white" type="number" domain={[0, 300000]}/>
+        {/*<YAxis stroke="white" type="number" domain={[0, 300000]}/>*/}
+        <YAxis stroke="white" type="number" domain={[0,  'auto']}/>
+
         <CartesianGrid strokeDasharray="3 3"/>
         {/*<Tooltip/>*/}
         {/*<Legend />*/}
