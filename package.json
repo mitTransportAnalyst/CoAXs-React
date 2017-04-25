@@ -86,7 +86,9 @@
     "babel-preset-stage-3": "^6.17.0",
     "babel-runtime": "^6.20.0",
     "clean-webpack-plugin": "^0.1.15",
+    "commitizen": "^2.9.6",
     "css-loader": "^0.26.1",
+    "cz-conventional-changelog": "^2.0.0",
     "enzyme": "^2.7.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.10.0",
@@ -106,5 +108,10 @@
     "webpack-dev-server": "^1.16.2",
     "webworkify-webpack": "^2.0.5",
     "whatwg-fetch": "^2.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
