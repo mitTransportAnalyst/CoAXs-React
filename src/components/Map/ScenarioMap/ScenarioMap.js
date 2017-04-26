@@ -666,7 +666,7 @@ class ScenarioMap extends React.Component {
           />}
 
 
-          { isochrone2 && <GeoJson
+          { this.props.isCompareMode && isochrone2 && <GeoJson
             style={{color: "#2eadd3",
               fill: '#2eadd3', fillOpacity: 0.4}}
             data={isochrone2}
