@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/mitTransportAnalyst/CoAXs-React.svg?branch=NOLA-newBrowsochrone)](https://travis-ci.org/mitTransportAnalyst/CoAXs-React)
+
+
+
 # Getting started
 
     npm install
