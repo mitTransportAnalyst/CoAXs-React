@@ -31,7 +31,7 @@ class IntroModal extends React.Component {
           <Modal.Body>
             <h4>Text in a modal</h4>
             <p>fewfewmfoewmfomewofmewofm/f ajfiewojfo/. jfewiojfoiew.</p>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/uNswES3tTPs" frameBorder="0" allowFullScreen></iframe>
+            {/*<iframe width="100%" height="315" src="https://www.youtube.com/embed/uNswES3tTPs" frameBorder="0" allowFullScreen></iframe>*/}
 
             <hr />
 

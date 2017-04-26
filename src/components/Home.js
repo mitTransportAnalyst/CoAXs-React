@@ -26,7 +26,7 @@ class Home extends React.Component {
       <div className="page-home">
         <Navbar/>
         <TopleftPanel/>
-        {/*{this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}*/}
+        {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
         {/*change map when click subhead*/}
         {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}
         {/*<div className={this.props.currentMap ? "" : 'hidden2' }>*/}

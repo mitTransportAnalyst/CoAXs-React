@@ -65,7 +65,7 @@ class Graph extends React.Component {
         <YAxis stroke="white" type="number" domain={[0, 400000]} tickFormatter={tooltipFormatter}/>
 
         <CartesianGrid strokeDasharray="3 3"/>
-        <Tooltip/>
+        {/*<Tooltip/>*/}
         {/*<Legend />*/}
         <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label/>
 
@@ -85,7 +85,7 @@ class Graph extends React.Component {
             <YAxis stroke="white" type="number" domain={[0, 400000]} tickFormatter={tooltipFormatter}/>
 
             <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip/>
+            {/*<Tooltip/>*/}
             {/*<Legend />*/}
 
             <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label>

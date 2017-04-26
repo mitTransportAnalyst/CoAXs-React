@@ -4,7 +4,6 @@ import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer} from 'rea
 import Leaflet from 'leaflet'
 
 import s from "./ScenarioMap.css"
-import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo} from "../../../config"
 import Geojson16A from '../../../Data/busline/16A.geojson'
 import Geojson16B from '../../../Data/busline/16B.geojson'
 import Geojson16C from '../../../Data/busline/16C.geojson'
@@ -42,7 +41,6 @@ import Transitive from 'transitive-js'
 import uuid from 'uuid'
 import Browsochrones from './NewBrowsochrones/lib'
 import debounce from 'debounce'
-import debug from 'debug'
 
 
 
@@ -52,7 +50,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
 //import configuration file
-import {isPTP, INIT_ORIGIN, INIT_DESTINATION, WORKER_VERSION, API_KEY_ID, API_KEY_SECRET, TRANSPORT_NETWORK_ID, BASE_URL, AUTH_URL, GRID_URL  } from '../../../config'
+import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo, isPTP, INIT_ORIGIN, INIT_DESTINATION, WORKER_VERSION, API_KEY_ID, API_KEY_SECRET, TRANSPORT_NETWORK_ID, BASE_URL, AUTH_URL, GRID_URL  } from '../../../config'
 
 
 /** how often will we allow the isochrone to update, in milliseconds */
@@ -74,7 +72,7 @@ class ScenarioMap extends React.Component {
       key: null,
       key2: null,
       loaded: false,
-      origin: INIT_ORIGIN,
+      origin: {lat:MapLat , lng:MapLng},
       destination: INIT_DESTINATION,
       originGrid: null,
 
@@ -210,10 +208,8 @@ class ScenarioMap extends React.Component {
 
   async fetchMetadata() {
 
-    if (true){
-
       let {preRequest} = this.state;
-
+      this.props.changeProgress(0.2);
       console.log(API_KEY_ID);
       // first get a token
       let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
@@ -229,6 +225,7 @@ class ScenarioMap extends React.Component {
 
       this.setState({...this.state, accessToken});
 
+      this.props.changeProgress(0.4);
       Promise.all([
         fetch(`${BASE_URL}?accessToken=${accessToken}`, {
           method: 'POST',
@@ -240,6 +237,7 @@ class ScenarioMap extends React.Component {
           })
         }).then(res => {
             console.log(res);
+            this.props.changeProgress(0.6);
             return res.json()
           }
         ),
@@ -257,6 +255,7 @@ class ScenarioMap extends React.Component {
         }),
         fetch(GRID_URL).then(res => {
           console.log(res);
+          this.props.changeProgress(0.7);
           return res.arrayBuffer()
         })
       ])
@@ -278,13 +277,11 @@ class ScenarioMap extends React.Component {
 
           ]).then(() => {
               console.log("done fetch");
+              this.props.changeProgress(1);
               this.setState({...this.state, loaded: true});
             }
           )
         })
-
-    }
-
 
   };
 
@@ -537,7 +534,7 @@ class ScenarioMap extends React.Component {
 
   /** get an isochrone and an accessibility figure */
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
-    console.log(isochroneCutoff, isBased);
+    // console.log(isochroneCutoff, isBased);
     if (isBased){
       let [accessibility2, isochrone2] = await Promise.all([
         this.bs2.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
@@ -567,7 +564,6 @@ class ScenarioMap extends React.Component {
 
     // console.log(point);
 
-    // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData(point);
 
     let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.originGrid, to:{x, y}});
 
@@ -596,7 +592,6 @@ class ScenarioMap extends React.Component {
   }
 
   componentDidMount() {
-    //  const browsochrones = new Browsochrones();
     this.fetchMetadata();
     fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'GET', })
       .then(res => res.json())
