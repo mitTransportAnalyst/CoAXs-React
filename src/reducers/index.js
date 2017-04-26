@@ -121,6 +121,18 @@ function fireUpdate(state = [], action) {
   }
 }
 
+
+
+function updateButtonState(state = true, action) {
+  switch (action.type) {
+    case 'pushUpdateButton':
+      return !state;
+    default:
+      return state
+  }
+}
+
+
 function isCompare(state = false, action) {
   switch (action.type) {
     case 'isCompare':
@@ -207,6 +219,7 @@ export const reducers = combineReducers({
   modeStore,
   GridNumberStore,
   fireUpdate,
+  updateButtonState,
   isCompare,
   navState,
   changeBusline,

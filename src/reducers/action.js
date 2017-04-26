@@ -80,6 +80,14 @@ export function fireUpdate(res) {
   }
 }
 
+
+export function pushUpdateButton(res) {
+  return {
+    type: "pushUpdateButton",
+    res
+  }
+}
+
 export function isCompare(res) {
   return {
     type: "isCompare",

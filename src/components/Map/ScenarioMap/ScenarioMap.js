@@ -616,19 +616,22 @@ class ScenarioMap extends React.Component {
     if (this.props.currentTimeFilter !== nextProps.currentTimeFilter & this.state.key != null) {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
-    if (this.props.fireScenario !== nextProps.fireScenario ) {
+
+    if (this.props.fireScenario !== nextProps.fireScenario) {
       let staticRequest = this.state.staticRequest;
       staticRequest.request.scenario.modifications = nextProps.fireScenario;
-      staticRequest.request.scenario.id =  uuid.v4();
+      staticRequest.request.scenario.id = uuid.v4();
 
       // staticRequest.jobId = uuid.v4();
       this.setState({
         staticRequest,
       });
+    }
+
+    if (this.props.updateButtonState !== nextProps.updateButtonState) {
       this.updateScneario();
     }
   }
-
 
   render() {
     let {transitive, transitive2, transitiveLayer, isochrone, isochrone2, key, key2, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, accessibility2, isochroneCutoff} = this.state;
@@ -894,6 +897,7 @@ function mapStateToProps(state) {
     isCompareMode: state.isCompare.isCompare,
     currentCorridor: state.reducer.currentCor,
     currentBusline: state.changeBusline,
+    updateButtonState: state.updateButtonState,
   }
 }
 
