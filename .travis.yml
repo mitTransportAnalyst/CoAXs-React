@@ -15,3 +15,9 @@ install:
 script:
   - npm run build-prod
 
+deploy:
+  provider: heroku
+  api_key: 39e813f2-1fe7-42b4-9e1e-f963c90eda5f
+  app: coaxs-nola
+  on: NOLA-newBrowsochrone
+
