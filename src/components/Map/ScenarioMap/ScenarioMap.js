@@ -264,9 +264,16 @@ class ScenarioMap extends React.Component {
 
           Promise.all([
             this.bs2.setQuery(metadata),
-            this.bs2.setStopTrees(stopTrees),
+            this.bs.setQuery(metadata),
+
+            this.bs2.setStopTrees(stopTrees.slice(0)),
+            this.bs.setStopTrees(stopTrees.slice(0)),
+
             this.bs2.setTransitiveNetwork(metadata.transitiveData),
+            this.bs.setTransitiveNetwork(metadata.transitiveData),
+
             this.bs2.putGrid({id: 'jobs', grid: grid}),
+            this.bs.putGrid({id: 'jobs', grid: grid}),
 
 
           ]).then(() => {
@@ -279,78 +286,6 @@ class ScenarioMap extends React.Component {
     }
 
 
-    let {preRequest} = this.state;
-
-    console.log(API_KEY_ID);
-    // first get a token
-    let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials'
-    }).then(r => r.json());
-
-    let accessToken = response.access_token;
-    console.log(accessToken);
-    // this.props.changeProgress(0.2);
-    this.props.changeProgress(1);
-
-    this.setState({...this.state, accessToken});
-
-    Promise.all([
-      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-        method: 'POST',
-        body: JSON.stringify({
-          type: 'static-metadata',
-          graphId: TRANSPORT_NETWORK_ID,
-          workerVersion: WORKER_VERSION,
-          request: preRequest
-        })
-      }).then(res => {
-          console.log(res);
-          // this.props.changeProgress(0.4);
-
-        return res.json()
-        }
-      ),
-      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-        method: 'POST',
-        body: JSON.stringify({
-          type: 'static-stop-trees',
-          graphId: TRANSPORT_NETWORK_ID,
-          workerVersion: WORKER_VERSION,
-          request: preRequest
-        })
-      }).then(res => {
-        console.log(res);
-        // this.props.changeProgress(0.6);
-
-        return res.arrayBuffer()
-      }),
-      fetch(GRID_URL).then(res => {
-        console.log(res);
-        // this.props.changeProgress(0.8);
-
-        return res.arrayBuffer()
-      })
-    ])
-      .then(([metadata, stopTrees, grid]) => {
-
-        Promise.all([
-          this.bs.setQuery(metadata),
-          this.bs.setStopTrees(stopTrees),
-          this.bs.setTransitiveNetwork(metadata.transitiveData),
-          this.bs.putGrid({id: 'jobs', grid: grid}),
-
-        ]).then(() => {
-            console.log("done fetch");
-           // this.props.changeProgress(1);
-
-          this.setState({...this.state, loaded: true});
-          }
-        )
-      })
   };
 
 
