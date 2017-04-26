@@ -15,6 +15,9 @@ import GeojsonE3D from '../../../Data/busline/E3D.geojson'
 import GeojsonE5A from '../../../Data/busline/E5A.geojson'
 import GeojsonE5B from '../../../Data/busline/E5B.geojson'
 
+import Baseline from '../../../Data/scenario/Baseline.json'
+
+
 
 
 
@@ -103,7 +106,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 120,
+          monteCarloDraws: 220,
           scenario: {id: 999},
         }
       },
@@ -135,21 +138,17 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 120,
-          scenario: {id: uuid.v4(),modifications: [
-
-
-
-
-
-          ]},
+          monteCarloDraws: 220,
+          scenario: {id: uuid.v4(),modifications:
+            Baseline.modifications
+          },
         }
       },
       staticRequestBase: {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-01-01',
+          date: '2017-04-18',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -173,165 +172,8 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 120,
-          scenario: {id: uuid.v4(),modifications: [
-            {
-              "type": "adjust-frequency",
-              "route": "NORTA:10464",
-              "retainTripsOutsideFrequencyEntries": false,
-              "entries": [
-                {
-                  "sourceTrip": "NORTA:2584422",
-                  "headwaySecs": 1800,
-                  "startTime": 18000,
-                  "endTime": 79200,
-                  "monday": true,
-                  "tuesday": true,
-                  "wednesday": true,
-                  "thursday": true,
-                  "friday": true,
-                  "saturday": true,
-                  "sunday": true
-                },
-                {
-                  "sourceTrip": "NORTA:2584389",
-                  "headwaySecs": 1800,
-                  "startTime": 18000,
-                  "endTime": 79200,
-                  "monday": true,
-                  "tuesday": true,
-                  "wednesday": true,
-                  "thursday": true,
-                  "friday": true,
-                  "saturday": true,
-                  "sunday": true,
-                  "name": "16B - OB"
-                }
-              ],
-              "comment": "16A"
-            },
-            {
-              "type": "remove-trips",
-              "routes": [
-                "NORTA:10343"
-              ],
-              "comment": "Remove NORTA 16A - baseline [2]"
-            },
-            {
-              "type": "remove-trips",
-              "routes": [
-                "RideNOLA:16B"
-              ],
-              "comment": "Remove NORTA 16B - ext to Ocshner"
-            },
-            {
-              "type": "remove-trips",
-              "routes": [
-                "RideNOLA:16C"
-              ],
-              "comment": "Remove NORTA 16C - ext to Clearview"
-            },
-            {
-              "type": "remove-trips",
-              "routes": [
-                "RideNOLA:E3B"
-              ],
-              "comment": "Remove JeT E3B - Extension to Orleans"
-            },
-            {
-              "type": "remove-trips",
-              "routes": [
-                "RideNOLA:E3C"
-              ],
-              "comment": "Remove JeT E3C - COA plan re-route"
-            },
-            {
-              "type": "remove-trips",
-              "routes": [
-                "RideNOLA:E3D"
-              ],
-              "comment": "Remove JeT E3D - Short turn to Ochsner"
-            },
-            {
-              "type": "remove-trips",
-              "routes": [
-                "RideNOLA:E5B"
-              ],
-              "comment": "Remove JeT E5B - Extension to Ochsner"
-            },
-            {
-              "type": "adjust-frequency",
-              "route": "Jefferson Transit:E3",
-              "retainTripsOutsideFrequencyEntries": false,
-              "entries": [
-                {
-                  "sourceTrip": "Jefferson Transit:E3XMWE37",
-                  "headwaySecs": 1440,
-                  "startTime": 18000,
-                  "endTime": 79200,
-                  "monday": true,
-                  "tuesday": true,
-                  "wednesday": true,
-                  "thursday": true,
-                  "friday": true,
-                  "saturday": true,
-                  "sunday": true,
-                  "name": "E3A - IB"
-                },
-                {
-                  "sourceTrip": "Jefferson Transit:E3WE46",
-                  "headwaySecs": 1440,
-                  "startTime": 18000,
-                  "endTime": 79200,
-                  "monday": true,
-                  "tuesday": true,
-                  "wednesday": true,
-                  "thursday": true,
-                  "friday": true,
-                  "saturday": true,
-                  "sunday": true,
-                  "name": "E3A - OB"
-                }
-              ],
-              "comment": "E3A"
-            },
-            {
-              "type": "adjust-frequency",
-              "route": "Jefferson Transit:E5",
-              "retainTripsOutsideFrequencyEntries": false,
-              "entries": [
-                {
-                  "sourceTrip": "Jefferson Transit:E5WE07",
-                  "headwaySecs": 1620,
-                  "startTime": 18000,
-                  "endTime": 79200,
-                  "monday": true,
-                  "tuesday": true,
-                  "wednesday": true,
-                  "thursday": true,
-                  "friday": true,
-                  "saturday": true,
-                  "sunday": true,
-                  "name": "E5A - OB"
-                },
-                {
-                  "sourceTrip": "Jefferson Transit:E5XMWE04",
-                  "headwaySecs": 1620,
-                  "startTime": 18000,
-                  "endTime": 79200,
-                  "monday": true,
-                  "tuesday": true,
-                  "wednesday": true,
-                  "thursday": true,
-                  "friday": true,
-                  "saturday": true,
-                  "sunday": true,
-                  "name": "E5A - IB"
-                }
-              ],
-              "comment": "E5A"
-            }
-            ]},
+          monteCarloDraws: 220,
+          scenario: {id: uuid.v4(),modifications: Baseline.modifications},
         }
       },
     };
@@ -549,8 +391,8 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin(buff, {x, y});
-          await this.bs2.generateSurface("grid");
+          await this.bs2.setOrigin({arrayBuffer: buff,point:{x, y}});
+          await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
 
@@ -639,7 +481,6 @@ class ScenarioMap extends React.Component {
 
   };
 
-  //TODO change API
   updateScneario() {
     if (this.props.isCompareMode){
       let origin = this.state.origin;
@@ -672,8 +513,8 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin(buff, {x, y});
-          await this.bs2.generateSurface("grid");
+          await this.bs2.setOrigin({arrayBuffer: buff, point:{x, y}});
+          await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
 
@@ -730,8 +571,8 @@ class ScenarioMap extends React.Component {
         console.log("generate surface");
         this.props.changeProgress(0.8);
 
-        await this.bs.setOrigin(buff, {x, y});
-        await this.bs.generateSurface("grid");
+        await this.bs.setOrigin({arrayBuffer: buff,point:{x, y}});
+        await this.bs.generateSurface({gridId: 'jobs'});
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
         this.props.changeProgress(0.9);
@@ -749,7 +590,7 @@ class ScenarioMap extends React.Component {
           inVehicleTravelTime: null,
           travelTime: null,
           waitTime: null
-        })
+        });
 
         this.props.changeProgress(1);
 
@@ -766,7 +607,7 @@ class ScenarioMap extends React.Component {
       let [accessibility2, isochrone2] = await Promise.all([
         this.bs2.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
 
-        this.bs2.getIsochrone(isochroneCutoff)
+        this.bs2.getIsochrone({cutoff: isochroneCutoff})
       ]);
       return {accessibility2, isochrone2, key2: uuid.v4()}
     }
@@ -846,7 +687,14 @@ class ScenarioMap extends React.Component {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
     if (this.props.fireScenario !== nextProps.fireScenario ) {
-      this.state.staticRequest.request.scenario.modifications = nextProps.fireScenario;
+      let staticRequest = this.state.staticRequest;
+      staticRequest.request.scenario.modifications = nextProps.fireScenario;
+      staticRequest.request.scenario.id =  uuid.v4();
+
+      // staticRequest.jobId = uuid.v4();
+      this.setState({
+        staticRequest,
+      });
       this.updateScneario();
     }
   }
@@ -861,13 +709,13 @@ class ScenarioMap extends React.Component {
         <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map'>
           <ZoomControl position="bottomright" />
 
-          {transitive &&
-          <TransitiveMapLayer
-            data={transitive}
-            styles={transitiveStyle}
-            key={`transitive-${key}`}
-          />
-          }
+          {/*{transitive &&*/}
+          {/*<TransitiveMapLayer*/}
+            {/*data={transitive}*/}
+            {/*styles={transitiveStyle}*/}
+            {/*key={`transitive-${key}`}*/}
+          {/*/>*/}
+          {/*}*/}
 
 
           <TileLayer
@@ -902,12 +750,12 @@ class ScenarioMap extends React.Component {
             ref='markerOrigin'
              />
 
-          <Marker
-            position={destination}
-            draggable = {true}
-            onDragend={this.moveDestination}
-            ref='markerDestination'
-          />
+          {/*<Marker*/}
+            {/*position={destination}*/}
+            {/*draggable = {true}*/}
+            {/*onDragend={this.moveDestination}*/}
+            {/*ref='markerDestination'*/}
+          {/*/>*/}
 
           {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
