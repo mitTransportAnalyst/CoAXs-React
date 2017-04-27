@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { Modal, Tooltip } from 'react-bootstrap';
+import { Modal, Tooltip, Overlay, Popover, OverlayTrigger } from 'react-bootstrap';
 import s from "./Navbar.css"
 import classNames from "classnames"
 import IntroModal from "../Modal/IntroModal"
@@ -29,6 +29,7 @@ class Navbar extends React.Component {
       showScenario: false,
       showSurvey: false,
       showPreSurvey: true,
+      show: false,
     };
     this.closeScenario = this.closeScenario.bind(this);
     this.closeIntro = this.closeIntro.bind(this);
@@ -40,9 +41,16 @@ class Navbar extends React.Component {
     this.handleClickSurvey = this.handleClickSurvey.bind(this);
     this.handleClickPreSurvey = this.handleClickPreSurvey.bind(this);
 
+    this.handleClick = this.handleClick.bind(this);
+
+
 
   }
 
+  handleClick(e) {
+
+    this.setState({ target: e.target, show: !this.state.show });
+  };
 
   closeScenario(){
     this.setState({ showScenario: false });
@@ -114,17 +122,20 @@ class Navbar extends React.Component {
       "blink": this.props.isdoneCompareScenario & !this.props.isdoneExitSurvey,
     });
 
-
+    const popoverFocus = (
+      <Popover id="popover-trigger-focus" title="Popover bottom">
+        <strong>Holy guacamole!</strong> Check this info.
+      </Popover>
+    );
 
     return (
       <div>
         <ul className="navbarTop">
-          <li className="navitem">
-            <a href="https://coaxs-landing-nola.herokuapp.com/" target="_blank" >Landing Page</a>
+          <li className="navitem" ref="target">
+              <a href="https://coaxs-landing-nola.herokuapp.com/" target="_blank" >Landing Page</a>
           </li>
           <li className={preClass}>
-            <a className="" href="#" onClick={this.handleClickPreSurvey} >Pre-survey</a>
-
+             <a className="" href="#" onClick={this.handleClickPreSurvey} >Pre-survey</a>
           </li>
           <li className={introClass}>
             <a  className="" href="#" onClick={this.handleClickIntro} >Intro to CoAXs</a>
@@ -135,12 +146,23 @@ class Navbar extends React.Component {
             <a className="" href="#" onClick={this.handleClickScenario}>Scenario Creation</a>
           </li>
 
-          <li className={exitClass}>
+          <li className={exitClass} ref="exit">
             <a className="" href="#" onClick={this.handleClickSurvey}>Post-survey</a>
           </li>
 
         </ul>
 
+        <Overlay
+          show={true}
+          target={this.refs.exit}
+          placement="bottom"
+          container={this}
+          containerPadding={20}
+        >
+          <Popover id="popover-contained" title="Popover bottom">
+            <strong>Holy guacamole!</strong> Check this info.
+          </Popover>
+        </Overlay>
 
 
         <IntroModal isShow={this.state.showIntro} closeModal={this.closeIntro}/>

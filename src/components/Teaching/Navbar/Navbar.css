@@ -19,6 +19,8 @@
 
   float: left;
   width: calc(100%/5);
+  /*box-sizing: border-box;*/
+
 }
 
 
@@ -30,11 +32,11 @@
   text-decoration: none;
 }
 
-.navitem a {
+.applicationStatus a {
   display: block;
   color: white;
   text-align: center;
-  padding: 10px 16px;
+  padding: 0px 0px;
   text-decoration: none;
 }
 
@@ -76,3 +78,67 @@
   top: 5px;
 
 }
+
+
+
+
+#applicationStatus {
+  position: relative;
+  width: 10000px;
+  height: 140px;
+  left: 20px;
+}
+
+.applicationStatus  { /* Added this and moved much code to here */
+  position: relative; /* this was a key property missing from your code */
+  width: 100%;
+  text-indent: 30px;
+  height: 39px;
+  background-color: #767676;
+  display: inline-block;
+  /* Dirty IE Hack */
+  zoom: 1;
+  *display: inline;
+  /* margin-right: 30px; Eliminated this */
+  margin-left: 0px;
+  padding: 10px 0px 10px 0;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  /*line-height: 39px;*/
+}
+
+/*ul.applicationStatus { !* this is irrelevant with the HTML you gave, but I added the class *!*/
+  /*list-style: none; }*/
+
+.applicationStatus:after, li.applicationStatusGood:after, li.applicationStatusNoGood:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-left: 20px solid #efbc4d;
+  border-bottom: 20px solid transparent;
+  margin: -10px 0px 0px 0px;
+}
+.applicationStatus:before, li.applicationStatusGood:before, li.applicationStatusNoGood:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  border-top: 20px solid transparent;
+  border-left: 20px solid white;
+  border-bottom: 20px solid transparent;
+  margin: -10px 0px 0px 0px;
+}
+
+li.applicationStatusGood {
+  background-color: #77a942; }
+li.applicationStatusGood:after {
+  border-left: 30px solid #77a942; }
+
+li.applicationStatusNoGood {
+  background-color: #c42c00; }
+li.applicationStatusNoGood:after {
+  border-left: 30px solid #c42c00; }
