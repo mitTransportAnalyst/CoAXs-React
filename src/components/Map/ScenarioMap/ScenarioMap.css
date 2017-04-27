@@ -11,5 +11,5 @@
   width: calc(100vw - 300px);
   position: absolute;
   left : 300px;
-  z-index 		   : 99
+  z-index 		   : -100
 }

@@ -15,6 +15,7 @@
   overflow         : hidden;
   z-index: 10;
   background-color : #696969;
+  height: 17px;
 }
 
 .topinfo {

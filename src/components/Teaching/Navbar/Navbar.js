@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { Modal, Tooltip, Overlay, Popover, OverlayTrigger } from 'react-bootstrap';
+import { Modal, Tooltip, Overlay, Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import s from "./Navbar.css"
 import classNames from "classnames"
 import IntroModal from "../Modal/IntroModal"
@@ -27,13 +27,19 @@ class Navbar extends React.Component {
     this.state = {
       showIntro: false,
       showScenario: false,
+      showScenarioPopup: false,
       showSurvey: false,
+      showExitSurveyPopup: false,
       showPreSurvey: true,
       show: false,
     };
     this.closeScenario = this.closeScenario.bind(this);
+    this.closeScenarioPopup = this.closeScenarioPopup.bind(this);
+
     this.closeIntro = this.closeIntro.bind(this);
     this.closeExitSurvey = this.closeExitSurvey.bind(this);
+    this.closeExitSurveyPopup = this.closeExitSurveyPopup.bind(this);
+
     this.closePreSurvey = this.closePreSurvey.bind(this);
 
     this.handleClickScenario = this.handleClickScenario.bind(this);
@@ -56,12 +62,22 @@ class Navbar extends React.Component {
     this.setState({ showScenario: false });
   }
 
+  closeScenarioPopup(){
+    this.setState({ showScenarioPopup: false });
+  }
+
+
   closeIntro(){
     this.setState({ showIntro: false });
   }
 
   closeExitSurvey(){
     this.setState({ showSurvey: false });
+  }
+
+
+  closeExitSurveyPopup(){
+    this.setState({ showExitSurveyPopup: false });
   }
 
   closePreSurvey(){
@@ -92,8 +108,13 @@ class Navbar extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if (nextProps.isdoneOneScenario !== this.props.isdoneOneScenario){
-      this.setState({ showScenario: true });
+      this.setState({ showScenarioPopup: true });
     }
+    if (nextProps.isdoneCompareScenario !== this.props.isdoneCompareScenario){
+      this.setState({ showExitSurveyPopup: true });
+    }
+
+
   }
 
 
@@ -105,65 +126,98 @@ class Navbar extends React.Component {
     });
 
     const introClass = classNames({
-      "navitem": true,
-      "active": !this.props.isdoneOneScenario,
-      "blink": this.props.isdonePreSurvey & !this.props.isdoneOneScenario,
+      "step": true,
+      "current": !this.props.isdoneOneScenario,
+      // "blink": this.props.isdonePreSurvey & !this.props.isdoneOneScenario,
     });
 
     const compareClass = classNames({
-      "navitem": true,
-      "active": !this.props.isdoneCompareScenario,
-      "blink": this.props.isdoneOneScenario & !this.props.isdoneCompareScenario,
+      "step": true,
+      "current": !this.props.isdoneCompareScenario,
+      // "blink": this.props.isdoneOneScenario & !this.props.isdoneCompareScenario,
     });
 
     const exitClass = classNames({
-      "navitem": true,
-      "active": !this.props.isdoneExitSurvey,
-      "blink": this.props.isdoneCompareScenario & !this.props.isdoneExitSurvey,
+      "step": true,
+      "current": !this.props.isdoneExitSurvey,
+      // "blink": this.props.isdoneCompareScenario & !this.props.isdoneExitSurvey,
     });
 
-    const popoverFocus = (
-      <Popover id="popover-trigger-focus" title="Popover bottom">
-        <strong>Holy guacamole!</strong> Check this info.
-      </Popover>
+    // const popoverFocus = (
+    //   <Popover id="popover-trigger-focus" title="Popover bottom">
+    //     <strong>Holy guacamole!</strong> Check this info.
+    //   </Popover>
+    // );
+
+
+    const tooltipforIntro = (
+      <Tooltip id="tooltipforIntro"><strong>Click question button to watch the Instructions</strong></Tooltip>
     );
 
     return (
-      <div>
-        <ul className="navbarTop">
-          <li className="navitem" ref="target">
-              <a href="https://coaxs-landing-nola.herokuapp.com/" target="_blank" >Landing Page</a>
-          </li>
-          <li className={preClass}>
-             <a className="" href="#" onClick={this.handleClickPreSurvey} >Pre-survey</a>
-          </li>
-          <li className={introClass}>
-            <a  className="" href="#" onClick={this.handleClickIntro} >Intro to CoAXs</a>
-          </li>
+      <div className="navbarTop" >
+        {/*<ul className="navbarTop">*/}
+        <div className="arrow-steps">
+
+          <div className="step" ref="target">
+              <a href="https://coaxs-landing-nola.herokuapp.com/" target="_blank" >1 Home Page</a>
+          </div>
 
 
-          <li className={compareClass}>
-            <a className="" href="#" onClick={this.handleClickScenario}>Scenario Creation</a>
-          </li>
+          <div className={introClass} >
+              <span className="" >2 Get to know CoAXs
+                <OverlayTrigger placement="bottom" overlay={tooltipforIntro}>
+                  <a ref="introQuestion" className="fa fa-question-circle-o questionMark" style={{ display: "inline", fontSize: 16}} aria-hidden="true" onClick={this.handleClickIntro} href="#"></a>
+                </OverlayTrigger>
+                {/*<button style={{marginLeft: 8, fontSize: 11}} onClick={this.handleClickIntro} >Instructions</button>*/}
+              </span>
+          </div>
 
-          <li className={exitClass} ref="exit">
-            <a className="" href="#" onClick={this.handleClickSurvey}>Post-survey</a>
-          </li>
 
-        </ul>
+          <div className={compareClass}>
+            <span >3 Create Your Own Scenario
+              <OverlayTrigger placement="bottom" overlay={tooltipforIntro}>
+                <a ref="compareQuestion" className="fa fa-question-circle-o questionMark" style={{ display: "inline", fontSize: 16}} aria-hidden="true" onClick={this.handleClickScenario} href="#"></a>
+              </OverlayTrigger>
+
+                {/*<button  onClick={this.handleClickScenario} >Instructions</button>*/}
+            </span>
+          </div>
+
+          <div className={exitClass} href="#" onClick={this.handleClickSurvey}>
+            <a href="#" ref="exit" >
+              4 Exit Survey
+            </a>
+          </div>
+        </div>
+
+
+
 
         <Overlay
-          show={true}
-          target={this.refs.exit}
+          show={this.state.showScenarioPopup}
+          target={this.refs.compareQuestion}
           placement="bottom"
-          container={this}
           containerPadding={20}
         >
-          <Popover id="popover-contained" title="Popover bottom">
-            <strong>Holy guacamole!</strong> Check this info.
+          <Popover id="popover-contained" title="Next Step">
+            <strong>Good job!</strong> After you explore the baseline scenario, let's push the question mark to watch the scenario creation video
+            <Button bsSize="small" style={{marginLeft: 5}} onClick={this.closeScenarioPopup}>Got it!</Button>
           </Popover>
         </Overlay>
 
+
+        <Overlay
+          show={this.state.showExitSurveyPopup}
+          target={this.refs.exit}
+          placement="bottom"
+          containerPadding={20}
+        >
+          <Popover id="popover-contained" title="Final Step">
+            <strong>Hope you enjoy CoAXs.</strong> Let's click the button above to do the exit survey. Thank you.
+            <Button bsSize="small" style={{marginLeft: 5}} onClick={this.closeExitSurveyPopup}>Got it!</Button>
+          </Popover>
+        </Overlay>
 
         <IntroModal isShow={this.state.showIntro} closeModal={this.closeIntro}/>
         <ScenarioCreationModal isShow={this.state.showScenario} closeModal={this.closeScenario}/>
