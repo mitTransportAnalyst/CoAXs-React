@@ -30,7 +30,7 @@ class ScenarioCreationModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
 
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/gPhlnZG-pRY" frameBorder="0"
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/K2gN4CGTOVQ" frameBorder="0"
                     allowFullScreen></iframe>
             <hr />
 

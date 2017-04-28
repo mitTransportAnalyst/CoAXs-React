@@ -29,7 +29,7 @@ class IntroModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
 
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/uNswES3tTPs" frameBorder="0"
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/LWxG2WIz76E" frameBorder="0"
                     allowFullScreen></iframe>
 
             <hr />
