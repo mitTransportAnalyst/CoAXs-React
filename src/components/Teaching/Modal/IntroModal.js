@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { Modal, Button} from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 
 //import redux
 import {bindActionCreators} from 'redux';
@@ -15,10 +15,9 @@ import * as actionCreators from '../../../reducers/action';
  */
 
 class IntroModal extends React.Component {
-  constructor(){
+  constructor() {
     super();
   }
-
 
 
   render() {
@@ -26,21 +25,27 @@ class IntroModal extends React.Component {
       <div>
         <Modal show={this.props.isShow} onHide={this.props.closeModal} keyboard={false} backdrop="static">
           <Modal.Header>
-            <Modal.Title>INTRO TO COAXs</Modal.Title>
+            <Modal.Title>Get to know CoAXs: User instructions</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>fewfewmfoewmfomewofmewofm/f ajfiewojfo/. jfewiojfoiew.</p>
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/uNswES3tTPs" frameBorder="0" allowFullScreen></iframe>
+
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/uNswES3tTPs" frameBorder="0"
+                    allowFullScreen></iframe>
 
             <hr />
 
-            <h4>Overflowing text to show scroll behavior</h4>
-            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+            {/*<h4>Overflowing text to show scroll behavior</h4>*/}
+            <ul>
+              <li>1 Drag the blue pin to your home or a place you know well, and wait for a few seconds.</li>
+              <li>2 Drag the time slider in the lower left hand corner to see how far you can travel in different time
+                intervals. Consider how this compares with your experience of your most frequent trips.
+              </li>
+              <li>3 Notice how your access to jobs changes by looking at the graph on the left side of the screen.</li>
+              <li>4 Once you’re finished exploring, click the navigation bar that says “Create your own scenario” to
+                move on to the next step.
+              </li>
 
+            </ul>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.closeModal}>Close</Button>
@@ -55,8 +60,7 @@ class IntroModal extends React.Component {
 
 //bind store and function to props
 function mapStateToProps(state) {
-  return {
-  }
+  return {}
 }
 
 function mapDispachToProps(dispatch) {

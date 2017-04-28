@@ -21,7 +21,10 @@ import * as actionCreators from '../reducers/action';
  */
 
 class Home extends React.Component {
+
   render() {
+    smartlook('tag', 'websiteName', 'NOLACoAXs');
+
     return (
       <div className="page-home">
         <Navbar/>
