@@ -1,0 +1,15 @@
+.scenarioDashboardPanel{
+  margin-top: 15px;
+}
+
+.btn {
+  border-radius: 0px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+.tiny {
+  background-color: #959595;
+  width: 100%
+}

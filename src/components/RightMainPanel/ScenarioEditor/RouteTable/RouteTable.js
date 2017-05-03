@@ -4,9 +4,9 @@ import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as actionCreators from '../../../reducers/action';
+import * as actionCreators from '../../../../reducers/action';
 
-import {RouteByID} from '../../../Data/LoadData'
+import {RouteByID} from '../../../../Data/LoadData'
 
 
 class RouteTable extends React.Component {
@@ -30,24 +30,21 @@ class RouteTable extends React.Component {
     }
 
     return (
-      <div className="colBody routeTable">
-        <div className="colHead">
-        </div>
+      <div className="routeTable">
 
 
         {/*{ this.props.isOpen ? null : <div className="placeHolder"/> }*/}
 
 
-        <div className="showToggle">
 
-          <div className="btn-group btn-group-justified">
-            <label className="btn" style={{color: "white", backgroundColor: "grey"}}>
-              {/*style="background-color: {{variants[tabnav].color}}; color: #FFF"*/}
-              <i className="fa fa-line-chart"/>
-              {/*<span >Hide Data</span>*/}
-              <span>Total number of buses: {totalbuses}</span>
-            </label>
-          </div>
+          {/*<div className="btn-group btn-group-justified">*/}
+            {/*<label className="btn" style={{color: "white", backgroundColor: "grey"}}>*/}
+              {/*/!*style="background-color: {{variants[tabnav].color}}; color: #FFF"*!/*/}
+              {/*<i className="fa fa-line-chart"/>*/}
+              {/*/!*<span >Hide Data</span>*!/*/}
+              {/*<span>Total number of buses: {totalbuses}</span>*/}
+            {/*</label>*/}
+          {/*</div>*/}
 
 
           {
@@ -69,10 +66,8 @@ class RouteTable extends React.Component {
             })
           }
 
-          <div className="bottomFixed">
-          </div>
+
         </div>
-      </div>
 
     );
   }

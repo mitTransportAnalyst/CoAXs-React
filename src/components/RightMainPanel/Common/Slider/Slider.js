@@ -39,7 +39,7 @@ class Slider extends React.Component {
     if (this.props.name === "timeSlider"){
       return (
         <div>
-          <span style={{color: "black"}}>  <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
+          <span style={{color: "black"}}> {this.props.value} min <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
         </div>
       );
 

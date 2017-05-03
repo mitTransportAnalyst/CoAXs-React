@@ -35,14 +35,14 @@ src
 ├── components
 │   ├── Bottom
 │   │   ├── Bottom.css
-│   │   ├── Bottom.js
+│   │   ├── RightMainPanel.js
 │   │   ├── Common
 │   │   │   └── Slider
 │   │   │       ├── Slider.css
 │   │   │       └── Slider.js
 │   │   ├── RouteSelector
 │   │   │   ├── RouteSelector.css
-│   │   │   └── RouteSelector.js
+│   │   │   └── ScenarioEditor.js
 │   │   ├── RouteTable
 │   │   │   ├── RouteTable.css
 │   │   │   └── RouteTable.js

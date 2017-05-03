@@ -38,6 +38,10 @@ module.exports = {
         loaders: ['style', 'css'],
       },
       {
+        test: /\.less$/,
+        loaders: ["style", 'css', 'less'],
+      },
+      {
         test: /\.geojson$/,
         loaders: ['json-loader'],
       },

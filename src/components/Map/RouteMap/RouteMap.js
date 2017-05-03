@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Map, Marker, Popup, TileLayer,GeoJSON } from 'react-leaflet';
-import s from "./RouteMap.css"
+// import s from "./RouteMap.css"
 import {MapLat, MapLng, ZoomLevel, Tile} from "../../../config"
 import {TrunkByID} from '../../../Data/LoadData'
 

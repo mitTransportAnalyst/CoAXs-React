@@ -4,7 +4,7 @@
 
 import React from "react";
 import TopleftPanel from "./TopleftPanel/TopleftPanel"
-import Bottom from "./Bottom/Bottom"
+import RightMainPanel from "./RightMainPanel/RightMainPanel"
 import RouteMap from "./Map/RouteMap/RouteMap"
 import ScenarioMap from "./Map/ScenarioMap/ScenarioMap"
 import Navbar from "./Teaching/Navbar/Navbar"
@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../reducers/action';
 
 /**
- * The main view which include TopleftPanel, map and Bottom component
+ * The main view which include TopleftPanel, map and RightMainPanel component
  */
 
 class Home extends React.Component {
@@ -29,7 +29,7 @@ class Home extends React.Component {
       <div className="page-home">
         <Navbar/>
         <TopleftPanel/>
-        {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
+        {/*{this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}*/}
         {/*change map when click subhead*/}
         {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}
         {/*<div className={this.props.currentMap ? "" : 'hidden2' }>*/}
@@ -38,7 +38,7 @@ class Home extends React.Component {
         <div className={this.props.currentMap ? 'hidden2' : ""}>
           <ScenarioMap />
         </div>
-        <Bottom/>
+        <RightMainPanel/>
       </div>
 
     );

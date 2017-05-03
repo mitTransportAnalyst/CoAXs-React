@@ -1,0 +1,49 @@
+.ScenarioEditorCol {
+  /*left: 50vw;*/
+  width: 100%;
+  box-shadow: 0px 0px 0px;
+  /*outline: 1px solid #000000;*/
+
+}
+
+/*.colHead {*/
+  /*background-color: #b4b4b4;*/
+  /*height: 20px;*/
+  /*vertical-align: middle;*/
+  /*text-align: center;*/
+  /*color: #FFFFFF;*/
+
+/*}*/
+
+
+.colHead{
+  height: 28px;
+  line-height: 28px;
+  background-color: #696969;
+  position: relative;;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  btn: 0px 5px 3px rgba(0,0,0,0.25);
+  z-index: 99;
+  font-size: 15px;
+
+
+
+}
+
+.routesContainer {
+  height: 30px;
+  width: 100%;
+}
+
+.routeItem {
+  color: #FFFFFF;
+  font-size: 14px;
+  width: 33.33333%;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center;
+
+}

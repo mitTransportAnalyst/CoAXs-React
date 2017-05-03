@@ -640,7 +640,7 @@ class ScenarioMap extends React.Component {
     return (
       <div className={s.map}>
         <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map'>
-          <ZoomControl position="bottomright" />
+          <ZoomControl position="bottomleft" />
 
           {/*{transitive &&*/}
           {/*<TransitiveMapLayer*/}

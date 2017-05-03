@@ -1,6 +1,6 @@
-import { combineReducers } from "redux";
-import { routerReducer } from "react-router-redux";
-import { reducer as formReducer } from "redux-form";
+import {combineReducers} from "redux";
+import {routerReducer} from "react-router-redux";
+import {reducer as formReducer} from "redux-form";
 
 
 /**
@@ -14,7 +14,7 @@ import { reducer as formReducer } from "redux-form";
  * @type {object}
  * @property {string} currentCor - initial clicked corridor {number} currentMap - initial map displayed 0: scenario map 1: route map
  */
-const initialState = {currentCor:"A", currentMap: 0};
+const initialState = {currentCor: "A", currentMap: 0};
 
 
 /**
@@ -48,9 +48,9 @@ function reducer(state = initialState, action) {
  */
 function scenarioStore(state = [{
   A: {
-  headway: 0,
-  alternative: "16A"
-},
+    headway: 0,
+    alternative: "16A"
+  },
   B: {
     headway: 0,
     alternative: "E3A"
@@ -61,12 +61,27 @@ function scenarioStore(state = [{
     alternative: "E5A"
 
   },
-  }], action)
-  {
+}, {
+  A: {
+    headway: 0,
+    alternative: "16A"
+  },
+  B: {
+    headway: 0,
+    alternative: "E3A"
+
+  },
+  C: {
+    headway: 0,
+    alternative: "E5A"
+
+  },
+}], action) {
   switch (action.type) {
     case 'saveScenario':
-      return [...state, action.res];
-        // "currentCor": JSON.parse(action.res)
+
+      return [state[0], action.res];
+    // "currentCor": JSON.parse(action.res)
 
     default:
       return state
@@ -77,7 +92,8 @@ function scenarioStore(state = [{
 function timeFilterStore(state = [], action) {
   switch (action.type) {
     case 'changeTimeFilter':
-      return {...state,
+      return {
+        ...state,
         "currentTimeFilter": action.res,
       };
     default:
@@ -122,7 +138,6 @@ function fireUpdate(state = [], action) {
 }
 
 
-
 function updateButtonState(state = true, action) {
   switch (action.type) {
     case 'pushUpdateButton':
@@ -144,7 +159,7 @@ function isCompare(state = false, action) {
   }
 }
 
-const initialBuslineState = {A:"16A", B:"E3A", C:"E5A"};
+const initialBuslineState = {A: "16A", B: "E3A", C: "E5A"};
 
 function changeBusline(state = initialBuslineState, action) {
   switch (action.type) {
@@ -159,8 +174,12 @@ function changeBusline(state = initialBuslineState, action) {
 }
 
 
-
-const initialNavState = {isdonePreSurvey:false, isdoneOneScenario:false, isdoneCompareScenario: false, isdoneExitSurvey: false};
+const initialNavState = {
+  isdonePreSurvey: false,
+  isdoneOneScenario: false,
+  isdoneCompareScenario: false,
+  isdoneExitSurvey: false
+};
 
 function navState(state = initialNavState, action) {
   switch (action.type) {
@@ -207,7 +226,6 @@ function ScorecardData(state = 0, action) {
       return state
   }
 }
-
 
 
 export const reducers = combineReducers({

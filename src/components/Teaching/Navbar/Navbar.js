@@ -18,7 +18,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
 /**
- * The main view which include TopleftPanel, map and Bottom component
+ * The main view which include TopleftPanel, map and RightMainPanel component
  */
 
 class Navbar extends React.Component {
@@ -158,6 +158,8 @@ class Navbar extends React.Component {
       <div className="navbarTop" >
         {/*<ul className="navbarTop">*/}
         <div className="arrow-steps">
+
+
 
           <div className="step" ref="target">
               <a href="https://coaxs-landing-nola.herokuapp.com/" target="_blank" >1 Home Page</a>

@@ -2,6 +2,8 @@ import React from "react";
 import s from "./Scenario.css";
 import _ from 'lodash';
 import cloneDeep from 'lodash/cloneDeep'
+import classNames from "classnames"
+
 
 
 import json16A from "../../../Data/scenario/16A.json"
@@ -37,9 +39,11 @@ class Scenario extends React.Component {
     };
 
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
-    this.handleClickCompare = this.handleClickCompare.bind(this);
     this.selectScenario = this.selectScenario.bind(this);
     this.handleUpdate= this.handleUpdate.bind(this);
+    this.handleClickBaselineButton= this.handleClickBaselineButton.bind(this);
+    this.handleClickCompareButton= this.handleClickCompareButton.bind(this);
+
 
 
   }
@@ -67,14 +71,22 @@ class Scenario extends React.Component {
     })
   }
 
-  handleClickCompare() {
+  handleClickCompareButton() {
+    //TODO CHANGE REDUX
     this.props.isCompare(!this.state.isCompareMode);
     this.setState({
       isCompareMode: !this.state.isCompareMode,
     })
   }
 
+  handleClickBaselineButton(){
+    this.props.isCompare(!this.state.isCompareMode);
+    this.setState({
+      isCompareMode: !this.state.isCompareMode,
+    })
 
+
+  }
 
 
 
@@ -111,7 +123,7 @@ class Scenario extends React.Component {
         "E5A": JSON.parse(JSON.stringify(jsonE5A)),
         "E5B": JSON.parse(JSON.stringify(jsonE5B)),
       };
-      const selectScenarioNum = this.props.newScenario[nextState.selectedScenario];
+      const selectScenarioNum = this.props.scenarioStore[nextState.selectedScenario];
       let firedScenario = [];
 
       for (let key in selectScenarioNum){
@@ -132,25 +144,28 @@ class Scenario extends React.Component {
   }
 
   render() {
-
-
-    let scenario = this.props.newScenario.map((scenario, index) => {
-      return <ScenarioEntry data={scenario} index={index} key={index} name="scenario"
-                            isCompareMode={this.state.isCompareMode} selectScenario={this.selectScenario} selectNum = {this.state.selectedScenario}/>
+    const baselineButton = classNames({
+      "btn": true,
+      "btn-info": !this.state.isCompareMode,
+      "btn-default": this.state.isCompareMode,
     });
 
+    const compareButton = classNames({
+      "btn": true,
+      "btn-info": this.state.isCompareMode,
+      "btn-default": !this.state.isCompareMode,
+    });
+
+    // let scenario = this.props.newScenario.map((scenario, index) => {
+    //   return <ScenarioEntry data={scenario} index={index} key={index} name="scenario"
+    //                         isCompareMode={this.state.isCompareMode} selectScenario={this.selectScenario} selectNum = {this.state.selectedScenario}/>
+    // });
+
     return (
-      <div className="colBody" id="leftDynamic">
-        <div className="colHead" onClick={this.handlePlaceHolder}>
+      <div className="scenarioDashboardPanel" >
+        <div className="colHead" >
           <i className="fa fa-random"/>
-          <span>Scenario Selector</span>
-          {/*<span>*/}
-          {/*Scenario<span> Comparison</span>:*/}
-          {/*<span>*/}
-          {/*<span>vs. </span>*/}
-          {/*<span>vs...</span>*/}
-          {/*</span>*/}
-          {/*</span>*/}
+          <span>Scenario Dashboard</span>
         </div>
 
         {/*{ this.state.isOpen ?*/}
@@ -164,35 +179,60 @@ class Scenario extends React.Component {
         {/*}*/}
 
 
-        <div className="showToggle">
+        <div>
 
-          <div className="btn-group btn-group-justified">
+          {/*<div className="btn-group btn-group-justified">*/}
 
-            {this.state.isCompareMode ? <label className="btn tiny" style={{backgroundColor: "grey", color: "white", border:"3px solid #eec16f"}} onClick={this.handleClickCompare}><i
-              className="fa fa-balance-scale"/> Compare
-            </label> : <label className="btn" style={{backgroundColor: "grey", color: "white"}}
-                              onClick={this.handleClickCompare}><i
-              className="fa fa-balance-scale"/> Compare
-            </label>}
-
-
-            <label className="btn" style={{backgroundColor: "grey", color: "white"}} onClick={this.handleUpdate}>
-              <i className="fa fa-plus-square"/> Update
-            </label>
+            {/*{this.state.isCompareMode ? <label className="btn tiny" style={{backgroundColor: "grey", color: "white", border:"3px solid #eec16f"}} onClick={this.handleClickCompare}><i*/}
+              {/*className="fa fa-balance-scale"/> Compare*/}
+            {/*</label> : <label className="btn" style={{backgroundColor: "grey", color: "white"}}*/}
+                              {/*onClick={this.handleClickCompare}><i*/}
+              {/*className="fa fa-balance-scale"/> Compare*/}
+            {/*</label>}*/}
 
 
-          </div>
+            {/*<label className="btn" style={{backgroundColor: "grey", color: "white"}} onClick={this.handleUpdate}>*/}
+              {/*<i className="fa fa-plus-square"/> Update*/}
+            {/*</label>*/}
 
-          <div className="scenariosTable" style={{marginTop: -18, paddingTop: 18}}>
-            <div className="scenario" style={{position: "absolute", zIndex: 10, width: 24}}>
 
-              {/*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*/}
+          {/*</div>*/}
 
-              {/*<i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>*/}
-            </div>
+          <div className="scenariosTable" >
+            {/*<div className="scenario" style={{position: "absolute", zIndex: 10, width: 24}}>*/}
+
+              {/*/!*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*!/*/}
+
+              {/*/!*<i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>*!/*/}
+            {/*</div>*/}
+
+
 
             <div className="scenarioEntries">
-              {scenario}
+
+              <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
+                             isCompareMode={this.state.isCompareMode}  />
+              <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
+                             isCompareMode={this.state.isCompareMode} />
+
+            </div>
+
+            <div >
+
+              <div className={baselineButton} style={{width: "50%", height: "10%",padding: 2}} onClick={this.handleClickBaselineButton}>
+                <i className="fa fa-eye"/> View the Baseline
+              </div>
+              <div className={compareButton} style={{width: "50%", height: "10%",padding: 2}} onClick={this.handleClickCompareButton}>
+                <i className="fa fa-balance-scale"/> Compare with Baseline
+              </div>
+            </div>
+
+
+            <div className="btn-group btn-group-justified">
+
+              <div className="btn btn-info" style={{width: "100%", height: "10%",padding: 2}}>
+                  <i className="fa fa-refresh"/> Update
+              </div>
             </div>
 
           </div>
@@ -205,7 +245,7 @@ class Scenario extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    newScenario: state.scenarioStore,
+    scenarioStore: state.scenarioStore,
   }
 }
 

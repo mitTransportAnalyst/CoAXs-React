@@ -7,8 +7,8 @@ window.esdocSearchIndex = [
   ],
   [
     "coaxs-react/src/components/bottom/bottom.js~bottom",
-    "class/src/components/Bottom/Bottom.js~Bottom.html",
-    "<span>Bottom</span> <span class=\"search-result-import-path\">CoAXs-React/src/components/Bottom/Bottom.js</span>",
+    "class/src/components/RightMainPanel/RightMainPanel.js~RightMainPanel.html",
+    "<span>RightMainPanel</span> <span class=\"search-result-import-path\">CoAXs-React/src/components/RightMainPanel/RightMainPanel.js</span>",
     "class"
   ],
   [
@@ -589,14 +589,14 @@ window.esdocSearchIndex = [
   ],
   [
     "src/components/bottom/bottom.js",
-    "file/src/components/Bottom/Bottom.js.html",
-    "src/components/Bottom/Bottom.js",
+    "file/src/components/RightMainPanel/RightMainPanel.js.html",
+    "src/components/RightMainPanel/RightMainPanel.js",
     "file"
   ],
   [
     "src/components/bottom/bottom.js~bottom#render",
-    "class/src/components/Bottom/Bottom.js~Bottom.html#instance-method-render",
-    "src/components/Bottom/Bottom.js~Bottom#render",
+    "class/src/components/RightMainPanel/RightMainPanel.js~RightMainPanel.html#instance-method-render",
+    "src/components/RightMainPanel/RightMainPanel.js~RightMainPanel#render",
     "method"
   ],
   [
@@ -631,8 +631,8 @@ window.esdocSearchIndex = [
   ],
   [
     "src/components/bottom/routeselector/routeselector.js",
-    "file/src/components/Bottom/RouteSelector/RouteSelector.js.html",
-    "src/components/Bottom/RouteSelector/RouteSelector.js",
+    "file/src/components/Bottom/ScenarioEditor/ScenarioEditor.js.html",
+    "src/components/Bottom/ScenarioEditor/ScenarioEditor.js",
     "file"
   ],
   [

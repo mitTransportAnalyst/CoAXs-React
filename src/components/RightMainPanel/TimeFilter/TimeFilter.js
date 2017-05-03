@@ -3,6 +3,8 @@ import Fa from "react-fontawesome";
 import "./TimeFilter.css";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import Slider from "../Common/Slider/Slider"
+import Graph from "./Graph"
+
 import {PointToPoint, Accessibility} from "../../../config"
 
 
@@ -54,9 +56,9 @@ class TimeFilter extends React.Component {
 
   render() {
     return (
-      <div className="colBody">
-        <div className="colHead" onClick={this.handlePlaceHolder}>
-          <i><Fa name="clock-o"/></i>
+      <div className="timeFilterPanel">
+        <div className="colHead" >
+          <i className="fa fa-clock-o"></i>
           Time Map
         </div>
 
@@ -71,10 +73,10 @@ class TimeFilter extends React.Component {
         {/*}*/}
 
 
-        <div className="showToggle">
-          <div className="updateStart">
-            {this.state.currentTimeFilter} min
-          </div>
+        <div>
+          {/*<div className="updateStart">*/}
+            {/*{this.state.currentTimeFilter} min*/}
+          {/*</div>*/}
 
 
           {/*<ButtonGroup className="updateStart">*/}
@@ -89,8 +91,8 @@ class TimeFilter extends React.Component {
             {/*</Button>*/}
           {/*</ButtonGroup>*/}
 
-          <div className="slideContainer" style={{marginTop: 20}}>
-            <div className="text-center">
+          <div className="" style={{marginTop: 8}}>
+            <div className="">
               <span >
              <Slider name="timeSlider" min={5} max={90} value={this.state.currentTimeFilter} step={5}
                      className="right" changeFunction={this.changeFeature}  />
@@ -108,7 +110,8 @@ class TimeFilter extends React.Component {
             </div>
           </div>
 
-          {/*{this.renderMode()}*/}
+          <Graph/>
+
 
         </div>
       </div>
