@@ -3,8 +3,9 @@
   background-color: rgba(255,255,255,1);
   z-index: 95;
   right: 20px;
-  top: 70px;
-  height: 730px;
-  width: 450px;
-  border: 0.5px solid black;
+  top: 50px;
+  height: 700px;
+  width: 420px;
+  border: 1px solid black;
+  overflow-y: scroll;
 }

@@ -45,8 +45,8 @@ class Graph extends React.Component {
     // }
 
     var data = [
-      {name: 'Base Scenario', job: 50000},
-      {name: 'New Scenario', job: 80000},
+      {name: 'Base Scenario', job: 150000},
+      {name: 'New Scenario', job: 200000},
     ];
 
 
@@ -56,9 +56,9 @@ class Graph extends React.Component {
     return (
       <div >
         <br/>
-        <div style={{margin: 5}}>
+        <div style={{marginTop: -20}}>
           <h5>Total number of jobs</h5>
-          <BarChart  width={440} height={200} data={data} layout="vertical" >
+          <BarChart  width={400} height={200} data={data} layout="vertical" >
 
             <XAxis stroke="black" type="number" domain={[0, 400000]} tickFormatter={tooltipFormatter}/>
             <YAxis dataKey="name" stroke="black" type="category"/>
