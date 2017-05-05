@@ -66,10 +66,17 @@ class ServiceEditor extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currentAdjust !== this.state.currentAdjust) {
-      let tempScore = {A: 0, B: 0, C: 0};     // change to dynamic
+      let tempScore = {A: 0, B: 0, C: 0};     // TODO: change to dynamic
+      let tempHeadway = {A: 0, B:0, C:0};
       for (let key in tempScore) {
         tempScore[key] = ScoreCard[nextState.currentAdjust[key].alternative].totalTime / (ScoreCard[nextState.currentAdjust[key].alternative].baseHeadway * (1 - Number(nextState.currentAdjust[key].headway) / 100))
       }
+
+      for (let key in tempHeadway) {
+        tempHeadway[key] = ScoreCard[nextState.currentAdjust[key].alternative].baseHeadway * (1 - Number(nextState.currentAdjust[key].headway) / 100 )
+      }
+
+      this.props.changeHeadway(tempHeadway);
       this.props.changeScorecard(tempScore);
       this.props.saveScenario(nextState.currentAdjust);
     }
@@ -77,11 +84,19 @@ class ServiceEditor extends React.Component {
   }
 
   componentDidMount() {
-    let tempScore = {A: 0, B: 0, C: 0};     // change to dynamic
+    let tempScore = {A: 0, B: 0, C: 0};     // TODO: change to dynamic
+    let tempHeadway = {A: 0, B:0, C:0};
+
     for (let key in tempScore) {
       tempScore[key] = ScoreCard[this.state.currentAdjust[key].alternative].totalTime / (ScoreCard[this.state.currentAdjust[key].alternative].baseHeadway * (1 - Number(this.state.currentAdjust[key].headway) / 100))
     }
+
+    for (let key in tempHeadway) {
+      tempHeadway[key] = ScoreCard[this.state.currentAdjust[key].alternative].baseHeadway * (1 - Number(this.state.currentAdjust[key].headway) / 100 )
+    }
     this.props.changeScorecard(tempScore);
+    this.props.changeHeadway(tempHeadway);
+
 
   }
 
@@ -170,12 +185,11 @@ class ServiceEditor extends React.Component {
             <div>
               <div style={{paddingTop: 1 , marginLeft: 10, }}>
 
-                <i className="fa fa-arrow-down" style={{color: "black"}}/>
 
                 <div style={{width: "96%", display: "inline-block", marginTop: 2}}>
                   <Slider name="headway" min={HeadwayMin} max={HeadwayMax}
                           value={this.state.currentAdjust[this.props.currentCorridor]["headway"]} step="5"
-                          className="right" changeFunction={this.changeFeature}/>
+                          className="right" changeFunction={this.changeFeature} headwayTime={this.props.headwayStore[this.props.currentCorridor]}/>
                 </div>
               </div>
             </div>
@@ -195,7 +209,8 @@ function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
     currentMap: state.reducer.currentMap,
-    currentBusAlternative: state.changeBusline,
+    currentBusAlternative: state.BuslineSelectedStore,
+    headwayStore: state.HeadwayTime,
   }
 }
 

@@ -161,7 +161,7 @@ function isCompare(state = false, action) {
 
 const initialBuslineState = {A: "16A", B: "E3A", C: "E5A"};
 
-function changeBusline(state = initialBuslineState, action) {
+function BuslineSelectedStore(state = initialBuslineState, action) {
   switch (action.type) {
     case 'changeBusline':
       return {
@@ -228,6 +228,17 @@ function ScorecardData(state = 0, action) {
 }
 
 
+function HeadwayTime(state = 0, action) {
+  switch (action.type) {
+    case 'changeHeadway':
+      return action.res;
+    default:
+      return state
+  }
+}
+
+
+
 export const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
@@ -240,7 +251,8 @@ export const reducers = combineReducers({
   updateButtonState,
   isCompare,
   navState,
-  changeBusline,
+  BuslineSelectedStore,
   loadingProgress,
   ScorecardData,
+  HeadwayTime,
 });

@@ -24,7 +24,7 @@ class ScenarioEntry extends React.Component {
           <div className="square" style={{padding: 3,fontSize: 13, color: "white", backgroundColor:CorridorInfo[corridorKey].color}}>
             {CorridorInfo[corridorKey].name}
           </div>
-            <small style={{fontSize: 14,}}>R: {this.props.data[corridorKey].alternative}  | H:{this.props.data[corridorKey].headway}  </small>
+            <small style={{fontSize: 14,}}>R: {this.props.data[corridorKey].alternative}  | H:{Math.ceil(this.props.headwayTime[corridorKey])}  </small>
         </div>
         )
       }
@@ -75,7 +75,8 @@ class ScenarioEntry extends React.Component {
 
   function mapStateToProps(state) {
     return {
-    newScenario: state.scenarioStore,
+      newScenario: state.scenarioStore,
+      headwayTime : state.HeadwayTime,
   }
   }
 

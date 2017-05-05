@@ -927,7 +927,7 @@ function mapStateToProps(state) {
     fireScenario : state.fireUpdate.fireScenario,
     isCompareMode: state.isCompare.isCompare,
     currentCorridor: state.reducer.currentCor,
-    currentBusline: state.changeBusline,
+    currentBusline: state.BuslineSelectedStore,
     updateButtonState: state.updateButtonState,
   }
 }

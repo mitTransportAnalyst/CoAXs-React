@@ -36,6 +36,8 @@ class Scenario extends React.Component {
       isCompareMode: false,
       selectedScenario: 0,
       firedScenario: [],
+      // TODO dynamic change
+      baselineHeadwayTime: {A: 30, B: 24, C:27}
     };
 
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
@@ -208,9 +210,9 @@ class Scenario extends React.Component {
             <div className="scenarioEntries">
 
               <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
-                             isCompareMode={this.state.isCompareMode}  />
+                             isCompareMode={this.state.isCompareMode}  headwayTime = {this.state.baselineHeadwayTime}/>
               <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
-                             isCompareMode={this.state.isCompareMode} />
+                             isCompareMode={this.state.isCompareMode} headwayTime = {this.props.headwayTime}/>
 
             </div>
 
@@ -243,6 +245,7 @@ class Scenario extends React.Component {
 function mapStateToProps(state) {
   return {
     scenarioStore: state.scenarioStore,
+    headwayTime: state.HeadwayTime,
   }
 }
 

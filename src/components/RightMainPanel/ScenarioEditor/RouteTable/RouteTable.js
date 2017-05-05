@@ -77,7 +77,7 @@ class RouteTable extends React.Component {
 function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
-    BuslineProps: state.changeBusline,
+    BuslineProps: state.BuslineSelectedStore,
     scorecardData: state.ScorecardData,
 
   }

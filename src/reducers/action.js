@@ -153,3 +153,12 @@ export function changeScorecard(res) {
 }
 
 
+
+export function changeHeadway(res) {
+  return {
+    type: "changeHeadway",
+    res
+
+  }
+}
+
