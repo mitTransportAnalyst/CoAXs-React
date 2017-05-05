@@ -27,6 +27,10 @@ import runningPic from '../../../../img/runningtime.png'
 import dwellPic from '../../../../img/dwelltime.png'
 import headwayPic from '../../../../img/frequency.png'
 
+
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+
+
 //bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -143,6 +147,11 @@ class ServiceEditor extends React.Component {
 
   render() {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
+
+    const tooltipforHeadway = (
+      <Tooltip id="tooltipforHeadway"><strong>Refers to the amount of time between buses arriving at a stop (on average). Drag the slider to the right to increase the number of buses and reduce the amount of time between them.
+      </strong></Tooltip>
+    );
     return (
       <div className="serviceEditorPanel">
 
@@ -177,10 +186,12 @@ class ServiceEditor extends React.Component {
         <div>
 
           <div className="setTimesTitle">
+            <OverlayTrigger placement="bottom" overlay={tooltipforHeadway}>
 
             <div className="subHead">
-              Time Between Buses
+                Time Between Buses
             </div>
+            </OverlayTrigger>
 
             <div>
               <div style={{paddingTop: 1 , marginLeft: 10, }}>
