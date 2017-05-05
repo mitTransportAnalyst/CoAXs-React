@@ -52,7 +52,17 @@
 .Transitive > .schematic-map .transitive-line {
   stroke-linecap: round;
   fill: none;
+  stroke: #333;
+
 }
+
+.Transitive >  .transitive-line {
+  stroke-linecap: round;
+  fill: none;
+  stroke: #333;
+
+}
+
 
 /**
  * Places
@@ -62,6 +72,8 @@
   fill: #fff;
   stroke: #333;
   stroke-width: 2px;
+  height: 0px;
+  width: 0px;
 }
 
 /**
@@ -74,6 +86,8 @@
   fill: #fff;
   stroke: #333;
   stroke-width: 1px;
+  height: 0px;
+  width: 0px;
 }
 
 /**
@@ -105,10 +119,13 @@
 .Transitive .transitive-line {
   stroke-linecap: round;
   filter: dropshadow(0 0 0 5px rgba(255, 255, 255, 0.5));
+
 }
 
 .Transitive .transitive-line-halo {
   opacity: 0.5;
+
+
 }
 
 .Transitive > .schematic-map .transitive-stop-label,
@@ -123,4 +140,7 @@
 .Transitive > .schematic-map .transitive-place-circle {
   fill: none;
   stroke-width: 0;
+  height: 5px;
+  width: 5px;
+  r: 5px
 }

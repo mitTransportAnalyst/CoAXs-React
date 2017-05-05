@@ -4,7 +4,9 @@
   z-index: 95;
   right: 20px;
   top: 50px;
-  height: 700px;
+  bottom: 30px;
+  max-height: 800px;
+  /*height: 700px;*/
   width: 420px;
   border: 1px solid black;
   overflow-y: scroll;

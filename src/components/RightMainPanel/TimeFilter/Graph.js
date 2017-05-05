@@ -23,31 +23,31 @@ class Graph extends React.Component {
   render() {
 
 
-    // if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
-    //   var data =[
-    //     {name: 'Base Scenario', job:null},
-    //     {name: 'New Scenario', job:null},
-    //   ];
-    // }
-    // else{
-    //   var data =[
-    //     {name: 'New Scenario', job:null},
-    //   ];
-    // }
-    //
-    //
-    // data[0].job = this.props.gridNumber;
-    //
-    // if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
-    //   data[0].job = this.props.gridNumber1;
-    //   data[1].job = this.props.gridNumber;
-    //
-    // }
+    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
+      var data =[
+        {name: 'Base Scenario', job:null},
+        {name: 'New Scenario', job:null},
+      ];
+    }
+    else{
+      var data =[
+        {name: 'Baseline Scenario', job:null},
+      ];
+    }
 
-    var data = [
-      {name: 'Base Scenario', job: 150000},
-      {name: 'New Scenario', job: 200000},
-    ];
+
+    data[0].job = this.props.gridNumber;
+
+    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
+      data[1].job = this.props.gridNumber1;
+
+    }
+
+    // for test
+    // var data = [
+    //   {name: 'Base Scenario', job: 150000},
+    //   {name: 'New Scenario', job: 200000},
+    // ];
 
 
     const scale = 'ordinal';
@@ -57,7 +57,7 @@ class Graph extends React.Component {
       <div >
         <br/>
         <div style={{marginTop: -20}}>
-          <h5>Total number of jobs</h5>
+          <h5>Jobs Reachable</h5>
           <BarChart  width={400} height={200} data={data} layout="vertical" >
 
             <XAxis stroke="black" type="number" domain={[0, 400000]} tickFormatter={tooltipFormatter}/>

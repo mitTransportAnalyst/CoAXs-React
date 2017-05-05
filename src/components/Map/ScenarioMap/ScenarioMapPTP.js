@@ -1,9 +1,13 @@
+/**
+ * Created by xinzheng on 5/4/17.
+ */
 import React from 'react';
 import {render} from 'react-dom';
 import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer} from 'react-leaflet';
 import Leaflet from 'leaflet'
 
 import s from "./ScenarioMap.css"
+import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo} from "../../../config"
 import Geojson16A from '../../../Data/busline/16A.geojson'
 import Geojson16B from '../../../Data/busline/16B.geojson'
 import Geojson16C from '../../../Data/busline/16C.geojson'
@@ -16,13 +20,7 @@ import GeojsonE5B from '../../../Data/busline/E5B.geojson'
 import GeojsonJeT from '../../../Data/busline/JeT.geojson'
 import GeojsonNORTA from '../../../Data/busline/NORTA.geojson'
 
-
-
-
 import Baseline from '../../../Data/scenario/Baseline.json'
-
-
-
 
 
 // TAUI
@@ -45,9 +43,8 @@ import Transitive from 'transitive-js'
 
 import uuid from 'uuid'
 import Browsochrones from './NewBrowsochrones/lib'
-// import Browsochrones from 'browsochrones'
-
 import debounce from 'debounce'
+import debug from 'debug'
 
 
 
@@ -57,14 +54,14 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
 //import configuration file
-import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo, isPTP, INIT_ORIGIN, INIT_DESTINATION, WORKER_VERSION, API_KEY_ID, API_KEY_SECRET, TRANSPORT_NETWORK_ID, BASE_URL, AUTH_URL, GRID_URL  } from '../../../config'
+import {isPTP, INIT_ORIGIN, INIT_DESTINATION, WORKER_VERSION, API_KEY_ID, API_KEY_SECRET, TRANSPORT_NETWORK_ID, BASE_URL, AUTH_URL, GRID_URL  } from '../../../config'
 
 
 /** how often will we allow the isochrone to update, in milliseconds */
 const MAX_UPDATE_INTERVAL_MS = 50; // seems smooth on 2015 Macbook Pro
 
 
-class ScenarioMap extends React.Component {
+class ScenarioMapPTP extends React.Component {
 
 
   constructor() {
@@ -79,7 +76,7 @@ class ScenarioMap extends React.Component {
       key: null,
       key2: null,
       loaded: false,
-      origin: {lat:MapLat , lng:MapLng},
+      origin: INIT_ORIGIN,
       destination: INIT_DESTINATION,
       originGrid: null,
 
@@ -144,8 +141,10 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 220,
-          scenario: {id: uuid.v4(),modifications:
-          Baseline.modifications
+          scenario: {id: uuid.v4(),modifications: Baseline.modifications
+
+
+
           },
         }
       },
@@ -215,8 +214,77 @@ class ScenarioMap extends React.Component {
 
   async fetchMetadata() {
 
-    let {preRequest} = this.state;
-    this.props.changeProgress(0.2);
+    if (true){
+
+      let {preRequest, staticRequest} = this.state;
+
+      console.log(API_KEY_ID);
+      // first get a token
+      let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'grant_type=client_credentials'
+      }).then(r => r.json());
+
+      let accessToken = response.access_token;
+      console.log(accessToken);
+
+      this.setState({...this.state, accessToken});
+
+      Promise.all([
+        fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: 'static-metadata',
+            graphId: TRANSPORT_NETWORK_ID,
+            workerVersion: WORKER_VERSION,
+            request: staticRequest
+          })
+        }).then(res => {
+            console.log(res);
+            return res.json()
+          }
+        ),
+        fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: 'static-stop-trees',
+            graphId: TRANSPORT_NETWORK_ID,
+            workerVersion: WORKER_VERSION,
+            request: preRequest
+          })
+        }).then(res => {
+          console.log(res);
+          return res.arrayBuffer()
+        }),
+        fetch(GRID_URL).then(res => {
+          console.log(res);
+          return res.arrayBuffer()
+        })
+      ])
+        .then(([metadata, stopTrees, grid]) => {
+
+          Promise.all([
+            this.bs2.setQuery(metadata),
+            this.bs2.setStopTrees(stopTrees),
+            this.bs2.setTransitiveNetwork(metadata.transitiveData),
+            this.bs2.putGrid({id: 'jobs', grid: grid}),
+
+
+          ]).then(() => {
+              console.log("done fetch");
+              this.setState({...this.state, loaded: true});
+            }
+          )
+        })
+
+    }
+
+
+    let {preRequest, staticRequest} = this.state;
+
     console.log(API_KEY_ID);
     // first get a token
     let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
@@ -229,10 +297,11 @@ class ScenarioMap extends React.Component {
 
     let accessToken = response.access_token;
     console.log(accessToken);
+    // this.props.changeProgress(0.2);
+    this.props.changeProgress(1);
 
     this.setState({...this.state, accessToken});
 
-    this.props.changeProgress(0.4);
     Promise.all([
       fetch(`${BASE_URL}?accessToken=${accessToken}`, {
         method: 'POST',
@@ -240,11 +309,12 @@ class ScenarioMap extends React.Component {
           type: 'static-metadata',
           graphId: TRANSPORT_NETWORK_ID,
           workerVersion: WORKER_VERSION,
-          request: preRequest
+          request: staticRequest
         })
       }).then(res => {
           console.log(res);
-          this.props.changeProgress(0.6);
+          // this.props.changeProgress(0.4);
+
           return res.json()
         }
       ),
@@ -258,41 +328,33 @@ class ScenarioMap extends React.Component {
         })
       }).then(res => {
         console.log(res);
+        // this.props.changeProgress(0.6);
+
         return res.arrayBuffer()
       }),
       fetch(GRID_URL).then(res => {
         console.log(res);
-        this.props.changeProgress(0.7);
+        // this.props.changeProgress(0.8);
+
         return res.arrayBuffer()
       })
     ])
       .then(([metadata, stopTrees, grid]) => {
 
-
         Promise.all([
-          this.bs2.setQuery(metadata),
           this.bs.setQuery(metadata),
-
-
-
-          this.bs2.setStopTrees(stopTrees.slice(0)),
-          this.bs.setStopTrees(stopTrees.slice(0)),
-
-          this.bs2.setTransitiveNetwork(metadata.transitiveData),
+          this.bs.setStopTrees(stopTrees),
           this.bs.setTransitiveNetwork(metadata.transitiveData),
-
-          this.bs2.putGrid({id: 'jobs', grid: grid}),
           this.bs.putGrid({id: 'jobs', grid: grid}),
-
 
         ]).then(() => {
             console.log("done fetch");
-            this.props.changeProgress(1);
+            // this.props.changeProgress(1);
+
             this.setState({...this.state, loaded: true});
           }
         )
       })
-
   };
 
 
@@ -305,7 +367,7 @@ class ScenarioMap extends React.Component {
         originGrid: {x, y}
       });
 
-      let {staticRequest, accessToken, isochroneCutoff, } = this.state;
+      let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
 
       this.setState({
         ...this.state,
@@ -324,7 +386,7 @@ class ScenarioMap extends React.Component {
         method: 'POST',
         body: JSON.stringify({
           type: 'static',
-          request: staticRequest,
+          request: staticRequestBase,
           workerVersion: WORKER_VERSION,
           graphId: TRANSPORT_NETWORK_ID,
           x,
@@ -333,8 +395,8 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin({arrayBuffer: buff,point:{x, y}});
-          await this.bs2.generateSurface({gridId: 'jobs'});
+          await this.bs2.setOrigin(buff, {x, y});
+          await this.bs2.generateSurface("grid");
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
 
@@ -359,7 +421,7 @@ class ScenarioMap extends React.Component {
 
     let origin = e.target.getLatLng();
     let {x, y} = this.bs.latLonToOriginPoint(origin);
-    let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
+    let {staticRequest, accessToken, isochroneCutoff} = this.state;
     this.setState({
       ...this.state,
       originGrid: {x, y}
@@ -384,7 +446,7 @@ class ScenarioMap extends React.Component {
       method: 'POST',
       body: JSON.stringify({
         type: 'static',
-        request: staticRequestBase,
+        request: staticRequest,
         workerVersion: WORKER_VERSION,
         graphId: TRANSPORT_NETWORK_ID,
         x,
@@ -423,11 +485,12 @@ class ScenarioMap extends React.Component {
 
   };
 
+  //TODO change API
   updateScneario() {
     if (this.props.isCompareMode){
       let origin = this.state.origin;
       let {x, y} = this.bs.latLonToOriginPoint(origin);
-      let {staticRequest, accessToken, isochroneCutoff} = this.state;
+      let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
 
       this.setState({
         ...this.state,
@@ -446,7 +509,7 @@ class ScenarioMap extends React.Component {
         method: 'POST',
         body: JSON.stringify({
           type: 'static',
-          request: staticRequest,
+          request: staticRequestBase,
           workerVersion: WORKER_VERSION,
           graphId: TRANSPORT_NETWORK_ID,
           x,
@@ -455,8 +518,8 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin({arrayBuffer: buff, point:{x, y}});
-          await this.bs2.generateSurface({gridId: 'jobs'});
+          await this.bs2.setOrigin(buff, {x, y});
+          await this.bs2.generateSurface("grid");
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
 
@@ -481,7 +544,7 @@ class ScenarioMap extends React.Component {
 
     let origin = this.state.origin;
     let {x, y} = this.bs.latLonToOriginPoint(origin);
-    let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
+    let {staticRequest, accessToken, isochroneCutoff} = this.state;
 
     this.setState({
       ...this.state,
@@ -502,7 +565,7 @@ class ScenarioMap extends React.Component {
       method: 'POST',
       body: JSON.stringify({
         type: 'static',
-        request: staticRequestBase,
+        request: staticRequest,
         workerVersion: WORKER_VERSION,
         graphId: TRANSPORT_NETWORK_ID,
         x,
@@ -513,8 +576,8 @@ class ScenarioMap extends React.Component {
         console.log("generate surface");
         this.props.changeProgress(0.8);
 
-        await this.bs.setOrigin({arrayBuffer: buff,point:{x, y}});
-        await this.bs.generateSurface({gridId: 'jobs'});
+        await this.bs.setOrigin(buff, {x, y});
+        await this.bs.generateSurface("grid");
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
         this.props.changeProgress(0.9);
@@ -532,7 +595,7 @@ class ScenarioMap extends React.Component {
           inVehicleTravelTime: null,
           travelTime: null,
           waitTime: null
-        });
+        })
 
         this.props.changeProgress(1);
 
@@ -544,12 +607,12 @@ class ScenarioMap extends React.Component {
 
   /** get an isochrone and an accessibility figure */
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
-    // console.log(isochroneCutoff, isBased);
+    console.log(isochroneCutoff, isBased);
     if (isBased){
       let [accessibility2, isochrone2] = await Promise.all([
         this.bs2.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
 
-        this.bs2.getIsochrone({cutoff: isochroneCutoff})
+        this.bs2.getIsochrone(isochroneCutoff)
       ]);
       return {accessibility2, isochrone2, key2: uuid.v4()}
     }
@@ -572,8 +635,9 @@ class ScenarioMap extends React.Component {
     // const point = this.bs.pixelToOriginPoint(destination, zoom);
     // const point = this.bs.pixelToOriginPoint(Leaflet.CRS.EPSG3857.latLngToPoint(destination, zoom), zoom);
 
-    console.log({ x, y });
+    // console.log(point);
 
+    // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData(point);
 
     let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.originGrid, to:{x, y}});
 
@@ -602,6 +666,7 @@ class ScenarioMap extends React.Component {
   }
 
   componentDidMount() {
+    //  const browsochrones = new Browsochrones();
     this.fetchMetadata();
     fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'GET', })
       .then(res => res.json())
@@ -626,22 +691,12 @@ class ScenarioMap extends React.Component {
     if (this.props.currentTimeFilter !== nextProps.currentTimeFilter & this.state.key != null) {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
-
-    if (this.props.fireScenario !== nextProps.fireScenario) {
-      let staticRequest = this.state.staticRequest;
-      staticRequest.request.scenario.modifications = nextProps.fireScenario;
-      staticRequest.request.scenario.id = uuid.v4();
-
-      // staticRequest.jobId = uuid.v4();
-      this.setState({
-        staticRequest,
-      });
-    }
-
-    if (this.props.updateButtonState !== nextProps.updateButtonState) {
+    if (this.props.fireScenario !== nextProps.fireScenario ) {
+      this.state.staticRequest.request.scenario.modifications = nextProps.fireScenario;
       this.updateScneario();
     }
   }
+
 
   render() {
     let {transitive, transitive2, transitiveLayer, isochrone, isochrone2, key, key2, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, accessibility2, isochroneCutoff} = this.state;
@@ -649,16 +704,16 @@ class ScenarioMap extends React.Component {
     const position = [MapLat, MapLng];
     return (
       <div className={s.map}>
-        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
-          <ZoomControl position="bottomleft" />
+        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map'>
+          <ZoomControl position="bottomright" />
 
-          {/*{transitive &&*/}
-          {/*<TransitiveMapLayer*/}
-            {/*data={transitive}*/}
-            {/*styles={transitiveStyle}*/}
-            {/*key={`transitive-${key}`}*/}
-          {/*/>*/}
-          {/*}*/}
+          {transitive &&
+          <TransitiveMapLayer
+            data={transitive}
+            styles={transitiveStyle}
+            key={`transitive-${key}`}
+          />
+          }
 
 
           <TileLayer
@@ -667,35 +722,22 @@ class ScenarioMap extends React.Component {
           />
 
 
-          <GeoJson data={GeojsonJeT} key = {"JeT"} style={{
-            color : "#D8D8D8",
-            weight: 1,
-            opacity: 1 }}
-          />
-
-
-          <GeoJson data={GeojsonNORTA} key = {"NORTA"} style={{
-            color : "#E0E0E0",
-            weight: 1,
-            opacity: 0.2 }}
-          />
-
-
-
-
           { isochrone && <GeoJson
-            style={{color: "#2eadd3", fill: '#2eadd3', fillOpacity: 0.4}}
+            style={{color: "#fd8", fill: '#fd8', fillOpacity: 0.4}}
             data={isochrone}
             key={`iso-${key}`}
           />}
 
 
-          { this.props.isCompareMode && isochrone2 && <GeoJson
-            style={{color: "#fd8",
-              fill: '#fd8', fillOpacity: 0.4}}
+          { isochrone2 && <GeoJson
+            style={{color: "#2eadd3",
+              fill: '#2eadd3', fillOpacity: 0.4}}
             data={isochrone2}
             key={`iso-${key2}`}
           />}
+
+          {/*{ transitive && {transitiveLayer}  }*/}
+          {/*{ transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`}/> }*/}
 
 
 
@@ -706,20 +748,12 @@ class ScenarioMap extends React.Component {
             ref='markerOrigin'
           />
 
-          {/*<Marker*/}
-            {/*position={destination}*/}
-            {/*draggable = {true}*/}
-            {/*onDragend={this.moveDestination}*/}
-            {/*ref='markerDestination'*/}
-          {/*/>*/}
-
-
-
-
-
-
-
-
+          <Marker
+            position={destination}
+            draggable = {true}
+            onDragend={this.moveDestination}
+            ref='markerDestination'
+          />
 
           {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
@@ -928,7 +962,6 @@ function mapStateToProps(state) {
     isCompareMode: state.isCompare.isCompare,
     currentCorridor: state.reducer.currentCor,
     currentBusline: state.changeBusline,
-    updateButtonState: state.updateButtonState,
   }
 }
 
@@ -937,6 +970,5 @@ function mapDispachToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispachToProps)(ScenarioMap);
-
+export default connect(mapStateToProps, mapDispachToProps)(ScenarioMapPTP);
 

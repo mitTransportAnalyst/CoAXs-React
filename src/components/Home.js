@@ -23,13 +23,15 @@ import * as actionCreators from '../reducers/action';
 class Home extends React.Component {
 
   render() {
-    smartlook('tag', 'websiteName', 'NOLACoAXs');
+
+    //TODO Smartlook
+    // smartlook('tag', 'websiteName', 'NOLACoAXs');
 
     return (
       <div className="page-home">
-        <Navbar/>
+        {/*<Navbar/>*/}
         <TopleftPanel/>
-        {/*{this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}*/}
+        {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
         {/*change map when click subhead*/}
         {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}
         {/*<div className={this.props.currentMap ? "" : 'hidden2' }>*/}

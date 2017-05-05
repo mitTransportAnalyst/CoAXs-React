@@ -72,7 +72,6 @@ class Scenario extends React.Component {
   }
 
   handleClickCompareButton() {
-    //TODO CHANGE REDUX
     this.props.isCompare(!this.state.isCompareMode);
     this.setState({
       isCompareMode: !this.state.isCompareMode,
@@ -84,8 +83,6 @@ class Scenario extends React.Component {
     this.setState({
       isCompareMode: !this.state.isCompareMode,
     })
-
-
   }
 
 
@@ -111,7 +108,7 @@ class Scenario extends React.Component {
 
 
   componentWillUpdate(nextProps, nextState){
-    if (this.state.selectedScenario !== nextState.selectedScenario){
+    if (this.props.scenarioStore !== nextProps.scenarioStore){
       const corridorObject = {
         "16A": JSON.parse(JSON.stringify(json16A)),
         "16B": JSON.parse(JSON.stringify(json16B)),
@@ -123,7 +120,7 @@ class Scenario extends React.Component {
         "E5A": JSON.parse(JSON.stringify(jsonE5A)),
         "E5B": JSON.parse(JSON.stringify(jsonE5B)),
       };
-      const selectScenarioNum = this.props.scenarioStore[nextState.selectedScenario];
+      const selectScenarioNum = nextProps.scenarioStore[1];
       let firedScenario = [];
 
       for (let key in selectScenarioNum){
@@ -228,7 +225,7 @@ class Scenario extends React.Component {
             </div>
 
 
-            <div className="btn-group btn-group-justified">
+            <div className="btn-group btn-group-justified" onClick={this.handleUpdate} >
 
               <div className="btn btn-info" style={{width: "100%", height: "10%",padding: 2}}>
                   <i className="fa fa-refresh"/> Update
