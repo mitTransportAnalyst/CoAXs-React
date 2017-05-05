@@ -7,7 +7,7 @@
 /** Introduction title on the left
  * @type {string} IntroTitle
  */
-export const IntroTitle = "CoAXs | Bus Priority";
+export const IntroTitle = "CoAXs | New Orleans";
 
 /** Introduction description on the left
  * @type {string} IntroDescription

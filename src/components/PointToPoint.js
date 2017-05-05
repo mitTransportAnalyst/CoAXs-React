@@ -1,12 +1,14 @@
 /**
- * @version 0.1.0
+ * Created by xinzheng on 5/5/17.
  */
+
+
 
 import React from "react";
 import TopleftPanel from "./TopleftPanel/TopleftPanel"
-import RightMainPanel from "./RightMainPanel/RightMainPanel"
+import RightMainPanelPTP from "./RightMainPanel/RightMainPanelPTP"
 import RouteMap from "./Map/RouteMap/RouteMap"
-import ScenarioMap from "./Map/ScenarioMap/ScenarioMap"
+import ScenarioMapPTP from "./Map/ScenarioMap/ScenarioMapPTP"
 import Navbar from "./Teaching/Navbar/Navbar"
 import LoadingPage from "./LoadingPage/LoadingPage"
 
@@ -20,7 +22,7 @@ import * as actionCreators from '../reducers/action';
  * The main view which include TopleftPanel, map and RightMainPanel component
  */
 
-class Home extends React.Component {
+class PointToPoint extends React.Component {
 
   render() {
 
@@ -35,12 +37,12 @@ class Home extends React.Component {
         {/*change map when click subhead*/}
         {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}
         {/*<div className={this.props.currentMap ? "" : 'hidden2' }>*/}
-          {/*<RouteMap  />*/}
+        {/*<RouteMap  />*/}
         {/*</div>*/}
         <div className={this.props.currentMap ? 'hidden2' : ""}>
-          <ScenarioMap />
+          <ScenarioMapPTP />
         </div>
-        <RightMainPanel/>
+        <RightMainPanelPTP/>
       </div>
 
     );
@@ -62,7 +64,7 @@ function mapDispachToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispachToProps)(Home);
+export default connect(mapStateToProps, mapDispachToProps)(PointToPoint);
 
 
 

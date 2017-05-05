@@ -76,9 +76,11 @@ class ScenarioMapPTP extends React.Component {
       key: null,
       key2: null,
       loaded: false,
-      origin: INIT_ORIGIN,
+      origin: {lat:MapLat , lng:MapLng},
       destination: INIT_DESTINATION,
       originGrid: null,
+      travelTime: null,
+      travelTime2: null,
 
       preRequest: {
         jobId: uuid.v4(),
@@ -218,7 +220,6 @@ class ScenarioMapPTP extends React.Component {
 
       let {preRequest, staticRequest} = this.state;
 
-      console.log(API_KEY_ID);
       // first get a token
       let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
         method: 'POST',
@@ -253,7 +254,7 @@ class ScenarioMapPTP extends React.Component {
             type: 'static-stop-trees',
             graphId: TRANSPORT_NETWORK_ID,
             workerVersion: WORKER_VERSION,
-            request: preRequest
+            request: staticRequest
           })
         }).then(res => {
           console.log(res);
@@ -283,7 +284,7 @@ class ScenarioMapPTP extends React.Component {
     }
 
 
-    let {preRequest, staticRequest} = this.state;
+    let {preRequest, staticRequest, staticRequestBase} = this.state;
 
     console.log(API_KEY_ID);
     // first get a token
@@ -297,8 +298,7 @@ class ScenarioMapPTP extends React.Component {
 
     let accessToken = response.access_token;
     console.log(accessToken);
-    // this.props.changeProgress(0.2);
-    this.props.changeProgress(1);
+    this.props.changeProgress(0.2);
 
     this.setState({...this.state, accessToken});
 
@@ -309,11 +309,11 @@ class ScenarioMapPTP extends React.Component {
           type: 'static-metadata',
           graphId: TRANSPORT_NETWORK_ID,
           workerVersion: WORKER_VERSION,
-          request: staticRequest
+          request: staticRequestBase
         })
       }).then(res => {
           console.log(res);
-          // this.props.changeProgress(0.4);
+          this.props.changeProgress(0.4);
 
           return res.json()
         }
@@ -324,17 +324,17 @@ class ScenarioMapPTP extends React.Component {
           type: 'static-stop-trees',
           graphId: TRANSPORT_NETWORK_ID,
           workerVersion: WORKER_VERSION,
-          request: preRequest
+          request: staticRequestBase
         })
       }).then(res => {
         console.log(res);
-        // this.props.changeProgress(0.6);
+        this.props.changeProgress(0.6);
 
         return res.arrayBuffer()
       }),
       fetch(GRID_URL).then(res => {
         console.log(res);
-        // this.props.changeProgress(0.8);
+        this.props.changeProgress(0.8);
 
         return res.arrayBuffer()
       })
@@ -349,7 +349,7 @@ class ScenarioMapPTP extends React.Component {
 
         ]).then(() => {
             console.log("done fetch");
-            // this.props.changeProgress(1);
+            this.props.changeProgress(1);
 
             this.setState({...this.state, loaded: true});
           }
@@ -360,6 +360,62 @@ class ScenarioMapPTP extends React.Component {
 
   moveOrigin(e) {
     if (this.props.isCompareMode){
+
+
+
+      let {accessToken, preRequest, staticRequest} = this.state;
+
+
+      Promise.all([
+        fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: 'static-metadata',
+            graphId: TRANSPORT_NETWORK_ID,
+            workerVersion: WORKER_VERSION,
+            request: staticRequest
+          })
+        }).then(res => {
+            console.log(res);
+            return res.json()
+          }
+        ),
+        fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: 'static-stop-trees',
+            graphId: TRANSPORT_NETWORK_ID,
+            workerVersion: WORKER_VERSION,
+            request: staticRequest
+          })
+        }).then(res => {
+          console.log(res);
+          return res.arrayBuffer()
+        }),
+        fetch(GRID_URL).then(res => {
+          console.log(res);
+          return res.arrayBuffer()
+        })
+      ])
+        .then(([metadata, stopTrees, grid]) => {
+
+          Promise.all([
+            this.bs2.setQuery(metadata),
+            this.bs2.setStopTrees(stopTrees),
+            this.bs2.setTransitiveNetwork(metadata.transitiveData),
+            this.bs2.putGrid({id: 'jobs', grid: grid}),
+
+
+          ]).then(() => {
+              console.log("done fetch");
+              this.setState({...this.state, loaded: true});
+            }
+          )
+        });
+
+
+
+
       let origin = e.target.getLatLng();
       let {x, y} = this.bs.latLonToOriginPoint(origin);
       this.setState({
@@ -367,7 +423,7 @@ class ScenarioMapPTP extends React.Component {
         originGrid: {x, y}
       });
 
-      let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
+      let {staticRequestBase, isochroneCutoff} = this.state;
 
       this.setState({
         ...this.state,
@@ -395,7 +451,7 @@ class ScenarioMapPTP extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin(buff, {x, y});
+          await this.bs2.setOrigin({arrayBuffer: buff,point:{x, y}});
           await this.bs2.generateSurface("grid");
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
@@ -419,9 +475,75 @@ class ScenarioMapPTP extends React.Component {
     }
 
 
+
+
+
+
+    let {preRequest, staticRequest, staticRequestBase, accessToken} = this.state;
+
+
+    this.props.changeProgress(0.2);
+
+    this.setState({...this.state, accessToken});
+
+    Promise.all([
+      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          type: 'static-metadata',
+          graphId: TRANSPORT_NETWORK_ID,
+          workerVersion: WORKER_VERSION,
+          request: staticRequestBase
+        })
+      }).then(res => {
+          console.log(res);
+
+          return res.json()
+        }
+      ),
+      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          type: 'static-stop-trees',
+          graphId: TRANSPORT_NETWORK_ID,
+          workerVersion: WORKER_VERSION,
+          request: staticRequestBase
+        })
+      }).then(res => {
+        console.log(res);
+
+        return res.arrayBuffer()
+      }),
+      fetch(GRID_URL).then(res => {
+        console.log(res);
+
+        return res.arrayBuffer()
+      })
+    ])
+      .then(([metadata, stopTrees, grid]) => {
+
+        Promise.all([
+          this.bs.setQuery(metadata),
+          this.bs.setStopTrees(stopTrees),
+          this.bs.setTransitiveNetwork(metadata.transitiveData),
+          this.bs.putGrid({id: 'jobs', grid: grid}),
+
+        ]).then(() => {
+            console.log("done fetch");
+
+            this.setState({...this.state, loaded: true});
+          }
+        )
+      })
+
+
+
+
+
+
     let origin = e.target.getLatLng();
     let {x, y} = this.bs.latLonToOriginPoint(origin);
-    let {staticRequest, accessToken, isochroneCutoff} = this.state;
+    let { isochroneCutoff} = this.state;
     this.setState({
       ...this.state,
       originGrid: {x, y}
@@ -485,12 +607,11 @@ class ScenarioMapPTP extends React.Component {
 
   };
 
-  //TODO change API
   updateScneario() {
     if (this.props.isCompareMode){
       let origin = this.state.origin;
       let {x, y} = this.bs.latLonToOriginPoint(origin);
-      let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
+      let {staticRequest, accessToken, isochroneCutoff} = this.state;
 
       this.setState({
         ...this.state,
@@ -509,7 +630,7 @@ class ScenarioMapPTP extends React.Component {
         method: 'POST',
         body: JSON.stringify({
           type: 'static',
-          request: staticRequestBase,
+          request: staticRequest,
           workerVersion: WORKER_VERSION,
           graphId: TRANSPORT_NETWORK_ID,
           x,
@@ -518,8 +639,8 @@ class ScenarioMapPTP extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin(buff, {x, y});
-          await this.bs2.generateSurface("grid");
+          await this.bs2.setOrigin({arrayBuffer: buff, point:{x, y}});
+          await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
 
@@ -544,7 +665,7 @@ class ScenarioMapPTP extends React.Component {
 
     let origin = this.state.origin;
     let {x, y} = this.bs.latLonToOriginPoint(origin);
-    let {staticRequest, accessToken, isochroneCutoff} = this.state;
+    let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
 
     this.setState({
       ...this.state,
@@ -565,7 +686,7 @@ class ScenarioMapPTP extends React.Component {
       method: 'POST',
       body: JSON.stringify({
         type: 'static',
-        request: staticRequest,
+        request: staticRequestBase,
         workerVersion: WORKER_VERSION,
         graphId: TRANSPORT_NETWORK_ID,
         x,
@@ -576,8 +697,8 @@ class ScenarioMapPTP extends React.Component {
         console.log("generate surface");
         this.props.changeProgress(0.8);
 
-        await this.bs.setOrigin(buff, {x, y});
-        await this.bs.generateSurface("grid");
+        await this.bs.setOrigin({arrayBuffer: buff,point:{x, y}});
+        await this.bs.generateSurface({gridId: 'jobs'});
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
         this.props.changeProgress(0.9);
@@ -595,7 +716,7 @@ class ScenarioMapPTP extends React.Component {
           inVehicleTravelTime: null,
           travelTime: null,
           waitTime: null
-        })
+        });
 
         this.props.changeProgress(1);
 
@@ -603,6 +724,7 @@ class ScenarioMapPTP extends React.Component {
 
 
   };
+
 
 
   /** get an isochrone and an accessibility figure */
@@ -629,7 +751,43 @@ class ScenarioMapPTP extends React.Component {
 
 
   async moveDestination(e) {
-    let destination = e.target.getLatLng();
+    if (this.props.isCompareMode) {
+
+      let destination = e.target.getLatLng();
+      let zoom = e.target._map._zoom;
+      let { x, y } = this.bs2.latLonToOriginPoint(destination);
+      // const point = this.bs.pixelToOriginPoint(destination, zoom);
+      // const point = this.bs.pixelToOriginPoint(Leaflet.CRS.EPSG3857.latLngToPoint(destination, zoom), zoom);
+
+      // console.log(point);
+
+      // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData(point);
+
+      let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs2.generateDestinationData({from: this.state.originGrid, to:{x, y}});
+
+
+      console.log("ptp");
+      console.log(await this.bs2.generateDestinationData({from: this.state.originGrid, to:{x, y}}));
+      // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.origin, to:{x, y}});
+
+      let transitiveLayer2 = new Leaflet.TransitiveLayer(new Transitive({
+        data: transitive
+      }));
+
+
+
+
+      this.setState({ ...this.state, transitive2:transitive, travelTime2:travelTime , waitTime2:waitTime, inVehicleTravelTime2:inVehicleTravelTime, transitiveLayer2, key2: uuid.v4() })
+
+
+
+
+    }
+
+
+
+
+      let destination = e.target.getLatLng();
     let zoom = e.target._map._zoom;
     let { x, y } = this.bs.latLonToOriginPoint(destination);
     // const point = this.bs.pixelToOriginPoint(destination, zoom);
@@ -680,8 +838,8 @@ class ScenarioMapPTP extends React.Component {
   }
 
   componentDidUpdate(nextState){
-    if (this.state.accessibility !== nextState.accessibility) {
-      this.props.changeGridNumber([this.state.accessibility,this.state.accessibility2])
+    if (this.state.travelTime !== nextState.travelTime) {
+      this.props.changeGridNumber([this.state.travelTime,this.state.travelTime2])
     }
 
   }
@@ -691,8 +849,19 @@ class ScenarioMapPTP extends React.Component {
     if (this.props.currentTimeFilter !== nextProps.currentTimeFilter & this.state.key != null) {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
-    if (this.props.fireScenario !== nextProps.fireScenario ) {
-      this.state.staticRequest.request.scenario.modifications = nextProps.fireScenario;
+
+    if (this.props.fireScenario !== nextProps.fireScenario) {
+      let staticRequest = this.state.staticRequest;
+      staticRequest.request.scenario.modifications = nextProps.fireScenario;
+      staticRequest.request.scenario.id = uuid.v4();
+
+      // staticRequest.jobId = uuid.v4();
+      this.setState({
+        staticRequest,
+      });
+    }
+
+    if (this.props.updateButtonState !== nextProps.updateButtonState) {
       this.updateScneario();
     }
   }
@@ -704,8 +873,8 @@ class ScenarioMapPTP extends React.Component {
     const position = [MapLat, MapLng];
     return (
       <div className={s.map}>
-        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map'>
-          <ZoomControl position="bottomright" />
+        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
+          <ZoomControl position="bottomleft"/>
 
           {transitive &&
           <TransitiveMapLayer
@@ -722,19 +891,19 @@ class ScenarioMapPTP extends React.Component {
           />
 
 
-          { isochrone && <GeoJson
-            style={{color: "#fd8", fill: '#fd8', fillOpacity: 0.4}}
-            data={isochrone}
-            key={`iso-${key}`}
-          />}
+          {/*{ isochrone && <GeoJson*/}
+            {/*style={{color: "#fd8", fill: '#fd8', fillOpacity: 0.4}}*/}
+            {/*data={isochrone}*/}
+            {/*key={`iso-${key}`}*/}
+          {/*/>}*/}
 
 
-          { isochrone2 && <GeoJson
-            style={{color: "#2eadd3",
-              fill: '#2eadd3', fillOpacity: 0.4}}
-            data={isochrone2}
-            key={`iso-${key2}`}
-          />}
+          {/*{ isochrone2 && <GeoJson*/}
+            {/*style={{color: "#2eadd3",*/}
+              {/*fill: '#2eadd3', fillOpacity: 0.4}}*/}
+            {/*data={isochrone2}*/}
+            {/*key={`iso-${key2}`}*/}
+          {/*/>}*/}
 
           {/*{ transitive && {transitiveLayer}  }*/}
           {/*{ transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`}/> }*/}
@@ -961,7 +1130,8 @@ function mapStateToProps(state) {
     fireScenario : state.fireUpdate.fireScenario,
     isCompareMode: state.isCompare.isCompare,
     currentCorridor: state.reducer.currentCor,
-    currentBusline: state.changeBusline,
+    currentBusline: state.BuslineSelectedStore,
+    updateButtonState: state.updateButtonState,
   }
 }
 
