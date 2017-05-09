@@ -32,7 +32,7 @@ class PointToPoint extends React.Component {
 
     return (
       <div className="page-home">
-        {/*<Navbar/>*/}
+        <Navbar/>
         <TopleftPanel/>
         <MapLegendPTP/>
         {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
