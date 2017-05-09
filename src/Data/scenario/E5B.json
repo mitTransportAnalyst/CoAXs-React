@@ -20,24 +20,21 @@
       "retainTripsOutsideFrequencyEntries": false,
       "entries": [
         {
-          "sourceTrip": "RideNOLA:abe037a7-c83b-4f6e-aed3-14f67f52f438",
-          "headwaySecs": 1620,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "E5B-OB",
           "startTime": 18000,
           "endTime": 79200,
-          "monday": true,
-          "tuesday": true,
-          "wednesday": true,
-          "thursday": true,
-          "friday": true,
-          "saturday": true,
-          "sunday": true,
-          "name": "E5B-OB"
+          "headwaySecs": 1620,
+          "startTimes": null,
+          "sourceTrip": "RideNOLA:abe037a7-c83b-4f6e-aed3-14f67f52f438"
         },
         {
-          "sourceTrip": "RideNOLA:67370325-7e3d-4238-aead-38477df681da",
-          "headwaySecs": 1620,
-          "startTime": 61200,
-          "endTime": 79200,
           "monday": true,
           "tuesday": true,
           "wednesday": true,
@@ -45,7 +42,12 @@
           "friday": true,
           "saturday": true,
           "sunday": true,
-          "name": "E5B-IB"
+          "name": "E5B-IB",
+          "startTime": 18000,
+          "endTime": 79200,
+          "headwaySecs": 1620,
+          "startTimes": null,
+          "sourceTrip": "RideNOLA:67370325-7e3d-4238-aead-38477df681da"
         }
       ],
       "comment": "E5B"

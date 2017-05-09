@@ -5,7 +5,6 @@ import cloneDeep from 'lodash/cloneDeep'
 import classNames from "classnames"
 
 
-
 import json16A from "../../../Data/scenario/16A.json"
 import json16B from "../../../Data/scenario/16B.json"
 import json16C from "../../../Data/scenario/16C.json"
@@ -23,7 +22,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
 //import configuration file
-import {CorridorInfo} from "../../../config"
+import {CorridorInfo, BaselineBuses} from "../../../config"
 
 import ScenarioEntry from "./ScenarioEntry"
 
@@ -37,15 +36,14 @@ class Scenario extends React.Component {
       selectedScenario: 0,
       firedScenario: [],
       // TODO dynamic change
-      baselineHeadwayTime: {A: 30, B: 24, C:27}
+      baselineHeadwayTime: {A: 30, B: 24, C: 27}
     };
 
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
-    this.selectScenario = this.selectScenario.bind(this);
-    this.handleUpdate= this.handleUpdate.bind(this);
-    this.handleClickBaselineButton= this.handleClickBaselineButton.bind(this);
-    this.handleClickCompareButton= this.handleClickCompareButton.bind(this);
-
+    // this.selectScenario = this.selectScenario.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleClickBaselineButton = this.handleClickBaselineButton.bind(this);
+    this.handleClickCompareButton = this.handleClickCompareButton.bind(this);
 
 
   }
@@ -77,40 +75,26 @@ class Scenario extends React.Component {
     this.props.isCompare(!this.state.isCompareMode);
     this.setState({
       isCompareMode: !this.state.isCompareMode,
+      selectedScenario: 1,
     })
   }
 
-  handleClickBaselineButton(){
+  handleClickBaselineButton() {
     this.props.isCompare(!this.state.isCompareMode);
     this.setState({
       isCompareMode: !this.state.isCompareMode,
+      selectedScenario: 0,
     })
   }
 
 
-
-  selectScenario(scenarioID) {
-    let newSelectedScenario = [...this.state.selectedScenario];
-
-    newSelectedScenario = scenarioID;
-
-    this.setState(
-      {...this.state, selectedScenario: newSelectedScenario}
-    )
-
-  }
-
-
-
-
-  handleUpdate(){
+  handleUpdate() {
     this.props.pushUpdateButton();
   }
 
 
-
-  componentWillUpdate(nextProps, nextState){
-    if (this.props.scenarioStore !== nextProps.scenarioStore){
+  componentWillUpdate(nextProps, nextState) {
+    if (this.props.scenarioStore !== nextProps.scenarioStore) {
       const corridorObject = {
         "16A": JSON.parse(JSON.stringify(json16A)),
         "16B": JSON.parse(JSON.stringify(json16B)),
@@ -125,7 +109,7 @@ class Scenario extends React.Component {
       const selectScenarioNum = nextProps.scenarioStore[1];
       let firedScenario = [];
 
-      for (let key in selectScenarioNum){
+      for (let key in selectScenarioNum) {
         let temp = cloneDeep(corridorObject[selectScenarioNum[key].alternative].modifications);
         temp.forEach(function (route) {
           if (route.type === "adjust-frequency") {
@@ -138,8 +122,12 @@ class Scenario extends React.Component {
       }
 
       this.props.fireUpdate(firedScenario);
-
     }
+
+    if (this.props.showCompareScenarioModal !== nextProps.showCompareScenarioModal) {
+      this.handleClickCompareButton();
+    }
+
   }
 
   render() {
@@ -161,20 +149,24 @@ class Scenario extends React.Component {
     // });
 
     return (
-      <div className="scenarioDashboardPanel" >
-        <div className="colHead" >
+      <div className="scenarioDashboardPanel">
+
+        {/*<div className="placeholder">*/}
+        {/*</div>*/}
+
+        <div className="colHead">
           <i className="fa fa-random"/>
-          <span>Scenario Dashboard</span>
+          <span>Scenario Summary</span>
         </div>
 
         {/*{ this.state.isOpen ?*/}
-          {/*<div className="placeHolder" onClick={this.handlePlaceHolder}>*/}
-            {/*<div className="bigText">*/}
-              {/*<i className="fa fa-random"/>*/}
-            {/*</div>*/}
-          {/*</div>*/}
-          {/*:*/}
-          {/*null*/}
+        {/*<div className="placeHolder" onClick={this.handlePlaceHolder}>*/}
+        {/*<div className="bigText">*/}
+        {/*<i className="fa fa-random"/>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        {/*:*/}
+        {/*null*/}
         {/*}*/}
 
 
@@ -182,55 +174,58 @@ class Scenario extends React.Component {
 
           {/*<div className="btn-group btn-group-justified">*/}
 
-            {/*{this.state.isCompareMode ? <label className="btn tiny" style={{backgroundColor: "grey", color: "white", border:"3px solid #eec16f"}} onClick={this.handleClickCompare}><i*/}
-              {/*className="fa fa-balance-scale"/> Compare*/}
-            {/*</label> : <label className="btn" style={{backgroundColor: "grey", color: "white"}}*/}
-                              {/*onClick={this.handleClickCompare}><i*/}
-              {/*className="fa fa-balance-scale"/> Compare*/}
-            {/*</label>}*/}
+          {/*{this.state.isCompareMode ? <label className="btn tiny" style={{backgroundColor: "grey", color: "white", border:"3px solid #eec16f"}} onClick={this.handleClickCompare}><i*/}
+          {/*className="fa fa-balance-scale"/> Compare*/}
+          {/*</label> : <label className="btn" style={{backgroundColor: "grey", color: "white"}}*/}
+          {/*onClick={this.handleClickCompare}><i*/}
+          {/*className="fa fa-balance-scale"/> Compare*/}
+          {/*</label>}*/}
 
 
-            {/*<label className="btn" style={{backgroundColor: "grey", color: "white"}} onClick={this.handleUpdate}>*/}
-              {/*<i className="fa fa-plus-square"/> Update*/}
-            {/*</label>*/}
+          {/*<label className="btn" style={{backgroundColor: "grey", color: "white"}} onClick={this.handleUpdate}>*/}
+          {/*<i className="fa fa-plus-square"/> Update*/}
+          {/*</label>*/}
 
 
           {/*</div>*/}
 
-          <div className="scenariosTable" >
+          <div className="scenariosTable">
             {/*<div className="scenario" style={{position: "absolute", zIndex: 10, width: 24}}>*/}
 
-              {/*/!*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*!/*/}
+            {/*/!*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*!/*/}
 
-              {/*/!*<i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>*!/*/}
+            {/*/!*<i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>*!/*/}
             {/*</div>*/}
-
 
 
             <div className="scenarioEntries">
 
               <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
-                             isCompareMode={this.state.isCompareMode}  headwayTime = {this.state.baselineHeadwayTime}/>
+                             isCompareMode={this.state.isCompareMode} headwayTime={this.state.baselineHeadwayTime}
+                             scorecardData={BaselineBuses} selectedScenario={this.state.selectedScenario}/>
               <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
-                             isCompareMode={this.state.isCompareMode} headwayTime = {this.props.headwayTime}/>
+                             isCompareMode={this.state.isCompareMode} headwayTime={this.props.headwayTime}
+                             scorecardData={this.props.scorecardData} selectedScenario={this.state.selectedScenario}/>
 
             </div>
 
             <div >
 
-              <div className={baselineButton} style={{width: "50%", height: "10%",padding: 2}} onClick={this.handleClickBaselineButton}>
+              <div className={baselineButton} style={{width: "50%", height: "10%", padding: 2}}
+                   onClick={this.handleClickBaselineButton}>
                 <i className="fa fa-eye"/> View the Baseline
               </div>
-              <div className={compareButton} style={{width: "50%", height: "10%",padding: 2}} onClick={this.handleClickCompareButton}>
+              <div className={compareButton} style={{width: "50%", height: "10%", padding: 2}}
+                   onClick={this.handleClickCompareButton}>
                 <i className="fa fa-balance-scale"/> Compare with Baseline
               </div>
             </div>
 
 
-            <div className="btn-group btn-group-justified" onClick={this.handleUpdate} >
+            <div className="btn-group btn-group-justified" onClick={this.handleUpdate}>
 
-              <div className="btn btn-info" style={{width: "100%", height: "10%",padding: 2}}>
-                  <i className="fa fa-refresh"/> Update
+              <div className="btn btn-info" style={{width: "100%", height: "10%", padding: 2}}>
+                <i className="fa fa-refresh"/> Update
               </div>
             </div>
 
@@ -246,6 +241,8 @@ function mapStateToProps(state) {
   return {
     scenarioStore: state.scenarioStore,
     headwayTime: state.HeadwayTime,
+    scorecardData: state.ScorecardData,
+    showCompareScenarioModal: state.showCompareScenarioModal,
   }
 }
 

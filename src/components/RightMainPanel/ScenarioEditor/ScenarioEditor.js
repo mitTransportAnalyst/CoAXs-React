@@ -28,6 +28,10 @@ class ScenarioEditor extends React.Component {
       <div className="ScenarioEditorCol">
 
 
+        {/*<div className="placeholder">*/}
+        {/*</div>*/}
+
+
         <div className="colHead">
           <i className="fa fa-pencil-square-o"/>
           Service Editor - Editing Route {CorridorInfo[this.props.currentCorridor].name}
@@ -50,8 +54,10 @@ class ScenarioEditor extends React.Component {
                   <div className="btn routeItem" key={corridor.id}
                        style={{border: "3px solid #eec16f", "backgroundColor": corridor.color}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
-                    {corridor.name} <i className="fa fa-bus"
-                                       style={{marginLeft: 12}}/> {Math.ceil(this.props.scorecardData[corridor.id])}
+                    Route {corridor.name}
+
+                    {/*<i className="fa fa-bus"*/}
+                                       {/*style={{marginLeft: 12}}/> {Math.ceil(this.props.scorecardData[corridor.id])}*/}
                   </div>
                 )
               }
@@ -60,8 +66,10 @@ class ScenarioEditor extends React.Component {
                   <div className="btn routeItem" key={corridor.id}
                        style={{"backgroundColor": corridor.color}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
-                    {corridor.name} <i className="fa fa-bus"
-                                       style={{marginLeft: 12}}/> {Math.ceil(this.props.scorecardData[corridor.id])}
+                    Route {corridor.name}
+
+                    {/*<i className="fa fa-bus"*/}
+                                       {/*style={{marginLeft: 12}}/> {Math.ceil(this.props.scorecardData[corridor.id])}*/}
                   </div>
                 )
 

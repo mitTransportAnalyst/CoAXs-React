@@ -668,31 +668,40 @@ class ScenarioMap extends React.Component {
 
 
           <GeoJson data={GeojsonJeT} key = {"JeT"} style={{
-            color : "#D8D8D8",
+            color : "#f1d3e9",
             weight: 1,
-            opacity: 1 }}
+            opacity: 0.5 }}
           />
 
 
           <GeoJson data={GeojsonNORTA} key = {"NORTA"} style={{
-            color : "#E0E0E0",
+            color : "#f1d3e9",
             weight: 1,
-            opacity: 0.2 }}
+            opacity: 0.3 }}
           />
 
 
 
 
           { isochrone && <GeoJson
-            style={{color: "#2eadd3", fill: '#2eadd3', fillOpacity: 0.4}}
+            style={{      stroke      : true,
+              fillColor   : '#89cff0',
+              color : '#45b3e7',
+              weight      : 1,
+              fillOpacity : 0.25,
+              opacity     : 1}}
             data={isochrone}
             key={`iso-${key}`}
           />}
 
 
           { this.props.isCompareMode && isochrone2 && <GeoJson
-            style={{color: "#fd8",
-              fill: '#fd8', fillOpacity: 0.4}}
+            style={{        stroke      : true,
+              fillColor   : '#FDB813',
+              color       : '#F68B1F',
+              weight      : 1,
+              fillOpacity : 0.25,
+              opacity     : 1,}}
             data={isochrone2}
             key={`iso-${key2}`}
           />}
@@ -725,8 +734,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
             <GeoJson data={Geojson16A} key = {"16A1"} style={{
               color : CorridorInfo["A"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -736,7 +745,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={Geojson16A} key = {"16A2"} style={{
               color : CorridorInfo["A"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -745,8 +754,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16B" &&
             <GeoJson data={Geojson16B} key = {"16B1"} style={{
               color : CorridorInfo["A"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -756,7 +765,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={Geojson16B} key = {"16B2"} style={{
               color : CorridorInfo["A"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -765,8 +774,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16C" &&
             <GeoJson data={Geojson16C} key = {"16C1"} style={{
               color : CorridorInfo["A"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -776,7 +785,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={Geojson16C} key = {"16C2"} style={{
               color : CorridorInfo["A"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -786,8 +795,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3A" &&
             <GeoJson data={GeojsonE3A} key = {"E3A1"} style={{
               color : CorridorInfo["B"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -798,7 +807,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={GeojsonE3A} key = {"E3A2"} style={{
               color : CorridorInfo["B"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -807,8 +816,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3B" &&
             <GeoJson data={GeojsonE3B} key = {"E3B1"} style={{
               color : CorridorInfo["B"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -819,7 +828,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={GeojsonE3B} key = {"E3B2"} style={{
               color : CorridorInfo["B"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -829,8 +838,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3C" &&
             <GeoJson data={GeojsonE3C} key = {"E3C1"} style={{
               color : CorridorInfo["B"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -841,7 +850,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={GeojsonE3C} key = {"E3C2"} style={{
               color : CorridorInfo["B"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -851,8 +860,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3D" &&
             <GeoJson data={GeojsonE3D} key = {"E3D1"} style={{
               color : CorridorInfo["B"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -863,7 +872,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={GeojsonE3D} key = {"E3D2"} style={{
               color : CorridorInfo["B"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -874,8 +883,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5A" &&
             <GeoJson data={GeojsonE5A} key = {"E5A1"} style={{
               color : CorridorInfo["C"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -886,7 +895,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={GeojsonE5A} key = {"E5A2"} style={{
               color : CorridorInfo["C"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }
@@ -896,8 +905,8 @@ class ScenarioMap extends React.Component {
             this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5B" &&
             <GeoJson data={GeojsonE5B} key = {"E5B1"} style={{
               color : CorridorInfo["C"].color,
-              weight: 10,
-              opacity: 0.5 }}
+              weight: 8,
+              opacity: 1 }}
             />
 
           }
@@ -908,7 +917,7 @@ class ScenarioMap extends React.Component {
             <GeoJson data={GeojsonE5B} key = {"E5B2"} style={{
               color : CorridorInfo["C"].color,
               weight: 5,
-              opacity: 1 }}
+              opacity: 0.5 }}
             />
 
           }

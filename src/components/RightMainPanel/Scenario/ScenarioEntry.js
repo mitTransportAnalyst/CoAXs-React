@@ -17,6 +17,11 @@ class ScenarioEntry extends React.Component {
 
   render() {
 
+    let totalbuses = 0;
+    for (let key in this.props.scorecardData ){
+      totalbuses += Math.ceil(this.props.scorecardData[key])
+    }
+
 
     var ScenarioValue = Object.keys(this.props.data).map((corridorKey) =>{
 
@@ -24,7 +29,7 @@ class ScenarioEntry extends React.Component {
           <div className="square" style={{padding: 3,fontSize: 13, color: "white", backgroundColor:CorridorInfo[corridorKey].color}}>
             {CorridorInfo[corridorKey].name}
           </div>
-            <small style={{fontSize: 14,}}>R: {this.props.data[corridorKey].alternative}  | H:{Math.ceil(this.props.headwayTime[corridorKey])}  </small>
+            <small style={{fontSize: 14,}}> {this.props.data[corridorKey].alternative}  | {Math.ceil(this.props.headwayTime[corridorKey])} min  | #Veh: {Math.ceil(this.props.scorecardData[corridorKey])}</small>
         </div>
         )
       }
@@ -32,15 +37,15 @@ class ScenarioEntry extends React.Component {
 
 
 
-        if (this.props.selectNum === this.props.index) {
+        if (this.props.selectedScenario === this.props.index ) {
           return (
-            <div className="scenarioEntry"  >
+            <div className="scenarioEntrySel"  >
               <div className="" style={{margin: 0, padding: 0}}>
 
 
 
-                    <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#eec16f"}}>
-                    {this.props.index === 0 ? `Base Scenario` : `New Scenario ${this.props.index}`   }
+                    <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#e9bc69"}}>
+                      {this.props.index === 0 ? `Base Scenario -- Total #veh: ${totalbuses}` : `New Scenario -- Total #veh: ${totalbuses}`   }
                     </div>
 
 
@@ -55,7 +60,7 @@ class ScenarioEntry extends React.Component {
             <div className="scenarioEntry" >
               <div className="" style={{margin: 0, padding: 0}}>
                 <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor:"#eec16f"}}>
-                  {this.props.index === 0 ? `Base Scenario` : `New Scenario`   }
+                  {this.props.index === 0 ? `Base Scenario -- Total #veh: ${totalbuses}` : `New Scenario -- Total #veh: ${totalbuses}`   }
                 </div>
 
                 {ScenarioValue}

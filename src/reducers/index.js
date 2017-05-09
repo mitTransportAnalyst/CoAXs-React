@@ -237,6 +237,15 @@ function HeadwayTime(state = 0, action) {
   }
 }
 
+function showCompareScenarioModal(state = false, action) {
+  switch (action.type) {
+    case 'fireCompareScenarioModal':
+      return true;
+    default:
+      return state
+  }
+}
+
 
 
 export const reducers = combineReducers({
@@ -255,4 +264,5 @@ export const reducers = combineReducers({
   loadingProgress,
   ScorecardData,
   HeadwayTime,
+  showCompareScenarioModal,
 });

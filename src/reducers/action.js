@@ -162,3 +162,12 @@ export function changeHeadway(res) {
   }
 }
 
+export function fireCompareScenarioModal(res) {
+  return {
+    type: "fireCompareScenarioModal",
+    res
+  }
+}
+
+
+

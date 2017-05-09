@@ -114,6 +114,10 @@ class Navbar extends React.Component {
       this.setState({ showExitSurveyPopup: true });
     }
 
+    if (nextProps.showCompareScenarioModal !== this.props.showCompareScenarioModal){
+      this.setState({ showScenario: true });
+    }
+
 
   }
 
@@ -196,17 +200,7 @@ class Navbar extends React.Component {
 
 
 
-        <Overlay
-          show={this.state.showScenarioPopup}
-          target={this.refs.compareQuestion}
-          placement="bottom"
-          containerPadding={20}
-        >
-          <Popover id="popover-contained" title="Next Step">
-            <strong>Good job!</strong> After you explore the baseline scenario, let's push the question mark to watch the scenario creation video
-            <Button bsSize="small" style={{marginLeft: 5}} onClick={this.closeScenarioPopup}>Got it!</Button>
-          </Popover>
-        </Overlay>
+
 
 
         <Overlay
@@ -241,6 +235,7 @@ function mapStateToProps(state) {
     isdoneCompareScenario: state.navState.isdoneCompareScenario,
     isdoneExitSurvey: state.navState.isdoneExitSurvey,
     isdonePreSurvey: state.navState.isdonePreSurvey,
+    showCompareScenarioModal: state.showCompareScenarioModal,
   }
 }
 

@@ -17,17 +17,15 @@
 
 
 .colHead{
-  height: 28px;
-  line-height: 28px;
+  height: 24px;
+  line-height: 24px;
   background-color: #696969;
   position: relative;;
-  top: 0px;
   width: 100%;
   text-align: center;
   color: white;
-  btn: 0px 5px 3px rgba(0,0,0,0.25);
   z-index: 99;
-  font-size: 15px;
+  font-size: 14px;
 
 
 
