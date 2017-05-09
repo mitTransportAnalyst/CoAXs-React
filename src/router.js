@@ -18,8 +18,6 @@ const router = (
       <IndexRoute component={Home}/>
       <Route path="/single" component={Home}/>
       <Route path="/ptp" component={PointToPoint}/>
-
-
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>

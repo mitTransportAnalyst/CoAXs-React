@@ -44,8 +44,8 @@ import Transitive from 'transitive-js'
 
 
 import uuid from 'uuid'
-import Browsochrones from './NewBrowsochrones/lib'
-// import Browsochrones from 'browsochrones'
+// import Browsochrones from './NewBrowsochrones/lib'
+import Browsochrones from 'browsochrones'
 
 import debounce from 'debounce'
 
@@ -186,7 +186,6 @@ class ScenarioMap extends React.Component {
 
     this.fetchMetadata = this.fetchMetadata.bind(this);
     this.moveOrigin = this.moveOrigin.bind(this);
-    this.moveDestination = this.moveDestination.bind(this);
 
     this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
     this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff,MAX_UPDATE_INTERVAL_MS);
@@ -299,7 +298,8 @@ class ScenarioMap extends React.Component {
   moveOrigin(e) {
     if (this.props.isCompareMode){
       let origin = e.target.getLatLng();
-      let {x, y} = this.bs.latLonToOriginPoint(origin);
+      console.log(origin)
+      let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
       this.setState({
         ...this.state,
         originGrid: {x, y}
@@ -333,7 +333,7 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin({arrayBuffer: buff,point:{x, y}});
+          await this.bs2.setOrigin({data: buff,point:{x, y}});
           await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
@@ -358,7 +358,11 @@ class ScenarioMap extends React.Component {
 
 
     let origin = e.target.getLatLng();
-    let {x, y} = this.bs.latLonToOriginPoint(origin);
+    console.log(origin)
+
+    let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
+
+    console.log({x,y})
     let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
     this.setState({
       ...this.state,
@@ -395,7 +399,7 @@ class ScenarioMap extends React.Component {
         console.log("generate surface");
         this.props.changeProgress(0.8);
 
-        await this.bs.setOrigin({arrayBuffer: buff,point:{x, y}});
+        await this.bs.setOrigin({data: buff,point:{x, y}});
         await this.bs.generateSurface({gridId: 'jobs'});
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
@@ -426,7 +430,7 @@ class ScenarioMap extends React.Component {
   updateScneario() {
     if (this.props.isCompareMode){
       let origin = this.state.origin;
-      let {x, y} = this.bs.latLonToOriginPoint(origin);
+      let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
       let {staticRequest, accessToken, isochroneCutoff} = this.state;
 
       this.setState({
@@ -455,7 +459,7 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin({arrayBuffer: buff, point:{x, y}});
+          await this.bs2.setOrigin({data: buff, point:{x, y}});
           await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
@@ -480,7 +484,7 @@ class ScenarioMap extends React.Component {
 
 
     let origin = this.state.origin;
-    let {x, y} = this.bs.latLonToOriginPoint(origin);
+    let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
     let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
 
     this.setState({
@@ -513,7 +517,7 @@ class ScenarioMap extends React.Component {
         console.log("generate surface");
         this.props.changeProgress(0.8);
 
-        await this.bs.setOrigin({arrayBuffer: buff,point:{x, y}});
+        await this.bs.setOrigin({data: buff,point:{x, y}});
         await this.bs.generateSurface({gridId: 'jobs'});
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
@@ -565,32 +569,6 @@ class ScenarioMap extends React.Component {
   }
 
 
-  async moveDestination(e) {
-    let destination = e.target.getLatLng();
-    let zoom = e.target._map._zoom;
-    let { x, y } = this.bs.latLonToOriginPoint(destination);
-    // const point = this.bs.pixelToOriginPoint(destination, zoom);
-    // const point = this.bs.pixelToOriginPoint(Leaflet.CRS.EPSG3857.latLngToPoint(destination, zoom), zoom);
-
-    console.log({ x, y });
-
-
-    let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.originGrid, to:{x, y}});
-
-    console.log(await this.bs.generateDestinationData({from: this.state.originGrid, to:{x, y}}));
-    // let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.bs.generateDestinationData({from: this.state.origin, to:{x, y}});
-
-    const transitiveLayer = new Leaflet.TransitiveLayer(new Transitive({
-      data: transitive
-    }));
-
-    console.log(transitiveLayer);
-
-
-    this.setState({ ...this.state, transitive, travelTime, waitTime, inVehicleTravelTime, transitiveLayer, key: uuid.v4() })
-
-
-  }
 
 
   componentWillMount(){
