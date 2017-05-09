@@ -11,7 +11,7 @@ import RouteMap from "./Map/RouteMap/RouteMap"
 import ScenarioMapPTP from "./Map/ScenarioMap/ScenarioMapPTP"
 import Navbar from "./Teaching/Navbar/Navbar"
 import LoadingPage from "./LoadingPage/LoadingPage"
-import MapLegend from "./Map/Legend/Legend"
+import MapLegendPTP from "./Map/Legend/LegendPTP"
 
 
 //import redux
@@ -32,9 +32,9 @@ class PointToPoint extends React.Component {
 
     return (
       <div className="page-home">
-        <Navbar/>
+        {/*<Navbar/>*/}
         <TopleftPanel/>
-        <MapLegend/>
+        <MapLegendPTP/>
         {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
         {/*change map when click subhead*/}
         {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}

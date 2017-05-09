@@ -4,3 +4,22 @@
   position: absolute;
   z-index: -100;
 }
+
+
+.iconStart {
+  background: url('../../../img/marker-flag-start-shadowed.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+}
+
+
+.iconEnd {
+  background: url('../../../img/marker-flag-end-shadowed.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+}
+

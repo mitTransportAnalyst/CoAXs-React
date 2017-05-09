@@ -58,7 +58,7 @@ class GraphPTP extends React.Component {
       <div >
         <br/>
         <div style={{marginTop: -20}}>
-          <h5>Travel Time</h5>
+          <h5>Travel Time (minutes)</h5>
           <BarChart  width={400} height={200} data={data} layout="vertical" >
 
             <XAxis stroke="black" type="number" domain={[0, 200]} tickFormatter={tooltipFormatter}/>

@@ -53,6 +53,7 @@
   stroke-linecap: round;
   fill: none;
   stroke: #333;
+  stroke-width: 2px;
 
 }
 
@@ -60,8 +61,12 @@
   stroke-linecap: round;
   fill: none;
   stroke: #333;
+  stroke-width: 2px;
+
 
 }
+
+
 
 
 /**
@@ -119,7 +124,7 @@
 .Transitive .transitive-line {
   stroke-linecap: round;
   filter: dropshadow(0 0 0 5px rgba(255, 255, 255, 0.5));
-
+  stroke-width: 2px;
 }
 
 .Transitive .transitive-line-halo {
@@ -131,10 +136,12 @@
 .Transitive > .schematic-map .transitive-stop-label,
 .Transitive > .schematic-map .transitive-multi-label,
 .Transitive > .schematic-map .transitive-place-label {
-  text-shadow: -2px -2px 0 rgba(255, 255, 255, 0.5),
-                2px -2px 0 rgba(255, 255, 255, 0.5),
-                -2px 2px 0 rgba(255, 255, 255, 0.5),
-                 2px 2px 0 rgba(255, 255, 255, 0.5);
+  /*text-shadow: -2px -2px 0 rgba(255, 255, 255, 0.5),*/
+                /*2px -2px 0 rgba(255, 255, 255, 0.5),*/
+                /*-2px 2px 0 rgba(255, 255, 255, 0.5),*/
+                 /*2px 2px 0 rgba(255, 255, 255, 0.5);*/
+
+  display: none;
 }
 
 .Transitive > .schematic-map .transitive-place-circle {

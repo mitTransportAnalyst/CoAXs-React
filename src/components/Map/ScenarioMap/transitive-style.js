@@ -72,14 +72,18 @@ exports.segments = {
       case 'CAR_PARK':
       case 'BICYCLE':
       case 'BICYCLE_RENT':
-        return '3px'
+        return '2px'
       case 'WALK':
-        return '5px'
+        return '2px'
       case 'TRANSIT':
         // bus segments:
-        if (segment.mode === 3) return utils.pixels(display.zoom.scale(), 2, 4, 6) + 'px'
+        // if (segment.mode === 3) return utils.pixels(display.zoom.scale(), 1, 2, 3) + 'px'
+        if (segment.mode === 3) return "1px"
+
         // all others:
-        return utils.pixels(display.zoom.scale(), 5, 7, 9) + 'px'
+        // return utils.pixels(display.zoom.scale(), 1, 2, 3) + 'px'
+        return "1px"
+
     }
   },
 
@@ -111,9 +115,9 @@ exports.segments = {
   envelope: function (display, segment, index, utils) {
     switch (segment.type) {
       case 'TRANSIT':
-        if (segment.mode === 3) return utils.pixels(display.zoom.scale(), 2, 4, 6) + 'px'
+        if (segment.mode === 3) return utils.pixels(display.zoom.scale(), 1, 2, 3) + 'px'
         // all others:
-        return utils.pixels(display.zoom.scale(), 5, 7, 9) + 'px'
+        return utils.pixels(display.zoom.scale(), 1, 2, 3) + 'px'
     }
   }
 }
@@ -129,8 +133,12 @@ exports.segment_label_containers = {
 }
 
 exports.segments_halo = {
-  'stroke-width': function (display, data, index, utils) {
-    return data.computeLineWidth(display) + 6
+  // 'stroke-width': function (display, data, index, utils) {
+  //   return data.computeLineWidth(display)
+  // }
+
+  'stroke-width': function () {
+    return "2px"
   }
 }
 
