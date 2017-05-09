@@ -386,7 +386,7 @@ class ScenarioMapPTP extends React.Component {
 
       this.setState({...this.state, accessToken});
 
-      let {preRequest, staticRequest} = this.state;
+      let {staticRequest} = this.state;
 
 
       Promise.all([
