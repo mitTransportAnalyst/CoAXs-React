@@ -5,30 +5,71 @@
 const path = require('path');
 const express = require('express');
 
-//
+
+
+
 // const app = express();
-// const indexPath = path.join(__dirname, '/public/index.html');
-// const publicPath = express.static(path.join(__dirname, '/public'));
+// const port = process.env.PORT || 3000;
+// const public_path = express.static(__dirname + '/public');
+// const index_path = __dirname + '/public/index.html';
 //
-// app.use(publicPath);
-// app.get('/', function (_, res) { res.sendFile(indexPath) });
+// app.use(public_path);
 //
+// app.get('*', function (request, response) {
+//   response.sendFile(index_path, function (error) {
+//     if (error) {
+//       console.log(error);
+//     }
+//   });
+// });
+
 
 
 const app = express();
 const port = process.env.PORT || 3000;
-const public_path = express.static(__dirname + '/public');
-const index_path = __dirname + '/public/index.html';
+// const public_path = express.static(__dirname + '/public/LandingNOLA');
+const publicMainNOLA_path = express.static(__dirname + '/public');
+// const publicLandingNOLA_path = express.static(__dirname + '/LandingNOLA');
 
-app.use(public_path);
 
-app.get('*', function (request, response) {
-  response.sendFile(index_path, function (error) {
+const mainNOLA_path = __dirname + '/public/index.html';
+const landingNOLA_path = __dirname + '/public/indexLandingNOLA.html';
+
+
+
+app.use(publicMainNOLA_path);
+
+
+app.get('/single', function (request, response) {
+
+  response.sendFile(mainNOLA_path, function (error) {
     if (error) {
       console.log(error);
     }
   });
 });
+
+
+app.get('/ptp', function (request, response) {
+
+  response.sendFile(mainNOLA_path, function (error) {
+    if (error) {
+      console.log(error);
+    }
+  });
+});
+
+app.get('/landing', function (request, response) {
+  // app.use(publicLandingNOLA_path);
+
+  response.sendFile(landingNOLA_path, function (error) {
+    if (error) {
+      console.log(error);
+    }
+  });
+});
+
+
 
 app.listen(port, function() {
   console.log("App is running on port " + port);
