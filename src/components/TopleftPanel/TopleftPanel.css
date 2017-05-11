@@ -1,10 +1,11 @@
 .topleft {
   color: white;
   position: absolute;
-  width            : 300px;
+  width            : 210px;
   overflow         : hidden;
   z-index: 10;
   background-color : #696969;
+  height:35px;
 }
 
 .topleftText {

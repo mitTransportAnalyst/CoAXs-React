@@ -6,6 +6,7 @@ import React from "react";
 import Fa from "react-fontawesome";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell} from "recharts";
+import GraphLabel from "./GraphLabel"
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -51,7 +52,8 @@ class Graph extends React.Component {
 
 
     const scale = 'ordinal';
-    const tooltipFormatter = (value) => ( value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
+    const axisFormatter = (value) => (value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
 
     return (
       <div >
@@ -60,14 +62,14 @@ class Graph extends React.Component {
           <h5>Jobs Reachable</h5>
           <BarChart  width={400} height={200} data={data} layout="vertical" >
 
-            <XAxis stroke="black" type="number" domain={[0, 400000]} tickFormatter={tooltipFormatter}/>
+            <XAxis stroke="black" type="number" domain={[0, 400000]} tickFormatter={axisFormatter}/>
             <YAxis dataKey="name" stroke="black" type="category"/>
 
             <CartesianGrid strokeDasharray="3 3"/>
             {/*<Tooltip/>*/}
             {/*<Legend />*/}
 
-            <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label layout="vertical" >
+            <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label={<GraphLabel/>} layout="vertical" >
               {
                 data.map((entry, index) => (
                   <Cell fill={index === 0 ? '#2eadd3' : '#facd7a' } key={`cell-${index}`}/>

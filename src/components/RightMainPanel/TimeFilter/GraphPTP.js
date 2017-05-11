@@ -8,6 +8,7 @@ import Fa from "react-fontawesome";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell} from "recharts";
 
+
 //bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';

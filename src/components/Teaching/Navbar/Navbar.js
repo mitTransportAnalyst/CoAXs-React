@@ -152,7 +152,7 @@ class Navbar extends React.Component {
     const exitClass = classNames({
       "step": true,
       "current": !this.props.isdoneExitSurvey,
-      // "blink": this.props.isdoneCompareScenario & !this.props.isdoneExitSurvey,
+      "blink": this.props.isdoneCompareScenario & !this.props.isdoneExitSurvey,
     });
 
     // const popoverFocus = (
