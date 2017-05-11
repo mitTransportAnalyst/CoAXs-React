@@ -57,7 +57,7 @@ class LegendPTP extends React.Component {
                 <svg height="10" width="20">
                   <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#555555", strokeWidth: 5}}/>
                 </svg>
-                <small className="panel-word">Route 16</small>
+                <small className="panel-word">RTA #16 S. Claiborne</small>
               </div>
 
 
@@ -65,14 +65,14 @@ class LegendPTP extends React.Component {
                 <svg height="10" width="20">
                   <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#2eadd3", strokeWidth: 5}}/>
                 </svg>
-                <small className="panel-word">Route E3</small>
+                <small className="panel-word">JeT #E3 Kenner Local</small>
               </div>
 
               <div>
                 <svg height="10" width="20">
                   <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#8d6aa8", strokeWidth: 5}}/>
                 </svg>
-                <small className="panel-word">Route E5</small>
+                <small className="panel-word">JeT #E5 Causeway </small>
               </div>
 
 

@@ -66,42 +66,8 @@ class TimeFilterPTP extends React.Component {
           <i className="fa fa-clock-o"></i>
           Time Map
         </div>
-
-        {/*{ this.state.isOpen?*/}
-        {/*<div className="placeHolder" onClick={this.handlePlaceHolder}>*/}
-        {/*<div className="bigText">*/}
-        {/*<i className="fa fa-clock-o"/>*/}
-        {/*</div>*/}
-        {/*</div>*/}
-        {/*:*/}
-        {/*null*/}
-        {/*}*/}
-
-
         <div>
-          {/*<div className="updateStart">*/}
-          {/*{this.state.currentTimeFilter} min*/}
-          {/*</div>*/}
-
-
-          {/*<ButtonGroup className="updateStart">*/}
-          {/*<Button bsStyle="info" className="update">*/}
-          {/*/!*<i><Fa name="refresh"/></i>*!/*/}
-          {/*<span> </span>*/}
-          {/*</Button>*/}
-
-          {/*<Button className="start">*/}
-          {/*/!*<i><Fa name="play"/></i>*!/*/}
-          {/*<span> </span>*/}
-          {/*</Button>*/}
-          {/*</ButtonGroup>*/}
-
-
-
-
-          {this.props.gridNumber !== null ? <GraphPTP/> : null}
-
-
+           {this.props.gridNumber !== null ? <GraphPTP/> : null}
         </div>
       </div>
 

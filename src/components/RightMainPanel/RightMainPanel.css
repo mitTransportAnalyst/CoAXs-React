@@ -5,9 +5,11 @@
   right: 20px;
   top: 50px;
   bottom: 30px;
-  max-height: 800px;
+  max-height: 720px;
   /*height: 700px;*/
   width: 420px;
   border: 1px solid black;
   overflow-y: scroll;
+  box-shadow: 5px 5px 2px #afafaf;
+
 }

@@ -6,8 +6,8 @@ import React from "react";
 import { Modal, Tooltip, Overlay, Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import s from "./Navbar.css"
 import classNames from "classnames"
-import IntroModal from "../Modal/IntroModal"
-import ScenarioCreationModal from "../Modal/ScenarioCreationModal"
+import IntroModalPTP from "../Modal/IntroModalPTP"
+import ScenarioCreationModalPTP from "../Modal/ScenarioCreationModalPTP"
 import ExitSurveyModal from "../Modal/ExitSurveyModal"
 import PreSurveyModal from "../Modal/PreSurveyModal"
 import {FormControlID} from "../../../config"
@@ -22,7 +22,7 @@ import * as actionCreators from '../../../reducers/action';
  * The main view which include TopleftPanel, map and RightMainPanel component
  */
 
-class Navbar extends React.Component {
+class NavbarPTP extends React.Component {
   constructor(){
     super();
     this.state = {
@@ -223,8 +223,8 @@ class Navbar extends React.Component {
           </Popover>
         </Overlay>
 
-        <IntroModal isShow={this.state.showIntro} closeModal={this.closeIntro}/>
-        <ScenarioCreationModal isShow={this.state.showScenario} closeModal={this.closeScenario}/>
+        <IntroModalPTP isShow={this.state.showIntro} closeModal={this.closeIntro}/>
+        <ScenarioCreationModalPTP isShow={this.state.showScenario} closeModal={this.closeScenario}/>
         <ExitSurveyModal isShow={this.state.showSurvey} closeModal={this.closeExitSurvey}/>
         <PreSurveyModal isShow={this.state.showPreSurvey} closeModal={this.closePreSurvey}/>
 
@@ -253,7 +253,7 @@ function mapDispachToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispachToProps)(Navbar);
+export default connect(mapStateToProps, mapDispachToProps)(NavbarPTP);
 
 
 

@@ -5,8 +5,10 @@
 import React from "react";
 import Fa from "react-fontawesome";
 import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell} from "recharts";
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Cell} from "recharts";
 import GraphLabel from "./GraphLabel"
+import {Tooltip, OverlayTrigger} from 'react-bootstrap';
+
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -24,22 +26,28 @@ class Graph extends React.Component {
   render() {
 
 
-    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
-      var data =[
-        {name: 'Base Scenario', job:null},
-        {name: 'New Scenario', job:null},
+    const tooltipforJob = (
+      <Tooltip id="tooltipforJob"><strong>The total number of jobs that can be reached is based on U.S. census
+        data</strong></Tooltip>
+    );
+
+
+    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined) {
+      var data = [
+        {name: 'Base Scenario', job: null},
+        {name: 'New Scenario', job: null},
       ];
     }
-    else{
-      var data =[
-        {name: 'Baseline Scenario', job:null},
+    else {
+      var data = [
+        {name: 'Baseline Scenario', job: null},
       ];
     }
 
 
     data[0].job = this.props.gridNumber;
 
-    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined ){
+    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined) {
       data[1].job = this.props.gridNumber1;
 
     }
@@ -58,18 +66,24 @@ class Graph extends React.Component {
     return (
       <div >
         <br/>
-        <div style={{marginTop: -20}}>
-          <h5>Jobs Reachable</h5>
-          <BarChart  width={400} height={200} data={data} layout="vertical" >
+        <div style={{marginTop: -20, marginLeft: 8}}>
+
+          <h5>Jobs Reachable
+            <OverlayTrigger placement="bottom" overlay={tooltipforJob}>
+              <i className="fa fa-question-circle-o questionMark"/>
+            </OverlayTrigger>
+
+          </h5>
+
+
+          <BarChart width={392} height={200} data={data} layout="vertical">
 
             <XAxis stroke="black" type="number" domain={[0, 400000]} tickFormatter={axisFormatter}/>
             <YAxis dataKey="name" stroke="black" type="category"/>
 
             <CartesianGrid strokeDasharray="3 3"/>
-            {/*<Tooltip/>*/}
-            {/*<Legend />*/}
 
-            <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label={<GraphLabel/>} layout="vertical" >
+            <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label={<GraphLabel/>} layout="vertical">
               {
                 data.map((entry, index) => (
                   <Cell fill={index === 0 ? '#2eadd3' : '#facd7a' } key={`cell-${index}`}/>
@@ -81,25 +95,25 @@ class Graph extends React.Component {
 
 
         </div>
-        </div>
+      </div>
 
-        );
-        }
-        }
+    );
+  }
+}
 
-        function mapStateToProps(state) {
-        return {
-        gridNumber: state.GridNumberStore.gridNumber,
-        gridNumber1: state.GridNumberStore.gridNumber1,
+function mapStateToProps(state) {
+  return {
+    gridNumber: state.GridNumberStore.gridNumber,
+    gridNumber1: state.GridNumberStore.gridNumber1,
 
-        isCompareMode: state.isCompare.isCompare,
-      }
-      }
+    isCompareMode: state.isCompare.isCompare,
+  }
+}
 
-        function mapDispachToProps(dispatch) {
-        return bindActionCreators(actionCreators, dispatch);
-      }
+function mapDispachToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
 
 
-        export default connect(mapStateToProps, mapDispachToProps)(Graph);
+export default connect(mapStateToProps, mapDispachToProps)(Graph);
 

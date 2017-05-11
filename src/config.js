@@ -53,9 +53,9 @@ export const Accessibility = true;
  * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
  */
 export const CorridorInfo = {
-  "A": {"name": "16", "color": "#555555", "id": "A" },
-  "B": {"name": "E3", "color": "#2eadd3", "id": "B" },
-  "C": {"name": "E5", "color": "#8d6aa8", "id": "C" },
+  "A": {"name": "16", "color": "#555555", "id": "A", fullName:"RTA #16 S. Claiborne"},
+  "B": {"name": "E3", "color": "#2eadd3", "id": "B",fullName:"JeT #E3 Kenner Local"},
+  "C": {"name": "E5", "color": "#8d6aa8", "id": "C", fullName:"JeT #E5 Causeway " },
 };
 
 export const BaselineBuses = {

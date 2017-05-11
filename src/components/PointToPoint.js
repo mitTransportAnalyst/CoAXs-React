@@ -9,7 +9,7 @@ import TopleftPanel from "./TopleftPanel/TopleftPanel"
 import RightMainPanelPTP from "./RightMainPanel/RightMainPanelPTP"
 import RouteMap from "./Map/RouteMap/RouteMap"
 import ScenarioMapPTP from "./Map/ScenarioMap/ScenarioMapPTP"
-import Navbar from "./Teaching/Navbar/Navbar"
+import NavbarPTP from "./Teaching/Navbar/NavbarPTP"
 import LoadingPage from "./LoadingPage/LoadingPage"
 import MapLegendPTP from "./Map/Legend/LegendPTP"
 import {FormControlID} from "../config"
@@ -40,7 +40,7 @@ class PointToPoint extends React.Component {
 
     return (
       <div className="page-home">
-        <Navbar/>
+        <NavbarPTP/>
         <TopleftPanel/>
         <MapLegendPTP/>
         {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}

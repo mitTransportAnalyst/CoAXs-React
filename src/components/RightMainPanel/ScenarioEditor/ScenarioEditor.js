@@ -38,38 +38,29 @@ class ScenarioEditor extends React.Component {
         </div>
 
 
-        {/*{ this.props.isOpen ? null : <div className="placeHolder"/> }*/}
 
 
         <div className="routesContainer">
-          {/*<label className="btn tiny" style={{backgroundColor: "grey", width: "100%"}}>*/}
-          {/*<i className="fa fa-level-down fa-flip-horizontal"></i>*/}
-          {/*</label>*/}
-
 
           {
             Object.values(corridorInfo).map((corridor) => {
               if (this.props.currentCorridor === corridor.id) {
                 return (
                   <div className="btn routeItem" key={corridor.id}
-                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color}}
+                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize:12}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
-                    Route {corridor.name}
+                    {corridor.fullName}
 
-                    {/*<i className="fa fa-bus"*/}
-                                       {/*style={{marginLeft: 12}}/> {Math.ceil(this.props.scorecardData[corridor.id])}*/}
                   </div>
                 )
               }
               else {
                 return (
                   <div className="btn routeItem" key={corridor.id}
-                       style={{"backgroundColor": corridor.color}}
+                       style={{"backgroundColor": corridor.color, fontSize:12}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
-                    Route {corridor.name}
+                    {corridor.fullName}
 
-                    {/*<i className="fa fa-bus"*/}
-                                       {/*style={{marginLeft: 12}}/> {Math.ceil(this.props.scorecardData[corridor.id])}*/}
                   </div>
                 )
 

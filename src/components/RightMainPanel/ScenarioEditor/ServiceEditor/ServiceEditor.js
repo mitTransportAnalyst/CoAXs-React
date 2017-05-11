@@ -149,8 +149,7 @@ class ServiceEditor extends React.Component {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
 
     const tooltipforHeadway = (
-      <Tooltip id="tooltipforHeadway"><strong>Refers to the amount of time between buses arriving at a stop (on average). Drag the slider to the right to increase the number of buses and reduce the amount of time between them.
-      </strong></Tooltip>
+      <Tooltip id="tooltipforHeadway"><strong>Refers to the average amount of time between buses at a stop</strong></Tooltip>
     );
     return (
       <div className="serviceEditorPanel">

@@ -33,7 +33,7 @@ class Scenario extends React.Component {
       isOpen: true,
       baseScenario: {},
       isCompareMode: false,
-      selectedScenario: 0,
+      selectedScenario: false,
       firedScenario: [],
       // TODO dynamic change
       baselineHeadwayTime: {A: 30, B: 24, C: 27}
@@ -75,7 +75,7 @@ class Scenario extends React.Component {
     this.props.isCompare(!this.state.isCompareMode);
     this.setState({
       isCompareMode: !this.state.isCompareMode,
-      selectedScenario: 1,
+      selectedScenario: !this.state.selectedScenario,
     })
   }
 
@@ -83,7 +83,7 @@ class Scenario extends React.Component {
     this.props.isCompare(!this.state.isCompareMode);
     this.setState({
       isCompareMode: !this.state.isCompareMode,
-      selectedScenario: 0,
+      selectedScenario: !this.state.selectedScenario,
     })
   }
 
@@ -143,10 +143,7 @@ class Scenario extends React.Component {
       "btn-default": !this.state.isCompareMode,
     });
 
-    // let scenario = this.props.newScenario.map((scenario, index) => {
-    //   return <ScenarioEntry data={scenario} index={index} key={index} name="scenario"
-    //                         isCompareMode={this.state.isCompareMode} selectScenario={this.selectScenario} selectNum = {this.state.selectedScenario}/>
-    // });
+
 
     return (
       <div className="scenarioDashboardPanel">
@@ -159,43 +156,10 @@ class Scenario extends React.Component {
           <span>Scenario Summary</span>
         </div>
 
-        {/*{ this.state.isOpen ?*/}
-        {/*<div className="placeHolder" onClick={this.handlePlaceHolder}>*/}
-        {/*<div className="bigText">*/}
-        {/*<i className="fa fa-random"/>*/}
-        {/*</div>*/}
-        {/*</div>*/}
-        {/*:*/}
-        {/*null*/}
-        {/*}*/}
-
-
         <div>
 
-          {/*<div className="btn-group btn-group-justified">*/}
-
-          {/*{this.state.isCompareMode ? <label className="btn tiny" style={{backgroundColor: "grey", color: "white", border:"3px solid #eec16f"}} onClick={this.handleClickCompare}><i*/}
-          {/*className="fa fa-balance-scale"/> Compare*/}
-          {/*</label> : <label className="btn" style={{backgroundColor: "grey", color: "white"}}*/}
-          {/*onClick={this.handleClickCompare}><i*/}
-          {/*className="fa fa-balance-scale"/> Compare*/}
-          {/*</label>}*/}
-
-
-          {/*<label className="btn" style={{backgroundColor: "grey", color: "white"}} onClick={this.handleUpdate}>*/}
-          {/*<i className="fa fa-plus-square"/> Update*/}
-          {/*</label>*/}
-
-
-          {/*</div>*/}
 
           <div className="scenariosTable">
-            {/*<div className="scenario" style={{position: "absolute", zIndex: 10, width: 24}}>*/}
-
-            {/*/!*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*!/*/}
-
-            {/*/!*<i className="fa fa-balance-scale" style={{position: "absolute", bottom: 40}}/>*!/*/}
-            {/*</div>*/}
 
 
             <div className="scenarioEntries">

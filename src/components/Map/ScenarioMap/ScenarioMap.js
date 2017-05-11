@@ -17,19 +17,12 @@ import GeojsonJeT from '../../../Data/busline/JeT.geojson'
 import GeojsonNORTA from '../../../Data/busline/NORTA.geojson'
 
 
-
-
 import Baseline from '../../../Data/scenario/Baseline.json'
-
-
-
 
 
 // TAUI
 import TransitiveMapLayer from './transitive-map-layer'
 import transitiveStyle from './transitive-style'
-
-
 
 
 import Transitive from 'transitive-js'
@@ -41,14 +34,11 @@ import Transitive from 'transitive-js'
 // import 'leaflet-transitivelayer'
 
 
-
-
 import uuid from 'uuid'
 // import Browsochrones from './NewBrowsochrones/lib'
 import Browsochrones from 'browsochrones'
 
 import debounce from 'debounce'
-
 
 
 //bind redux
@@ -57,7 +47,23 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
 //import configuration file
-import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo, isPTP, INIT_ORIGIN, INIT_DESTINATION, WORKER_VERSION, API_KEY_ID, API_KEY_SECRET, TRANSPORT_NETWORK_ID, BASE_URL, AUTH_URL, GRID_URL  } from '../../../config'
+import {
+  MapLat,
+  MapLng,
+  ZoomLevel,
+  Tile,
+  CorridorInfo,
+  isPTP,
+  INIT_ORIGIN,
+  INIT_DESTINATION,
+  WORKER_VERSION,
+  API_KEY_ID,
+  API_KEY_SECRET,
+  TRANSPORT_NETWORK_ID,
+  BASE_URL,
+  AUTH_URL,
+  GRID_URL
+} from '../../../config'
 
 
 /** how often will we allow the isochrone to update, in milliseconds */
@@ -79,7 +85,7 @@ class ScenarioMap extends React.Component {
       key: null,
       key2: null,
       loaded: false,
-      origin: {lat:MapLat , lng:MapLng},
+      origin: {lat: MapLat, lng: MapLng},
       destination: INIT_DESTINATION,
       originGrid: null,
 
@@ -144,8 +150,8 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 220,
-          scenario: {id: uuid.v4(),modifications:
-          Baseline.modifications
+          scenario: {
+            id: uuid.v4(), modifications: Baseline.modifications
           },
         }
       },
@@ -178,7 +184,7 @@ class ScenarioMap extends React.Component {
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
           monteCarloDraws: 220,
-          scenario: {id: uuid.v4(),modifications: Baseline.modifications},
+          scenario: {id: uuid.v4(), modifications: Baseline.modifications},
         }
       },
     };
@@ -188,7 +194,7 @@ class ScenarioMap extends React.Component {
     this.moveOrigin = this.moveOrigin.bind(this);
 
     this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
-    this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff,MAX_UPDATE_INTERVAL_MS);
+    this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff, MAX_UPDATE_INTERVAL_MS);
     this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
     this.updateScneario = this.updateScneario.bind(this);
 
@@ -200,15 +206,14 @@ class ScenarioMap extends React.Component {
   }
 
 
-
   async changeIsochroneCutoff(isochroneCutoff) {
     isochroneCutoff = parseInt(isochroneCutoff);
 
-    if (this.props.isCompareMode){
+    if (this.props.isCompareMode && this.state.isochrone2 !== null) {
       var data = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
     }
     var data1 = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
-    this.setState({...this.state, ...data,...data1, isochroneCutoff})
+    this.setState({...this.state, ...data, ...data1, isochroneCutoff})
   };
 
 
@@ -273,7 +278,6 @@ class ScenarioMap extends React.Component {
           this.bs.setQuery(metadata),
 
 
-
           this.bs2.setStopTrees(stopTrees.slice(0)),
           this.bs.setStopTrees(stopTrees.slice(0)),
 
@@ -296,16 +300,16 @@ class ScenarioMap extends React.Component {
 
 
   moveOrigin(e) {
-    if (this.props.isCompareMode){
+    if (this.props.isCompareMode) {
       let origin = e.target.getLatLng();
       console.log(origin)
-      let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
+      let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
       this.setState({
         ...this.state,
         originGrid: {x, y}
       });
 
-      let {staticRequest, accessToken, isochroneCutoff, } = this.state;
+      let {staticRequest, accessToken, isochroneCutoff,} = this.state;
 
       this.setState({
         ...this.state,
@@ -333,7 +337,7 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin({data: buff,point:{x, y}});
+          await this.bs2.setOrigin({data: buff, point: {x, y}});
           await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
@@ -360,9 +364,9 @@ class ScenarioMap extends React.Component {
     let origin = e.target.getLatLng();
     console.log(origin)
 
-    let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
+    let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
 
-    console.log({x,y})
+    console.log({x, y})
     let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
     this.setState({
       ...this.state,
@@ -397,9 +401,9 @@ class ScenarioMap extends React.Component {
     }).then(res => res.arrayBuffer())
       .then(async(buff) => {
         console.log("generate surface");
-        this.props.changeProgress(0.8);
+        this.props.changeProgress(0.6);
 
-        await this.bs.setOrigin({data: buff,point:{x, y}});
+        await this.bs.setOrigin({data: buff, point: {x, y}});
         await this.bs.generateSurface({gridId: 'jobs'});
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
@@ -428,9 +432,9 @@ class ScenarioMap extends React.Component {
   };
 
   updateScneario() {
-    if (this.props.isCompareMode){
+    if (this.props.isCompareMode) {
       let origin = this.state.origin;
-      let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
+      let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
       let {staticRequest, accessToken, isochroneCutoff} = this.state;
 
       this.setState({
@@ -459,7 +463,7 @@ class ScenarioMap extends React.Component {
       }).then(res => res.arrayBuffer())
         .then(async(buff) => {
           console.log("generate surface");
-          await this.bs2.setOrigin({data: buff, point:{x, y}});
+          await this.bs2.setOrigin({data: buff, point: {x, y}});
           await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
@@ -484,7 +488,7 @@ class ScenarioMap extends React.Component {
 
 
     let origin = this.state.origin;
-    let {x, y} = this.bs.latLonToOriginPoint({lat:origin.lat, lon:origin.lng});
+    let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
     let {staticRequestBase, accessToken, isochroneCutoff} = this.state;
 
     this.setState({
@@ -515,9 +519,9 @@ class ScenarioMap extends React.Component {
     }).then(res => res.arrayBuffer())
       .then(async(buff) => {
         console.log("generate surface");
-        this.props.changeProgress(0.8);
+        this.props.changeProgress(0.6);
 
-        await this.bs.setOrigin({data: buff,point:{x, y}});
+        await this.bs.setOrigin({data: buff, point: {x, y}});
         await this.bs.generateSurface({gridId: 'jobs'});
         let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
@@ -549,16 +553,15 @@ class ScenarioMap extends React.Component {
   /** get an isochrone and an accessibility figure */
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
     // console.log(isochroneCutoff, isBased);
-    if (isBased){
+    if (isBased) {
       let [accessibility2, isochrone2] = await Promise.all([
         this.bs2.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
-
         this.bs2.getIsochrone({cutoff: isochroneCutoff})
       ]);
       return {accessibility2, isochrone2, key2: uuid.v4()}
     }
 
-    else{
+    else {
       let [accessibility, isochrone] = await Promise.all([
         this.bs.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
         this.bs.getIsochrone({cutoff: isochroneCutoff})
@@ -569,13 +572,17 @@ class ScenarioMap extends React.Component {
   }
 
 
-
-
-  componentWillMount(){
+  componentWillMount() {
     let mode = false;
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'GET', })
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC', {method: 'GET',})
       .then(res => res.json())
-      .then(res => {if (res[0].count % 2 === 0){  mode = false; } else {  mode = true;} })
+      .then(res => {
+        if (res[0].count % 2 === 0) {
+          mode = false;
+        } else {
+          mode = true;
+        }
+      })
       .then(this.setState({...this.state, isPTP: mode}));
   }
 
@@ -584,11 +591,10 @@ class ScenarioMap extends React.Component {
 
   }
 
-  componentDidUpdate(nextState){
+  componentDidUpdate(nextState) {
     if (this.state.accessibility !== nextState.accessibility) {
-      this.props.changeGridNumber([this.state.accessibility,this.state.accessibility2])
+      this.props.changeGridNumber([this.state.accessibility, this.state.accessibility2])
     }
-
   }
 
 
@@ -602,9 +608,21 @@ class ScenarioMap extends React.Component {
       staticRequest.request.scenario.modifications = nextProps.fireScenario;
       staticRequest.request.scenario.id = uuid.v4();
 
-      // staticRequest.jobId = uuid.v4();
       this.setState({
         staticRequest,
+      });
+    }
+
+    if (this.props.isCompareMode !== nextProps.isCompareMode) {
+      this.setState({
+        isochrone: null,
+        isochrone2: null,
+        transitive: null,
+        transitive2: null,
+        key: null,
+        key2: null,
+        accessibility: null,
+        accessibility2: null,
       });
     }
 
@@ -614,19 +632,19 @@ class ScenarioMap extends React.Component {
   }
 
   render() {
-    let {transitive, transitive2, transitiveLayer, isochrone, isochrone2, key, key2, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, accessibility2, isochroneCutoff} = this.state;
+    let {isochrone, isochrone2, key, key2, origin} = this.state;
 
     const position = [MapLat, MapLng];
     return (
       <div className={s.map}>
         <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
-          <ZoomControl position="bottomleft" />
+          <ZoomControl position="bottomleft"/>
 
           {/*{transitive &&*/}
           {/*<TransitiveMapLayer*/}
-            {/*data={transitive}*/}
-            {/*styles={transitiveStyle}*/}
-            {/*key={`transitive-${key}`}*/}
+          {/*data={transitive}*/}
+          {/*styles={transitiveStyle}*/}
+          {/*key={`transitive-${key}`}*/}
           {/*/>*/}
           {/*}*/}
 
@@ -637,45 +655,48 @@ class ScenarioMap extends React.Component {
           />
 
 
-          <GeoJson data={GeojsonJeT} key = {"JeT"} style={{
-            color : "#f1d3e9",
+          <GeoJson data={GeojsonJeT} key={"JeT"} style={{
+            color: "#f1d3e9",
             weight: 1,
-            opacity: 0.5 }}
+            opacity: 0.5
+          }}
           />
 
 
-          <GeoJson data={GeojsonNORTA} key = {"NORTA"} style={{
-            color : "#f1d3e9",
+          <GeoJson data={GeojsonNORTA} key={"NORTA"} style={{
+            color: "#f1d3e9",
             weight: 1,
-            opacity: 0.3 }}
+            opacity: 0.3
+          }}
           />
-
-
 
 
           { isochrone && <GeoJson
-            style={{      stroke      : true,
-              fillColor   : '#89cff0',
-              color : '#45b3e7',
-              weight      : 1,
-              fillOpacity : 0.25,
-              opacity     : 1}}
+            style={{
+              stroke: true,
+              fillColor: '#89cff0',
+              color: '#45b3e7',
+              weight: 1,
+              fillOpacity: 0.25,
+              opacity: 1
+            }}
             data={isochrone}
             key={`iso-${key}`}
           />}
 
 
           { this.props.isCompareMode && isochrone2 && <GeoJson
-            style={{        stroke      : true,
-              fillColor   : '#FDB813',
-              color       : '#F68B1F',
-              weight      : 1,
-              fillOpacity : 0.25,
-              opacity     : 1,}}
+            style={{
+              stroke: true,
+              fillColor: '#FDB813',
+              color: '#F68B1F',
+              weight: 1,
+              fillOpacity: 0.25,
+              opacity: 1,
+            }}
             data={isochrone2}
             key={`iso-${key2}`}
           />}
-
 
 
           <Marker
@@ -686,76 +707,75 @@ class ScenarioMap extends React.Component {
           />
 
           {/*<Marker*/}
-            {/*position={destination}*/}
-            {/*draggable = {true}*/}
-            {/*onDragend={this.moveDestination}*/}
-            {/*ref='markerDestination'*/}
+          {/*position={destination}*/}
+          {/*draggable = {true}*/}
+          {/*onDragend={this.moveDestination}*/}
+          {/*ref='markerDestination'*/}
           {/*/>*/}
-
-
-
-
-
-
-
 
 
           {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
-            <GeoJson data={Geojson16A} key = {"16A1"} style={{
-              color : CorridorInfo["A"].color,
+            <GeoJson data={Geojson16A} key={"16A1"} style={{
+              color: CorridorInfo["A"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
 
           {
             this.props.currentCorridor != "A" && this.props.currentBusline.A === "16A" &&
-            <GeoJson data={Geojson16A} key = {"16A2"} style={{
-              color : CorridorInfo["A"].color,
+            <GeoJson data={Geojson16A} key={"16A2"} style={{
+              color: CorridorInfo["A"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
 
           {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16B" &&
-            <GeoJson data={Geojson16B} key = {"16B1"} style={{
-              color : CorridorInfo["A"].color,
+            <GeoJson data={Geojson16B} key={"16B1"} style={{
+              color: CorridorInfo["A"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
 
           {
             this.props.currentCorridor != "A" && this.props.currentBusline.A === "16B" &&
-            <GeoJson data={Geojson16B} key = {"16B2"} style={{
-              color : CorridorInfo["A"].color,
+            <GeoJson data={Geojson16B} key={"16B2"} style={{
+              color: CorridorInfo["A"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
 
           {
             this.props.currentCorridor === "A" && this.props.currentBusline.A === "16C" &&
-            <GeoJson data={Geojson16C} key = {"16C1"} style={{
-              color : CorridorInfo["A"].color,
+            <GeoJson data={Geojson16C} key={"16C1"} style={{
+              color: CorridorInfo["A"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
 
           {
             this.props.currentCorridor != "A" && this.props.currentBusline.A === "16C" &&
-            <GeoJson data={Geojson16C} key = {"16C2"} style={{
-              color : CorridorInfo["A"].color,
+            <GeoJson data={Geojson16C} key={"16C2"} style={{
+              color: CorridorInfo["A"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
@@ -763,10 +783,11 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3A" &&
-            <GeoJson data={GeojsonE3A} key = {"E3A1"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3A} key={"E3A1"} style={{
+              color: CorridorInfo["B"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
@@ -774,20 +795,22 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3A" &&
-            <GeoJson data={GeojsonE3A} key = {"E3A2"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3A} key={"E3A2"} style={{
+              color: CorridorInfo["B"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
 
           {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3B" &&
-            <GeoJson data={GeojsonE3B} key = {"E3B1"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3B} key={"E3B1"} style={{
+              color: CorridorInfo["B"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
@@ -795,10 +818,11 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3B" &&
-            <GeoJson data={GeojsonE3B} key = {"E3B2"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3B} key={"E3B2"} style={{
+              color: CorridorInfo["B"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
@@ -806,10 +830,11 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3C" &&
-            <GeoJson data={GeojsonE3C} key = {"E3C1"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3C} key={"E3C1"} style={{
+              color: CorridorInfo["B"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
@@ -817,10 +842,11 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3C" &&
-            <GeoJson data={GeojsonE3C} key = {"E3C2"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3C} key={"E3C2"} style={{
+              color: CorridorInfo["B"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
@@ -828,10 +854,11 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3D" &&
-            <GeoJson data={GeojsonE3D} key = {"E3D1"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3D} key={"E3D1"} style={{
+              color: CorridorInfo["B"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
@@ -839,22 +866,23 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3D" &&
-            <GeoJson data={GeojsonE3D} key = {"E3D2"} style={{
-              color : CorridorInfo["B"].color,
+            <GeoJson data={GeojsonE3D} key={"E3D2"} style={{
+              color: CorridorInfo["B"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
 
 
-
           {
             this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5A" &&
-            <GeoJson data={GeojsonE5A} key = {"E5A1"} style={{
-              color : CorridorInfo["C"].color,
+            <GeoJson data={GeojsonE5A} key={"E5A1"} style={{
+              color: CorridorInfo["C"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
@@ -862,10 +890,11 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5A" &&
-            <GeoJson data={GeojsonE5A} key = {"E5A2"} style={{
-              color : CorridorInfo["C"].color,
+            <GeoJson data={GeojsonE5A} key={"E5A2"} style={{
+              color: CorridorInfo["C"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
@@ -873,10 +902,11 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5B" &&
-            <GeoJson data={GeojsonE5B} key = {"E5B1"} style={{
-              color : CorridorInfo["C"].color,
+            <GeoJson data={GeojsonE5B} key={"E5B1"} style={{
+              color: CorridorInfo["C"].color,
               weight: 8,
-              opacity: 1 }}
+              opacity: 1
+            }}
             />
 
           }
@@ -884,14 +914,14 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5B" &&
-            <GeoJson data={GeojsonE5B} key = {"E5B2"} style={{
-              color : CorridorInfo["C"].color,
+            <GeoJson data={GeojsonE5B} key={"E5B2"} style={{
+              color: CorridorInfo["C"].color,
               weight: 5,
-              opacity: 0.5 }}
+              opacity: 0.5
+            }}
             />
 
           }
-
 
 
         </Map>
@@ -903,7 +933,7 @@ class ScenarioMap extends React.Component {
 function mapStateToProps(state) {
   return {
     currentTimeFilter: state.timeFilterStore.currentTimeFilter,
-    fireScenario : state.fireUpdate.fireScenario,
+    fireScenario: state.fireUpdate.fireScenario,
     isCompareMode: state.isCompare.isCompare,
     currentCorridor: state.reducer.currentCor,
     currentBusline: state.BuslineSelectedStore,

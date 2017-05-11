@@ -30,7 +30,7 @@ class ScenarioCreationModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
 
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/K2gN4CGTOVQ" frameBorder="0"
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/G5JneWVO6Y0" frameBorder="0"
                     allowFullScreen></iframe>
             <hr />
 
@@ -39,26 +39,23 @@ class ScenarioCreationModal extends React.Component {
 
 
             <ul>
-              <li><strong>1 Choose an alternative for each route:</strong> Select each route (16, E3, and E5), and then,
-                choose which alternative of that route you’d like to test. Click on each alternative to see it on the
-                map.
+              <li><strong>1 Choose an alternative for each route:</strong> Select each route ( RTA #16 S. Claiborne,
+                JeT #E3 Kenner Local, JeT #E5 Causeway), and then, choose which alternative of that route you’d like to
+                test. Click on each alternative to see where it goes on the map.
+
               </li>
-              <li><strong>2 Choose a headway:</strong> Move the slider on the right hand side for each alternative that
-                you’d like to change. Moving the slider to the right means the bus will come more often. See how many
-                buses that headway will require by looking at the number next to the bus icon.
+              <li><strong>2 Change the time between buses:</strong> For each alternative, move the slider on the right hand side.
+                Moving the slider to the right means the bus will come more often. You can also see how many buses that
+                will require in the "Scenario Summary".
               </li>
-              <li><strong>3 Compare your scenario:</strong> Once you have the sliders where you want them for each
-                route, click “save scenario”, then “update” to see how this compares to today’s service.
+              <li><strong>3 Compare your scenario:</strong> Once you’ve created the scenario you want to test, click “Update” to see how this compares to today’s service.
               </li>
-              <li><strong>4 Explore your scenario:</strong> Move the blue pin around to see how your scenario would
-                impact different parts of the city, and change the time slider to see how benefits change.
+              <li><strong>4 Explore your scenario:</strong> Just like before, change the time slider to see how access to jobs changes, and you can also move the blue pin around to see how your scenario would impact different parts of the city.
               </li>
 
             </ul>
-            <p>Quick tip #1: in general, placing the pin near an end of one of the transit routes you’re upgrading in
-              the scenario will enable you to see the greatest impacts. Though sometimes, benefits may be significant
-              not just for communities at the ends of lines; use your intuition and knowledge of the transit network in
-              your city to explore where the impacts might be the most significant.</p>
+            <p>
+              <strong>Quick tip:</strong> in general, placing the pin near an end of one of the transit routes you’re upgrading in the scenario will enable you to see the greatest impacts. Though sometimes, benefits may be significant not just for communities at the ends of lines; use your intuition and knowledge of the transit network in your city to explore where the impacts might be the most significant.</p>
 
           </Modal.Body>
           <Modal.Footer>

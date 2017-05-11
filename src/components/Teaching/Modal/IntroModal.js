@@ -29,20 +29,18 @@ class IntroModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
 
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/LWxG2WIz76E" frameBorder="0"
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/mL9pXGcHHOI" frameBorder="0"
                     allowFullScreen></iframe>
 
             <hr />
 
             {/*<h4>Overflowing text to show scroll behavior</h4>*/}
             <ul>
-              <li>1 Drag the blue pin to your home or a place you know well, and wait for a few seconds.</li>
-              <li>2 Drag the time slider in the lower left hand corner to see how far you can travel in different time
-                intervals. Consider how this compares with your experience of your most frequent trips.
+              <li>1 Drag the blue pin to your home or a place you know well, and wait for a few seconds. </li>
+              <li>2 Drag the time slider on the right hand side to see how far you can travel in different amounts of time. Consider how this compares with your experience of your most frequent trips.
               </li>
-              <li>3 Notice how your access to jobs changes by looking at the graph on the left side of the screen.</li>
-              <li>4 Once you’re finished exploring, click the navigation bar that says “Create your own scenario” to
-                move on to the next step.
+              <li>3 Notice how many jobs you can access at different time cutoffs by looking at the graph on the right hand side of the screen.</li>
+              <li>4 Once you’re finished exploring, click the button on the right hand side that says “Click here to go to Step 3” to move on to the next step.
               </li>
 
             </ul>
