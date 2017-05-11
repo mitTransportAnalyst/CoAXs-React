@@ -71,7 +71,7 @@ src
 │   ├── NotFound.js
 │   └── TopleftPanel
 │       ├── TopleftPanel.css
-│       └── PreSurvey.js
+│       └── PreSurveyAccess.js
 ├── config.js
 ├── img
 │   ├── alignment.jpg

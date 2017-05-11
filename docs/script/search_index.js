@@ -205,8 +205,8 @@ window.esdocSearchIndex = [
   ],
   [
     "coaxs-react/src/components/topleftpanel/topleftpanel.js~lefttoppanel",
-    "class/src/components/TopleftPanel/PreSurvey.js~lefttopPanel.html",
-    "<span>lefttopPanel</span> <span class=\"search-result-import-path\">CoAXs-React/src/components/TopleftPanel/PreSurvey.js</span>",
+    "class/src/components/TopleftPanel/PreSurveyAccess.js~lefttopPanel.html",
+    "<span>lefttopPanel</span> <span class=\"search-result-import-path\">CoAXs-React/src/components/TopleftPanel/PreSurveyAccess.js</span>",
     "class"
   ],
   [
@@ -901,14 +901,14 @@ window.esdocSearchIndex = [
   ],
   [
     "src/components/topleftpanel/topleftpanel.js",
-    "file/src/components/TopleftPanel/PreSurvey.js.html",
-    "src/components/TopleftPanel/PreSurvey.js",
+    "file/src/components/TopleftPanel/PreSurveyAccess.js.html",
+    "src/components/TopleftPanel/PreSurveyAccess.js",
     "file"
   ],
   [
     "src/components/topleftpanel/topleftpanel.js~lefttoppanel#render",
-    "class/src/components/TopleftPanel/PreSurvey.js~lefttopPanel.html#instance-method-render",
-    "src/components/TopleftPanel/PreSurvey.js~lefttopPanel#render",
+    "class/src/components/TopleftPanel/PreSurveyAccess.js~lefttopPanel.html#instance-method-render",
+    "src/components/TopleftPanel/PreSurveyAccess.js~lefttopPanel#render",
     "method"
   ],
   [

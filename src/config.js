@@ -65,6 +65,11 @@ export const BaselineBuses = {
 };
 
 
+export const FormControlID = {
+  ptpEntry: "control28805034",
+  singleEntry: "control28770612",
+  exit: "control28766436",
+};
 
 
 //Browsochrone configuration

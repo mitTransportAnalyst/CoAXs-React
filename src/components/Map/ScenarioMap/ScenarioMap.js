@@ -581,14 +581,6 @@ class ScenarioMap extends React.Component {
 
   componentDidMount() {
     this.fetchMetadata();
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'GET', })
-      .then(res => res.json())
-      .then(res => {this.setState({...this.state, isPTP: res[0].count % 2 === 1}); console.log(this.state.isPTP) })
-      .then(fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'PUT',    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }, body:JSON.stringify({"$inc":{"count":1}})}));
-    //
 
   }
 

@@ -10,6 +10,7 @@ import IntroModal from "../Modal/IntroModal"
 import ScenarioCreationModal from "../Modal/ScenarioCreationModal"
 import ExitSurveyModal from "../Modal/ExitSurveyModal"
 import PreSurveyModal from "../Modal/PreSurveyModal"
+import {FormControlID} from "../../../config"
 
 
 //import redux
@@ -25,12 +26,12 @@ class Navbar extends React.Component {
   constructor(){
     super();
     this.state = {
-      showIntro: false,
+      showIntro: true,
       showScenario: false,
       showScenarioPopup: false,
       showSurvey: false,
       showExitSurveyPopup: false,
-      showPreSurvey: true,
+      showPreSurvey: false,
       show: false,
     };
     this.closeScenario = this.closeScenario.bind(this);
@@ -97,7 +98,14 @@ class Navbar extends React.Component {
 
   handleClickSurvey(){
     this.props.doneExitSurvey(" ");
-    this.setState({ showSurvey: true });
+
+
+    let exitform = `https://www.123contactform.com/sf.php?s=123contactform-2676941&${FormControlID.exit}=${this.props.emailStore}`;
+
+    window.location.href=exitform;
+
+    // this.setState({ showSurvey: true });
+
   }
 
   handleClickPreSurvey(){
@@ -236,6 +244,7 @@ function mapStateToProps(state) {
     isdoneExitSurvey: state.navState.isdoneExitSurvey,
     isdonePreSurvey: state.navState.isdonePreSurvey,
     showCompareScenarioModal: state.showCompareScenarioModal,
+    emailStore: state.emailStore,
   }
 }
 

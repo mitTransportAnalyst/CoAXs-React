@@ -12,6 +12,7 @@ import ScenarioMapPTP from "./Map/ScenarioMap/ScenarioMapPTP"
 import Navbar from "./Teaching/Navbar/Navbar"
 import LoadingPage from "./LoadingPage/LoadingPage"
 import MapLegendPTP from "./Map/Legend/LegendPTP"
+import {FormControlID} from "../config"
 
 
 //import redux
@@ -24,6 +25,13 @@ import * as actionCreators from '../reducers/action';
  */
 
 class PointToPoint extends React.Component {
+  componentDidMount(){
+    //TODO make make it in config.js
+    if (this.props.location.query[FormControlID.ptpEntry] !== undefined){
+      this.props.addEmail(this.props.location.query[FormControlID.ptpEntry])
+    }
+  }
+
 
   render() {
 
@@ -36,11 +44,6 @@ class PointToPoint extends React.Component {
         <TopleftPanel/>
         <MapLegendPTP/>
         {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
-        {/*change map when click subhead*/}
-        {/*{this.props.currentMap ? <RouteMap /> : <ScenarioMap />}*/}
-        {/*<div className={this.props.currentMap ? "" : 'hidden2' }>*/}
-        {/*<RouteMap  />*/}
-        {/*</div>*/}
         <div className={this.props.currentMap ? 'hidden2' : ""}>
           <ScenarioMapPTP />
         </div>

@@ -169,5 +169,12 @@ export function fireCompareScenarioModal(res) {
   }
 }
 
+export function addEmail(res) {
+  return {
+    type: "addEmail",
+    res
+  }
+}
+
 
 

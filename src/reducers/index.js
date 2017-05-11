@@ -246,6 +246,14 @@ function showCompareScenarioModal(state = false, action) {
   }
 }
 
+function emailStore(state = null, action) {
+  switch (action.type) {
+    case 'addEmail':
+      return action.res;
+    default:
+      return state
+  }
+}
 
 
 export const reducers = combineReducers({
@@ -265,4 +273,5 @@ export const reducers = combineReducers({
   ScorecardData,
   HeadwayTime,
   showCompareScenarioModal,
+  emailStore,
 });
