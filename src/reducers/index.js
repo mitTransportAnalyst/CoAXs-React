@@ -14,7 +14,7 @@ import {reducer as formReducer} from "redux-form";
  * @type {object}
  * @property {string} currentCor - initial clicked corridor {number} currentMap - initial map displayed 0: scenario map 1: route map
  */
-const initialState = {currentCor: "A", currentMap: 0};
+const initialState = {currentCor: "A"};
 
 
 /**
@@ -27,14 +27,7 @@ function reducer(state = initialState, action) {
     case 'clickCorridor':
       return {
         ...state,
-        // "currentCor": JSON.parse(action.res)
         "currentCor": action.res
-      };
-    case 'changeMap':
-      return {
-        ...state,
-        // "currentCor": JSON.parse(action.res)
-        "currentMap": action.res
       };
     default:
       return state
@@ -49,40 +42,36 @@ function reducer(state = initialState, action) {
 function scenarioStore(state = [{
   A: {
     headway: 0,
-    alternative: "16A"
+    speed: 0
   },
   B: {
     headway: 0,
-    alternative: "E3A"
+    speed: 0
 
   },
   C: {
     headway: 0,
-    alternative: "E5A"
-
+    speed: 0
   },
 }, {
   A: {
     headway: 0,
-    alternative: "16A"
+    speed: 0
   },
   B: {
     headway: 0,
-    alternative: "E3A"
+    speed: 0
 
   },
   C: {
     headway: 0,
-    alternative: "E5A"
+    speed: 0
 
   },
 }], action) {
   switch (action.type) {
     case 'saveScenario':
-
       return [state[0], action.res];
-    // "currentCor": JSON.parse(action.res)
-
     default:
       return state
   }
@@ -270,7 +259,6 @@ export const reducers = combineReducers({
   navState,
   BuslineSelectedStore,
   loadingProgress,
-  ScorecardData,
   HeadwayTime,
   showCompareScenarioModal,
   emailStore,

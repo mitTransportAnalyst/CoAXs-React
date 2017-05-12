@@ -9,17 +9,10 @@ import {divIcon} from 'leaflet';
 
 import s from "./ScenarioMap.css"
 import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo} from "../../../config"
-import Geojson16A from '../../../Data/busline/16A.geojson'
-import Geojson16B from '../../../Data/busline/16B.geojson'
-import Geojson16C from '../../../Data/busline/16C.geojson'
-import GeojsonE3A from '../../../Data/busline/E3A.geojson'
-import GeojsonE3B from '../../../Data/busline/E3B.geojson'
-import GeojsonE3C from '../../../Data/busline/E3C.geojson'
-import GeojsonE3D from '../../../Data/busline/E3D.geojson'
-import GeojsonE5A from '../../../Data/busline/E5A.geojson'
-import GeojsonE5B from '../../../Data/busline/E5B.geojson'
-import GeojsonJeT from '../../../Data/busline/JeT.geojson'
-import GeojsonNORTA from '../../../Data/busline/NORTA.geojson'
+import GeojsonVanNess from '../../../Data/busline/vanNess.geojson'
+import GeojsonGeary from '../../../Data/busline/geary.geojson'
+import GeojsonGeneva from '../../../Data/busline/geneva.geojson'
+
 
 import Baseline from '../../../Data/scenario/Baseline.json'
 
@@ -27,22 +20,12 @@ import Baseline from '../../../Data/scenario/Baseline.json'
 // TAUI
 import TransitiveMapLayer from './transitive-map-layer'
 import transitiveStyle from './transitive-style'
-
-
 import Transitive from 'transitive-js'
-// import 'leaflet-transitivelayer'
-
-// old browsochrone example
-//import TransitiveLayer from './transitive-layer'
-//import transitiveStyle from './transitive-style'
-// import 'leaflet-transitivelayer'
 
 
 import uuid from 'uuid'
-// import Browsochrones from './NewBrowsochrones/lib'
 import Browsochrones from 'browsochrones'
 import debounce from 'debounce'
-import debug from 'debug'
 
 
 //bind redux
@@ -95,7 +78,7 @@ class ScenarioMapPTP extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-18',
+          date: '2017-05-09',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -127,7 +110,7 @@ class ScenarioMapPTP extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-18',
+          date: '2017-05-09',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -163,7 +146,7 @@ class ScenarioMapPTP extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-18',
+          date: '2017-05-09',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -1134,21 +1117,6 @@ class ScenarioMapPTP extends React.Component {
           />
 
 
-          <GeoJson data={GeojsonJeT} key={"JeT"} style={{
-            color: "#f1d3e9",
-            weight: 1,
-            opacity: 0.5
-          }}
-          />
-
-
-          <GeoJson data={GeojsonNORTA} key={"NORTA"} style={{
-            color: "#f1d3e9",
-            weight: 1,
-            opacity: 0.3
-          }}
-          />
-
 
           <Marker
             position={origin}
@@ -1168,8 +1136,8 @@ class ScenarioMapPTP extends React.Component {
           />
 
           {
-            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
-            <GeoJson data={Geojson16A} key={"16A1"} style={{
+            this.props.currentCorridor === "A" &&
+            <GeoJson data={GeojsonVanNess} key={"VanNess"} style={{
               color: CorridorInfo["A"].color,
               weight: 8,
               opacity: 1
@@ -1179,52 +1147,8 @@ class ScenarioMapPTP extends React.Component {
           }
 
           {
-            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16A" &&
-            <GeoJson data={Geojson16A} key={"16A2"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16B" &&
-            <GeoJson data={Geojson16B} key={"16B1"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16B" &&
-            <GeoJson data={Geojson16B} key={"16B2"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16C" &&
-            <GeoJson data={Geojson16C} key={"16C1"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16C" &&
-            <GeoJson data={Geojson16C} key={"16C2"} style={{
+            this.props.currentCorridor != "A" &&
+            <GeoJson data={GeojsonVanNess} key={"VanNess2"} style={{
               color: CorridorInfo["A"].color,
               weight: 5,
               opacity: 0.5
@@ -1235,8 +1159,8 @@ class ScenarioMapPTP extends React.Component {
 
 
           {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3A" &&
-            <GeoJson data={GeojsonE3A} key={"E3A1"} style={{
+            this.props.currentCorridor === "B" &&
+            <GeoJson data={GeojsonGeary} key={"Geary"} style={{
               color: CorridorInfo["B"].color,
               weight: 8,
               opacity: 1
@@ -1247,31 +1171,8 @@ class ScenarioMapPTP extends React.Component {
 
 
           {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3A" &&
-            <GeoJson data={GeojsonE3A} key={"E3A2"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3B" &&
-            <GeoJson data={GeojsonE3B} key={"E3B1"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3B" &&
-            <GeoJson data={GeojsonE3B} key={"E3B2"} style={{
+            this.props.currentCorridor != "B" &&
+            <GeoJson data={GeojsonGeary} key={"Geary2"} style={{
               color: CorridorInfo["B"].color,
               weight: 5,
               opacity: 0.5
@@ -1282,56 +1183,8 @@ class ScenarioMapPTP extends React.Component {
 
 
           {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3C" &&
-            <GeoJson data={GeojsonE3C} key={"E3C1"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3C" &&
-            <GeoJson data={GeojsonE3C} key={"E3C2"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3D" &&
-            <GeoJson data={GeojsonE3D} key={"E3D1"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3D" &&
-            <GeoJson data={GeojsonE3D} key={"E3D2"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5A" &&
-            <GeoJson data={GeojsonE5A} key={"E5A1"} style={{
+            this.props.currentCorridor === "C" &&
+            <GeoJson data={GeojsonGeneva} key={"Geneva"} style={{
               color: CorridorInfo["C"].color,
               weight: 8,
               opacity: 1
@@ -1342,32 +1195,8 @@ class ScenarioMapPTP extends React.Component {
 
 
           {
-            this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5A" &&
-            <GeoJson data={GeojsonE5A} key={"E5A2"} style={{
-              color: CorridorInfo["C"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5B" &&
-            <GeoJson data={GeojsonE5B} key={"E5B1"} style={{
-              color: CorridorInfo["C"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5B" &&
-            <GeoJson data={GeojsonE5B} key={"E5B2"} style={{
+            this.props.currentCorridor != "C" &&
+            <GeoJson data={GeojsonGeneva} key={"Geneva2"} style={{
               color: CorridorInfo["C"].color,
               weight: 5,
               opacity: 0.5

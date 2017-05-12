@@ -5,8 +5,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import {GeoJson} from 'react-leaflet';
-import ProposedData from './proposed.geojson'
-import TrunkData from './trunks.geojson'
 import CorridorData from './corridors.json'
 
 import {CorridorInfo} from '../config'

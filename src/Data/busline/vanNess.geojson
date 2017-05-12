@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "Name": "Van Ness", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": 1, "extrude": -1, "visibility": -1, "drawOrder": null, "icon": null }, "geometry": { "type": "LineString", "coordinates": [ [ -122.4187017, 37.7731996, 0.0 ], [ -122.4192488, 37.7750822, 0.0 ], [ -122.4203109, 37.7803059, 0.0 ], [ -122.4211156, 37.7842785, 0.0 ], [ -122.4217916, 37.787666, 0.0 ], [ -122.4224567, 37.7909853, 0.0 ], [ -122.4229073, 37.7933126, 0.0 ], [ -122.4242485, 37.7997982, 0.0 ], [ -122.4244255, 37.8007053, 0.0 ], [ -122.4245596, 37.8013411, 0.0 ] ] } }
+]
+}

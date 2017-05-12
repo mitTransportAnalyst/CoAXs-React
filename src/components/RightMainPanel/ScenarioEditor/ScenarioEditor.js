@@ -28,16 +28,11 @@ class ScenarioEditor extends React.Component {
       <div className="ScenarioEditorCol">
 
 
-        {/*<div className="placeholder">*/}
-        {/*</div>*/}
-
 
         <div className="colHead">
           <i className="fa fa-pencil-square-o"/>
-          Service Editor - Editing Route {CorridorInfo[this.props.currentCorridor].name}
+          Service Editor - Editing Corridor {CorridorInfo[this.props.currentCorridor].fullName}
         </div>
-
-
 
 
         <div className="routesContainer">
@@ -47,7 +42,7 @@ class ScenarioEditor extends React.Component {
               if (this.props.currentCorridor === corridor.id) {
                 return (
                   <div className="btn routeItem" key={corridor.id}
-                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize:12}}
+                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize: 14}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}
 
@@ -57,7 +52,7 @@ class ScenarioEditor extends React.Component {
               else {
                 return (
                   <div className="btn routeItem" key={corridor.id}
-                       style={{"backgroundColor": corridor.color, fontSize:12}}
+                       style={{"backgroundColor": corridor.color, fontSize: 14}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}
 
@@ -71,7 +66,6 @@ class ScenarioEditor extends React.Component {
 
         </div>
 
-        <RouteTable/>
         <ServiceEditor/>
 
       </div>
@@ -83,8 +77,6 @@ class ScenarioEditor extends React.Component {
 function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
-    scorecardData: state.ScorecardData,
-    isOpen: state.reducer.currentMap,
   }
 }
 

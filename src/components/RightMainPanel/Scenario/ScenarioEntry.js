@@ -19,11 +19,6 @@ class ScenarioEntry extends React.Component {
 
   render() {
 
-    let totalbuses = 0;
-    for (let key in this.props.scorecardData) {
-      totalbuses += Math.ceil(this.props.scorecardData[key])
-    }
-
 
     const tooltipforAlter = (
       <Tooltip id="tooltipforAlter"><strong>Route Alternative</strong></Tooltip>
@@ -48,20 +43,15 @@ class ScenarioEntry extends React.Component {
             </div>
 
             <small style={{fontSize: 14,}}>
-              <OverlayTrigger placement="bottom" overlay={tooltipforAlter}>
-                <span>{this.props.data[corridorKey].alternative} </span>
-              </OverlayTrigger>
-
-              |
 
               <OverlayTrigger placement="bottom" overlay={tooltipforHeadwayValue}>
-                <span>{Math.ceil(this.props.headwayTime[corridorKey])} min</span>
+                <span>Time: +{Math.ceil(this.props.data[corridorKey].headway)}%</span>
               </OverlayTrigger>
 
               |
 
               <OverlayTrigger placement="bottom" overlay={tooltipforBuses}>
-                <span>#Veh: {Math.ceil(this.props.scorecardData[corridorKey])}</span>
+                <span>Speed: +{Math.ceil(this.props.data[corridorKey].speed)}% </span>
               </OverlayTrigger>
 
             </small>
@@ -78,7 +68,7 @@ class ScenarioEntry extends React.Component {
 
 
             <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#e9bc69"}}>
-              {this.props.index === 0 ? `Base Scenario -- Total #veh: ${totalbuses}` : `New Scenario -- Total #veh: ${totalbuses}`   }
+              {this.props.index === 0 ? "Base Scenario" : "New Scenario"  }
             </div>
 
             {ScenarioValue}
@@ -92,7 +82,7 @@ class ScenarioEntry extends React.Component {
         <div className="scenarioEntry">
           <div className="" style={{margin: 0, padding: 0}}>
             <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#eec16f"}}>
-              {this.props.index === 0 ? `Base Scenario -- Total #veh: ${totalbuses}` : `New Scenario -- Total #veh: ${totalbuses}`   }
+              {this.props.index === 0 ? "Base Scenario" : "New Scenario"   }
             </div>
 
             {ScenarioValue}

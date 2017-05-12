@@ -1,0 +1,805 @@
+{
+  "id": 0,
+  "description": "SF 3 BRT",
+  "feedChecksums": {
+    "caltrain": 809748519,
+    "ggt_gtfs": 2471172906,
+    "ac_transit": 674808891,
+    "bart": 1408534540,
+    "samtran": 2500273493,
+    "sfmta": 2482712756
+  },
+  "modifications": [
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:11866",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "30X Marina Express - Embarcadero",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 360,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7370563"
+        }
+      ],
+      "comment": "30X Marina Express Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "ggt_gtfs:101X-201",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "101X Santa Rosa - South",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 3300,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5523781"
+        }
+      ],
+      "comment": "GGT 101X Santa Rosa Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "ggt_gtfs:93-201",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "93 Golden Gate Bridge - South",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 720,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5523857"
+        }
+      ],
+      "comment": "GGT 93 Golden Gate Bridge Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "ggt_gtfs:70-201",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GGT 70 South",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 3840,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5523320"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GGT 70 North",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 3840,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5481218"
+        }
+      ],
+      "comment": "GGT 70 Novato Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "ggt_gtfs:30-201",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GGT 30 North",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 3720,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5523541"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GGT 30 South",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 3720,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5525412"
+        }
+      ],
+      "comment": "GGT 30 San Rafael Baseline Frequency"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:11879"
+      ],
+      "hops": [
+        [
+          "sfmta:6473",
+          "sfmta:6817"
+        ],
+        [
+          "sfmta:6817",
+          "sfmta:6815"
+        ],
+        [
+          "sfmta:6815",
+          "sfmta:6804"
+        ],
+        [
+          "sfmta:6804",
+          "sfmta:6823"
+        ],
+        [
+          "sfmta:6823",
+          "sfmta:6829"
+        ],
+        [
+          "sfmta:6829",
+          "sfmta:6803"
+        ],
+        [
+          "sfmta:6803",
+          "sfmta:6813"
+        ],
+        [
+          "sfmta:6813",
+          "sfmta:6798"
+        ],
+        [
+          "sfmta:6798",
+          "sfmta:6833"
+        ],
+        [
+          "sfmta:6832",
+          "sfmta:6834"
+        ],
+        [
+          "sfmta:6834",
+          "sfmta:6814"
+        ],
+        [
+          "sfmta:6814",
+          "sfmta:6828"
+        ],
+        [
+          "sfmta:6828",
+          "sfmta:6830"
+        ],
+        [
+          "sfmta:6830",
+          "sfmta:7736"
+        ],
+        [
+          "sfmta:7736",
+          "sfmta:6805"
+        ],
+        [
+          "sfmta:6805",
+          "sfmta:6816"
+        ],
+        [
+          "sfmta:6816",
+          "sfmta:6821"
+        ]
+      ],
+      "scale": 1,
+      "comment": "47 Van Ness Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "ggt_gtfs:101X-201"
+      ],
+      "hops": [
+        [
+          "ggt_gtfs:40024",
+          "ggt_gtfs:42243"
+        ],
+        [
+          "ggt_gtfs:42243",
+          "ggt_gtfs:42244"
+        ],
+        [
+          "ggt_gtfs:42244",
+          "ggt_gtfs:40028"
+        ],
+        [
+          "ggt_gtfs:40028",
+          "ggt_gtfs:40030"
+        ],
+        [
+          "ggt_gtfs:40030",
+          "ggt_gtfs:40078"
+        ],
+        [
+          "ggt_gtfs:40078",
+          "ggt_gtfs:40032"
+        ],
+        [
+          "ggt_gtfs:40031",
+          "ggt_gtfs:42246"
+        ],
+        [
+          "ggt_gtfs:42246",
+          "ggt_gtfs:40029"
+        ],
+        [
+          "ggt_gtfs:40029",
+          "ggt_gtfs:40027"
+        ],
+        [
+          "ggt_gtfs:40027",
+          "ggt_gtfs:40025"
+        ],
+        [
+          "ggt_gtfs:40025",
+          "ggt_gtfs:42245"
+        ]
+      ],
+      "scale": 1,
+      "comment": "GGT 101X Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:11866"
+      ],
+      "hops": [
+        [
+          "sfmta:3956",
+          "sfmta:3956"
+        ]
+      ],
+      "scale": 1,
+      "comment": "30X Speed"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:11881",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "49 Van Ness - City College",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7382963"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "49 Van Ness - North Point and Van Ness",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7383276"
+        }
+      ],
+      "comment": "49 Van Ness Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:11879",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "47 Van Ness - Fishermans Wharf",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7380934"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "47 Van Ness - Caltrain Depot",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7380878"
+        }
+      ],
+      "comment": "47 Van Ness Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "ggt_gtfs:101-201",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GGT 101 Santa Rosa - North",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 1800,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5523344"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GGT 101 Santa Rosa - South",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 1800,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5481321"
+        }
+      ],
+      "comment": "GGT 101 Santa Rosa Baseline Frequency"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:11881"
+      ],
+      "hops": [
+        [
+          "sfmta:6801",
+          "sfmta:6832"
+        ],
+        [
+          "sfmta:6832",
+          "sfmta:6834"
+        ],
+        [
+          "sfmta:6834",
+          "sfmta:6814"
+        ],
+        [
+          "sfmta:6814",
+          "sfmta:6828"
+        ],
+        [
+          "sfmta:6828",
+          "sfmta:6830"
+        ],
+        [
+          "sfmta:6830",
+          "sfmta:7736"
+        ],
+        [
+          "sfmta:7736",
+          "sfmta:6805"
+        ],
+        [
+          "sfmta:6805",
+          "sfmta:6816"
+        ],
+        [
+          "sfmta:6816",
+          "sfmta:6821"
+        ],
+        [
+          "sfmta:6821",
+          "sfmta:5836"
+        ],
+        [
+          "sfmta:6473",
+          "sfmta:6817"
+        ],
+        [
+          "sfmta:6817",
+          "sfmta:6815"
+        ],
+        [
+          "sfmta:6815",
+          "sfmta:6804"
+        ],
+        [
+          "sfmta:6804",
+          "sfmta:6823"
+        ],
+        [
+          "sfmta:6823",
+          "sfmta:6829"
+        ],
+        [
+          "sfmta:6829",
+          "sfmta:6803"
+        ],
+        [
+          "sfmta:6803",
+          "sfmta:6813"
+        ],
+        [
+          "sfmta:6813",
+          "sfmta:6798"
+        ],
+        [
+          "sfmta:6798",
+          "sfmta:6833"
+        ],
+        [
+          "sfmta:6833",
+          "sfmta:6800"
+        ],
+        [
+          "sfmta:6817",
+          "sfmta:6815"
+        ],
+        [
+          "sfmta:6815",
+          "sfmta:6804"
+        ],
+        [
+          "sfmta:6804",
+          "sfmta:6823"
+        ],
+        [
+          "sfmta:6823",
+          "sfmta:6829"
+        ],
+        [
+          "sfmta:6829",
+          "sfmta:6803"
+        ],
+        [
+          "sfmta:6803",
+          "sfmta:6813"
+        ],
+        [
+          "sfmta:6813",
+          "sfmta:6798"
+        ],
+        [
+          "sfmta:6798",
+          "sfmta:6833"
+        ],
+        [
+          "sfmta:6833",
+          "sfmta:6800"
+        ]
+      ],
+      "scale": 1,
+      "comment": "49 Van Ness Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "ggt_gtfs:101-201"
+      ],
+      "hops": [
+        [
+          "ggt_gtfs:40024",
+          "ggt_gtfs:42243"
+        ],
+        [
+          "ggt_gtfs:42243",
+          "ggt_gtfs:42244"
+        ],
+        [
+          "ggt_gtfs:42244",
+          "ggt_gtfs:40028"
+        ],
+        [
+          "ggt_gtfs:40028",
+          "ggt_gtfs:40030"
+        ],
+        [
+          "ggt_gtfs:40030",
+          "ggt_gtfs:40078"
+        ],
+        [
+          "ggt_gtfs:40078",
+          "ggt_gtfs:40032"
+        ],
+        [
+          "ggt_gtfs:40031",
+          "ggt_gtfs:42246"
+        ],
+        [
+          "ggt_gtfs:42246",
+          "ggt_gtfs:40029"
+        ],
+        [
+          "ggt_gtfs:40029",
+          "ggt_gtfs:40027"
+        ],
+        [
+          "ggt_gtfs:40027",
+          "ggt_gtfs:40025"
+        ],
+        [
+          "ggt_gtfs:40025",
+          "ggt_gtfs:42245"
+        ],
+        [
+          "ggt_gtfs:40024",
+          "ggt_gtfs:42243"
+        ],
+        [
+          "ggt_gtfs:42243",
+          "ggt_gtfs:42244"
+        ],
+        [
+          "ggt_gtfs:42244",
+          "ggt_gtfs:40028"
+        ],
+        [
+          "ggt_gtfs:40028",
+          "ggt_gtfs:40030"
+        ],
+        [
+          "ggt_gtfs:40030",
+          "ggt_gtfs:40078"
+        ],
+        [
+          "ggt_gtfs:40078",
+          "ggt_gtfs:40032"
+        ],
+        [
+          "ggt_gtfs:40031",
+          "ggt_gtfs:42246"
+        ],
+        [
+          "ggt_gtfs:42246",
+          "ggt_gtfs:40029"
+        ],
+        [
+          "ggt_gtfs:40029",
+          "ggt_gtfs:40027"
+        ],
+        [
+          "ggt_gtfs:40027",
+          "ggt_gtfs:40025"
+        ],
+        [
+          "ggt_gtfs:40025",
+          "ggt_gtfs:42245"
+        ]
+      ],
+      "scale": 1,
+      "comment": "GGT 101 Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "ggt_gtfs:70-201"
+      ],
+      "hops": [
+        [
+          "ggt_gtfs:42243",
+          "ggt_gtfs:42244"
+        ],
+        [
+          "ggt_gtfs:42244",
+          "ggt_gtfs:40028"
+        ],
+        [
+          "ggt_gtfs:40028",
+          "ggt_gtfs:40030"
+        ],
+        [
+          "ggt_gtfs:40030",
+          "ggt_gtfs:40078"
+        ],
+        [
+          "ggt_gtfs:40078",
+          "ggt_gtfs:40032"
+        ],
+        [
+          "ggt_gtfs:40031",
+          "ggt_gtfs:42246"
+        ],
+        [
+          "ggt_gtfs:42246",
+          "ggt_gtfs:40029"
+        ],
+        [
+          "ggt_gtfs:40029",
+          "ggt_gtfs:40027"
+        ],
+        [
+          "ggt_gtfs:40027",
+          "ggt_gtfs:40025"
+        ],
+        [
+          "ggt_gtfs:40025",
+          "ggt_gtfs:42245"
+        ]
+      ],
+      "scale": 1,
+      "comment": "GGT 70 Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "ggt_gtfs:30-201"
+      ],
+      "hops": [
+        [
+          "ggt_gtfs:40031",
+          "ggt_gtfs:42246"
+        ],
+        [
+          "ggt_gtfs:42246",
+          "ggt_gtfs:40029"
+        ],
+        [
+          "ggt_gtfs:40029",
+          "ggt_gtfs:40027"
+        ],
+        [
+          "ggt_gtfs:40027",
+          "ggt_gtfs:40025"
+        ],
+        [
+          "ggt_gtfs:40025",
+          "ggt_gtfs:42245"
+        ],
+        [
+          "ggt_gtfs:42245",
+          "ggt_gtfs:40023"
+        ],
+        [
+          "ggt_gtfs:40024",
+          "ggt_gtfs:42243"
+        ],
+        [
+          "ggt_gtfs:42243",
+          "ggt_gtfs:42244"
+        ],
+        [
+          "ggt_gtfs:42244",
+          "ggt_gtfs:40028"
+        ],
+        [
+          "ggt_gtfs:40028",
+          "ggt_gtfs:40030"
+        ],
+        [
+          "ggt_gtfs:40030",
+          "ggt_gtfs:40078"
+        ],
+        [
+          "ggt_gtfs:40078",
+          "ggt_gtfs:40032"
+        ]
+      ],
+      "scale": 1,
+      "comment": "GGT 30 Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "ggt_gtfs:93-201"
+      ],
+      "hops": [
+        [
+          "ggt_gtfs:40031",
+          "ggt_gtfs:42246"
+        ],
+        [
+          "ggt_gtfs:42246",
+          "ggt_gtfs:40029"
+        ],
+        [
+          "ggt_gtfs:40029",
+          "ggt_gtfs:40027"
+        ],
+        [
+          "ggt_gtfs:40027",
+          "ggt_gtfs:40025"
+        ],
+        [
+          "ggt_gtfs:40025",
+          "ggt_gtfs:42245"
+        ],
+        [
+          "ggt_gtfs:40024",
+          "ggt_gtfs:42243"
+        ],
+        [
+          "ggt_gtfs:42243",
+          "ggt_gtfs:42244"
+        ],
+        [
+          "ggt_gtfs:42244",
+          "ggt_gtfs:40028"
+        ],
+        [
+          "ggt_gtfs:40028",
+          "ggt_gtfs:40030"
+        ],
+        [
+          "ggt_gtfs:40030",
+          "ggt_gtfs:40078"
+        ],
+        [
+          "ggt_gtfs:40078",
+          "ggt_gtfs:40032"
+        ]
+      ],
+      "scale": 1,
+      "comment": "GGT 93 Speed"
+    }
+  ]
+}

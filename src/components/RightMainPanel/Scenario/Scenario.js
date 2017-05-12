@@ -35,12 +35,8 @@ class Scenario extends React.Component {
       isCompareMode: false,
       selectedScenario: false,
       firedScenario: [],
-      // TODO dynamic change
-      baselineHeadwayTime: {A: 30, B: 24, C: 27}
     };
 
-    this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
-    // this.selectScenario = this.selectScenario.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClickBaselineButton = this.handleClickBaselineButton.bind(this);
     this.handleClickCompareButton = this.handleClickCompareButton.bind(this);
@@ -65,11 +61,6 @@ class Scenario extends React.Component {
     })
   }
 
-  handlePlaceHolder() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
 
   handleClickCompareButton() {
     this.props.isCompare(!this.state.isCompareMode);
@@ -94,40 +85,39 @@ class Scenario extends React.Component {
 
 
   componentWillUpdate(nextProps, nextState) {
-    if (this.props.scenarioStore !== nextProps.scenarioStore) {
-      const corridorObject = {
-        "16A": JSON.parse(JSON.stringify(json16A)),
-        "16B": JSON.parse(JSON.stringify(json16B)),
-        "16C": JSON.parse(JSON.stringify(json16C)),
-        "E3A": JSON.parse(JSON.stringify(jsonE3A)),
-        "E3B": JSON.parse(JSON.stringify(jsonE3B)),
-        "E3C": JSON.parse(JSON.stringify(jsonE3C)),
-        "E3D": JSON.parse(JSON.stringify(jsonE3D)),
-        "E5A": JSON.parse(JSON.stringify(jsonE5A)),
-        "E5B": JSON.parse(JSON.stringify(jsonE5B)),
-      };
-      const selectScenarioNum = nextProps.scenarioStore[1];
-      let firedScenario = [];
-
-      for (let key in selectScenarioNum) {
-        let temp = cloneDeep(corridorObject[selectScenarioNum[key].alternative].modifications);
-        temp.forEach(function (route) {
-          if (route.type === "adjust-frequency") {
-            route.entries.forEach((entry) => {
-              entry.headwaySecs = entry.headwaySecs * (1 - 0.01 * Number(selectScenarioNum[key].headway));
-            });
-          }
-          firedScenario.push(route);
-        })
-      }
-
-      this.props.fireUpdate(firedScenario);
-    }
+    // if (this.props.scenarioStore !== nextProps.scenarioStore) {
+    //   const corridorObject = {
+    //     "16A": JSON.parse(JSON.stringify(json16A)),
+    //     "16B": JSON.parse(JSON.stringify(json16B)),
+    //     "16C": JSON.parse(JSON.stringify(json16C)),
+    //     "E3A": JSON.parse(JSON.stringify(jsonE3A)),
+    //     "E3B": JSON.parse(JSON.stringify(jsonE3B)),
+    //     "E3C": JSON.parse(JSON.stringify(jsonE3C)),
+    //     "E3D": JSON.parse(JSON.stringify(jsonE3D)),
+    //     "E5A": JSON.parse(JSON.stringify(jsonE5A)),
+    //     "E5B": JSON.parse(JSON.stringify(jsonE5B)),
+    //   };
+    //   const selectScenarioNum = nextProps.scenarioStore[1];
+    //   let firedScenario = [];
+    //
+    //   for (let key in selectScenarioNum) {
+    //     let temp = cloneDeep(corridorObject[selectScenarioNum[key].alternative].modifications);
+    //     temp.forEach(function (route) {
+    //       if (route.type === "adjust-frequency") {
+    //         route.entries.forEach((entry) => {
+    //           entry.headwaySecs = entry.headwaySecs * (1 - 0.01 * Number(selectScenarioNum[key].headway));
+    //         });
+    //       }
+    //       firedScenario.push(route);
+    //     })
+    //   }
+    //
+    //   this.props.fireUpdate(firedScenario);
+    // }
 
     if (this.props.showCompareScenarioModal !== nextProps.showCompareScenarioModal) {
       this.handleClickCompareButton();
     }
-
   }
 
   render() {
@@ -144,13 +134,8 @@ class Scenario extends React.Component {
     });
 
 
-
     return (
       <div className="scenarioDashboardPanel">
-
-        {/*<div className="placeholder">*/}
-        {/*</div>*/}
-
         <div className="colHead">
           <i className="fa fa-random"/>
           <span>Scenario Summary</span>
@@ -165,11 +150,11 @@ class Scenario extends React.Component {
             <div className="scenarioEntries">
 
               <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
-                             isCompareMode={this.state.isCompareMode} headwayTime={this.state.baselineHeadwayTime}
-                             scorecardData={BaselineBuses} selectedScenario={this.state.selectedScenario}/>
+                             isCompareMode={this.state.isCompareMode}
+                             selectedScenario={this.state.selectedScenario}/>
               <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
-                             isCompareMode={this.state.isCompareMode} headwayTime={this.props.headwayTime}
-                             scorecardData={this.props.scorecardData} selectedScenario={this.state.selectedScenario}/>
+                             isCompareMode={this.state.isCompareMode}
+                             selectedScenario={this.state.selectedScenario}/>
 
             </div>
 
@@ -205,7 +190,6 @@ function mapStateToProps(state) {
   return {
     scenarioStore: state.scenarioStore,
     headwayTime: state.HeadwayTime,
-    scorecardData: state.ScorecardData,
     showCompareScenarioModal: state.showCompareScenarioModal,
   }
 }

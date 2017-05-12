@@ -1,0 +1,1167 @@
+{
+  "id": 0,
+  "description": "SF 3 BRT",
+  "feedChecksums": {
+    "caltrain": 809748519,
+    "ggt_gtfs": 2471172906,
+    "ac_transit": 674808891,
+    "bart": 1408534540,
+    "samtran": 2500273493,
+    "sfmta": 2482712756
+  },
+  "modifications": [
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:1038",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "38AX Financial District",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 600,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7343896"
+        }
+      ],
+      "comment": "38AX Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:1039",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "38BX",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 600,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7343897"
+        }
+      ],
+      "comment": "38BX Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "ggt_gtfs:92-201",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GCT 92 - South",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 3600,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5523426"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "GCT 92 - North",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 3600,
+          "startTimes": null,
+          "sourceTrip": "ggt_gtfs:5505582"
+        }
+      ],
+      "comment": "GCT 92"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:11872",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "38 Transbay",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7373555"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "38 VA",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7372717"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "38 Balboa",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 600,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7373352"
+        }
+      ],
+      "comment": "38 Geary Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:11873",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "38R - Transbay",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 240,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7375436"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "38R - Lands End",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 240,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7375278"
+        }
+      ],
+      "comment": "38R Geary Rapid"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:11872"
+      ],
+      "hops": [
+        [
+          "sfmta:4298",
+          "sfmta:4304"
+        ],
+        [
+          "sfmta:4304",
+          "sfmta:4769"
+        ],
+        [
+          "sfmta:4769",
+          "sfmta:4295"
+        ],
+        [
+          "sfmta:4295",
+          "sfmta:4760"
+        ],
+        [
+          "sfmta:4760",
+          "sfmta:4293"
+        ],
+        [
+          "sfmta:4293",
+          "sfmta:4289"
+        ],
+        [
+          "sfmta:4289",
+          "sfmta:4758"
+        ],
+        [
+          "sfmta:4758",
+          "sfmta:4290"
+        ],
+        [
+          "sfmta:4290",
+          "sfmta:4762"
+        ],
+        [
+          "sfmta:7854",
+          "sfmta:4255"
+        ],
+        [
+          "sfmta:4255",
+          "sfmta:4257"
+        ],
+        [
+          "sfmta:4257",
+          "sfmta:4259"
+        ],
+        [
+          "sfmta:4259",
+          "sfmta:4261"
+        ],
+        [
+          "sfmta:4261",
+          "sfmta:4755"
+        ],
+        [
+          "sfmta:4755",
+          "sfmta:4263"
+        ],
+        [
+          "sfmta:4263",
+          "sfmta:4265"
+        ],
+        [
+          "sfmta:4265",
+          "sfmta:4267"
+        ],
+        [
+          "sfmta:4267",
+          "sfmta:4269"
+        ],
+        [
+          "sfmta:4269",
+          "sfmta:4271"
+        ],
+        [
+          "sfmta:4271",
+          "sfmta:4273"
+        ],
+        [
+          "sfmta:4273",
+          "sfmta:4278"
+        ],
+        [
+          "sfmta:4279",
+          "sfmta:4275"
+        ],
+        [
+          "sfmta:4275",
+          "sfmta:4274"
+        ],
+        [
+          "sfmta:4274",
+          "sfmta:4272"
+        ],
+        [
+          "sfmta:4272",
+          "sfmta:4270"
+        ],
+        [
+          "sfmta:4270",
+          "sfmta:4268"
+        ],
+        [
+          "sfmta:4268",
+          "sfmta:4266"
+        ],
+        [
+          "sfmta:4266",
+          "sfmta:4264"
+        ],
+        [
+          "sfmta:4264",
+          "sfmta:4756"
+        ],
+        [
+          "sfmta:4756",
+          "sfmta:4262"
+        ],
+        [
+          "sfmta:4262",
+          "sfmta:4260"
+        ],
+        [
+          "sfmta:4260",
+          "sfmta:4258"
+        ],
+        [
+          "sfmta:4759",
+          "sfmta:4765"
+        ],
+        [
+          "sfmta:4765",
+          "sfmta:4294"
+        ],
+        [
+          "sfmta:4294",
+          "sfmta:4761"
+        ],
+        [
+          "sfmta:4761",
+          "sfmta:4296"
+        ],
+        [
+          "sfmta:4296",
+          "sfmta:4770"
+        ],
+        [
+          "sfmta:4770",
+          "sfmta:4305"
+        ],
+        [
+          "sfmta:7836",
+          "sfmta:4274"
+        ],
+        [
+          "sfmta:4274",
+          "sfmta:4272"
+        ],
+        [
+          "sfmta:4272",
+          "sfmta:4270"
+        ],
+        [
+          "sfmta:4270",
+          "sfmta:4268"
+        ],
+        [
+          "sfmta:4268",
+          "sfmta:4266"
+        ],
+        [
+          "sfmta:4266",
+          "sfmta:4264"
+        ],
+        [
+          "sfmta:4264",
+          "sfmta:4756"
+        ],
+        [
+          "sfmta:4756",
+          "sfmta:4262"
+        ],
+        [
+          "sfmta:4262",
+          "sfmta:4260"
+        ],
+        [
+          "sfmta:4260",
+          "sfmta:4258"
+        ],
+        [
+          "sfmta:4759",
+          "sfmta:4765"
+        ],
+        [
+          "sfmta:4765",
+          "sfmta:4294"
+        ],
+        [
+          "sfmta:4294",
+          "sfmta:4761"
+        ],
+        [
+          "sfmta:4761",
+          "sfmta:4296"
+        ],
+        [
+          "sfmta:4296",
+          "sfmta:4770"
+        ],
+        [
+          "sfmta:4770",
+          "sfmta:4305"
+        ],
+        [
+          "sfmta:4279",
+          "sfmta:4275"
+        ],
+        [
+          "sfmta:4275",
+          "sfmta:4274"
+        ],
+        [
+          "sfmta:4274",
+          "sfmta:4272"
+        ],
+        [
+          "sfmta:4272",
+          "sfmta:4270"
+        ],
+        [
+          "sfmta:4270",
+          "sfmta:4268"
+        ],
+        [
+          "sfmta:4268",
+          "sfmta:4266"
+        ],
+        [
+          "sfmta:4266",
+          "sfmta:4264"
+        ],
+        [
+          "sfmta:4264",
+          "sfmta:4756"
+        ],
+        [
+          "sfmta:4756",
+          "sfmta:4262"
+        ],
+        [
+          "sfmta:4262",
+          "sfmta:4260"
+        ],
+        [
+          "sfmta:4260",
+          "sfmta:4258"
+        ],
+        [
+          "sfmta:4759",
+          "sfmta:4765"
+        ],
+        [
+          "sfmta:4765",
+          "sfmta:4294"
+        ],
+        [
+          "sfmta:4294",
+          "sfmta:4761"
+        ],
+        [
+          "sfmta:4761",
+          "sfmta:4296"
+        ],
+        [
+          "sfmta:4296",
+          "sfmta:4770"
+        ],
+        [
+          "sfmta:4770",
+          "sfmta:4305"
+        ],
+        [
+          "sfmta:4298",
+          "sfmta:4304"
+        ],
+        [
+          "sfmta:4304",
+          "sfmta:4769"
+        ],
+        [
+          "sfmta:4769",
+          "sfmta:4295"
+        ],
+        [
+          "sfmta:4295",
+          "sfmta:4760"
+        ],
+        [
+          "sfmta:4760",
+          "sfmta:4293"
+        ],
+        [
+          "sfmta:4293",
+          "sfmta:4289"
+        ],
+        [
+          "sfmta:4289",
+          "sfmta:4758"
+        ],
+        [
+          "sfmta:4758",
+          "sfmta:4290"
+        ],
+        [
+          "sfmta:4290",
+          "sfmta:4762"
+        ],
+        [
+          "sfmta:7854",
+          "sfmta:4255"
+        ],
+        [
+          "sfmta:4255",
+          "sfmta:4257"
+        ],
+        [
+          "sfmta:4257",
+          "sfmta:4259"
+        ],
+        [
+          "sfmta:4259",
+          "sfmta:4261"
+        ],
+        [
+          "sfmta:4261",
+          "sfmta:4755"
+        ],
+        [
+          "sfmta:4755",
+          "sfmta:4263"
+        ],
+        [
+          "sfmta:4263",
+          "sfmta:4265"
+        ],
+        [
+          "sfmta:4265",
+          "sfmta:4267"
+        ],
+        [
+          "sfmta:4267",
+          "sfmta:4269"
+        ],
+        [
+          "sfmta:4269",
+          "sfmta:4271"
+        ],
+        [
+          "sfmta:4271",
+          "sfmta:4273"
+        ],
+        [
+          "sfmta:4273",
+          "sfmta:4278"
+        ],
+        [
+          "sfmta:4759",
+          "sfmta:4765"
+        ],
+        [
+          "sfmta:4765",
+          "sfmta:4294"
+        ],
+        [
+          "sfmta:4294",
+          "sfmta:4761"
+        ],
+        [
+          "sfmta:4761",
+          "sfmta:4296"
+        ],
+        [
+          "sfmta:4296",
+          "sfmta:4770"
+        ],
+        [
+          "sfmta:4770",
+          "sfmta:4305"
+        ],
+        [
+          "sfmta:4298",
+          "sfmta:4304"
+        ],
+        [
+          "sfmta:4304",
+          "sfmta:4769"
+        ],
+        [
+          "sfmta:4769",
+          "sfmta:4295"
+        ],
+        [
+          "sfmta:4295",
+          "sfmta:4760"
+        ],
+        [
+          "sfmta:4760",
+          "sfmta:4293"
+        ],
+        [
+          "sfmta:4293",
+          "sfmta:4289"
+        ],
+        [
+          "sfmta:4289",
+          "sfmta:4758"
+        ],
+        [
+          "sfmta:4758",
+          "sfmta:4290"
+        ],
+        [
+          "sfmta:4290",
+          "sfmta:4762"
+        ],
+        [
+          "sfmta:7854",
+          "sfmta:4255"
+        ],
+        [
+          "sfmta:4255",
+          "sfmta:4257"
+        ],
+        [
+          "sfmta:4257",
+          "sfmta:4259"
+        ],
+        [
+          "sfmta:4259",
+          "sfmta:4261"
+        ],
+        [
+          "sfmta:4261",
+          "sfmta:4755"
+        ],
+        [
+          "sfmta:4755",
+          "sfmta:4263"
+        ],
+        [
+          "sfmta:4263",
+          "sfmta:4265"
+        ],
+        [
+          "sfmta:4265",
+          "sfmta:4267"
+        ],
+        [
+          "sfmta:4267",
+          "sfmta:4269"
+        ],
+        [
+          "sfmta:4269",
+          "sfmta:4271"
+        ],
+        [
+          "sfmta:4271",
+          "sfmta:4273"
+        ],
+        [
+          "sfmta:4273",
+          "sfmta:3560"
+        ],
+        [
+          "sfmta:4275",
+          "sfmta:4274"
+        ],
+        [
+          "sfmta:4274",
+          "sfmta:4272"
+        ],
+        [
+          "sfmta:4272",
+          "sfmta:4270"
+        ],
+        [
+          "sfmta:4270",
+          "sfmta:4268"
+        ],
+        [
+          "sfmta:4268",
+          "sfmta:4266"
+        ],
+        [
+          "sfmta:4266",
+          "sfmta:4264"
+        ],
+        [
+          "sfmta:4264",
+          "sfmta:4756"
+        ],
+        [
+          "sfmta:4756",
+          "sfmta:4262"
+        ],
+        [
+          "sfmta:4262",
+          "sfmta:4260"
+        ],
+        [
+          "sfmta:4260",
+          "sfmta:4258"
+        ],
+        [
+          "sfmta:4759",
+          "sfmta:4765"
+        ],
+        [
+          "sfmta:4765",
+          "sfmta:4294"
+        ],
+        [
+          "sfmta:4294",
+          "sfmta:4761"
+        ],
+        [
+          "sfmta:4761",
+          "sfmta:4296"
+        ],
+        [
+          "sfmta:4296",
+          "sfmta:4770"
+        ],
+        [
+          "sfmta:4770",
+          "sfmta:4305"
+        ],
+        [
+          "sfmta:4275",
+          "sfmta:4274"
+        ],
+        [
+          "sfmta:4274",
+          "sfmta:4272"
+        ],
+        [
+          "sfmta:4272",
+          "sfmta:4270"
+        ],
+        [
+          "sfmta:4270",
+          "sfmta:4268"
+        ],
+        [
+          "sfmta:4268",
+          "sfmta:4266"
+        ],
+        [
+          "sfmta:4266",
+          "sfmta:4264"
+        ],
+        [
+          "sfmta:4264",
+          "sfmta:4756"
+        ],
+        [
+          "sfmta:4756",
+          "sfmta:4262"
+        ],
+        [
+          "sfmta:4262",
+          "sfmta:4260"
+        ],
+        [
+          "sfmta:4260",
+          "sfmta:4258"
+        ],
+        [
+          "sfmta:4759",
+          "sfmta:4765"
+        ],
+        [
+          "sfmta:4765",
+          "sfmta:4294"
+        ],
+        [
+          "sfmta:4294",
+          "sfmta:4761"
+        ],
+        [
+          "sfmta:4761",
+          "sfmta:4296"
+        ],
+        [
+          "sfmta:4296",
+          "sfmta:4770"
+        ],
+        [
+          "sfmta:4770",
+          "sfmta:4305"
+        ],
+        [
+          "sfmta:4298",
+          "sfmta:4304"
+        ],
+        [
+          "sfmta:4304",
+          "sfmta:4769"
+        ],
+        [
+          "sfmta:4769",
+          "sfmta:4295"
+        ],
+        [
+          "sfmta:4295",
+          "sfmta:4760"
+        ],
+        [
+          "sfmta:4760",
+          "sfmta:4293"
+        ],
+        [
+          "sfmta:4293",
+          "sfmta:4289"
+        ],
+        [
+          "sfmta:4289",
+          "sfmta:4758"
+        ],
+        [
+          "sfmta:4758",
+          "sfmta:4290"
+        ],
+        [
+          "sfmta:4290",
+          "sfmta:4762"
+        ],
+        [
+          "sfmta:7854",
+          "sfmta:4255"
+        ],
+        [
+          "sfmta:4255",
+          "sfmta:4257"
+        ],
+        [
+          "sfmta:4257",
+          "sfmta:4259"
+        ],
+        [
+          "sfmta:4259",
+          "sfmta:4261"
+        ],
+        [
+          "sfmta:4261",
+          "sfmta:4755"
+        ],
+        [
+          "sfmta:4755",
+          "sfmta:4263"
+        ],
+        [
+          "sfmta:4263",
+          "sfmta:4265"
+        ],
+        [
+          "sfmta:4265",
+          "sfmta:4267"
+        ],
+        [
+          "sfmta:4267",
+          "sfmta:4269"
+        ],
+        [
+          "sfmta:4269",
+          "sfmta:4271"
+        ],
+        [
+          "sfmta:4271",
+          "sfmta:4273"
+        ],
+        [
+          "sfmta:4273",
+          "sfmta:4278"
+        ]
+      ],
+      "scale": 1,
+      "comment": "38 Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:1038"
+      ],
+      "hops": [
+        [
+          "sfmta:4269",
+          "sfmta:4271"
+        ],
+        [
+          "sfmta:4271",
+          "sfmta:4273"
+        ],
+        [
+          "sfmta:4273",
+          "sfmta:4278"
+        ],
+        [
+          "sfmta:4279",
+          "sfmta:4275"
+        ],
+        [
+          "sfmta:4275",
+          "sfmta:4274"
+        ],
+        [
+          "sfmta:4274",
+          "sfmta:4272"
+        ],
+        [
+          "sfmta:4272",
+          "sfmta:4270"
+        ]
+      ],
+      "scale": 1,
+      "comment": "38AX "
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:1039"
+      ],
+      "hops": [
+        [
+          "sfmta:6093",
+          "sfmta:4290"
+        ],
+        [
+          "sfmta:4290",
+          "sfmta:4762"
+        ],
+        [
+          "sfmta:4762",
+          "sfmta:4292"
+        ],
+        [
+          "sfmta:4292",
+          "sfmta:7854"
+        ],
+        [
+          "sfmta:7854",
+          "sfmta:4255"
+        ],
+        [
+          "sfmta:4255",
+          "sfmta:4257"
+        ],
+        [
+          "sfmta:4257",
+          "sfmta:4259"
+        ],
+        [
+          "sfmta:4259",
+          "sfmta:4261"
+        ],
+        [
+          "sfmta:4261",
+          "sfmta:4755"
+        ],
+        [
+          "sfmta:4755",
+          "sfmta:4263"
+        ],
+        [
+          "sfmta:4263",
+          "sfmta:4265"
+        ],
+        [
+          "sfmta:4265",
+          "sfmta:4267"
+        ],
+        [
+          "sfmta:4267",
+          "sfmta:4269"
+        ],
+        [
+          "sfmta:4270",
+          "sfmta:4268"
+        ],
+        [
+          "sfmta:4268",
+          "sfmta:4266"
+        ],
+        [
+          "sfmta:4266",
+          "sfmta:4264"
+        ],
+        [
+          "sfmta:4264",
+          "sfmta:4756"
+        ],
+        [
+          "sfmta:4756",
+          "sfmta:4262"
+        ],
+        [
+          "sfmta:4262",
+          "sfmta:4260"
+        ],
+        [
+          "sfmta:4291",
+          "sfmta:4754"
+        ],
+        [
+          "sfmta:4754",
+          "sfmta:6092"
+        ]
+      ],
+      "scale": 1,
+      "comment": "38BX"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:11873"
+      ],
+      "hops": [
+        [
+          "sfmta:4304",
+          "sfmta:4295"
+        ],
+        [
+          "sfmta:4295",
+          "sfmta:4293"
+        ],
+        [
+          "sfmta:4293",
+          "sfmta:4758"
+        ],
+        [
+          "sfmta:4758",
+          "sfmta:4762"
+        ],
+        [
+          "sfmta:4762",
+          "sfmta:7854"
+        ],
+        [
+          "sfmta:7854",
+          "sfmta:4257"
+        ],
+        [
+          "sfmta:4257",
+          "sfmta:4755"
+        ],
+        [
+          "sfmta:4755",
+          "sfmta:4265"
+        ],
+        [
+          "sfmta:4265",
+          "sfmta:4269"
+        ],
+        [
+          "sfmta:4269",
+          "sfmta:4278"
+        ],
+        [
+          "sfmta:4279",
+          "sfmta:4270"
+        ],
+        [
+          "sfmta:4270",
+          "sfmta:4266"
+        ],
+        [
+          "sfmta:4266",
+          "sfmta:4756"
+        ],
+        [
+          "sfmta:4756",
+          "sfmta:4258"
+        ],
+        [
+          "sfmta:4258",
+          "sfmta:4288"
+        ],
+        [
+          "sfmta:4288",
+          "sfmta:4763"
+        ],
+        [
+          "sfmta:4763",
+          "sfmta:4759"
+        ],
+        [
+          "sfmta:4759",
+          "sfmta:4294"
+        ],
+        [
+          "sfmta:4294",
+          "sfmta:4296"
+        ],
+        [
+          "sfmta:4296",
+          "sfmta:4305"
+        ]
+      ],
+      "scale": 1,
+      "comment": "38R Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "ggt_gtfs:92-201"
+      ],
+      "hops": [
+        [
+          "ggt_gtfs:41070",
+          "ggt_gtfs:41068"
+        ],
+        [
+          "ggt_gtfs:41068",
+          "ggt_gtfs:41066"
+        ],
+        [
+          "ggt_gtfs:41066",
+          "ggt_gtfs:41064"
+        ],
+        [
+          "ggt_gtfs:41064",
+          "ggt_gtfs:41062"
+        ],
+        [
+          "ggt_gtfs:41062",
+          "ggt_gtfs:41060"
+        ],
+        [
+          "ggt_gtfs:41060",
+          "ggt_gtfs:41058"
+        ],
+        [
+          "ggt_gtfs:41058",
+          "ggt_gtfs:41056"
+        ],
+        [
+          "ggt_gtfs:41055",
+          "ggt_gtfs:41057"
+        ],
+        [
+          "ggt_gtfs:41052",
+          "ggt_gtfs:41063"
+        ],
+        [
+          "ggt_gtfs:41063",
+          "ggt_gtfs:41065"
+        ],
+        [
+          "ggt_gtfs:41065",
+          "ggt_gtfs:41067"
+        ],
+        [
+          "ggt_gtfs:41067",
+          "ggt_gtfs:41069"
+        ]
+      ],
+      "scale": 1,
+      "comment": "GGT 92 Speed"
+    }
+  ]
+}

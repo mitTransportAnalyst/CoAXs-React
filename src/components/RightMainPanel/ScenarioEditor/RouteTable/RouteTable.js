@@ -24,28 +24,8 @@ class RouteTable extends React.Component {
   }
 
   render() {
-    let totalbuses = 0;
-    for (let key in this.props.scorecardData ){
-      totalbuses += Math.ceil(this.props.scorecardData[key])
-    }
-
     return (
       <div className="routeTable">
-
-
-        {/*{ this.props.isOpen ? null : <div className="placeHolder"/> }*/}
-
-
-
-          {/*<div className="btn-group btn-group-justified">*/}
-            {/*<label className="btn" style={{color: "white", backgroundColor: "grey"}}>*/}
-              {/*/!*style="background-color: {{variants[tabnav].color}}; color: #FFF"*!/*/}
-              {/*<i className="fa fa-line-chart"/>*/}
-              {/*/!*<span >Hide Data</span>*!/*/}
-              {/*<span>Total number of buses: {totalbuses}</span>*/}
-            {/*</label>*/}
-          {/*</div>*/}
-
 
           {
             RouteByID[this.props.currentCorridor].buslines.map((busline, index) => {
@@ -77,9 +57,6 @@ class RouteTable extends React.Component {
 function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
-    BuslineProps: state.BuslineSelectedStore,
-    scorecardData: state.ScorecardData,
-
   }
 }
 

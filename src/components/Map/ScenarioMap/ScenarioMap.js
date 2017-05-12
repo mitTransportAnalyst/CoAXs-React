@@ -4,38 +4,18 @@ import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer} from 'rea
 import Leaflet from 'leaflet'
 
 import s from "./ScenarioMap.css"
-import Geojson16A from '../../../Data/busline/16A.geojson'
-import Geojson16B from '../../../Data/busline/16B.geojson'
-import Geojson16C from '../../../Data/busline/16C.geojson'
-import GeojsonE3A from '../../../Data/busline/E3A.geojson'
-import GeojsonE3B from '../../../Data/busline/E3B.geojson'
-import GeojsonE3C from '../../../Data/busline/E3C.geojson'
-import GeojsonE3D from '../../../Data/busline/E3D.geojson'
-import GeojsonE5A from '../../../Data/busline/E5A.geojson'
-import GeojsonE5B from '../../../Data/busline/E5B.geojson'
-import GeojsonJeT from '../../../Data/busline/JeT.geojson'
-import GeojsonNORTA from '../../../Data/busline/NORTA.geojson'
+import GeojsonVanNess from '../../../Data/busline/vanNess.geojson'
+import GeojsonGeary from '../../../Data/busline/geary.geojson'
+import GeojsonGeneva from '../../../Data/busline/geneva.geojson'
 
 
 import Baseline from '../../../Data/scenario/Baseline.json'
-
-
-// TAUI
-import TransitiveMapLayer from './transitive-map-layer'
-import transitiveStyle from './transitive-style'
-
-
-import Transitive from 'transitive-js'
-// import 'leaflet-transitivelayer'
-
-// old browsochrone example
-//import TransitiveLayer from './transitive-layer'
-//import transitiveStyle from './transitive-style'
-// import 'leaflet-transitivelayer'
+import VanNessSeed from "../../../Data/scenario/VanNess.json"
+import GearySeed from "../../../Data/scenario/Geary.json"
+import GenevaSeed from "../../../Data/scenario/Geneva.json"
 
 
 import uuid from 'uuid'
-// import Browsochrones from './NewBrowsochrones/lib'
 import Browsochrones from 'browsochrones'
 
 import debounce from 'debounce'
@@ -53,7 +33,6 @@ import {
   ZoomLevel,
   Tile,
   CorridorInfo,
-  isPTP,
   INIT_ORIGIN,
   INIT_DESTINATION,
   WORKER_VERSION,
@@ -76,7 +55,6 @@ class ScenarioMap extends React.Component {
   constructor() {
     super();
     this.state = {
-      isPTP: false,
       transitive: null,
       isochrone: null,
       transitive2: null,
@@ -93,7 +71,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-18',
+          date: '2017-05-09',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -125,7 +103,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-18',
+          date: '2017-05-09',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -159,7 +137,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-18',
+          date: '2017-05-09',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -197,6 +175,7 @@ class ScenarioMap extends React.Component {
     this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff, MAX_UPDATE_INTERVAL_MS);
     this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
     this.updateScneario = this.updateScneario.bind(this);
+    this.updateRequest = this.updateRequest.bind(this);
 
 
     this.bs = new Browsochrones({webpack: true});
@@ -300,6 +279,9 @@ class ScenarioMap extends React.Component {
 
 
   moveOrigin(e) {
+
+    this.updateRequest();
+
     if (this.props.isCompareMode) {
       let origin = e.target.getLatLng();
       console.log(origin)
@@ -573,22 +555,11 @@ class ScenarioMap extends React.Component {
 
 
   componentWillMount() {
-    let mode = false;
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC', {method: 'GET',})
-      .then(res => res.json())
-      .then(res => {
-        if (res[0].count % 2 === 0) {
-          mode = false;
-        } else {
-          mode = true;
-        }
-      })
-      .then(this.setState({...this.state, isPTP: mode}));
+
   }
 
   componentDidMount() {
     this.fetchMetadata();
-
   }
 
   componentDidUpdate(nextState) {
@@ -603,15 +574,15 @@ class ScenarioMap extends React.Component {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
 
-    if (this.props.fireScenario !== nextProps.fireScenario) {
-      let staticRequest = this.state.staticRequest;
-      staticRequest.request.scenario.modifications = nextProps.fireScenario;
-      staticRequest.request.scenario.id = uuid.v4();
-
-      this.setState({
-        staticRequest,
-      });
-    }
+    // if (this.props.fireScenario !== nextProps.fireScenario) {
+    //   let staticRequest = this.state.staticRequest;
+    //   staticRequest.request.scenario.modifications = nextProps.fireScenario;
+    //   staticRequest.request.scenario.id = uuid.v4();
+    //
+    //   this.setState({
+    //     staticRequest,
+    //   });
+    // }
 
     if (this.props.isCompareMode !== nextProps.isCompareMode) {
       this.setState({
@@ -627,9 +598,65 @@ class ScenarioMap extends React.Component {
     }
 
     if (this.props.updateButtonState !== nextProps.updateButtonState) {
+      this.updateRequest();
       this.updateScneario();
     }
   }
+
+
+  updateRequest() {
+    let staticRequest = this.state.staticRequest;
+    let scenarioJSON = [];
+    let scenarioStore = this.props.scenarioStore;
+    VanNessSeed.modifications.forEach(function (route) {
+      if (route.type === "adjust-frequency") {
+        route.entries.forEach(function (entry) {
+          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].A.headway) * 0.01);
+        });
+        scenarioJSON.push(route);
+      }
+      if (route.type === "adjust-speed") {
+        route.scale = 1 + parseInt(scenarioStore[1].A.speed) * 0.01;
+        scenarioJSON.push(route);
+      }
+    });
+    GearySeed.modifications.forEach(function (route) {
+      if (route.type === "adjust-frequency") {
+        route.entries.forEach(function (entry) {
+          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].B.headway) * 0.01);
+        });
+        scenarioJSON.push(route);
+      }
+      if (route.type === "adjust-speed") {
+        route.scale = 1 + parseInt(scenarioStore[1].B.speed) * 0.01;
+        scenarioJSON.push(route);
+      }
+    });
+    GenevaSeed.modifications.forEach(function (route) {
+      if (route.type === "adjust-frequency") {
+        route.entries.forEach(function (entry) {
+          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].C.headway) * 0.01);
+        });
+        scenarioJSON.push(route);
+      }
+      if (route.type === "adjust-speed") {
+        route.scale = 1 + parseInt(scenarioStore[1].C.speed) * 0.01;
+        scenarioJSON.push(route);
+      }
+    });
+
+    staticRequest.request.scenario.modifications = scenarioJSON;
+    staticRequest.request.scenario.id = uuid.v4();
+
+    this.setState({
+      staticRequest,
+    });
+
+    console.log(scenarioJSON)
+
+
+  }
+
 
   render() {
     let {isochrone, isochrone2, key, key2, origin} = this.state;
@@ -640,34 +667,10 @@ class ScenarioMap extends React.Component {
         <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
           <ZoomControl position="bottomleft"/>
 
-          {/*{transitive &&*/}
-          {/*<TransitiveMapLayer*/}
-          {/*data={transitive}*/}
-          {/*styles={transitiveStyle}*/}
-          {/*key={`transitive-${key}`}*/}
-          {/*/>*/}
-          {/*}*/}
-
 
           <TileLayer
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          />
-
-
-          <GeoJson data={GeojsonJeT} key={"JeT"} style={{
-            color: "#f1d3e9",
-            weight: 1,
-            opacity: 0.5
-          }}
-          />
-
-
-          <GeoJson data={GeojsonNORTA} key={"NORTA"} style={{
-            color: "#f1d3e9",
-            weight: 1,
-            opacity: 0.3
-          }}
           />
 
 
@@ -706,17 +709,10 @@ class ScenarioMap extends React.Component {
             ref='markerOrigin'
           />
 
-          {/*<Marker*/}
-          {/*position={destination}*/}
-          {/*draggable = {true}*/}
-          {/*onDragend={this.moveDestination}*/}
-          {/*ref='markerDestination'*/}
-          {/*/>*/}
-
 
           {
-            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16A" &&
-            <GeoJson data={Geojson16A} key={"16A1"} style={{
+            this.props.currentCorridor === "A" &&
+            <GeoJson data={GeojsonVanNess} key={"VanNess"} style={{
               color: CorridorInfo["A"].color,
               weight: 8,
               opacity: 1
@@ -726,52 +722,8 @@ class ScenarioMap extends React.Component {
           }
 
           {
-            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16A" &&
-            <GeoJson data={Geojson16A} key={"16A2"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16B" &&
-            <GeoJson data={Geojson16B} key={"16B1"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16B" &&
-            <GeoJson data={Geojson16B} key={"16B2"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor === "A" && this.props.currentBusline.A === "16C" &&
-            <GeoJson data={Geojson16C} key={"16C1"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor != "A" && this.props.currentBusline.A === "16C" &&
-            <GeoJson data={Geojson16C} key={"16C2"} style={{
+            this.props.currentCorridor != "A" &&
+            <GeoJson data={GeojsonVanNess} key={"VanNess2"} style={{
               color: CorridorInfo["A"].color,
               weight: 5,
               opacity: 0.5
@@ -782,8 +734,8 @@ class ScenarioMap extends React.Component {
 
 
           {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3A" &&
-            <GeoJson data={GeojsonE3A} key={"E3A1"} style={{
+            this.props.currentCorridor === "B" &&
+            <GeoJson data={GeojsonGeary} key={"Geary"} style={{
               color: CorridorInfo["B"].color,
               weight: 8,
               opacity: 1
@@ -794,31 +746,8 @@ class ScenarioMap extends React.Component {
 
 
           {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3A" &&
-            <GeoJson data={GeojsonE3A} key={"E3A2"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-          {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3B" &&
-            <GeoJson data={GeojsonE3B} key={"E3B1"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3B" &&
-            <GeoJson data={GeojsonE3B} key={"E3B2"} style={{
+            this.props.currentCorridor != "B" &&
+            <GeoJson data={GeojsonGeary} key={"Geary2"} style={{
               color: CorridorInfo["B"].color,
               weight: 5,
               opacity: 0.5
@@ -829,56 +758,8 @@ class ScenarioMap extends React.Component {
 
 
           {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3C" &&
-            <GeoJson data={GeojsonE3C} key={"E3C1"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3C" &&
-            <GeoJson data={GeojsonE3C} key={"E3C2"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "B" && this.props.currentBusline.B === "E3D" &&
-            <GeoJson data={GeojsonE3D} key={"E3D1"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "B" && this.props.currentBusline.B === "E3D" &&
-            <GeoJson data={GeojsonE3D} key={"E3D2"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5A" &&
-            <GeoJson data={GeojsonE5A} key={"E5A1"} style={{
+            this.props.currentCorridor === "C" &&
+            <GeoJson data={GeojsonGeneva} key={"Geneva"} style={{
               color: CorridorInfo["C"].color,
               weight: 8,
               opacity: 1
@@ -889,32 +770,8 @@ class ScenarioMap extends React.Component {
 
 
           {
-            this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5A" &&
-            <GeoJson data={GeojsonE5A} key={"E5A2"} style={{
-              color: CorridorInfo["C"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "C" && this.props.currentBusline.C === "E5B" &&
-            <GeoJson data={GeojsonE5B} key={"E5B1"} style={{
-              color: CorridorInfo["C"].color,
-              weight: 8,
-              opacity: 1
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor != "C" && this.props.currentBusline.C === "E5B" &&
-            <GeoJson data={GeojsonE5B} key={"E5B2"} style={{
+            this.props.currentCorridor != "C" &&
+            <GeoJson data={GeojsonGeneva} key={"Geneva2"} style={{
               color: CorridorInfo["C"].color,
               weight: 5,
               opacity: 0.5
@@ -938,6 +795,7 @@ function mapStateToProps(state) {
     currentCorridor: state.reducer.currentCor,
     currentBusline: state.BuslineSelectedStore,
     updateButtonState: state.updateButtonState,
+    scenarioStore: state.scenarioStore,
   }
 }
 

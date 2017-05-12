@@ -10,7 +10,7 @@ class RightMainPanel extends React.Component {
   render() {
     return (
       <div className="rightMainPanel">
-        <PlaceHolder />
+        {/*<PlaceHolder />*/}
         <ScenarioEditor/>
         <Scenario/>
         <TimeFilter/>

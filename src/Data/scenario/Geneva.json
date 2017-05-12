@@ -1,0 +1,366 @@
+{
+  "id": 0,
+  "description": "SF 3 BRT",
+  "feedChecksums": {
+    "caltrain": 809748519,
+    "ggt_gtfs": 2471172906,
+    "ac_transit": 674808891,
+    "bart": 1408534540,
+    "samtran": 2500273493,
+    "sfmta": 2482712756
+  },
+  "modifications": [
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:1110",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "8 Baseline Frequency - Fishermans Wharf",
+          "startTime": 21600,
+          "endTime": 82800,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7350608"
+        },
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "8 Baseline Frequency - City College",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 480,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7350492"
+        }
+      ],
+      "comment": "8 Bayshore Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:1109",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "8BX Baseline Frequency - Fishermans Wharf",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 420,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7437076"
+        }
+      ],
+      "comment": "8BX Bayshore Baseline Frequency"
+    },
+    {
+      "type": "adjust-frequency",
+      "route": "sfmta:1108",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "8AX Bayshore Baseline Frequency",
+          "startTime": 21600,
+          "endTime": 39600,
+          "headwaySecs": 360,
+          "startTimes": null,
+          "sourceTrip": "sfmta:7440454"
+        }
+      ],
+      "comment": "8AX Bayshore Baseline Frequency"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:1110"
+      ],
+      "hops": [
+        [
+          "sfmta:4811",
+          "sfmta:7671"
+        ],
+        [
+          "sfmta:7671",
+          "sfmta:4893"
+        ],
+        [
+          "sfmta:4893",
+          "sfmta:4883"
+        ],
+        [
+          "sfmta:4883",
+          "sfmta:4891"
+        ],
+        [
+          "sfmta:4891",
+          "sfmta:4888"
+        ],
+        [
+          "sfmta:4888",
+          "sfmta:4796"
+        ],
+        [
+          "sfmta:4796",
+          "sfmta:4799"
+        ],
+        [
+          "sfmta:4799",
+          "sfmta:7304"
+        ],
+        [
+          "sfmta:7304",
+          "sfmta:6343"
+        ],
+        [
+          "sfmta:5795",
+          "sfmta:5926"
+        ],
+        [
+          "sfmta:4900",
+          "sfmta:7300"
+        ],
+        [
+          "sfmta:7300",
+          "sfmta:4798"
+        ],
+        [
+          "sfmta:4798",
+          "sfmta:4795"
+        ],
+        [
+          "sfmta:4795",
+          "sfmta:4894"
+        ],
+        [
+          "sfmta:4894",
+          "sfmta:4889"
+        ],
+        [
+          "sfmta:4889",
+          "sfmta:4890"
+        ],
+        [
+          "sfmta:4890",
+          "sfmta:4884"
+        ],
+        [
+          "sfmta:4884",
+          "sfmta:4892"
+        ],
+        [
+          "sfmta:4892",
+          "sfmta:4886"
+        ],
+        [
+          "sfmta:4886",
+          "sfmta:4810"
+        ],
+        [
+          "sfmta:4810",
+          "sfmta:4879"
+        ],
+        [
+          "sfmta:4879",
+          "sfmta:4803"
+        ],
+        [
+          "sfmta:4803",
+          "sfmta:4881"
+        ],
+        [
+          "sfmta:4881",
+          "sfmta:5926"
+        ],
+        [
+          "sfmta:5926",
+          "sfmta:4882"
+        ],
+        [
+          "sfmta:4882",
+          "sfmta:4805"
+        ],
+        [
+          "sfmta:4805",
+          "sfmta:4816"
+        ],
+        [
+          "sfmta:4816",
+          "sfmta:4811"
+        ],
+        [
+          "sfmta:4811",
+          "sfmta:7671"
+        ],
+        [
+          "sfmta:7671",
+          "sfmta:4893"
+        ],
+        [
+          "sfmta:4893",
+          "sfmta:4883"
+        ],
+        [
+          "sfmta:4883",
+          "sfmta:4891"
+        ],
+        [
+          "sfmta:4891",
+          "sfmta:4888"
+        ],
+        [
+          "sfmta:4888",
+          "sfmta:4796"
+        ],
+        [
+          "sfmta:4796",
+          "sfmta:4799"
+        ],
+        [
+          "sfmta:4799",
+          "sfmta:7304"
+        ],
+        [
+          "sfmta:7304",
+          "sfmta:6343"
+        ]
+      ],
+      "scale": 1,
+      "comment": "8 Bayshore Speed"
+    },
+    {
+      "type": "adjust-speed",
+      "routes": [
+        "sfmta:1109"
+      ],
+      "hops": [
+        [
+          "sfmta:4882",
+          "sfmta:4805"
+        ],
+        [
+          "sfmta:4805",
+          "sfmta:4816"
+        ],
+        [
+          "sfmta:4816",
+          "sfmta:4811"
+        ],
+        [
+          "sfmta:4811",
+          "sfmta:7671"
+        ],
+        [
+          "sfmta:7671",
+          "sfmta:4893"
+        ],
+        [
+          "sfmta:4893",
+          "sfmta:4883"
+        ],
+        [
+          "sfmta:4883",
+          "sfmta:4891"
+        ],
+        [
+          "sfmta:4891",
+          "sfmta:4888"
+        ],
+        [
+          "sfmta:4888",
+          "sfmta:4796"
+        ],
+        [
+          "sfmta:4796",
+          "sfmta:4799"
+        ],
+        [
+          "sfmta:4799",
+          "sfmta:7304"
+        ],
+        [
+          "sfmta:7304",
+          "sfmta:6343"
+        ],
+        [
+          "sfmta:4900",
+          "sfmta:7300"
+        ],
+        [
+          "sfmta:7300",
+          "sfmta:4798"
+        ],
+        [
+          "sfmta:4798",
+          "sfmta:4795"
+        ],
+        [
+          "sfmta:4795",
+          "sfmta:4894"
+        ],
+        [
+          "sfmta:4894",
+          "sfmta:4889"
+        ],
+        [
+          "sfmta:4889",
+          "sfmta:4890"
+        ],
+        [
+          "sfmta:4890",
+          "sfmta:4884"
+        ],
+        [
+          "sfmta:4884",
+          "sfmta:4892"
+        ],
+        [
+          "sfmta:4892",
+          "sfmta:4886"
+        ],
+        [
+          "sfmta:4886",
+          "sfmta:4810"
+        ],
+        [
+          "sfmta:4810",
+          "sfmta:4879"
+        ],
+        [
+          "sfmta:4879",
+          "sfmta:4803"
+        ],
+        [
+          "sfmta:4803",
+          "sfmta:4881"
+        ]
+      ],
+      "scale": 1,
+      "comment": "8BX Bayshore Speed"
+    }
+  ]
+}

@@ -48,7 +48,7 @@ class Slider extends React.Component {
     else{
     return (
       <div>
-        <span style={{color: "black"}}>{Math.ceil(this.props.headwayTime)} min   <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
+        <span style={{color: "black"}}> {this.props.value} %  <input type="range" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className="isosRange"/></span>
       </div>
     );
     }
