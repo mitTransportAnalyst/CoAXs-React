@@ -174,7 +174,7 @@ class Navbar extends React.Component {
 
 
           <div className="step" ref="target">
-              <a href="https://coaxs-landing-nola.herokuapp.com/" target="_blank" >1 Home Page</a>
+              <a href="http://coaxs.herokuapp.com/landingnola" target="_blank" >1 Home Page</a>
           </div>
 
 
