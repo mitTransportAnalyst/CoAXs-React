@@ -25,7 +25,7 @@ class ScenarioEntry extends React.Component {
     );
 
     const tooltipforHeadwayValue = (
-      <Tooltip id="tooltipforHeadwayValue"><strong>Time Between Buses</strong></Tooltip>
+      <Tooltip id="tooltipforHeadwayValue"><strong>Percent reduction in the average time between buses</strong></Tooltip>
     );
 
     const tooltipforSpeedValue = (

@@ -1116,7 +1116,7 @@ class ScenarioMapPTP extends React.Component {
 
     return (
       <div className={s.map}>
-        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
+        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={10} maxZoom={15}>
           <ZoomControl position="bottomleft"/>
 
           {transitive &&
