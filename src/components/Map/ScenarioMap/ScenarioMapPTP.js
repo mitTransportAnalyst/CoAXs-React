@@ -15,7 +15,9 @@ import GeojsonGeneva from '../../../Data/busline/geneva.geojson'
 
 
 import Baseline from '../../../Data/scenario/Baseline.json'
-
+import VanNessSeed from "../../../Data/scenario/VanNess.json"
+import GearySeed from "../../../Data/scenario/Geary.json"
+import GenevaSeed from "../../../Data/scenario/Geneva.json"
 
 // TAUI
 import TransitiveMapLayer from './transitive-map-layer'
@@ -58,7 +60,6 @@ class ScenarioMapPTP extends React.Component {
   constructor() {
     super();
     this.state = {
-      isPTP: false,
       transitive: null,
       isochrone: null,
       transitive2: null,
@@ -68,7 +69,7 @@ class ScenarioMapPTP extends React.Component {
       key2: null,
       loaded: false,
       origin: {lat: MapLat, lng: MapLng},
-      destination: {lat:INIT_DESTINATION[0], lng:INIT_DESTINATION[1]},
+      destination: {lat: INIT_DESTINATION[0], lng: INIT_DESTINATION[1]},
       originGrid: null,
       destinationGrid: null,
       travelTime: null,
@@ -185,6 +186,7 @@ class ScenarioMapPTP extends React.Component {
     this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff, MAX_UPDATE_INTERVAL_MS);
     this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
     this.updateScneario = this.updateScneario.bind(this);
+    this.updateRequest = this.updateRequest.bind(this);
 
 
     this.bs = new Browsochrones({webpack: true});
@@ -206,6 +208,7 @@ class ScenarioMapPTP extends React.Component {
 
 
   async fetchMetadata() {
+
 
     if (true) {
 
@@ -353,6 +356,8 @@ class ScenarioMapPTP extends React.Component {
 
 
   async moveOrigin(e) {
+    this.updateRequest();
+
     if (this.props.isCompareMode) {
 
 
@@ -624,129 +629,129 @@ class ScenarioMapPTP extends React.Component {
   };
 
   async updateScneario() {
+    this.updateRequest();
 
 
-      if (this.props.isCompareMode) {
+    if (this.props.isCompareMode) {
 
-        let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: 'grant_type=client_credentials'
-        }).then(r => r.json());
+      let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'grant_type=client_credentials'
+      }).then(r => r.json());
 
-        let accessToken = response.access_token;
-        console.log(accessToken);
+      let accessToken = response.access_token;
+      console.log(accessToken);
 
-        this.setState({...this.state, accessToken});
+      this.setState({...this.state, accessToken});
 
-        let {staticRequest} = this.state;
-
-
-        Promise.all([
-          fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-            method: 'POST',
-            body: JSON.stringify({
-              type: 'static-metadata',
-              graphId: TRANSPORT_NETWORK_ID,
-              workerVersion: WORKER_VERSION,
-              request: staticRequest
-            })
-          }).then(res => {
-              console.log(res);
-              return res.json()
-            }
-          ),
-          fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-            method: 'POST',
-            body: JSON.stringify({
-              type: 'static-stop-trees',
-              graphId: TRANSPORT_NETWORK_ID,
-              workerVersion: WORKER_VERSION,
-              request: staticRequest
-            })
-          }).then(res => {
-            console.log(res);
-            return res.arrayBuffer()
-          }),
-          fetch(GRID_URL).then(res => {
-            console.log(res);
-            return res.arrayBuffer()
-          })
-        ])
-          .then(([metadata, stopTrees, grid]) => {
-
-            Promise.all([
-              this.bs2.setQuery(metadata),
-              this.bs2.setStopTrees(stopTrees),
-              this.bs2.setTransitiveNetwork(metadata.transitiveData),
-              this.bs2.putGrid({id: 'jobs', grid: grid}),
+      let {staticRequest} = this.state;
 
 
-            ]).then(() => {
-                console.log("done fetch");
-                this.setState({...this.state, loaded: true});
-              }
-            )
-          });
-
-
-
-        let origin = this.state.origin;
-        let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
-        let {isochroneCutoff} = this.state;
-
-        this.setState({
-          ...this.state,
-          origin,
-          isochrone2: null,
-          transitive2: null,
-          inVehicleTravelTime2: null,
-          travelTime2: null,
-          waitTime2: null,
-          accessibility2: null
-        });
-
-
-        // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      Promise.all([
         fetch(`${BASE_URL}?accessToken=${accessToken}`, {
           method: 'POST',
           body: JSON.stringify({
-            type: 'static',
-            request: staticRequest,
-            workerVersion: WORKER_VERSION,
+            type: 'static-metadata',
             graphId: TRANSPORT_NETWORK_ID,
-            x,
-            y
+            workerVersion: WORKER_VERSION,
+            request: staticRequest
           })
-        }).then(res => res.arrayBuffer())
-          .then(async(buff) => {
-            console.log("generate surface");
-            await this.bs2.setOrigin({data: buff, point: {x, y}});
-            await this.bs2.generateSurface({gridId: 'jobs'});
-            let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
-
-
-            console.log("done isochrone and accessibility");
-            this.props.doneCompareScenario(" ");
-
-            this.setState({
-              ...this.state,
-              isochrone2,
-              key2: uuid.v4(),
-              origin,
-              accessibility2,
-              transitive2: null,
-              inVehicleTravelTime2: null,
-              travelTime2: null,
-              waitTime2: null
-            });
-            this.updateDestination();
-
+        }).then(res => {
+            console.log(res);
+            return res.json()
+          }
+        ),
+        fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: 'static-stop-trees',
+            graphId: TRANSPORT_NETWORK_ID,
+            workerVersion: WORKER_VERSION,
+            request: staticRequest
           })
+        }).then(res => {
+          console.log(res);
+          return res.arrayBuffer()
+        }),
+        fetch(GRID_URL).then(res => {
+          console.log(res);
+          return res.arrayBuffer()
+        })
+      ])
+        .then(([metadata, stopTrees, grid]) => {
 
-      }
+          Promise.all([
+            this.bs2.setQuery(metadata),
+            this.bs2.setStopTrees(stopTrees),
+            this.bs2.setTransitiveNetwork(metadata.transitiveData),
+            this.bs2.putGrid({id: 'jobs', grid: grid}),
+
+
+          ]).then(() => {
+              console.log("done fetch");
+              this.setState({...this.state, loaded: true});
+            }
+          )
+        });
+
+
+      let origin = this.state.origin;
+      let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
+      let {isochroneCutoff} = this.state;
+
+      this.setState({
+        ...this.state,
+        origin,
+        isochrone2: null,
+        transitive2: null,
+        inVehicleTravelTime2: null,
+        travelTime2: null,
+        waitTime2: null,
+        accessibility2: null
+      });
+
+
+      // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          type: 'static',
+          request: staticRequest,
+          workerVersion: WORKER_VERSION,
+          graphId: TRANSPORT_NETWORK_ID,
+          x,
+          y
+        })
+      }).then(res => res.arrayBuffer())
+        .then(async(buff) => {
+          console.log("generate surface");
+          await this.bs2.setOrigin({data: buff, point: {x, y}});
+          await this.bs2.generateSurface({gridId: 'jobs'});
+          let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
+
+
+          console.log("done isochrone and accessibility");
+          this.props.doneCompareScenario(" ");
+
+          this.setState({
+            ...this.state,
+            isochrone2,
+            key2: uuid.v4(),
+            origin,
+            accessibility2,
+            transitive2: null,
+            inVehicleTravelTime2: null,
+            travelTime2: null,
+            waitTime2: null
+          });
+          this.updateDestination();
+
+        })
+
+    }
 
 
     // first get a token
@@ -823,65 +828,65 @@ class ScenarioMapPTP extends React.Component {
 
 
     let origin = this.state.origin;
-      let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
-      let {isochroneCutoff} = this.state;
+    let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
+    let {isochroneCutoff} = this.state;
 
-      this.setState({
-        ...this.state,
-        origin,
-        isochrone: null,
-        transitive: null,
-        inVehicleTravelTime: null,
-        travelTime: null,
-        waitTime: null,
-        accessibility: null
-      });
+    this.setState({
+      ...this.state,
+      origin,
+      isochrone: null,
+      transitive: null,
+      inVehicleTravelTime: null,
+      travelTime: null,
+      waitTime: null,
+      accessibility: null
+    });
 
-      this.props.changeProgress(0.2);
-
-
-      // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-        method: 'POST',
-        body: JSON.stringify({
-          type: 'static',
-          request: staticRequestBase,
-          workerVersion: WORKER_VERSION,
-          graphId: TRANSPORT_NETWORK_ID,
-          x,
-          y
-        })
-      }).then(res => res.arrayBuffer())
-        .then(async(buff) => {
-          console.log("generate surface");
-          this.props.changeProgress(0.8);
-
-          await this.bs.setOrigin({data: buff, point: {x, y}});
-          await this.bs.generateSurface({gridId: 'jobs'});
-          let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
-
-          this.props.changeProgress(0.9);
-
-          console.log("done isochrone and accessibility");
-          this.props.doneOneScenario(" ");
-
-          this.setState({
-            ...this.state,
-            isochrone,
-            key: uuid.v4(),
-            origin,
-            accessibility,
-            transitive: null,
-            inVehicleTravelTime: null,
-            travelTime: null,
-            waitTime: null
-          });
-
-          this.updateDestination();
-          this.props.changeProgress(1);
+    this.props.changeProgress(0.2);
 
 
+    // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+    fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'static',
+        request: staticRequestBase,
+        workerVersion: WORKER_VERSION,
+        graphId: TRANSPORT_NETWORK_ID,
+        x,
+        y
+      })
+    }).then(res => res.arrayBuffer())
+      .then(async(buff) => {
+        console.log("generate surface");
+        this.props.changeProgress(0.8);
+
+        await this.bs.setOrigin({data: buff, point: {x, y}});
+        await this.bs.generateSurface({gridId: 'jobs'});
+        let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
+
+        this.props.changeProgress(0.9);
+
+        console.log("done isochrone and accessibility");
+        this.props.doneOneScenario(" ");
+
+        this.setState({
+          ...this.state,
+          isochrone,
+          key: uuid.v4(),
+          origin,
+          accessibility,
+          transitive: null,
+          inVehicleTravelTime: null,
+          travelTime: null,
+          waitTime: null
         });
+
+        this.updateDestination();
+        this.props.changeProgress(1);
+
+
+      });
   };
 
 
@@ -915,7 +920,6 @@ class ScenarioMapPTP extends React.Component {
       let {x, y} = this.bs2.latLonToOriginPoint({lat: destination.lat, lon: destination.lng});
 
 
-
       let {transitive, travelTime, waitTime, inVehicleTravelTime} = await this.bs2.generateDestinationData({
         from: this.state.originGrid,
         to: {x, y}
@@ -937,8 +941,6 @@ class ScenarioMapPTP extends React.Component {
         key2: uuid.v4()
       })
     }
-
-
 
 
     let destination = e.target.getLatLng();
@@ -1015,7 +1017,6 @@ class ScenarioMapPTP extends React.Component {
 
     const transitiveLayer = new Leaflet.TransitiveLayer(new Transitive({
       data: transitive,
-
     }));
 
     this.setState({
@@ -1030,25 +1031,8 @@ class ScenarioMapPTP extends React.Component {
   }
 
 
-
-
-  componentWillMount() {
-    let mode = false;
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC', {method: 'GET',})
-      .then(res => res.json())
-      .then(res => {
-        if (res[0].count % 2 === 0) {
-          mode = false;
-        } else {
-          mode = true;
-        }
-      })
-      .then(this.setState({...this.state, isPTP: mode}));
-  }
-
   componentDidMount() {
     this.fetchMetadata();
-
   }
 
   componentDidUpdate(nextState) {
@@ -1064,22 +1048,63 @@ class ScenarioMapPTP extends React.Component {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
 
-    if (this.props.fireScenario !== nextProps.fireScenario) {
-      let staticRequest = this.state.staticRequest;
-      staticRequest.request.scenario.modifications = nextProps.fireScenario;
-      staticRequest.request.scenario.id = uuid.v4();
-
-      // staticRequest.jobId = uuid.v4();
-      this.setState({
-        staticRequest,
-      });
-    }
-
     if (this.props.updateButtonState !== nextProps.updateButtonState) {
+      this.updateRequest();
       this.updateScneario();
     }
   }
 
+
+  updateRequest() {
+    let staticRequest = this.state.staticRequest;
+    let scenarioJSON = [];
+    let scenarioStore = this.props.scenarioStore;
+    VanNessSeed.modifications.forEach(function (route) {
+      if (route.type === "adjust-frequency") {
+        route.entries.forEach(function (entry) {
+          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].A.headway) * 0.01);
+        });
+        scenarioJSON.push(route);
+      }
+      if (route.type === "adjust-speed") {
+        route.scale = 1 + parseInt(scenarioStore[1].A.speed) * 0.01;
+        scenarioJSON.push(route);
+      }
+    });
+    GearySeed.modifications.forEach(function (route) {
+      if (route.type === "adjust-frequency") {
+        route.entries.forEach(function (entry) {
+          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].B.headway) * 0.01);
+        });
+        scenarioJSON.push(route);
+      }
+      if (route.type === "adjust-speed") {
+        route.scale = 1 + parseInt(scenarioStore[1].B.speed) * 0.01;
+        scenarioJSON.push(route);
+      }
+    });
+    GenevaSeed.modifications.forEach(function (route) {
+      if (route.type === "adjust-frequency") {
+        route.entries.forEach(function (entry) {
+          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].C.headway) * 0.01);
+        });
+        scenarioJSON.push(route);
+      }
+      if (route.type === "adjust-speed") {
+        route.scale = 1 + parseInt(scenarioStore[1].C.speed) * 0.01;
+        scenarioJSON.push(route);
+      }
+    });
+
+    staticRequest.request.scenario.modifications = scenarioJSON;
+    staticRequest.request.scenario.id = uuid.v4();
+
+    this.setState({
+      staticRequest,
+    });
+
+
+  }
 
   render() {
     let {transitive, transitive2, transitiveLayer, isochrone, isochrone2, key, key2, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, accessibility2, isochroneCutoff} = this.state;
@@ -1115,7 +1140,6 @@ class ScenarioMapPTP extends React.Component {
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-
 
 
           <Marker
@@ -1220,6 +1244,7 @@ function mapStateToProps(state) {
     currentCorridor: state.reducer.currentCor,
     currentBusline: state.BuslineSelectedStore,
     updateButtonState: state.updateButtonState,
+    scenarioStore: state.scenarioStore,
   }
 }
 

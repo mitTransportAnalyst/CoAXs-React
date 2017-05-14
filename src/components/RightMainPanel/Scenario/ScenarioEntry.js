@@ -28,8 +28,8 @@ class ScenarioEntry extends React.Component {
       <Tooltip id="tooltipforHeadwayValue"><strong>Time Between Buses</strong></Tooltip>
     );
 
-    const tooltipforBuses = (
-      <Tooltip id="tooltipforBuses"><strong>Number of vehicles needed</strong></Tooltip>
+    const tooltipforSpeedValue = (
+      <Tooltip id="tooltipforSpeedValue"><strong>Percent improvement in Bus Speed</strong></Tooltip>
     );
 
     var ScenarioValue = Object.keys(this.props.data).map((corridorKey) => {
@@ -45,12 +45,12 @@ class ScenarioEntry extends React.Component {
             <small style={{fontSize: 14,}}>
 
               <OverlayTrigger placement="bottom" overlay={tooltipforHeadwayValue}>
-                <span>Time: +{Math.ceil(this.props.data[corridorKey].headway)}%</span>
+                <span>Time: -{Math.ceil(this.props.data[corridorKey].headway)}%</span>
               </OverlayTrigger>
 
               |
 
-              <OverlayTrigger placement="bottom" overlay={tooltipforBuses}>
+              <OverlayTrigger placement="bottom" overlay={tooltipforSpeedValue}>
                 <span>Speed: +{Math.ceil(this.props.data[corridorKey].speed)}% </span>
               </OverlayTrigger>
 

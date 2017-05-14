@@ -12,12 +12,6 @@ class lefttopPanel extends React.Component {
         <h4 className="topleftText">
           {IntroTitle}
         </h4>
-        {/*<div className="topinfo container">*/}
-          {/*<div>*/}
-            {/*<h5>{IntroDescription}</h5>*/}
-          {/*</div>*/}
-
-        {/*</div>*/}
       </div>
     );
   }

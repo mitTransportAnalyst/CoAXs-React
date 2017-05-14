@@ -554,9 +554,6 @@ class ScenarioMap extends React.Component {
   }
 
 
-  componentWillMount() {
-
-  }
 
   componentDidMount() {
     this.fetchMetadata();
@@ -573,16 +570,6 @@ class ScenarioMap extends React.Component {
     if (this.props.currentTimeFilter !== nextProps.currentTimeFilter & this.state.key != null) {
       this.changeIsochroneCutoff(nextProps.currentTimeFilter);
     }
-
-    // if (this.props.fireScenario !== nextProps.fireScenario) {
-    //   let staticRequest = this.state.staticRequest;
-    //   staticRequest.request.scenario.modifications = nextProps.fireScenario;
-    //   staticRequest.request.scenario.id = uuid.v4();
-    //
-    //   this.setState({
-    //     staticRequest,
-    //   });
-    // }
 
     if (this.props.isCompareMode !== nextProps.isCompareMode) {
       this.setState({
@@ -651,9 +638,6 @@ class ScenarioMap extends React.Component {
     this.setState({
       staticRequest,
     });
-
-    console.log(scenarioJSON)
-
 
   }
 

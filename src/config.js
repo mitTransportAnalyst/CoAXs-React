@@ -7,7 +7,7 @@
 /** Introduction title on the left
  * @type {string} IntroTitle
  */
-export const IntroTitle = "CoAXs | New Orleans";
+export const IntroTitle = "CoAXs | San Francisco";
 
 /** Introduction description on the left
  * @type {string} IntroDescription
@@ -66,8 +66,8 @@ export const BaselineBuses = {
 
 
 export const FormControlID = {
-  ptpEntry: "control28805034",
-  singleEntry: "control28770612",
+  ptpEntry: "control28770696",
+  singleEntry: "control28891971",
   exit: "control28766436",
 };
 

@@ -91,8 +91,12 @@ class ServiceEditor extends React.Component {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
 
     const tooltipforHeadway = (
-      <Tooltip id="tooltipforHeadway"><strong>Refers to the average amount of time between buses at a
-        stop</strong></Tooltip>
+      <Tooltip id="tooltipforHeadway"><strong>Refers to the percent improvement in time between buses. Dragging the slider to the right will reduce the average time between buses by that percentage</strong></Tooltip>
+    );
+
+
+    const tooltipforSpeed = (
+      <Tooltip id="tooltipforSpeed"><strong>Refers to the average speed of the bus along the highlighted corridor. When Pittsburgh implemented a BRT corridor, they saw bus speeds go up 40%</strong></Tooltip>
     );
     return (
       <div className="serviceEditorPanel">
@@ -103,7 +107,7 @@ class ServiceEditor extends React.Component {
           <div className="setTimesTitle">
             <OverlayTrigger placement="bottom" overlay={tooltipforHeadway}>
               <div className="subHead">
-                Time Between Buses
+                Improved Time Between Buses
               </div>
             </OverlayTrigger>
 
@@ -123,7 +127,7 @@ class ServiceEditor extends React.Component {
 
 
           <div className="setTimesTitle">
-            <OverlayTrigger placement="bottom" overlay={tooltipforHeadway}>
+            <OverlayTrigger placement="bottom" overlay={tooltipforSpeed}>
               <div className="subHead">
                 Bus Speed
               </div>

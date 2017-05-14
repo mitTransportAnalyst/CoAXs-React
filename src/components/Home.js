@@ -35,10 +35,10 @@ class Home extends React.Component {
     }
     return (
       <div className="page-home">
-        {/*<Navbar/>*/}
+        <Navbar/>
         <TopleftPanel/>
         <MapLegend/>
-        {/*{this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}*/}
+        {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
         <div className={this.props.currentMap ? 'hidden2' : ""}>
           <ScenarioMap />
         </div>

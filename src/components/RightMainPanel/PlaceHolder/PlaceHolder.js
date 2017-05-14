@@ -60,7 +60,7 @@ class PlaceHolder extends React.Component {
       <div className={placeHolderStyle}>
 
         <h4 ref="placeholderText" className={placeHolderWordStyle} onClick={this.handleClickPlaceHolder}>
-          Click here to go to Step 3 and active this component
+          Click here to go to Step 3
         </h4>
 
 

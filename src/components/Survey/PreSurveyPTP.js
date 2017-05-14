@@ -11,7 +11,7 @@ import "./PreSurvey.css"
 class PreSurveyPTP extends React.Component {
 
   componentDidMount(){
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"NOLA"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'PUT',    headers: {
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"SF"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'PUT',    headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, body:JSON.stringify({"$inc":{"count":1}})});
@@ -19,7 +19,7 @@ class PreSurveyPTP extends React.Component {
 
   render() {
     console.log(this.props.location.query.email);
-    let formurl = `https://www.123contactform.com/sf.php?s=123contactform-2679634&control28805034=${this.props.location.query.email}`;
+    let formurl = `https://www.123contactform.com/sf.php?s=123contactform-2677289&control28770696=${this.props.location.query.email}`;
 
 
 
