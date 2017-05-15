@@ -27,9 +27,11 @@ class Home extends React.Component {
 
 
   componentDidMount() {
+    smartlook('tag', 'websiteName', 'NOLACoAXs-ACC');
 
     if (this.props.location.query[FormControlID.singleEntry] !== undefined){
-      this.props.addEmail(this.props.location.query[FormControlID.singleEntry])
+      this.props.addEmail(this.props.location.query[FormControlID.singleEntry]);
+      smartlook('tag', 'email', this.props.location.query[FormControlID.ptpEntry]);
     }
 
     fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
@@ -45,8 +47,8 @@ class Home extends React.Component {
         'Content-Type': 'application/json'
       }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"NOLA", "type":"exit", "navState":this.props.navState})});
 
-      ev.preventDefault();
-      return ev.returnValue = 'Are you sure you want to close?';
+      // ev.preventDefault();
+      // return ev.returnValue = 'Are you sure you want to close?';
     });
 
   }
@@ -56,7 +58,6 @@ class Home extends React.Component {
 
   render() {
 
-    smartlook('tag', 'websiteName', 'NOLACoAXs');
 
 
 

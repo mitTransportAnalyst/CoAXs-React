@@ -26,9 +26,11 @@ import * as actionCreators from '../reducers/action';
 
 class PointToPoint extends React.Component {
   componentDidMount(){
-    //TODO make make it in config.js
+    smartlook('tag', 'websiteName', 'NOLACoAXs-PTP');
+
     if (this.props.location.query[FormControlID.ptpEntry] !== undefined){
-      this.props.addEmail(this.props.location.query[FormControlID.ptpEntry])
+      this.props.addEmail(this.props.location.query[FormControlID.ptpEntry]);
+      smartlook('tag', 'email', this.props.location.query[FormControlID.ptpEntry]);
     }
 
     fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
@@ -44,8 +46,8 @@ class PointToPoint extends React.Component {
         'Content-Type': 'application/json'
       }, body:JSON.stringify({"time":Date() ,"email":this.props.emailStore, "ptp": true, "city":"NOLA", "type":"exit", "navState":this.props.navState})});
 
-      ev.preventDefault();
-      return ev.returnValue = 'Are you sure you want to close?';
+      // ev.preventDefault();
+      // return ev.returnValue = 'Are you sure you want to close?';
     });
 
   }
@@ -53,8 +55,6 @@ class PointToPoint extends React.Component {
 
   render() {
 
-    //TODO Smartlook
-    smartlook('tag', 'websiteName', 'NOLACoAXs');
 
     return (
       <div className="page-home">
