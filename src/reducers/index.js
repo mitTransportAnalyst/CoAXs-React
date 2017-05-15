@@ -148,7 +148,7 @@ function updateButtonState(state = true, action) {
 }
 
 
-function isCompare(state = false, action) {
+function isCompare(state = {isCompare: false}, action) {
   switch (action.type) {
     case 'isCompare':
       return {
@@ -175,7 +175,7 @@ function BuslineSelectedStore(state = initialBuslineState, action) {
 
 
 const initialNavState = {
-  isdonePreSurvey: false,
+  isdonePreSurvey: true,
   isdoneOneScenario: false,
   isdoneCompareScenario: false,
   isdoneExitSurvey: false

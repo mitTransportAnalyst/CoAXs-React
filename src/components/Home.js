@@ -24,15 +24,42 @@ import * as actionCreators from '../reducers/action';
 
 class Home extends React.Component {
 
-  render() {
 
-    //TODO Smartlook
-    // smartlook('tag', 'websiteName', 'NOLACoAXs');
 
+  componentDidMount() {
 
     if (this.props.location.query[FormControlID.singleEntry] !== undefined){
       this.props.addEmail(this.props.location.query[FormControlID.singleEntry])
     }
+
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"NOLA", "type":"start"})});
+
+
+    window.addEventListener("beforeunload", (ev) =>
+    {
+      fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"NOLA", "type":"exit", "navState":this.props.navState})});
+
+      ev.preventDefault();
+      return ev.returnValue = 'Are you sure you want to close?';
+    });
+
+  }
+
+
+
+
+  render() {
+
+    smartlook('tag', 'websiteName', 'NOLACoAXs');
+
+
+
     return (
       <div className="page-home">
         <Navbar/>
@@ -55,6 +82,8 @@ function mapStateToProps(state) {
   return {
     currentMap: state.reducer.currentMap,
     loadingProgress: state.loadingProgress,
+    navState: state.navState,
+    emailStore: state.emailStore,
   }
 }
 

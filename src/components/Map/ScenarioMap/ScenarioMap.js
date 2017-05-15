@@ -300,6 +300,12 @@ class ScenarioMap extends React.Component {
 
 
   moveOrigin(e) {
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false,"city":"NOLA", origin:this.state.origin, "type":"moveOrigin", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+
+
     if (this.props.isCompareMode) {
       let origin = e.target.getLatLng();
       console.log(origin)
@@ -432,6 +438,12 @@ class ScenarioMap extends React.Component {
   };
 
   updateScneario() {
+
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"NOLA", origin:this.state.origin, "type":"updateScenario", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+
     if (this.props.isCompareMode) {
       let origin = this.state.origin;
       let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
@@ -573,17 +585,17 @@ class ScenarioMap extends React.Component {
 
 
   componentWillMount() {
-    let mode = false;
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC', {method: 'GET',})
-      .then(res => res.json())
-      .then(res => {
-        if (res[0].count % 2 === 0) {
-          mode = false;
-        } else {
-          mode = true;
-        }
-      })
-      .then(this.setState({...this.state, isPTP: mode}));
+    // let mode = false;
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/user?q={"city":"Boston"}&apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC', {method: 'GET',})
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     if (res[0].count % 2 === 0) {
+    //       mode = false;
+    //     } else {
+    //       mode = true;
+    //     }
+    //   })
+    //   .then(this.setState({...this.state, isPTP: mode}));
   }
 
   componentDidMount() {
@@ -594,6 +606,7 @@ class ScenarioMap extends React.Component {
   componentDidUpdate(nextState) {
     if (this.state.accessibility !== nextState.accessibility) {
       this.props.changeGridNumber([this.state.accessibility, this.state.accessibility2])
+
     }
   }
 
@@ -639,14 +652,6 @@ class ScenarioMap extends React.Component {
       <div className={s.map}>
         <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
           <ZoomControl position="bottomleft"/>
-
-          {/*{transitive &&*/}
-          {/*<TransitiveMapLayer*/}
-          {/*data={transitive}*/}
-          {/*styles={transitiveStyle}*/}
-          {/*key={`transitive-${key}`}*/}
-          {/*/>*/}
-          {/*}*/}
 
 
           <TileLayer
@@ -705,13 +710,6 @@ class ScenarioMap extends React.Component {
             onDragend={this.moveOrigin}
             ref='markerOrigin'
           />
-
-          {/*<Marker*/}
-          {/*position={destination}*/}
-          {/*draggable = {true}*/}
-          {/*onDragend={this.moveDestination}*/}
-          {/*ref='markerDestination'*/}
-          {/*/>*/}
 
 
           {
@@ -938,6 +936,8 @@ function mapStateToProps(state) {
     currentCorridor: state.reducer.currentCor,
     currentBusline: state.BuslineSelectedStore,
     updateButtonState: state.updateButtonState,
+    emailStore: state.emailStore,
+    scenarioStore: state.scenarioStore,
   }
 }
 

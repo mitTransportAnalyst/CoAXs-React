@@ -46,7 +46,7 @@ class ScenarioEditor extends React.Component {
             Object.values(corridorInfo).map((corridor) => {
               if (this.props.currentCorridor === corridor.id) {
                 return (
-                  <div className="btn routeItem" key={corridor.id}
+                  <div className="btn routeItemSel" key={corridor.id}
                        style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize:12}}
                        onClick={()=>this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}

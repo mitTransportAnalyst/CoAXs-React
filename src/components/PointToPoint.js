@@ -30,13 +30,31 @@ class PointToPoint extends React.Component {
     if (this.props.location.query[FormControlID.ptpEntry] !== undefined){
       this.props.addEmail(this.props.location.query[FormControlID.ptpEntry])
     }
+
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body:JSON.stringify({"time":Date() ,"email":this.props.emailStore, "ptp": true, "city":"NOLA", "type":"start", "navState":this.props.navState})});
+
+
+    window.addEventListener("beforeunload", (ev) =>
+    {
+      fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body:JSON.stringify({"time":Date() ,"email":this.props.emailStore, "ptp": true, "city":"NOLA", "type":"exit", "navState":this.props.navState})});
+
+      ev.preventDefault();
+      return ev.returnValue = 'Are you sure you want to close?';
+    });
+
   }
 
 
   render() {
 
     //TODO Smartlook
-    // smartlook('tag', 'websiteName', 'NOLACoAXs');
+    smartlook('tag', 'websiteName', 'NOLACoAXs');
 
     return (
       <div className="page-home">
@@ -60,7 +78,8 @@ function mapStateToProps(state) {
   return {
     currentMap: state.reducer.currentMap,
     loadingProgress: state.loadingProgress,
-
+    navState: state.navState,
+    emailStore: state.emailStore,
   }
 }
 
