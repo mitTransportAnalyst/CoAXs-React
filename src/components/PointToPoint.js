@@ -26,11 +26,11 @@ import * as actionCreators from '../reducers/action';
 
 class PointToPoint extends React.Component {
   componentDidMount(){
-    smartlook('tag', 'websiteName', 'NOLACoAXs-PTP');
+    // smartlook('tag', 'websiteName', 'NOLACoAXs-PTP');
 
     if (this.props.location.query[FormControlID.ptpEntry] !== undefined){
       this.props.addEmail(this.props.location.query[FormControlID.ptpEntry]);
-      smartlook('tag', 'email', this.props.location.query[FormControlID.ptpEntry]);
+      // smartlook('tag', 'email', this.props.location.query[FormControlID.ptpEntry]);
     }
 
     fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {

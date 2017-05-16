@@ -27,11 +27,11 @@ class Home extends React.Component {
 
 
   componentDidMount() {
-    smartlook('tag', 'websiteName', 'NOLACoAXs-ACC');
+    // smartlook('tag', 'websiteName', 'NOLACoAXs-ACC');
 
     if (this.props.location.query[FormControlID.singleEntry] !== undefined){
       this.props.addEmail(this.props.location.query[FormControlID.singleEntry]);
-      smartlook('tag', 'email', this.props.location.query[FormControlID.ptpEntry]);
+      // smartlook('tag', 'email', this.props.location.query[FormControlID.ptpEntry]);
     }
 
     fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {

@@ -117,7 +117,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 220,
+          monteCarloDraws: 720,
           scenario: {id: 999},
         }
       },
@@ -149,7 +149,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 220,
+          monteCarloDraws: 720,
           scenario: {
             id: uuid.v4(), modifications: Baseline.modifications
           },
@@ -183,7 +183,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 220,
+          monteCarloDraws: 720,
           scenario: {id: uuid.v4(), modifications: Baseline.modifications},
         }
       },
