@@ -18,10 +18,10 @@ const router = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
     <Route path="/" >
       <IndexRoute component={Home}/>
-      <Route path="/main/sf/accessibility" component={Home}/>
-      <Route path="/main/sf/point2point" component={PointToPoint}/>
-      <Route path="/main/sf/presurveyaccess" component={PreSurveyAccess} />
-      <Route path="/main/sf/presurveyptp" component={PreSurveyPTP} />
+      <Route path="/main/atl/accessibility" component={Home}/>
+      <Route path="/main/atl/point2point" component={PointToPoint}/>
+      <Route path="/main/atl/presurveyaccess" component={PreSurveyAccess} />
+      <Route path="/main/atl/presurveyptp" component={PreSurveyPTP} />
 
       <Route path="*" component={NotFound}/>
     </Route>

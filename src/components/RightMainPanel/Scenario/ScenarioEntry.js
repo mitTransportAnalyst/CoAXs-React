@@ -20,39 +20,28 @@ class ScenarioEntry extends React.Component {
   render() {
 
 
-    const tooltipforAlter = (
-      <Tooltip id="tooltipforAlter"><strong>Route Alternative</strong></Tooltip>
+    const tooltipforSwitch = (
+      <Tooltip id="tooltipforSwitch"><strong>Turn on or turn off</strong></Tooltip>
     );
 
-    const tooltipforHeadwayValue = (
-      <Tooltip id="tooltipforHeadwayValue"><strong>Percent reduction in the average time between buses</strong></Tooltip>
-    );
-
-    const tooltipforSpeedValue = (
-      <Tooltip id="tooltipforSpeedValue"><strong>Percent improvement in Bus Speed</strong></Tooltip>
-    );
 
     var ScenarioValue = Object.keys(this.props.data).map((corridorKey) => {
 
         return (
 
-          <div style={{width: 150, position: "relative", marginTop: 2, marginLeft: 8}} key={corridorKey}>
+          <div style={{width: 150, position: "relative", marginLeft: 2, height: 20}} key={corridorKey}>
             <div className="square"
-                 style={{padding: 3, fontSize: 13, color: "white", backgroundColor: CorridorInfo[corridorKey].color}}>
+                 style={{fontSize: 13, color: "white", backgroundColor: CorridorInfo[corridorKey].color}}>
               {CorridorInfo[corridorKey].name}
             </div>
 
             <small style={{fontSize: 14,}}>
 
-              <OverlayTrigger placement="bottom" overlay={tooltipforHeadwayValue}>
-                <span>Time: -{Math.ceil(this.props.data[corridorKey].headway)}%</span>
-              </OverlayTrigger>
+              {/*<OverlayTrigger placement="bottom">*/}
+                <span>{this.props.data[corridorKey].active? "On": "Off"}</span>
 
-              |
+              {/*</OverlayTrigger>*/}
 
-              <OverlayTrigger placement="bottom" overlay={tooltipforSpeedValue}>
-                <span>Speed: +{Math.ceil(this.props.data[corridorKey].speed)}% </span>
-              </OverlayTrigger>
 
             </small>
           </div>

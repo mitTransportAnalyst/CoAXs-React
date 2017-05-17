@@ -6,15 +6,6 @@
 
 }
 
-/*.colHead {*/
-  /*background-color: #b4b4b4;*/
-  /*height: 20px;*/
-  /*vertical-align: middle;*/
-  /*text-align: center;*/
-  /*color: #FFFFFF;*/
-
-/*}*/
-
 
 .colHead{
   height: 24px;
@@ -32,16 +23,32 @@
 }
 
 .routesContainer {
-  height: 30px;
+  height: 65px;
   width: 100%;
 }
 
 .routeItem {
   color: #FFFFFF;
   font-size: 14px;
-  width: 33.33333%;
-  height: 100%;
+  padding: 4px;
+  width: 33.3333%;
+  height: 30px;
   vertical-align: middle;
   text-align: center;
+}
 
+
+.routeItemSel {
+  border: 3px solid #eec16f;
+  padding: 3px;
+}
+
+.routeInfill{
+  color: #FFFFFF;
+  font-size: 14px;
+  width: 50%;
+  height: 30px;
+  padding: 4px;
+  vertical-align: middle;
+  text-align: center;
 }

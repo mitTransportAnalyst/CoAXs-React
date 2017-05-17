@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-84.4244384765625,33.76362918406904]},"properties":{"id":"ifb","name":"Boone Station"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[-84.36487197875977,33.75317514689363]},"properties":{"id":"ifh","name":"Hulsey/Krog Station"}}]}

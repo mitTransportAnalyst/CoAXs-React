@@ -1,0 +1,19 @@
+{
+  "id": 0,
+  "description": "full_atlanta",
+  "feedChecksums": {
+    "BASEMARTA": 2529300899,
+    "New_Street_Car": 2158692110,
+    "Street_Car": 3046420395,
+    "BRT_AND_Infills": 1359235446
+  },
+  "modifications": [
+    {
+      "type": "remove-trips",
+      "routes": [
+        "BRT_AND_Infills:ROUTE_23c33ec8-57c4-4777-bc0d-b9248a2db368"
+      ],
+      "comment": "Northside"
+    }
+  ]
+}

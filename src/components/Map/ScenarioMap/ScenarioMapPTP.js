@@ -3,21 +3,23 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
-import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer} from 'react-leaflet';
+import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer,CircleMarker} from 'react-leaflet';
 import Leaflet from 'leaflet'
 import {divIcon} from 'leaflet';
 
 import s from "./ScenarioMap.css"
 import {MapLat, MapLng, ZoomLevel, Tile, CorridorInfo} from "../../../config"
-import GeojsonVanNess from '../../../Data/busline/vanNess.geojson'
-import GeojsonGeary from '../../../Data/busline/geary.geojson'
-import GeojsonGeneva from '../../../Data/busline/geneva.geojson'
+import GeojsonCampbellton from '../../../Data/busline/Campbellton.geojson'
+import GeojsonNorthside from '../../../Data/busline/Northside.geojson'
+import GeojsonStreetcar from '../../../Data/busline/Streetcar.geojson'
 
 
 import Baseline from '../../../Data/scenario/Baseline.json'
-import VanNessSeed from "../../../Data/scenario/VanNess.json"
-import GearySeed from "../../../Data/scenario/Geary.json"
-import GenevaSeed from "../../../Data/scenario/Geneva.json"
+import CampbelltonSeed from "../../../Data/scenario/Campbellton.json"
+import NorthsideSeed from "../../../Data/scenario/Northside.json"
+import StreetcarSeed from "../../../Data/scenario/Streetcar.json"
+import InfillGreenSeed from "../../../Data/scenario/InfillGreen.json"
+import InfillRedSeed from "../../../Data/scenario/InfillRed.json"
 
 // TAUI
 import TransitiveMapLayer from './transitive-map-layer'
@@ -79,7 +81,7 @@ class ScenarioMapPTP extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-05-09',
+          date: '2017-04-11',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -111,7 +113,7 @@ class ScenarioMapPTP extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-05-09',
+          date: '2017-04-11',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -147,7 +149,7 @@ class ScenarioMapPTP extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-05-09',
+          date: '2017-04-11',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -1058,43 +1060,38 @@ class ScenarioMapPTP extends React.Component {
   updateRequest() {
     let staticRequest = this.state.staticRequest;
     let scenarioJSON = [];
-    let scenarioStore = this.props.scenarioStore;
-    VanNessSeed.modifications.forEach(function (route) {
-      if (route.type === "adjust-frequency") {
-        route.entries.forEach(function (entry) {
-          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].A.headway) * 0.01);
-        });
+    let scenarioStore = this.props.scenarioStore[1];
+
+    if (!scenarioStore.A.active){
+      CampbelltonSeed.modifications.forEach(function (route) {
         scenarioJSON.push(route);
-      }
-      if (route.type === "adjust-speed") {
-        route.scale = 1 + parseInt(scenarioStore[1].A.speed) * 0.01;
+      });
+    }
+
+    if (!scenarioStore.B.active){
+      NorthsideSeed.modifications.forEach(function (route) {
         scenarioJSON.push(route);
-      }
-    });
-    GearySeed.modifications.forEach(function (route) {
-      if (route.type === "adjust-frequency") {
-        route.entries.forEach(function (entry) {
-          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].B.headway) * 0.01);
-        });
+      });
+    }
+
+    if (!scenarioStore.C.active){
+      StreetcarSeed.modifications.forEach(function (route) {
         scenarioJSON.push(route);
-      }
-      if (route.type === "adjust-speed") {
-        route.scale = 1 + parseInt(scenarioStore[1].B.speed) * 0.01;
+      });
+    }
+
+    if (!scenarioStore.D.active){
+      InfillGreenSeed.modifications.forEach(function (route) {
         scenarioJSON.push(route);
-      }
-    });
-    GenevaSeed.modifications.forEach(function (route) {
-      if (route.type === "adjust-frequency") {
-        route.entries.forEach(function (entry) {
-          entry.headwaySecs = entry.headwaySecs * (1 - parseInt(scenarioStore[1].C.headway) * 0.01);
-        });
+      });
+    }
+
+    if (!scenarioStore.E.active){
+      InfillRedSeed.modifications.forEach(function (route) {
         scenarioJSON.push(route);
-      }
-      if (route.type === "adjust-speed") {
-        route.scale = 1 + parseInt(scenarioStore[1].C.speed) * 0.01;
-        scenarioJSON.push(route);
-      }
-    });
+      });
+    }
+
 
     staticRequest.request.scenario.modifications = scenarioJSON;
     staticRequest.request.scenario.id = uuid.v4();
@@ -1160,74 +1157,55 @@ class ScenarioMapPTP extends React.Component {
           />
 
           {
-            this.props.currentCorridor === "A" &&
-            <GeoJson data={GeojsonVanNess} key={"VanNess"} style={{
+            this.props.scenarioStore[1].A.active  &&
+            <GeoJson data={GeojsonCampbellton} key={"Campbellton"} style={{
               color: CorridorInfo["A"].color,
               weight: 8,
               opacity: 1
             }}
             />
-
           }
 
           {
-            this.props.currentCorridor != "A" &&
-            <GeoJson data={GeojsonVanNess} key={"VanNess2"} style={{
-              color: CorridorInfo["A"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "B" &&
-            <GeoJson data={GeojsonGeary} key={"Geary"} style={{
+            this.props.scenarioStore[1].B.active  &&
+            <GeoJson data={GeojsonNorthside} key={"Northside"} style={{
               color: CorridorInfo["B"].color,
               weight: 8,
               opacity: 1
             }}
             />
-
           }
 
-
           {
-            this.props.currentCorridor != "B" &&
-            <GeoJson data={GeojsonGeary} key={"Geary2"} style={{
-              color: CorridorInfo["B"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
-          }
-
-
-          {
-            this.props.currentCorridor === "C" &&
-            <GeoJson data={GeojsonGeneva} key={"Geneva"} style={{
+            this.props.scenarioStore[1].C.active  &&
+            <GeoJson data={GeojsonStreetcar} key={"Streetcar"} style={{
               color: CorridorInfo["C"].color,
               weight: 8,
               opacity: 1
             }}
             />
-
           }
 
-
-          {
-            this.props.currentCorridor != "C" &&
-            <GeoJson data={GeojsonGeneva} key={"Geneva2"} style={{
-              color: CorridorInfo["C"].color,
-              weight: 5,
-              opacity: 0.5
-            }}
-            />
-
+          {this.props.scenarioStore[1].D.active &&
+          <CircleMarker center={[33.76362918406904, -84.4244384765625]} radius={10} color={CorridorInfo["D"].color}/>
           }
+
+          {this.props.scenarioStore[1].D.active &&
+          <CircleMarker center={[33.75317514689363, -84.36487197875977]} radius={10} color={CorridorInfo["D"].color}/>
+          }
+
+          {this.props.scenarioStore[1].E.active &&
+          <CircleMarker center={[33.813, -84.3755]} radius={10} color={CorridorInfo["E"].color}/>
+          }
+
+          {this.props.scenarioStore[1].E.active &&
+          <CircleMarker center={[33.74214885967333, -84.40310955047607]} radius={10} color={CorridorInfo["E"].color}/>
+          }
+
+          {this.props.scenarioStore[1].E.active &&
+          <CircleMarker center={[33.72805170329976, -84.41679954528807]} radius={10} color={CorridorInfo["E"].color}/>
+          }
+
 
 
         </Map>

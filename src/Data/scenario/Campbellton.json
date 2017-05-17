@@ -1,0 +1,19 @@
+{
+  "id": 0,
+  "description": "full_atlanta",
+  "feedChecksums": {
+    "BASEMARTA": 2529300899,
+    "New_Street_Car": 2158692110,
+    "Street_Car": 3046420395,
+    "BRT_AND_Infills": 1359235446
+  },
+  "modifications": [
+    {
+      "type": "remove-trips",
+      "routes": [
+        "BRT_AND_Infills:ROUTE_4287cea8-a2d9-4b3a-a2e1-030f691ffb3c"
+      ],
+      "comment": "Campbelton"
+    }
+  ]
+}

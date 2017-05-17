@@ -55,27 +55,49 @@ class LegendPTP extends React.Component {
             <div className={legendPanelClass}>
               <div>
                 <svg height="10" width="20">
-                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#555555", strokeWidth: 5}}/>
+                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#2eadd3", strokeWidth: 5}}/>
                 </svg>
-                <small className="panel-word">Van Ness</small>
+                <small className="panel-word">Campbellton BRT</small>
               </div>
 
 
               <div>
                 <svg height="10" width="20">
-                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#2eadd3", strokeWidth: 5}}/>
+                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#555555", strokeWidth: 5}}/>
                 </svg>
-                <small className="panel-word">Geary</small>
+                <small className="panel-word">Northside Drive BRT</small>
               </div>
 
               <div>
                 <svg height="10" width="20">
                   <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#8d6aa8", strokeWidth: 5}}/>
                 </svg>
-                <small className="panel-word">Geneva</small>
+                <small className="panel-word">Streetcar Extension</small>
               </div>
 
 
+              <div>
+                <svg height="10" width="20">
+                  <circle cx="10" cy="5" r="5" stroke="#37bf86" strokeWidth="1"  fill="#37bf86" />
+                </svg>
+                <small className="panel-word">Infill Stations on Green Line</small>
+              </div>
+
+
+              <div>
+                <svg height="10" width="20">
+                  <circle cx="10" cy="5" r="5" stroke="#ed4267" strokeWidth="1"  fill="#ed4267" />
+                </svg>
+                <small className="panel-word">Infill Stations on Red Line</small>
+              </div>
+
+
+              <div>
+                <svg height="10" width="20">
+                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#f1d3e9", strokeWidth: 2}}/>
+                </svg>
+                <small className="panel-word">Transit network</small>
+              </div>
 
             </div>
 

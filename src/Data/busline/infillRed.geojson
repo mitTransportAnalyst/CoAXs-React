@@ -1,0 +1,2 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-84.3755,33.813]},"properties":{"id":"ifa","name":"Armour Station"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[-84.40310955047607,33.74214885967333]},"properties":{"id":"ifme","name":"Mechanicsville Station"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[-84.41679954528807,33.72805170329976]},"properties":{"id":"ifmu","name":"Murphy Crossing Station"}}]}

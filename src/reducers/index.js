@@ -41,32 +41,36 @@ function reducer(state = initialState, action) {
  */
 function scenarioStore(state = [{
   A: {
-    headway: 0,
-    speed: 0
+    active:false,
   },
   B: {
-    headway: 0,
-    speed: 0
-
+    active:false,
   },
   C: {
-    headway: 0,
-    speed: 0
+    active:false,
   },
+  D: {
+    active:false,
+  },
+  E: {
+    active:false,
+  },
+
 }, {
   A: {
-    headway: 0,
-    speed: 0
+    active:false,
   },
   B: {
-    headway: 0,
-    speed: 0
-
+    active:false,
   },
   C: {
-    headway: 0,
-    speed: 0
-
+    active:false,
+  },
+  D: {
+    active:false,
+  },
+  E: {
+    active:false,
   },
 }], action) {
   switch (action.type) {

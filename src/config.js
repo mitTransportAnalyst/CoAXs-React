@@ -7,7 +7,7 @@
 /** Introduction title on the left
  * @type {string} IntroTitle
  */
-export const IntroTitle = "CoAXs | San Francisco";
+export const IntroTitle = "CoAXs | Atlanta";
 
 /** Introduction description on the left
  * @type {string} IntroDescription
@@ -18,12 +18,12 @@ export const IntroDescription = "Showing door-to-door travel, with public transi
 /** Center latitude of map
  * @type {number} MapLat
  */
-export const MapLat =  37.773972;
+export const MapLat =  33.7490;
 
 /** Center longitude of map
  * @type {number} MapLat
  */
-export const MapLng = -122.431297;
+export const MapLng =  -84.387314;
 
 /** zoom level of map
  * @type {number} ZoomLevel
@@ -53,38 +53,36 @@ export const Accessibility = true;
  * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
  */
 export const CorridorInfo = {
-  "A": {"name": "VN", "color": "#555555", "id": "A", fullName:"Van Ness"},
-  "B": {"name": "GR", "color": "#2eadd3", "id": "B",fullName:"Geary"},
-  "C": {"name": "GN", "color": "#8d6aa8", "id": "C", fullName:"Geneva" },
-};
-
-export const BaselineBuses = {
-  A: 2,
-  B: 4,
-  C: 3,
+  "A": {"name": "Campbellton BRT", "color": "#2eadd3", "id": "A", fullName:"Campbellton BRT"},
+  "B": {"name": "Northside Drive BRT", "color": "#555555", "id": "B",fullName:"Northside Drive BRT"},
+  "C": {"name": "Streetcar Extension", "color": "#8d6aa8", "id": "C", fullName:"Streetcar Extension" },
+  "D": {"name": "Green Line Infill Station", "color": "#37bf86", "id": "D", fullName:"Infill Station on Green Line" },
+  "E": {"name": "Red Line Infill Station", "color": "#ed4267", "id": "E", fullName:"Infill Station on Red Line" },
 };
 
 
 export const FormControlID = {
-  ptpEntry: "control28770696",
-  singleEntry: "control28891971",
+  ptpEntry: "control28770765",
+  singleEntry: "control28947061",
   exit: "control28766436",
 };
 
 
 //Browsochrone configuration
-export const INIT_ORIGIN = [37.773972, -122.431297];
-export const INIT_DESTINATION = [37.783972, -122.421297];
+export const INIT_ORIGIN = [33.7490, -84.387314];
+export const INIT_DESTINATION = [33.7290, -84.377314];
 export const WORKER_VERSION = 'v2.0.0-SNAPSHOT';
 export const API_KEY_ID = "3158ID11NHODSZ2BZX1WY1R4G";
 export const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
-export const TRANSPORT_NETWORK_ID = "b421029057a917b425caeea3f902fb9f";  // SF
+// export const TRANSPORT_NETWORK_ID = "b421029057a917b425caeea3f902fb9f";  // SF
+export const TRANSPORT_NETWORK_ID = "1c39a5be72ec603982833f880a785aa7";  // ATL
 
 
 
 export const BASE_URL = "http://coaxs.mit.edu/api/single";
 export const AUTH_URL = "http://coaxs.mit.edu/oauth/token";
-export const GRID_URL = "https://s3.amazonaws.com/coaxsus/SF/SFw_totjobs.grid";
+export const GRID_URL = "https://s3.amazonaws.com/coaxsus/ATL/ALTw_totjobs.grid";
+// export const GRID_URL = "https://s3.amazonaws.com/coaxsus/ATL/ALTr_totjobs.grid";
 
 
 

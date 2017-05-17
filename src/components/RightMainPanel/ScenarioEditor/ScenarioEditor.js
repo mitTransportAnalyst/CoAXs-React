@@ -9,11 +9,15 @@ import {CorridorInfo} from "../../../config"
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
+import {cloneDeep} from 'lodash';
+import classNames from "classnames"
+
 
 class ScenarioEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
+    this.handleClickCorridor = this.handleClickCorridor.bind(this)
   }
 
 
@@ -21,52 +25,99 @@ class ScenarioEditor extends React.Component {
     this.props.clickCorridor("A");
   }
 
+  handleClickCorridor(corridorID){
+      let newScenario = cloneDeep(this.props.scenarioStore[1]);
+      newScenario[corridorID].active = !this.props.scenarioStore[1][corridorID].active;
+      this.props.saveScenario(newScenario)
+  }
+
 
   render() {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
+
+    const AClass = classNames({
+      "routeItem": true,
+      "btn": true,
+      "routeItemSel": this.props.scenarioStore[1].A.active,
+    });
+
+    const BClass = classNames({
+      "routeItem": true,
+      "btn": true,
+      "routeItemSel": this.props.scenarioStore[1].B.active,
+    });
+
+
+    const CClass = classNames({
+      "routeItem": true,
+      "btn": true,
+      "routeItemSel": this.props.scenarioStore[1].C.active,
+    });
+
+
+    const DClass = classNames({
+      "routeInfill" : true,
+      "routeItem": true,
+      "btn": true,
+      "routeItemSel": this.props.scenarioStore[1].D.active,
+    });
+
+
+    const EClass = classNames({
+      "routeInfill" : true,
+      "routeItem": true,
+      "btn": true,
+      "routeItemSel": this.props.scenarioStore[1].E.active,
+    });
+
+
     return (
       <div className="ScenarioEditorCol">
 
 
-
         <div className="colHead">
           <i className="fa fa-pencil-square-o"/>
-          Service Editor - Editing Corridor {CorridorInfo[this.props.currentCorridor].fullName}
+          Service Editor
         </div>
 
 
         <div className="routesContainer">
 
-          {
-            Object.values(corridorInfo).map((corridor) => {
-              if (this.props.currentCorridor === corridor.id) {
-                return (
-                  <div className="btn routeItem" key={corridor.id}
-                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize: 14}}
-                       onClick={()=>this.props.clickCorridor(corridor.id)}>
-                    {corridor.fullName}
+          <div className={AClass}
+               style={{ "backgroundColor": corridorInfo["A"].color, fontSize: 14}}
+               onClick={()=>this.handleClickCorridor(corridorInfo["A"].id)}>
+            {corridorInfo["A"].fullName}
+          </div>
 
-                  </div>
-                )
-              }
-              else {
-                return (
-                  <div className="btn routeItem" key={corridor.id}
-                       style={{"backgroundColor": corridor.color, fontSize: 14}}
-                       onClick={()=>this.props.clickCorridor(corridor.id)}>
-                    {corridor.fullName}
+          <div className={BClass}
+               style={{ "backgroundColor": corridorInfo["B"].color, fontSize: 14}}
+               onClick={()=>this.handleClickCorridor(corridorInfo["B"].id)}>
+            {corridorInfo["B"].fullName}
+          </div>
 
-                  </div>
-                )
+          <div className={CClass}
+               style={{ "backgroundColor": corridorInfo["C"].color, fontSize: 14}}
+               onClick={()=>this.handleClickCorridor(corridorInfo["C"].id)}>
+            {corridorInfo["C"].fullName}
+          </div>
 
 
-              }
-            })
-          }
+          <div className={DClass}
+               style={{ "backgroundColor": corridorInfo["D"].color, fontSize: 14}}
+               onClick={()=>this.handleClickCorridor(corridorInfo["D"].id)}>
+            {corridorInfo["D"].fullName}
+          </div>
+
+
+          <div className={EClass}
+               style={{ "backgroundColor": corridorInfo["E"].color, fontSize: 14}}
+               onClick={()=>this.handleClickCorridor(corridorInfo["E"].id)}>
+            {corridorInfo["E"].fullName}
+          </div>
+
 
         </div>
 
-        <ServiceEditor/>
 
       </div>
     );
@@ -77,6 +128,7 @@ class ScenarioEditor extends React.Component {
 function mapStateToProps(state) {
   return {
     currentCorridor: state.reducer.currentCor,
+    scenarioStore: state.scenarioStore,
   }
 }
 
