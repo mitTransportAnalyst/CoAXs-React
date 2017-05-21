@@ -1,32 +1,19 @@
 {
   "id": 0,
-  "description": "2017_4_12_NOLA_MegaGTFS_v2",
+  "description": "Scenarios 5.20 v2",
   "feedChecksums": {
-    "NORTA": 378916123,
-    "RideNOLA": 4255186909,
-    "Jefferson Transit": 3313038634
+    "NORTA": 3069491354,
+    "Jefferson Transit": 2756955444,
+    "RideNOLA": 4211514032
   },
   "modifications": [
     {
       "type": "adjust-frequency",
-      "route": "NORTA:10464",
+      "route": "RideNOLA:16A",
       "retainTripsOutsideFrequencyEntries": false,
       "entries": [
         {
-          "sourceTrip": "NORTA:2584422",
-          "headwaySecs": 1800,
-          "startTime": 18000,
-          "endTime": 79200,
-          "monday": true,
-          "tuesday": true,
-          "wednesday": true,
-          "thursday": true,
-          "friday": true,
-          "saturday": true,
-          "sunday": true
-        },
-        {
-          "sourceTrip": "NORTA:2584389",
+          "sourceTrip": "RideNOLA:e8fdd30b-84f9-4db7-b2c2-5c5c5e5c40b9",
           "headwaySecs": 1800,
           "startTime": 18000,
           "endTime": 79200,
@@ -37,7 +24,21 @@
           "friday": true,
           "saturday": true,
           "sunday": true,
-          "name": "16B - OB"
+          "name": "OB"
+        },
+        {
+          "sourceTrip": "RideNOLA:52211fdd-129d-48e9-aed9-2f7ea5b70435",
+          "headwaySecs": 1800,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "IB"
         }
       ],
       "comment": "16A"
@@ -45,23 +46,44 @@
     {
       "type": "remove-trips",
       "routes": [
+        "NORTA:10464"
+      ],
+      "comment": "16A old 1"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
         "NORTA:10343"
       ],
-      "comment": "Remove NORTA 16A - baseline [2]"
+      "comment": "16A old 2"
     },
     {
       "type": "remove-trips",
       "routes": [
         "RideNOLA:16B"
       ],
-      "comment": "Remove NORTA 16B - ext to Ocshner"
+      "comment": "16B"
     },
     {
       "type": "remove-trips",
       "routes": [
         "RideNOLA:16C"
       ],
-      "comment": "Remove NORTA 16C - ext to Clearview"
+      "comment": "16C"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "Jefferson Transit:E3"
+      ],
+      "comment": "E3A old"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "Jefferson Transit:E5"
+      ],
+      "comment": "E5A old"
     }
   ]
 }

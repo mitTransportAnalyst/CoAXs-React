@@ -26,8 +26,9 @@ import Baseline from '../../../Data/scenario/Baseline.json'
 
 // TAUI
 import TransitiveMapLayer from './transitive-map-layer'
-import transitiveStyle from './transitive-style'
-
+// import transitiveStyle from './transitive-style'
+import transitiveStyle from './styles'
+import transitiveStyleBaseline from './stylesBaseline'
 
 import Transitive from 'transitive-js'
 // import 'leaflet-transitivelayer'
@@ -956,10 +957,12 @@ class ScenarioMapPTP extends React.Component {
         to: {x, y}
       });
 
-      transitive.journeys = transitive.journeys.slice(0, 2);
+      transitive.journeys = transitive.journeys.slice(0, 1);
 
       let transitiveLayer2 = new Leaflet.TransitiveLayer(new Transitive({
         data: transitive,
+        styles: transitiveStyle,
+
       }));
 
       this.setState({
@@ -991,10 +994,11 @@ class ScenarioMapPTP extends React.Component {
       to: {x, y}
     });
 
-    transitive.journeys = transitive.journeys.slice(0, 2);
+    transitive.journeys = transitive.journeys.slice(0, 1);
 
     const transitiveLayer = new Leaflet.TransitiveLayer(new Transitive({
       data: transitive,
+      styles: transitiveStyleBaseline,
 
     }));
 
@@ -1028,10 +1032,12 @@ class ScenarioMapPTP extends React.Component {
         to: {x, y}
       });
 
-      transitive.journeys = transitive.journeys.slice(0, 2);
+      transitive.journeys = transitive.journeys.slice(0, 1);
 
       let transitiveLayer2 = new Leaflet.TransitiveLayer(new Transitive({
         data: transitive,
+        styles: transitiveStyle,
+
       }));
 
       this.setState({
@@ -1054,10 +1060,11 @@ class ScenarioMapPTP extends React.Component {
       to: {x, y}
     });
 
-    transitive.journeys = transitive.journeys.slice(0, 2);
+    transitive.journeys = transitive.journeys.slice(0, 1);
 
     const transitiveLayer = new Leaflet.TransitiveLayer(new Transitive({
       data: transitive,
+      styles: transitiveStyleBaseline,
 
     }));
 
@@ -1131,7 +1138,6 @@ class ScenarioMapPTP extends React.Component {
 
     const iconStart = divIcon({className: 'iconStart', iconSize: [45, 45]});
     const iconEnd = divIcon({className: 'iconEnd', iconSize: [45, 45]});
-
     return (
       <div className={s.map}>
         <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
@@ -1140,7 +1146,7 @@ class ScenarioMapPTP extends React.Component {
           {transitive &&
           <TransitiveMapLayer
             data={transitive}
-            styles={transitiveStyle}
+            styles={transitiveStyleBaseline}
             key={`transitive-${key}`}
           />
           }

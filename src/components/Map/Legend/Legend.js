@@ -16,7 +16,7 @@ class Legend extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLegend: false,
+      showLegend: true,
     };
     this.handleClickExpend = this.handleClickExpend.bind(this)
 

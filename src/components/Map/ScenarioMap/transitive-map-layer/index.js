@@ -14,14 +14,15 @@ export default class TransitiveMapLayer extends MapLayer {
   };
 
   shouldComponentUpdate (newProps, newState) {
-    console.log(!isEqual(newProps, this.props) || !isEqual(newState, this.state));
+    // console.log(!isEqual(newProps, this.props) || !isEqual(newState, this.state));
     return !isEqual(newProps, this.props) || !isEqual(newState, this.state)
   }
 
   componentWillMount () {
     super.componentWillMount();
     this.transitive = new Transitive({
-      data: this.props.data
+      data: this.props.data,
+      styles: this.props.styles,
      });
     this.leafletElement = new LeafletTransitiveLayer(this.transitive)
   }

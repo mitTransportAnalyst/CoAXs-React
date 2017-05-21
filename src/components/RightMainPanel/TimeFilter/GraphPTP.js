@@ -52,8 +52,7 @@ class GraphPTP extends React.Component {
 
 
     const tooltipforTravelTime = (
-      <Tooltip id="tooltipforTravelTime"><strong> The total number of minutes it takes to travel from start flag to the
-        end flag using a combination of walking and public transportation</strong></Tooltip>
+      <Tooltip id="tooltipforTravelTime"><strong> This represents the average of the total minutes of door to door travel time, including walking, waiting, and taking public transit, if someone were to leave any time between 7 and 9am.</strong></Tooltip>
     );
 
     return (

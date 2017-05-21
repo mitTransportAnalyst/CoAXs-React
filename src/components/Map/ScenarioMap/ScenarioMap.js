@@ -21,11 +21,11 @@ import Baseline from '../../../Data/scenario/Baseline.json'
 
 
 // TAUI
-import TransitiveMapLayer from './transitive-map-layer'
-import transitiveStyle from './transitive-style'
-
-
-import Transitive from 'transitive-js'
+// import TransitiveMapLayer from './transitive-map-layer'
+// import transitiveStyle from './transitive-style'
+//
+//
+// import Transitive from 'transitive-js'
 // import 'leaflet-transitivelayer'
 
 // old browsochrone example
