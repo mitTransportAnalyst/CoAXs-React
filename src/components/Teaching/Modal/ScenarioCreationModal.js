@@ -30,7 +30,7 @@ class ScenarioCreationModal extends React.Component {
           </Modal.Header>
           <Modal.Body>
 
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/G5JneWVO6Y0" frameBorder="0"
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/OdNutKfxec0" frameBorder="0"
                     allowFullScreen></iframe>
             <hr />
 
@@ -39,19 +39,14 @@ class ScenarioCreationModal extends React.Component {
 
 
             <ul>
-              <li><strong>1 Choose an alternative for each route:</strong> Select each route ( RTA #16 S. Claiborne,
-                JeT #E3 Kenner Local, JeT #E5 Causeway), and then, choose which alternative of that route you’d like to
-                test. Click on each alternative to see where it goes on the map.
+              <li><strong>1 Select a project to modify:</strong> Click on one of the buttons labeled Campbellton BRT, Northside Drive BRT, Streetcar extension, Infill Station on Green Line or Infill Station on Red Line.
 
               </li>
-              <li><strong>2 Change the time between buses:</strong> For each alternative, move the slider on the right hand side.
-                Moving the slider to the right means the bus will come more often. You can also see how many buses that
-                will require in the "Scenario Summary".
+              <li><strong>2 Compare your scenario:</strong>  Once you’ve created the scenario you want to test, click “Update” to see how your scenario compares to today’s service.
               </li>
-              <li><strong>3 Compare your scenario:</strong> Once you’ve created the scenario you want to test, click “Update” to see how this compares to today’s service.
+              <li><strong>3 Explore your scenario:</strong> Just like before, change the time slider to see how access to jobs changes, and you can also move the blue pin around to see how your scenario would impact different parts of the city.
               </li>
-              <li><strong>4 Explore your scenario:</strong> Just like before, change the time slider to see how access to jobs changes, and you can also move the blue pin around to see how your scenario would impact different parts of the city.
-              </li>
+
 
             </ul>
             <p>
