@@ -33,18 +33,18 @@ class Home extends React.Component {
       // smartlook('tag', 'email', this.props.location.query[FormControlID.ptpEntry]);
     }
 
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"ATL", "type":"start"})});
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json'
+    // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"ATL", "type":"start"})});
 
 
     window.addEventListener("beforeunload", (ev) =>
     {
-      fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"ATL", "type":"exit", "navState":this.props.navState})});
+      // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json'
+      // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"ATL", "type":"exit", "navState":this.props.navState})});
 
       // ev.preventDefault();
       // return ev.returnValue = 'Are you sure you want to close?';
@@ -58,10 +58,10 @@ class Home extends React.Component {
 
     return (
       <div className="page-home">
-        <Navbar/>
+        {/*<Navbar/>*/}
         <TopleftPanel/>
         <MapLegend/>
-        {this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}
+        {/*{this.props.loadingProgress === 1 ? null : <LoadingPage progress={this.props.loadingProgress}/>}*/}
         <div className={this.props.currentMap ? 'hidden2' : ""}>
           <ScenarioMap />
         </div>

@@ -53,64 +53,64 @@ class Legend extends React.Component {
 
 
             <div className={legendPanelClass}>
-              <div>
-                <svg height="10" width="20">
-                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#2eadd3", strokeWidth: 5}}/>
-                </svg>
-                <small className="panel-word">Campbellton BRT</small>
-              </div>
+              {/*<div>*/}
+                {/*<svg height="10" width="20">*/}
+                  {/*<line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#2eadd3", strokeWidth: 5}}/>*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">Campbellton BRT</small>*/}
+              {/*</div>*/}
 
 
-              <div>
-                <svg height="10" width="20">
-                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#555555", strokeWidth: 5}}/>
-                </svg>
-                <small className="panel-word">Northside drive BRT</small>
-              </div>
+              {/*<div>*/}
+                {/*<svg height="10" width="20">*/}
+                  {/*<line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#555555", strokeWidth: 5}}/>*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">Northside drive BRT</small>*/}
+              {/*</div>*/}
 
-              <div>
-                <svg height="10" width="20">
-                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#8d6aa8", strokeWidth: 5}}/>
-                </svg>
-                <small className="panel-word">Streetcar extension</small>
-              </div>
-
-
-              <div>
-                <svg height="10" width="20">
-                  <circle cx="10" cy="5" r="5" stroke="#37bf86" strokeWidth="1"  fill="#37bf86" />
-                </svg>
-                <small className="panel-word">Infill stations on green line</small>
-              </div>
+              {/*<div>*/}
+                {/*<svg height="10" width="20">*/}
+                  {/*<line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#8d6aa8", strokeWidth: 5}}/>*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">Streetcar extension</small>*/}
+              {/*</div>*/}
 
 
-              <div>
-                <svg height="10" width="20">
-                  <circle cx="10" cy="5" r="5" stroke="#ed4267" strokeWidth="1"  fill="#ed4267" />
-                </svg>
-                <small className="panel-word">Infill stations on red line</small>
-              </div>
+              {/*<div>*/}
+                {/*<svg height="10" width="20">*/}
+                  {/*<circle cx="10" cy="5" r="5" stroke="#37bf86" strokeWidth="1"  fill="#37bf86" />*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">Infill stations on green line</small>*/}
+              {/*</div>*/}
 
-              <div>
-                <svg width="20" height="20">
-                  <rect width="20" height="20" style={{fill: "#89cff0", strokeWidth: 3, stroke: "#45b3e7"}}/>
-                </svg>
-                <small className="panel-word">Baseline accessiblity area</small>
-              </div>
 
-              <div>
-                <svg width="20" height="20">
-                  <rect width="20" height="20" style={{fill: "#FDB813", strokeWidth: 3, stroke: "#F68B1F"}}/>
-                </svg>
-                <small className="panel-word">New scenario accessiblity area</small>
-              </div>
+              {/*<div>*/}
+                {/*<svg height="10" width="20">*/}
+                  {/*<circle cx="10" cy="5" r="5" stroke="#ed4267" strokeWidth="1"  fill="#ed4267" />*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">Infill stations on red line</small>*/}
+              {/*</div>*/}
 
-              <div>
-                <svg height="10" width="20">
-                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#f1d3e9", strokeWidth: 2}}/>
-                </svg>
-                <small className="panel-word">Transit network</small>
-              </div>
+              {/*<div>*/}
+                {/*<svg width="20" height="20">*/}
+                  {/*<rect width="20" height="20" style={{fill: "#89cff0", strokeWidth: 3, stroke: "#45b3e7"}}/>*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">Baseline accessiblity area</small>*/}
+              {/*</div>*/}
+
+              {/*<div>*/}
+                {/*<svg width="20" height="20">*/}
+                  {/*<rect width="20" height="20" style={{fill: "#FDB813", strokeWidth: 3, stroke: "#F68B1F"}}/>*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">New scenario accessiblity area</small>*/}
+              {/*</div>*/}
+
+              {/*<div>*/}
+                {/*<svg height="10" width="20">*/}
+                  {/*<line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#f1d3e9", strokeWidth: 2}}/>*/}
+                {/*</svg>*/}
+                {/*<small className="panel-word">Transit network</small>*/}
+              {/*</div>*/}
 
 
             </div>

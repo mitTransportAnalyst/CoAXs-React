@@ -49,6 +49,7 @@ class ScenarioEditor extends React.Component {
 
 
     const CClass = classNames({
+      "routeInfill" : true,
       "routeItem": true,
       "btn": true,
       "routeItemSel": this.props.scenarioStore[1].C.active,
@@ -63,12 +64,6 @@ class ScenarioEditor extends React.Component {
     });
 
 
-    const EClass = classNames({
-      "routeInfill" : true,
-      "routeItem": true,
-      "btn": true,
-      "routeItemSel": this.props.scenarioStore[1].E.active,
-    });
 
 
     return (
@@ -109,11 +104,7 @@ class ScenarioEditor extends React.Component {
           </div>
 
 
-          <div className={EClass}
-               style={{ "backgroundColor": corridorInfo["E"].color, fontSize: 14}}
-               onClick={()=>this.handleClickCorridor(corridorInfo["E"].id)}>
-            {corridorInfo["E"].fullName}
-          </div>
+
 
 
         </div>

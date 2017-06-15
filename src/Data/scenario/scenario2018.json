@@ -16,13 +16,6 @@
     {
       "type": "remove-trips",
       "routes": [
-        "coaxs_chileTLC:ROUTE_ec2f6e16-9f29-4e7f-bc13-5e073ac7e160"
-      ],
-      "comment": "Remove Trips"
-    },
-    {
-      "type": "remove-trips",
-      "routes": [
         "coaxs_chileTstgoNvos:ROUTE_e673fe65-26be-42c2-89d6-ed8d91fee8cc"
       ],
       "comment": "Remove Trips"
@@ -135,13 +128,6 @@
     {
       "type": "remove-trips",
       "routes": [
-        "coaxs_chileT01:ROUTE_9889cd91-fd70-499f-ae28-bb6d0ba379f3"
-      ],
-      "comment": "Remove Trips"
-    },
-    {
-      "type": "remove-trips",
-      "routes": [
         "coaxs_chileTsgoMod:116"
       ],
       "comment": "Remove Trips"
@@ -199,13 +185,6 @@
       "type": "remove-trips",
       "routes": [
         "coaxs_chileMT:ROUTE_032abd5d-ba59-487a-982d-04f8ebad0e24"
-      ],
-      "comment": "Remove Trips"
-    },
-    {
-      "type": "remove-trips",
-      "routes": [
-        "coaxs_chileL07:ROUTE_d372d191-2aa6-4ba6-bcfd-171ab57df8d0"
       ],
       "comment": "Remove Trips"
     },

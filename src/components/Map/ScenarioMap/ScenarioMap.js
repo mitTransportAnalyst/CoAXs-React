@@ -11,10 +11,10 @@ import GeojsonStreetcar from '../../../Data/busline/Streetcar.geojson'
 
 
 import Baseline from '../../../Data/scenario/Baseline.json'
-import CampbelltonSeed from "../../../Data/scenario/Campbellton.json"
-import NorthsideSeed from "../../../Data/scenario/Northside.json"
-import StreetcarSeed from "../../../Data/scenario/Streetcar.json"
-import InfillGreenSeed from "../../../Data/scenario/InfillGreen.json"
+import scenario2018 from "../../../Data/scenario/scenario2018.json"
+import scenarioL7 from "../../../Data/scenario/scenarioL7.json"
+import scenarioTLC from "../../../Data/scenario/scenarioTLC.json"
+import scenarioTBi from "../../../Data/scenario/scenarioTBi.json"
 import InfillRedSeed from "../../../Data/scenario/InfillRed.json"
 
 
@@ -74,7 +74,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-11',
+          date: '2017-04-15',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -106,7 +106,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-11',
+          date: '2017-04-15',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -140,7 +140,7 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-11',
+          date: '2017-04-15',
           fromTime: 25200,
           toTime: 32400,
           accessModes: 'WALK',
@@ -282,10 +282,10 @@ class ScenarioMap extends React.Component {
 
 
   moveOrigin(e) {
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false,"city":"ATL", origin:this.state.origin, "type":"moveOrigin", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json'
+    // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false,"city":"ATL", origin:this.state.origin, "type":"moveOrigin", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
 
 
     this.updateRequest();
@@ -422,10 +422,10 @@ class ScenarioMap extends React.Component {
   };
 
   updateScneario() {
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"ATL", origin:this.state.origin, "type":"updateScenario", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json'
+    // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"ATL", origin:this.state.origin, "type":"updateScenario", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
 
     if (this.props.isCompareMode) {
       let origin = this.state.origin;
@@ -609,34 +609,29 @@ class ScenarioMap extends React.Component {
     let scenarioStore = this.props.scenarioStore[1];
 
     if (!scenarioStore.A.active){
-      CampbelltonSeed.modifications.forEach(function (route) {
+      scenario2018.modifications.forEach(function (route) {
         scenarioJSON.push(route);
       });
     }
 
     if (!scenarioStore.B.active){
-      NorthsideSeed.modifications.forEach(function (route) {
+      scenarioL7.modifications.forEach(function (route) {
         scenarioJSON.push(route);
       });
     }
 
     if (!scenarioStore.C.active){
-      StreetcarSeed.modifications.forEach(function (route) {
+      scenarioTLC.modifications.forEach(function (route) {
         scenarioJSON.push(route);
       });
     }
 
     if (!scenarioStore.D.active){
-      InfillGreenSeed.modifications.forEach(function (route) {
+      scenarioTBi.modifications.forEach(function (route) {
         scenarioJSON.push(route);
       });
     }
 
-    if (!scenarioStore.E.active){
-      InfillRedSeed.modifications.forEach(function (route) {
-        scenarioJSON.push(route);
-      });
-    }
 
 
     staticRequest.request.scenario.modifications = scenarioJSON;
@@ -739,17 +734,9 @@ class ScenarioMap extends React.Component {
           <CircleMarker center={[33.75317514689363, -84.36487197875977]} radius={10} color={CorridorInfo["D"].color}/>
           }
 
-          {this.props.scenarioStore[1].E.active &&
-          <CircleMarker center={[33.813, -84.3755]} radius={10} color={CorridorInfo["E"].color}/>
-          }
 
-          {this.props.scenarioStore[1].E.active &&
-          <CircleMarker center={[33.74214885967333, -84.40310955047607]} radius={10} color={CorridorInfo["E"].color}/>
-          }
 
-          {this.props.scenarioStore[1].E.active &&
-          <CircleMarker center={[33.72805170329976, -84.41679954528807]} radius={10} color={CorridorInfo["E"].color}/>
-          }
+
 
 
 

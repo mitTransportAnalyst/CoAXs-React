@@ -51,11 +51,7 @@ function scenarioStore(state = [{
   },
   D: {
     active:false,
-  },
-  E: {
-    active:false,
-  },
-
+  }
 }, {
   A: {
     active:false,
@@ -68,10 +64,7 @@ function scenarioStore(state = [{
   },
   D: {
     active:false,
-  },
-  E: {
-    active:false,
-  },
+  }
 }], action) {
   switch (action.type) {
     case 'saveScenario':

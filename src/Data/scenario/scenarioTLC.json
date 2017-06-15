@@ -1,0 +1,73 @@
+{
+  "id": 0,
+  "description": "StgoV3",
+  "feedChecksums": {
+    "coaxs_chileTLC": 2866763086,
+    "coaxs_chileTstgoNvos": 1285824918,
+    "coaxs_chileT01": 4107895763,
+    "coaxs_chileB01": 1000379120,
+    "coaxs_chileTsgoMod": 3383628560,
+    "coaxs_chileL03": 3125401547,
+    "coaxs_chileMT": 2400825609,
+    "coaxs_chileL07": 2093776030,
+    "coaxs_chileL06": 4262322673
+  },
+  "modifications": [
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileTLC:ROUTE_ec2f6e16-9f29-4e7f-bc13-5e073ac7e160"
+      ],
+      "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileB01:116"
+      ],
+      "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileB01:421"
+      ],
+      "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileB01:422"
+      ],
+      "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileB01:D07"
+      ],
+      "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileB01:D17"
+      ],
+      "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileB01:C03"
+      ],
+      "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileB01:C22"
+      ],
+      "comment": "Remove Trips"
+    }
+  ]
+}

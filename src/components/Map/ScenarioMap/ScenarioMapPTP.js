@@ -358,10 +358,10 @@ class ScenarioMapPTP extends React.Component {
 
 
   async moveOrigin(e) {
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, "type":"moveOrigin", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json'
+    // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, "type":"moveOrigin", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
 
     this.updateRequest();
 
@@ -636,10 +636,10 @@ class ScenarioMapPTP extends React.Component {
   };
 
   async updateScneario() {
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, "type":"updateScenario", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json'
+    // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, "type":"updateScenario", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
 
     this.updateRequest();
 
@@ -927,10 +927,10 @@ class ScenarioMapPTP extends React.Component {
 
   async moveDestination(e) {
 
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, destination: this.state.destination, "type":"moveDestination", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json'
+    // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, destination: this.state.destination, "type":"moveDestination", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
 
 
     if (this.props.isCompareMode) {
@@ -997,10 +997,10 @@ class ScenarioMapPTP extends React.Component {
 
   async updateDestination() {
 
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, destination: this.state.destination, "type":"updateDestination", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+    // fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json'
+    // }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": true,"city":"ATL", origin:this.state.origin, destination: this.state.destination, "type":"updateDestination", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
 
 
     if (this.props.isCompareMode) {
