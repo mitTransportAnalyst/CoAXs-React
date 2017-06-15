@@ -282,6 +282,11 @@ class ScenarioMap extends React.Component {
 
 
   moveOrigin(e) {
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false,"city":"ATL", origin:this.state.origin, "type":"moveOrigin", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+
 
     this.updateRequest();
 
@@ -417,6 +422,11 @@ class ScenarioMap extends React.Component {
   };
 
   updateScneario() {
+    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC',{method:'POST',    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body:JSON.stringify({"time":Date(), "email":this.props.emailStore, "ptp": false, "city":"ATL", origin:this.state.origin, "type":"updateScenario", "scenario": this.props.scenarioStore, "isCompare": this.props.isCompareMode})});
+
     if (this.props.isCompareMode) {
       let origin = this.state.origin;
       let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
@@ -758,6 +768,8 @@ function mapStateToProps(state) {
     currentBusline: state.BuslineSelectedStore,
     updateButtonState: state.updateButtonState,
     scenarioStore: state.scenarioStore,
+    emailStore: state.emailStore,
+
   }
 }
 
