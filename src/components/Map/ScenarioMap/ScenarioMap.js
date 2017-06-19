@@ -81,9 +81,9 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-15',
+          date: '2017-06-08',
           fromTime: 25200,
-          toTime: 32400,
+          toTime: 27900,
           accessModes: 'WALK',
           directModes: 'WALK',
           egressModes: 'WALK',
@@ -105,7 +105,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 220,
+          monteCarloDraws: 180,
           scenario: {id: 999},
         }
       },
@@ -113,9 +113,9 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-15',
+          date: '2017-06-08',
           fromTime: 25200,
-          toTime: 32400,
+          toTime: 27900,
           accessModes: 'WALK',
           directModes: 'WALK',
           egressModes: 'WALK',
@@ -137,7 +137,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 220,
+          monteCarloDraws: 180,
           scenario: {
             id: uuid.v4(), modifications: Baseline.modifications
           },
@@ -147,9 +147,9 @@ class ScenarioMap extends React.Component {
         jobId: uuid.v4(),
         transportNetworkId: TRANSPORT_NETWORK_ID,
         request: {
-          date: '2017-04-15',
+          date: '2017-06-08',
           fromTime: 25200,
-          toTime: 32400,
+          toTime: 27900,
           accessModes: 'WALK',
           directModes: 'WALK',
           egressModes: 'WALK',
@@ -171,7 +171,7 @@ class ScenarioMap extends React.Component {
           maxRides: 8,
           bikeTrafficStress: 4,
           boardingAssumption: 'RANDOM',
-          monteCarloDraws: 220,
+          monteCarloDraws: 180,
           scenario: {id: uuid.v4(), modifications: Baseline.modifications},
         }
       },
