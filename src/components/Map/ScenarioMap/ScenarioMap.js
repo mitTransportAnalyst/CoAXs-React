@@ -9,6 +9,13 @@ import GeojsonCampbellton from '../../../Data/busline/Campbellton.geojson'
 import GeojsonNorthside from '../../../Data/busline/Northside.geojson'
 import GeojsonStreetcar from '../../../Data/busline/Streetcar.geojson'
 
+import GeojsonL3 from '../../../Data/busline/L3.geojson'
+import GeojsonL6 from '../../../Data/busline/L6.geojson'
+import GeojsonL7 from '../../../Data/busline/L7.geojson'
+import GeojsonMNA from '../../../Data/busline/MetrotrenNA.geojson'
+import GeojsonTele from '../../../Data/busline/Tele.geojson'
+import GeojsonTLC from '../../../Data/busline/TranviaLC.geojson'
+
 
 import Baseline from '../../../Data/scenario/Baseline.json'
 import scenario2018 from "../../../Data/scenario/scenario2018.json"
@@ -698,7 +705,7 @@ class ScenarioMap extends React.Component {
 
           {
           this.props.scenarioStore[1].A.active  &&
-          <GeoJson data={GeojsonCampbellton} key={"Campbellton"} style={{
+          <GeoJson data={GeojsonL3} key={"L3"} style={{
           color: CorridorInfo["A"].color,
           weight: 8,
           opacity: 1
@@ -707,8 +714,18 @@ class ScenarioMap extends React.Component {
           }
 
           {
+            this.props.scenarioStore[1].A.active  &&
+            <GeoJson data={GeojsonL6} key={"L6"} style={{
+              color: CorridorInfo["A"].color,
+              weight: 8,
+              opacity: 1
+            }}
+            />
+          }
+
+          {
             this.props.scenarioStore[1].B.active  &&
-            <GeoJson data={GeojsonNorthside} key={"Northside"} style={{
+            <GeoJson data={GeojsonL7} key={"L7"} style={{
               color: CorridorInfo["B"].color,
               weight: 8,
               opacity: 1
@@ -718,7 +735,7 @@ class ScenarioMap extends React.Component {
 
           {
             this.props.scenarioStore[1].C.active  &&
-            <GeoJson data={GeojsonStreetcar} key={"Streetcar"} style={{
+            <GeoJson data={GeojsonTLC} key={"TLC"} style={{
               color: CorridorInfo["C"].color,
               weight: 8,
               opacity: 1
@@ -726,13 +743,17 @@ class ScenarioMap extends React.Component {
             />
           }
 
-          {this.props.scenarioStore[1].D.active &&
-          <CircleMarker center={[33.76362918406904, -84.4244384765625]} radius={10} color={CorridorInfo["D"].color}/>
+          {
+            this.props.scenarioStore[1].D.active  &&
+            <GeoJson data={GeojsonTele} key={"Tele"} style={{
+              color: CorridorInfo["D"].color,
+              weight: 8,
+              opacity: 1
+            }}
+            />
           }
 
-          {this.props.scenarioStore[1].D.active &&
-          <CircleMarker center={[33.75317514689363, -84.36487197875977]} radius={10} color={CorridorInfo["D"].color}/>
-          }
+
 
 
 

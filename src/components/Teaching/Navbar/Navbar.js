@@ -173,36 +173,36 @@ class Navbar extends React.Component {
 
 
 
-          <div className="step" ref="target">
-              <a href="http://coaxs.herokuapp.com/landingatl" target="_blank" >1 Home Page</a>
-          </div>
+          {/*<div className="step" ref="target">*/}
+              {/*<a href="http://coaxs.herokuapp.com/landingatl" target="_blank" >1 Home Page</a>*/}
+          {/*</div>*/}
 
 
-          <div className={introClass} >
-              <span className="" >2 Get to know CoAXs
-                <OverlayTrigger placement="bottom" overlay={tooltipforIntro}>
-                  <a ref="introQuestion" className="fa fa-question-circle-o questionMark" style={{ display: "inline", fontSize: 16}} aria-hidden="true" onClick={this.handleClickIntro} href="#"></a>
-                </OverlayTrigger>
-                {/*<button style={{marginLeft: 8, fontSize: 11}} onClick={this.handleClickIntro} >Instructions</button>*/}
-              </span>
-          </div>
+          {/*<div className={introClass} >*/}
+              {/*<span className="" >2 Get to know CoAXs*/}
+                {/*<OverlayTrigger placement="bottom" overlay={tooltipforIntro}>*/}
+                  {/*<a ref="introQuestion" className="fa fa-question-circle-o questionMark" style={{ display: "inline", fontSize: 16}} aria-hidden="true" onClick={this.handleClickIntro} href="#"></a>*/}
+                {/*</OverlayTrigger>*/}
+                {/*/!*<button style={{marginLeft: 8, fontSize: 11}} onClick={this.handleClickIntro} >Instructions</button>*!/*/}
+              {/*</span>*/}
+          {/*</div>*/}
 
 
-          <div className={compareClass}>
-            <span >3 Create Your Own Scenario
-              <OverlayTrigger placement="bottom" overlay={tooltipforIntro}>
-                <a ref="compareQuestion" className="fa fa-question-circle-o questionMark" style={{ display: "inline", fontSize: 16}} aria-hidden="true" onClick={this.handleClickScenario} href="#"></a>
-              </OverlayTrigger>
+          {/*<div className={compareClass}>*/}
+            {/*<span >3 Create Your Own Scenario*/}
+              {/*<OverlayTrigger placement="bottom" overlay={tooltipforIntro}>*/}
+                {/*<a ref="compareQuestion" className="fa fa-question-circle-o questionMark" style={{ display: "inline", fontSize: 16}} aria-hidden="true" onClick={this.handleClickScenario} href="#"></a>*/}
+              {/*</OverlayTrigger>*/}
 
-                {/*<button  onClick={this.handleClickScenario} >Instructions</button>*/}
-            </span>
-          </div>
+                {/*/!*<button  onClick={this.handleClickScenario} >Instructions</button>*!/*/}
+            {/*</span>*/}
+          {/*</div>*/}
 
-          <div className={exitClass} href="#" onClick={this.handleClickSurvey}>
-            <a href="#" ref="exit" >
-              4 Exit Survey
-            </a>
-          </div>
+          {/*<div className={exitClass} href="#" onClick={this.handleClickSurvey}>*/}
+            {/*<a href="#" ref="exit" >*/}
+              {/*4 Exit Survey*/}
+            {/*</a>*/}
+          {/*</div>*/}
         </div>
 
 
@@ -211,22 +211,22 @@ class Navbar extends React.Component {
 
 
 
-        <Overlay
-          show={this.state.showExitSurveyPopup}
-          target={this.refs.exit}
-          placement="bottom"
-          containerPadding={20}
-        >
-          <Popover id="popover-contained" title="Final Step">
-            <strong>Hope you enjoy CoAXs.</strong> Let's click the button above to do the exit survey. Thank you.
-            <Button bsSize="small" style={{marginLeft: 5}} onClick={this.closeExitSurveyPopup}>Got it!</Button>
-          </Popover>
-        </Overlay>
+        {/*<Overlay*/}
+          {/*show={this.state.showExitSurveyPopup}*/}
+          {/*target={this.refs.exit}*/}
+          {/*placement="bottom"*/}
+          {/*containerPadding={20}*/}
+        {/*>*/}
+          {/*<Popover id="popover-contained" title="Final Step">*/}
+            {/*<strong>Hope you enjoy CoAXs.</strong> Let's click the button above to do the exit survey. Thank you.*/}
+            {/*<Button bsSize="small" style={{marginLeft: 5}} onClick={this.closeExitSurveyPopup}>Got it!</Button>*/}
+          {/*</Popover>*/}
+        {/*</Overlay>*/}
 
-        <IntroModal isShow={this.state.showIntro} closeModal={this.closeIntro}/>
-        <ScenarioCreationModal isShow={this.state.showScenario} closeModal={this.closeScenario}/>
-        <ExitSurveyModal isShow={this.state.showSurvey} closeModal={this.closeExitSurvey}/>
-        <PreSurveyModal isShow={this.state.showPreSurvey} closeModal={this.closePreSurvey}/>
+        {/*<IntroModal isShow={this.state.showIntro} closeModal={this.closeIntro}/>*/}
+        {/*<ScenarioCreationModal isShow={this.state.showScenario} closeModal={this.closeScenario}/>*/}
+        {/*<ExitSurveyModal isShow={this.state.showSurvey} closeModal={this.closeExitSurvey}/>*/}
+        {/*<PreSurveyModal isShow={this.state.showPreSurvey} closeModal={this.closePreSurvey}/>*/}
 
       </div>
 
