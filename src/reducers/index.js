@@ -104,7 +104,20 @@ function GridNumberStore(state = [], action) {
       return {
         "gridNumber": action.res[0],
         "gridNumber1": action.res[1],
-
+        "edu3060": action.res[2],
+        "edu30601": action.res[3],
+        "edu6075": action.res[4],
+        "edu60751": action.res[5],
+        "edu7590": action.res[6],
+        "edu75901": action.res[7],
+        "edunorank": action.res[8],
+        "edunorank1": action.res[9],
+        "hetpri": action.res[10],
+        "hetpri1": action.res[11],
+        "hetsec": action.res[12],
+        "hetsec1": action.res[13],
+        "hetter": action.res[14],
+        "hetter1": action.res[15],
       };
     default:
       return state
