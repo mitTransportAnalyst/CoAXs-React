@@ -129,7 +129,7 @@ class Graph extends React.Component {
           {/*JOB*/}
           <BarChart width={392} height={200} data={data} layout="vertical">
 
-            <XAxis stroke="black" type="number" domain={[0, 70000]} tickFormatter={axisFormatter}/>
+            <XAxis stroke="black" type="number" domain={[0, 2000000]} tickFormatter={axisFormatter}/>
             <YAxis dataKey="name" stroke="black" type="category"/>
 
             <CartesianGrid strokeDasharray="3 3"/>

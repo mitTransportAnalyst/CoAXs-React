@@ -819,6 +819,19 @@ class ScenarioMap extends React.Component {
             />
           }
 
+
+          {
+            this.props.scenarioStore[1].A.active  &&
+            <GeoJson data={GeojsonMNA} key={"MNA"} style={{
+              color: CorridorInfo["A"].color,
+              weight: 8,
+              opacity: 1
+            }}
+            />
+          }
+
+
+
           {
             this.props.scenarioStore[1].B.active  &&
             <GeoJson data={GeojsonL7} key={"L7"} style={{
