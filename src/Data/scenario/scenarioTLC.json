@@ -68,6 +68,13 @@
         "coaxs_chileB01:C22"
       ],
       "comment": "Remove Trips"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "coaxs_chileTstgoNvos:ROUTE_d5359500-a927-43ba-a7d2-f4cab275bc35"
+      ],
+      "comment": "Remove Trips"
     }
   ]
 }
