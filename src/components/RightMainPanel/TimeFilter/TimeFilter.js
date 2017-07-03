@@ -73,7 +73,7 @@ class TimeFilter extends React.Component {
           <div className="" style={{margin: 8}}>
             <div className="">
               <span >
-             <Slider name="timeSlider" min={5} max={90} value={this.state.currentTimeFilter} step={5}
+             <Slider name="timeSlider" min={5} max={60} value={this.state.currentTimeFilter} step={5}
                      className="right" changeFunction={this.changeFeature}/>
                 <div>
                 </div>

@@ -30,7 +30,7 @@ class ScenarioCreationModalPTP extends React.Component {
           </Modal.Header>
           <Modal.Body>
 
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/Hq6En_M9jXU" frameBorder="0"
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/sSHxxiRr6Ys" frameBorder="0"
                     allowFullScreen></iframe>
             <hr />
 
@@ -38,14 +38,15 @@ class ScenarioCreationModalPTP extends React.Component {
 
 
             <ul>
-              <li><strong>1 Choose an alternative for each route:</strong> Select each route ( RTA #16 S. Claiborne, JeT #E3 Kenner Local, JeT #E5 Causeway), and then, choose which alternative of that route you’d like to test. Click on each alternative to see where it goes on the map.
+              <li><strong>1 Choose a corridor to modify:</strong> Select either Van Ness, Geary, or Geneva Ave. You’ll see the relevant section highlighted on the map.
               </li>
-              <li><strong>2 Change the time between buses:</strong>  For each alternative, move the slider on the right hand side. Moving the slider to the right means the bus will come more often. You can also see how many buses that will require in the “Scenario Summary”.
-
+              <li><strong>2 Change the bus speed:</strong> For each corridor, move the slider to the right to increase bus speeds along the highlighted segment. Cities that have implemented similar upgrades like dedicated bus lanes and traffic signal priority have seen speeds improve between 10% and 40%.
               </li>
-              <li><strong>3 Compare your scenario:</strong> Once you’ve created the scenario you want to test, then click “Update” to see how this compares to today’s service.
+              <li><strong>3 Change the time between buses: </strong> Moving this slider to the right means that buses will come more often. This affects all the bus lines that use the corridor.
               </li>
-              <li><strong>4 Explore your scenario:</strong> Just like before, move the red pin around to see how travel time changes to different destinations, and you can also move the green pin around to see how your scenario would impact different parts of the city.
+              <li><strong>4 Compare your scenario:</strong> Once you’ve created the scenario you want to test, click “Update” to see how your new scenario compares to today’s service.
+              </li>
+              <li><strong>5 Explore your scenario:</strong> Just like before, move the pin around to see how your new scenario impacts different parts of the city.
               </li>
 
             </ul>
