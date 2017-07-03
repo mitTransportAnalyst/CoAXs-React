@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">src/components/Map/ScenarioMap/ScenarioMap.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/mitTransportAnalyst/CoAXs-React" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ModifyDwells">ModifyDwells</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifyHeadway">modifyHeadway</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifySpeed">modifySpeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Accessibility">Accessibility</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CorridorInfo">CorridorInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DwellTime">DwellTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DwellTimeMax">DwellTimeMax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DwellTimeMin">DwellTimeMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Headway">Headway</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HeadwayMax">HeadwayMax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HeadwayMin">HeadwayMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-IntroDescription">IntroDescription</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-IntroTitle">IntroTitle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MapLat">MapLat</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MapLng">MapLng</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PointToPoint">PointToPoint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RunningTime">RunningTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RunningTimeMax">RunningTimeMax</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RunningTimeMin">RunningTimeMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Tile">Tile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ZoomLevel">ZoomLevel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-router">router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-history">history</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Data</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RouteByID">RouteByID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TrunkByID">TrunkByID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-corridorInfo">corridorInfo</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/NotFound.js~NotFound.html">NotFound</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Bottom</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Bottom/Bottom.js~Bottom.html">Bottom</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Bottom/Common/Slider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Bottom/Common/Slider/Slider.js~Slider.html">Slider</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Bottom/TimeFilter</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter.html">TimeFilter</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Map/RouteMap</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/RouteMap/RouteMap.js~RouteMap.html">RouteMap</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Map/ScenarioMap</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap.html">ScenarioMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer.html">TransitiveLayer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Map/ScenarioMap/lib</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample.html">BrowsochronesExample</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer.html">TransitiveLayer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/TopleftPanel</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/TopleftPanel/TopleftPanel.js~lefttopPanel.html">lefttopPanel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reducers</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-changeMap">changeMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-clickCorridor">clickCorridor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-saveScenario">saveScenario</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-reducers">reducers</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">sagas</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sagas">sagas</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/components/Map/ScenarioMap/ScenarioMap.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import {render} from &apos;react-dom&apos;;
+import {Map, Marker, Popup, TileLayer, GeoJSON} from &apos;react-leaflet&apos;;
+import s from &quot;./ScenarioMap.css&quot;
+import {MapLat, MapLng, ZoomLevel, Tile} from &quot;../../../config&quot;
+
+import uuid from &apos;uuid&apos;
+import Browsochrones from &apos;browsochrones&apos;
+
+
+
+
+const BOSTON = [42.358056, -71.063611];
+const BOSTON_COMMON = [42.355, -71.065556];
+const LIFE_ALIVE = [42.366639, -71.105435];
+const WORKER_VERSION = &apos;v1.5.0-65-g1c86762&apos;;
+
+const API_KEY_ID = &quot;3158ID11NHODSZ2BZX1WY1R4G&quot;;
+const API_KEY_SECRET = &quot;5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k&quot;;
+const TRANSPORT_NETWORK_ID = &quot;709b3861891d5ea98975ab8317f8f270&quot;;
+const BASE_URL = &quot;http://coaxs.mit.edu:9090/api/single&quot;;
+const AUTH_URL = &quot;http://coaxs.mit.edu/oauth/token&quot;;
+const GRID_URL = &quot;https://analyst-static.s3.amazonaws.com/grids/boston/Jobs_with_earnings__1250_per_month_or_less.grid&quot;;
+
+/** how often will we allow the isochrone to update, in milliseconds */
+const MAX_UPDATE_INTERVAL_MS = 20; // seems smooth on 2015 Macbook Pro
+
+
+class ScenarioMap extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      transitive: null,
+      isochrone: null,
+      isochroneCutoff: 60,
+      key: null,
+      loaded: false,
+      origin: BOSTON_COMMON,
+      destination: LIFE_ALIVE,
+      staticRequest: {
+        jobId: uuid.v4(),
+        transportNetworkId: TRANSPORT_NETWORK_ID,
+        request: {
+          date: &apos;2016-09-27&apos;,
+          fromTime: 27000,
+          toTime: 30600,
+          accessModes: &apos;WALK&apos;,
+          directModes: &apos;WALK&apos;,
+          egressModes: &apos;WALK&apos;,
+          transitModes: &apos;WALK,TRANSIT&apos;,
+          walkSpeed: 1.3888888888888888,
+          bikeSpeed: 4.166666666666667,
+          carSpeed: 20,
+          streetTime: 90,
+          maxWalkTime: 20,
+          maxBikeTime: 20,
+          maxCarTime: 45,
+          minBikeTime: 10,
+          minCarTime: 10,
+          suboptimalMinutes: 5,
+          reachabilityThreshold: 0,
+          bikeSafe: 1,
+          bikeSlope: 1,
+          bikeTime: 1,
+          maxRides: 8,
+          bikeTrafficStress: 4,
+          boardingAssumption: &apos;RANDOM&apos;,
+          monteCarloDraws: 220,
+          scenario: process.env.SCENARIO || {
+            id: uuid.v4(),
+            modifications: []
+          }
+        }
+      }
+    };
+    this.fetchMetadata = this.fetchMetadata.bind(this)
+  }
+
+
+  async fetchMetadata() {
+
+    const bs = new Browsochrones();
+
+
+    let {staticRequest} = this.state;
+
+    console.log(API_KEY_ID);
+    // first get a token
+    let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&amp;secret=${encodeURIComponent(API_KEY_SECRET)}`, {
+      method: &apos;POST&apos;,
+      headers: {
+        &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded&apos;
+      },
+      body: &apos;grant_type=client_credentials&apos;
+    }).then(r =&gt; r.json());
+
+    let accessToken = response.access_token;
+    console.log(accessToken);
+
+    this.setState({...this.state, accessToken});
+
+
+    Promise.all([
+      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+        method: &apos;POST&apos;,
+        body: JSON.stringify({
+          type: &apos;static-metadata&apos;,
+          graphId: TRANSPORT_NETWORK_ID,
+          workerVersion: WORKER_VERSION,
+          request: staticRequest
+        })
+      }).then(res =&gt; {
+        console.log(res);
+        return res.json()}
+
+      ),
+      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+        method: &apos;POST&apos;,
+        body: JSON.stringify({
+          type: &apos;static-stop-trees&apos;,
+          graphId: TRANSPORT_NETWORK_ID,
+          workerVersion: WORKER_VERSION,
+          request: staticRequest
+        })
+      }).then(res =&gt; {
+        console.log(res);
+        return res.arrayBuffer()}),
+      fetch(GRID_URL).then(res =&gt; {
+        console.log(res);
+        return res.arrayBuffer()})
+    ])
+      .then(([metadata, stopTrees, grid]) =&gt; {
+
+        Promise.all([
+          bs.setQuery(metadata),
+          bs.setStopTrees(stopTrees),
+          bs.setTransitiveNetwork(metadata.transitiveData),
+          bs.putGrid(&apos;grid&apos;, grid)
+        ]).then(this.setState({...this.state, loaded: true}))
+      })
+  };
+
+
+
+
+
+
+  componentDidMount() {
+    //  const browsochrones = new Browsochrones();
+    this.fetchMetadata();
+
+  }
+
+  render() {
+    let { transitive, isochrone, key, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, isochroneCutoff } = this.state
+
+    const position = [MapLat, MapLng];
+    return (
+      &lt;div className={s.map}&gt;
+        &lt;Map ref=&quot;foo&quot; center={position} zoom={13} detectRetina&gt;
+          &lt;TileLayer
+            url={Tile}
+            attribution=&apos;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&apos;
+          /&gt;
+
+          { isochrone &amp;&amp; &lt;GeoJson
+            style={{ fill: &apos;#dfe&apos;, fillOpacity: 0.5 }}
+            data={isochrone}
+            key={`iso-${key}`}
+          /&gt;}
+
+          { transitive &amp;&amp; &lt;TransitiveLayer data={transitive} key={`transitive-${key}`} /&gt; }
+
+        &lt;/Map&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default ScenarioMap;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

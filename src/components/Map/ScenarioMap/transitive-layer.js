@@ -7,6 +7,9 @@ import Transitive from 'transitive-js'
 
 export default class TransitiveLayer extends MapLayer {
   // TODO proptypes
+  static propTypes = {
+    data: PropTypes.object.isRequired
+  }
 
   componentWillMount () {
     super.componentWillMount()

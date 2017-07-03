@@ -1,0 +1,23 @@
+.placeholder{
+  padding-top: 150px;
+  background-color: rgba(128,128,128,0.97);
+  color: #FFFFFF;
+  width: 100%;
+  height: 378px;
+  z-index: 9999;
+  position: absolute;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.placeholderClosed{
+    display: none;
+}
+
+.placeholderText{
+  cursor: pointer;
+}
+
+.placeholderTextClosed{
+  visibility: hidden;
+}

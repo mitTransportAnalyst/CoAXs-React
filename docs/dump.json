@@ -1,0 +1,4803 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "name": "src/Data/LoadData.js",
+    "content": "/**\n * Created by xinzheng on 2/1/17.\n */\n\nimport React from 'react';\nimport { render } from 'react-dom';\nimport {GeoJson} from 'react-leaflet';\nimport ProposedData from './proposed.geojson'\nimport TrunkData from './trunks.geojson'\nimport CorridorData from './corridors.json'\n\nimport {CorridorInfo} from '../config'\n\nconst corridorInfo = CorridorInfo ;\n\n//load trunk and push them into a dict by corridor ID\nconst TrunkByID = {};\nlet counter = 0;\nfor (let trunk of TrunkData.features){\n    TrunkByID[trunk.properties.corridorId] =\n    <GeoJson data={trunk} key = {counter} style={{\n      color : corridorInfo[trunk.properties.corridorId].color,\n      weight: 10,\n      opacity: 0.4 }}\n    />;\n  counter++;\n}\n\n\n\n//load bus routes and push them into a dict by corridor ID\nconst RouteByID = {};\nfor (let key of Object.keys(CorridorData)){\n  RouteByID[key] = CorridorData[key];\n}\n\n\nexport {TrunkByID, RouteByID, corridorInfo};\n\n\n\n\n",
+    "static": true,
+    "longname": "src/Data/LoadData.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 1,
+    "kind": "variable",
+    "name": "counter",
+    "memberof": "src/Data/LoadData.js",
+    "static": true,
+    "longname": "src/Data/LoadData.js~counter",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/Data/LoadData.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "variable",
+    "name": "TrunkByID",
+    "memberof": "src/Data/LoadData.js",
+    "static": true,
+    "longname": "src/Data/LoadData.js~TrunkByID",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/Data/LoadData.js",
+    "importStyle": "{TrunkByID}",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 3,
+    "kind": "variable",
+    "name": "RouteByID",
+    "memberof": "src/Data/LoadData.js",
+    "static": true,
+    "longname": "src/Data/LoadData.js~RouteByID",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/Data/LoadData.js",
+    "importStyle": "{RouteByID}",
+    "description": null,
+    "lineNumber": 32,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 4,
+    "kind": "variable",
+    "name": "corridorInfo",
+    "memberof": "src/Data/LoadData.js",
+    "static": true,
+    "longname": "src/Data/LoadData.js~corridorInfo",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/Data/LoadData.js",
+    "importStyle": "{corridorInfo}",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 5,
+    "kind": "file",
+    "name": "src/components/Bottom/Bottom.js",
+    "content": "import React from \"react\";\nimport \"./Bottom.css\"\nimport TimeFilter from \"./TimeFilter/TimeFilter\"\nimport Scenario from \"./Scenario/Scenario\"\nimport RouteSelector from \"./RouteSelector/RouteSelector\"\nimport RouteTable from \"./RouteTable/RouteTable\"\nimport ServiceEditor from \"./ServiceEditor/ServiceEditor\"\n\nclass Bottom extends React.Component {\n  render() {\n    return (\n      <div className=\"bottomCol\">\n        <TimeFilter/>\n        <Scenario/>\n        <RouteSelector/>\n        <RouteTable/>\n        <ServiceEditor/>\n      </div>\n    );\n  }\n}\n\nexport default Bottom\n",
+    "static": true,
+    "longname": "src/components/Bottom/Bottom.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 6,
+    "kind": "class",
+    "name": "Bottom",
+    "memberof": "src/components/Bottom/Bottom.js",
+    "static": true,
+    "longname": "src/components/Bottom/Bottom.js~Bottom",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Bottom/Bottom.js",
+    "importStyle": "Bottom",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 7,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Bottom/Bottom.js~Bottom",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Bottom.js~Bottom#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 8,
+    "kind": "file",
+    "name": "src/components/Bottom/Common/Slider/Slider.js",
+    "content": "import React from \"react\";\nimport \"./Slider.css\";\n\n\n/**\n * slider component\n */\nclass Slider extends React.Component {\n  /**\n   * constructor\n   * @param {object} props\n   */\n  constructor(props) {\n    super(props);\n    /**\n     * @type {object}\n     * @property {number} [value=this.props.min] - save the slider value, set it to minimal at default\n     */\n    this.state = {value: this.props.min};\n    this.handleChange = this.handleChange.bind(this);\n  }\n\n  /**\n   * handle move the slider\n   * @param {SytheticEvent} event\n   */\n  handleChange(event) {\n    this.setState({value: event.target.value});\n    if (this.props.changeFunction){\n      this.props.changeFunction(this.props.name,event.target.value)\n    }\n  }\n\n  /**\n   * render\n   * @return {ReactElement} input slider\n   */\n  render() {\n    return (\n      <div>\n        <span style={{color: \"black\"}}>{this.props.value}   <input type=\"range\" name={this.props.name}  value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleChange} className=\"isosRange\"/></span>\n      </div>\n    );\n  }\n}\n\nexport default Slider\n",
+    "static": true,
+    "longname": "src/components/Bottom/Common/Slider/Slider.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 9,
+    "kind": "class",
+    "name": "Slider",
+    "memberof": "src/components/Bottom/Common/Slider/Slider.js",
+    "static": true,
+    "longname": "src/components/Bottom/Common/Slider/Slider.js~Slider",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Bottom/Common/Slider/Slider.js",
+    "importStyle": "Slider",
+    "description": "slider component",
+    "lineNumber": 8,
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 10,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/components/Bottom/Common/Slider/Slider.js~Slider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Common/Slider/Slider.js~Slider#constructor",
+    "access": null,
+    "description": "constructor",
+    "lineNumber": 13,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 11,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Bottom/Common/Slider/Slider.js~Slider",
+    "static": false,
+    "longname": "src/components/Bottom/Common/Slider/Slider.js~Slider#state",
+    "access": null,
+    "description": "",
+    "lineNumber": 19,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "this.props.min",
+        "defaultRaw": "this.props.min",
+        "name": "value",
+        "description": "save the slider value, set it to minimal at default"
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 12,
+    "kind": "member",
+    "name": "handleChange",
+    "memberof": "src/components/Bottom/Common/Slider/Slider.js~Slider",
+    "static": false,
+    "longname": "src/components/Bottom/Common/Slider/Slider.js~Slider#handleChange",
+    "access": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 13,
+    "kind": "method",
+    "name": "handleChange",
+    "memberof": "src/components/Bottom/Common/Slider/Slider.js~Slider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Common/Slider/Slider.js~Slider#handleChange",
+    "access": null,
+    "description": "handle move the slider",
+    "lineNumber": 27,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "SytheticEvent"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 14,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Bottom/Common/Slider/Slider.js~Slider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Common/Slider/Slider.js~Slider#render",
+    "access": null,
+    "description": "render",
+    "lineNumber": 38,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "ReactElement"
+      ],
+      "spread": false,
+      "description": "input slider"
+    }
+  },
+  {
+    "__docId__": 15,
+    "kind": "file",
+    "name": "src/components/Bottom/RouteSelector/RouteSelector.js",
+    "content": "import React from \"react\";\nimport s from \"./RouteSelector.css\";\nimport {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'\nimport {corridorInfo} from '../../../Data/LoadData'\n\nimport {bindActionCreators} from 'redux';\nimport {connect} from 'react-redux';\nimport * as actionCreators from '../../../reducers/action';\n\nclass RouteSelector extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = {}\n  }\n\n\n  componenetDidMount() {\n    this.props.clickCorridor(\"A\");\n  }\n\n\n  render() {\n\n\n    return (\n      <div className=\"colBody routeSelector\">\n\n        <div className=\"colHead\">\n          <div className=\"fa-stack\">\n            <i className=\"fa-stack\" style={{color: \"black\"}}></i>\n          </div>\n        </div>\n\n        { this.props.isOpen ? null : <div className=\"placeHolder\"/> }\n\n\n        <div className=\"showToggle\">\n\n          <div>\n            <label className=\"btn tiny\" style={{backgroundColor: \"grey\", width: \"100%\"}}>\n              <i className=\"fa fa-level-down fa-flip-horizontal\"></i>\n            </label>\n\n\n            {\n              Object.values(corridorInfo).map((corridor) => {\n                return (\n                  <div className=\"smallColVal\" key={corridor.id}\n                       style={{\"color\": \"#FFF\", \"backgroundColor\": corridor.color, \"fontSize\": 16, \"padding\": 8}}\n                       onClick={()=>this.props.clickCorridor(corridor.id)}>\n                    {corridor.name}\n                  </div>\n                )\n              })\n            }\n\n\n          </div>\n        </div>\n      </div>\n    );\n  }\n}\n\n\nfunction mapStateToProps(state) {\n  return {\n    currentCorridor: state.reducer.currentCor,\n    isOpen: state.reducer.currentMap,\n  }\n}\n\nfunction mapDispachToProps(dispatch) {\n  return bindActionCreators(actionCreators, dispatch);\n}\n\n\nexport default connect(mapStateToProps, mapDispachToProps)(RouteSelector);\n\n\n",
+    "static": true,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 16,
+    "kind": "class",
+    "name": "RouteSelector",
+    "memberof": "src/components/Bottom/RouteSelector/RouteSelector.js",
+    "static": true,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/RouteSelector/RouteSelector.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 17,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 18,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector",
+    "static": false,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector#state",
+    "access": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 19,
+    "kind": "method",
+    "name": "componenetDidMount",
+    "memberof": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector#componenetDidMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 20,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js~RouteSelector#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 21,
+    "kind": "function",
+    "name": "mapStateToProps",
+    "memberof": "src/components/Bottom/RouteSelector/RouteSelector.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js~mapStateToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/RouteSelector/RouteSelector.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 66,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "state",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"currentCorridor\": *, \"isOpen\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "function",
+    "name": "mapDispachToProps",
+    "memberof": "src/components/Bottom/RouteSelector/RouteSelector.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/RouteSelector/RouteSelector.js~mapDispachToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/RouteSelector/RouteSelector.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 73,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dispatch",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "file",
+    "name": "src/components/Bottom/RouteTable/RouteTable.js",
+    "content": "import React from \"react\";\nimport s from \"./RouteTable.css\";\nimport {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'\n\nimport {bindActionCreators} from 'redux';\nimport {connect} from 'react-redux';\nimport * as actionCreators from '../../../reducers/action';\n\nimport {RouteByID} from '../../../Data/LoadData'\n\n\nclass RouteTable extends React.Component {\n  render() {\n\n    return (\n      <div className=\"colBody routeTable\">\n        <div className=\"colHead\">\n        </div>\n\n\n        { this.props.isOpen ? null : <div className=\"placeHolder\"/> }\n\n\n        <div className=\"showToggle\">\n\n          <div className=\"btn-group btn-group-justified\">\n            <label className=\"btn\" style={{color: \"white\", backgroundColor: \"grey\"}}>\n              {/*style=\"background-color: {{variants[tabnav].color}}; color: #FFF\"*/}\n              <i className=\"fa fa-line-chart\"/>\n              {/*<span >Hide Data</span>*/}\n              <span >Show Data</span>\n            </label>\n          </div>\n\n\n          {\n            RouteByID[this.props.currentCorridor].buslines.map((busline, index) => {\n              return (\n                <label className=\"btn btn-xs card\" key={busline}>\n                  {busline}\n                </label>\n              )\n            })\n          }\n\n          <div className=\"bottomFixed\">\n          </div>\n        </div>\n      </div>\n\n    );\n  }\n}\n\n\nfunction mapStateToProps(state) {\n  return {\n    currentCorridor: state.reducer.currentCor,\n    isOpen: state.reducer.currentMap,\n  }\n}\n\nfunction mapDispachToProps(dispatch) {\n  return bindActionCreators(actionCreators, dispatch);\n}\n\n\nexport default connect(mapStateToProps, mapDispachToProps)(RouteTable);\n\n\n",
+    "static": true,
+    "longname": "src/components/Bottom/RouteTable/RouteTable.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 24,
+    "kind": "class",
+    "name": "RouteTable",
+    "memberof": "src/components/Bottom/RouteTable/RouteTable.js",
+    "static": true,
+    "longname": "src/components/Bottom/RouteTable/RouteTable.js~RouteTable",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/RouteTable/RouteTable.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 25,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Bottom/RouteTable/RouteTable.js~RouteTable",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/RouteTable/RouteTable.js~RouteTable#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 26,
+    "kind": "function",
+    "name": "mapStateToProps",
+    "memberof": "src/components/Bottom/RouteTable/RouteTable.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/RouteTable/RouteTable.js~mapStateToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/RouteTable/RouteTable.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 56,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "state",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"currentCorridor\": *, \"isOpen\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 27,
+    "kind": "function",
+    "name": "mapDispachToProps",
+    "memberof": "src/components/Bottom/RouteTable/RouteTable.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/RouteTable/RouteTable.js~mapDispachToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/RouteTable/RouteTable.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 63,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dispatch",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 28,
+    "kind": "file",
+    "name": "src/components/Bottom/Scenario/Scenario.js",
+    "content": "import React from \"react\";\nimport s from \"./Scenario.css\";\n\n//bind redux\nimport {bindActionCreators} from 'redux';\nimport {connect} from 'react-redux';\nimport * as actionCreators from '../../../reducers/action';\n\n//import configuration file\nimport {CorridorInfo} from \"../../../config\"\n\nclass Scenario extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      isOpen: true,\n      baseScenario: {}\n    };\n\n    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)\n\n  }\n\n  //Set base scenario\n  componentWillMount() {\n    let model = {};\n    Object.keys(CorridorInfo).map(\n      (id)=> {\n        model[id] = {\n          \"runningTime\": 0,\n          \"dwellTime\": 0,\n          \"headway\": 0,\n        }\n      }\n    );\n    this.setState({\n      \"baseScenario\": model,\n    })\n  }\n\n  handlePlaceHolder() {\n    this.setState({\n      isOpen: !this.state.isOpen\n    })\n  }\n\n  render() {\n    return (\n      <div className=\"colBody\" id=\"leftDynamic\">\n        <div className=\"colHead\" onClick={this.handlePlaceHolder}>\n          <i className=\"fa fa-random\"/>\n          <span>Scenario: Existing MBTA</span>\n          {/*<span>*/}\n          {/*Scenario<span> Comparison</span>:*/}\n          {/*<span>*/}\n          {/*<span>vs. </span>*/}\n          {/*<span>vs...</span>*/}\n          {/*</span>*/}\n          {/*</span>*/}\n        </div>\n\n        { this.state.isOpen ?\n          <div className=\"placeHolder\" onClick={this.handlePlaceHolder}>\n            <div className=\"bigText\">\n              <i className=\"fa fa-random\"/>\n            </div>\n          </div>\n          :\n          null\n        }\n\n\n        <div className=\"showToggle\">\n\n          <div className=\"btn-group btn-group-justified\">\n\n            <label className=\"btn\" style={{backgroundColor: \"grey\", color: \"white\"}}><i\n              className=\"fa fa-balance-scale\"/> Compare\n            </label>\n\n\n            <label className=\"btn\" style={{backgroundColor: \"grey\", color: \"white\"}}><i\n              className=\"fa fa-plus-square\"/> Rename\n            </label>\n\n\n          </div>\n\n          <div className={s.scenariosTable} style={{marginTop: -18, paddingTop: 18}}>\n            <div className={s.scenario} style={{position: \"absolute\", zIndex: 10, width: 24}}>\n\n              {/*position:absolute;z-index:10;box-shadow:5px 0px 3px rgba(0,0,0,0.1);width:24px*/}\n\n              <i className=\"fa fa-balance-scale\" style={{position: \"absolute\", bottom: 40}}/>\n            </div>\n\n            <div className={s.scenarioEntries}>\n              <div className={s.scenario} style={{display: \"inline-block\", whiteSpace: \"nowrap\"}}>\n                <div className={s.subHead}>\n                  {/*{{combo.name }}*/}\n                </div>\n\n                {/*<input type=\"text\" className=\"subHead\">*/}\n                {/*</input>*/}\n\n\n                <div style={{width: 20, position: \"absolute\"}}>\n                  <div className=\"square\" style={{color: \"#FFF\"}}>\n                    {/*\"color:#FFF;background-color:{{variant.color}};\"*/}\n                  </div>\n                </div>\n\n                <div style={{width: \"100%\", position: \"absolute\", left: 22}}>\n                  <div>\n                    {/*<span className=\"text-success\">*/}\n                    <small>R: | D:\n                      | H:\n                    </small>\n                  </div>\n\n                </div>\n\n                <div className=\"text-center\" style={{position: \"absolute\", width: \"100%\", zIndex: 10, bottom: 2}}>\n                  <i className=\"fa fa-circle-o faa-pulse animated\"/>\n                  <i className=\"fa fa-circle-o\"/>\n                </div>\n                <div className=\"text-center\" style={{position: \"absolute\", width: \"100%\", zIndex: 10, bottom: 2}}>\n                  <i className=\"fa fa-check-circle\"/>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    );\n  }\n}\n\n\nfunction mapStateToProps(state) {\n  return {\n    newScenario: state.scenarioStore.newScenario,\n  }\n}\n\nfunction mapDispachToProps(dispatch) {\n  return bindActionCreators(actionCreators, dispatch);\n}\n\n\nexport default connect(mapStateToProps, mapDispachToProps)(Scenario);\n\n\n",
+    "static": true,
+    "longname": "src/components/Bottom/Scenario/Scenario.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 29,
+    "kind": "class",
+    "name": "Scenario",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js",
+    "static": true,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~Scenario",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/Scenario/Scenario.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 30,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js~Scenario",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~Scenario#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 31,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js~Scenario",
+    "static": false,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~Scenario#state",
+    "access": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"isOpen\": boolean, \"baseScenario\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 32,
+    "kind": "member",
+    "name": "handlePlaceHolder",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js~Scenario",
+    "static": false,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~Scenario#handlePlaceHolder",
+    "access": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 33,
+    "kind": "method",
+    "name": "componentWillMount",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js~Scenario",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~Scenario#componentWillMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 34,
+    "kind": "method",
+    "name": "handlePlaceHolder",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js~Scenario",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~Scenario#handlePlaceHolder",
+    "access": null,
+    "description": null,
+    "lineNumber": 41,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 35,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js~Scenario",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~Scenario#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 47,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 36,
+    "kind": "function",
+    "name": "mapStateToProps",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~mapStateToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/Scenario/Scenario.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 140,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "state",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"newScenario\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 37,
+    "kind": "function",
+    "name": "mapDispachToProps",
+    "memberof": "src/components/Bottom/Scenario/Scenario.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/Scenario/Scenario.js~mapDispachToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/Scenario/Scenario.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 146,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dispatch",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 38,
+    "kind": "file",
+    "name": "src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "content": "import React from \"react\";\nimport s from \"./ServiceEditor.css\";\nimport cloneDeep from 'lodash/cloneDeep'\n\n//import configuration file\nimport {\n  RunningTime,\n  Headway,\n  DwellTime,\n  RunningTimeMin,\n  RunningTimeMax,\n  DwellTimeMin,\n  DwellTimeMax,\n  HeadwayMin,\n  HeadwayMax,\n  CorridorInfo,\n} from \"../../../config\"\n\n//import slider component\nimport Slider from \"../Common/Slider/Slider\"\n\n\n//import pictures\nimport runningPic from '../../../img/runningtime.png'\nimport dwellPic from '../../../img/dwelltime.png'\nimport headwayPic from '../../../img/frequency.png'\n\n//bind redux\nimport {bindActionCreators} from 'redux';\nimport {connect} from 'react-redux';\nimport * as actionCreators from '../../../reducers/action';\n\n\nclass ServiceEditor extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      isOpen: true,\n      resetAdjust: {},\n      currentAdjust: {},\n    };\n\n    this.handlePlaceHolder = this.handlePlaceHolder.bind(this);\n    this.handleSaveButton = this.handleSaveButton.bind(this);\n    this.changeFeature = this.changeFeature.bind(this);\n\n\n  }\n\n  componentWillMount() {\n    let model = {};\n    Object.keys(CorridorInfo).map(\n      (id)=> {\n        model[id] = {\n          \"runningTime\": 0,\n          \"dwellTime\": 0,\n          \"headway\": 0,\n        }\n      }\n    );\n    this.setState({\n      \"resetAdjust\": model,\n      \"currentAdjust\": model,\n    })\n\n\n  }\n\n\n  handlePlaceHolder() {\n    this.setState({\n      isOpen: !this.state.isOpen\n    })\n  }\n\n\n  handleSaveButton() {\n    this.props.saveScenario(this.state.currentAdjust)\n\n  }\n\n\n  changeFeature(feature, value) {\n    let temp = cloneDeep(this.state.currentAdjust);\n    temp[this.props.currentCorridor][feature] = value;\n    this.setState({\n      currentAdjust: temp,\n    })\n  }\n\n\n  render() {\n    return (\n      <div className=\"colBody\" id=\"service-tab\">\n        <div className=\"colHead\" onClick={\n          () => {\n            this.handlePlaceHolder();\n            this.props.changeMap(!this.props.currentMap);\n          }}>\n          <i className=\"fa fa-pencil-square-o\"/>\n          Service Editor\n        </div>\n\n\n        { this.state.isOpen ?\n          <div className=\"placeHolder\" onClick={\n            () => {\n              this.handlePlaceHolder();\n              this.props.changeMap(!this.props.currentMap);\n            }}>\n            <div className=\"bigText\">\n              <i className=\"fa fa-pencil-square-o\"/>\n            </div>\n          </div>\n          :\n          null\n        }\n\n        <div className=\"btn-group btn-group-justified\">\n          <div className=\"btn\">\n            {/*style=\"width:300px; color:{{variants[tabnav].color}}; background-color:{{variants[tabnav].color}}\"*/}\n            <i className=\"fa fa-level-down \"/>\n          </div>\n\n          <div className=\"btn btn-info\" style={{width: 150, position: \"absolute\", right: 0}}\n               onClick={this.handleSaveButton}>\n            <i className=\"fa fa-save\"/> Save\n          </div>\n        </div>\n\n\n        <div>\n\n          <div className=\"setTimesTitle\" style={RunningTime ? null : {display: \"none\"}}>\n            <div className=\"subHead\">\n              Running time change (segment only)\n            </div>\n            <div>\n              <div style={{marginTop: -2}}>\n\n                <div style={{width: 60, display: \"inline-block\"}}>\n                  <img src={runningPic} style={{height: 35}}/>\n                </div>\n                <i className=\"fa fa-arrow-down\" style={{color: \"black\"}}/>\n\n                <div style={{width: \"75%\", display: \"inline-block\", marginTop: 2}}>\n                  <Slider name=\"runningTime\" min={RunningTimeMin} max={RunningTimeMax} value={this.state.currentAdjust[this.props.currentCorridor][\"runningTime\"]} step={5}\n                          className=\"right\" changeFunction={this.changeFeature}  />\n\n\n                </div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n\n        <div style={DwellTime ? {marginTop: 1} : {display: \"none\"}}>\n\n          <div className=\"setTimesTitle\">\n\n            <div className=\"subHead\">\n              Dwell time change (all stops for all corridor routes)\n            </div>\n\n            <div>\n              <div style={{paddingTop: 1}}>\n                <div style={{width: 60, display: \"inline-block\"}}>\n                  <img src={dwellPic} style={{height: 30}}/>\n                </div>\n                <i className=\"fa fa-arrow-down\" style={{color: \"black\"}}/>\n\n                <div style={{width: \"75%\", display: \"inline-block\", marginTop: 2}}>\n                  <Slider name=\"dwellTime\" min={DwellTimeMin} max={DwellTimeMax} value={this.state.currentAdjust[this.props.currentCorridor][\"dwellTime\"]}  step=\"5\" className=\"right\" changeFunction={this.changeFeature}/>\n\n                </div>\n              </div>\n            </div>\n\n\n          </div>\n\n        </div>\n\n        <div style={Headway ? {marginTop: 1} : {display: \"none\"}}>\n\n          <div className=\"setTimesTitle\">\n\n            <div className=\"subHead\">\n              Headway change (all corridor routes)\n            </div>\n\n            <div>\n              <div style={{paddingTop: 1}}>\n                <div style={{width: 60, display: \"inline-block\"}}>\n                  <img src={headwayPic} style={{height: 35}}/>\n                </div>\n                <i className=\"fa fa-arrow-down\" style={{color: \"black\"}}/>\n\n                <div style={{width: \"75%\", display: \"inline-block\", marginTop: 2}}>\n                  <Slider name=\"headway\" min={HeadwayMin} max={HeadwayMax} value={this.state.currentAdjust[this.props.currentCorridor][\"headway\"]}  step=\"5\" className=\"right\" changeFunction={this.changeFeature}/>\n                </div>\n              </div>\n            </div>\n\n\n          </div>\n\n        </div>\n      </div>\n\n\n\n\n\n    );\n  }\n}\n\n\nfunction mapStateToProps(state) {\n  return {\n    currentCorridor: state.reducer.currentCor,\n    currentMap: state.reducer.currentMap,\n  }\n}\n\nfunction mapDispachToProps(dispatch) {\n  return bindActionCreators(actionCreators, dispatch);\n}\n\n\nexport default connect(mapStateToProps, mapDispachToProps)(ServiceEditor);\n\n\n",
+    "static": true,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 39,
+    "kind": "class",
+    "name": "ServiceEditor",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "static": true,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 40,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 41,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#state",
+    "access": null,
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"isOpen\": boolean, \"resetAdjust\": *, \"currentAdjust\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 42,
+    "kind": "member",
+    "name": "handlePlaceHolder",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#handlePlaceHolder",
+    "access": null,
+    "description": null,
+    "lineNumber": 43,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 43,
+    "kind": "member",
+    "name": "handleSaveButton",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#handleSaveButton",
+    "access": null,
+    "description": null,
+    "lineNumber": 44,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 44,
+    "kind": "member",
+    "name": "changeFeature",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#changeFeature",
+    "access": null,
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 45,
+    "kind": "method",
+    "name": "componentWillMount",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#componentWillMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 46,
+    "kind": "method",
+    "name": "handlePlaceHolder",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#handlePlaceHolder",
+    "access": null,
+    "description": null,
+    "lineNumber": 70,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 47,
+    "kind": "method",
+    "name": "handleSaveButton",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#handleSaveButton",
+    "access": null,
+    "description": null,
+    "lineNumber": 77,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 48,
+    "kind": "method",
+    "name": "changeFeature",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#changeFeature",
+    "access": null,
+    "description": null,
+    "lineNumber": 83,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "feature",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 49,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~ServiceEditor#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 92,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "function",
+    "name": "mapStateToProps",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~mapStateToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 221,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "state",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"currentCorridor\": *, \"currentMap\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "name": "mapDispachToProps",
+    "memberof": "src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Bottom/ServiceEditor/ServiceEditor.js~mapDispachToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Bottom/ServiceEditor/ServiceEditor.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 228,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dispatch",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "file",
+    "name": "src/components/Bottom/TimeFilter/TimeFilter.js",
+    "content": "import React from \"react\";\nimport Fa from \"react-fontawesome\";\nimport \"./TimeFilter.css\";\nimport {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'\nimport Slider from \"../Common/Slider/Slider\"\nimport {PointToPoint, Accessibility} from \"../../../config\"\n\nclass TimeFilter extends React.Component {\n  constructor(props){\n    super(props);\n    this.state = {\n      isOpen: true,\n    };\n\n    this.handlePlaceHolder = this.handlePlaceHolder.bind(this)\n  }\n\n\n  renderMode(){\n    if (PointToPoint && Accessibility){\n      return <div style={{color:\"black\", marginTop:30}}>\n        Point-to-point mode:\n        {/*<i className=\"fa fa-check-square\"></i>*/}\n        <i style={{color:\"white\", paddingLeft:6}} className=\"fa fa-square\"/>\n      </div>\n    }\n  }\n\n  handlePlaceHolder(){\n    this.setState({\n      isOpen : !this.state.isOpen\n    })\n  }\n\n  render() {\n    return (\n      <div className=\"colBody\">\n        <div className=\"colHead\" onClick={this.handlePlaceHolder}>\n          <i><Fa name=\"clock-o\"/></i>\n          Time Map\n        </div>\n\n        { this.state.isOpen?\n          <div className=\"placeHolder\" onClick={this.handlePlaceHolder}>\n            <div className=\"bigText\">\n              <i className=\"fa fa-clock-o\"/>\n            </div>\n          </div>\n          :\n          null\n        }\n\n\n        <div className=\"showToggle\">\n\n          <ButtonGroup className=\"updateStart\">\n            <Button bsStyle=\"info\" className=\"update\">\n              <i><Fa name=\"refresh\"/></i>\n              <span> Update</span>\n            </Button>\n\n            <Button className=\"start\">\n              <i><Fa name=\"play\"/></i>\n              <span> Start</span>\n            </Button>\n          </ButtonGroup>\n\n          <div className=\"slideContainer\">\n            <div className=\"text-center\">\n              <span>\n                <Slider name=\"timeSlider\" min={5} max={115} step={5}/>\n\n                <div>\n                  <span style={{position: \"absolute\", left:10, color:\"black\"}}>\n                    <i><Fa name=\"step-backward\" size=\"2x\"/></i>\n                  </span>\n\n                  <span style={{position: \"absolute\", right:10, color:\"black\"}}>\n                    <i><Fa name=\"step-forward\" size=\"2x\"/></i>\n                  </span>\n\n                </div>\n              </span>\n            </div>\n          </div>\n\n          {this.renderMode()};\n\n        </div>\n      </div>\n\n    );\n  }\n}\n\nexport default TimeFilter\n",
+    "static": true,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 53,
+    "kind": "class",
+    "name": "TimeFilter",
+    "memberof": "src/components/Bottom/TimeFilter/TimeFilter.js",
+    "static": true,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Bottom/TimeFilter/TimeFilter.js",
+    "importStyle": "TimeFilter",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 54,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter",
+    "static": false,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter#state",
+    "access": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"isOpen\": boolean}"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "name": "handlePlaceHolder",
+    "memberof": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter",
+    "static": false,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter#handlePlaceHolder",
+    "access": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "method",
+    "name": "renderMode",
+    "memberof": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter#renderMode",
+    "access": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "method",
+    "name": "handlePlaceHolder",
+    "memberof": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter#handlePlaceHolder",
+    "access": null,
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 59,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Bottom/TimeFilter/TimeFilter.js~TimeFilter#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "file",
+    "name": "src/components/Home.js",
+    "content": "/**\n * @version 0.1.0\n */\n\nimport React from \"react\";\nimport TopleftPanel from \"./TopleftPanel/TopleftPanel\"\nimport Bottom from \"./Bottom/Bottom\"\nimport RouteMap from \"./Map/RouteMap/RouteMap\"\nimport ScenarioMap from \"./Map/ScenarioMap/ScenarioMap\"\n\n//import redux\nimport {bindActionCreators} from 'redux';\nimport {connect} from 'react-redux';\nimport * as actionCreators from '../reducers/action';\n\n/**\n * The main view which include TopleftPanel, map and Bottom component\n */\n\nclass Home extends React.Component {\n\n\n  render() {\n    return (\n      <div className=\"page-home\">\n        <TopleftPanel/>\n        {/*change map when click subhead*/}\n        {this.props.currentMap ? <RouteMap style={{height:500, width:500}}/> : <ScenarioMap style={{height:500, width:500}}/>}\n        <Bottom/>\n      </div>\n\n    );\n  }\n}\n\n\n//bind store and function to props\nfunction mapStateToProps(state) {\n  return {\n    currentMap: state.reducer.currentMap,\n  }\n}\n\nfunction mapDispachToProps(dispatch) {\n  return bindActionCreators(actionCreators, dispatch);\n}\n\n\nexport default connect(mapStateToProps, mapDispachToProps)(Home);\n\n\n\n",
+    "static": true,
+    "longname": "src/components/Home.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 61,
+    "kind": "class",
+    "name": "Home",
+    "memberof": "src/components/Home.js",
+    "static": true,
+    "longname": "src/components/Home.js~Home",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Home.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Home.js~Home",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Home.js~Home#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "function",
+    "name": "mapStateToProps",
+    "memberof": "src/components/Home.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Home.js~mapStateToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Home.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 38,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "state",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"currentMap\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "function",
+    "name": "mapDispachToProps",
+    "memberof": "src/components/Home.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/Home.js~mapDispachToProps",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Home.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 44,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dispatch",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "file",
+    "name": "src/components/Map/RouteMap/RouteMap.js",
+    "content": "import React from 'react';\nimport { render } from 'react-dom';\nimport { Map, Marker, Popup, TileLayer,GeoJSON } from 'react-leaflet';\nimport s from \"./RouteMap.css\"\nimport {MapLat, MapLng, ZoomLevel, Tile} from \"../../../config\"\nimport {TrunkByID} from '../../../Data/LoadData'\n\nimport TrunkData from '../../../Data/trunks.geojson'\n\n\n\nclass RouteMap extends React.Component {\n  constructor() {\n    super();\n    this.state = {\n      lat: MapLat,\n      lng: MapLng,\n      zoom: ZoomLevel,\n    };\n  }\n\n  componentDidMount(){\n    // console.log(this.refs.foo);\n\n  }\n\n  render() {\n    const allTrunk = Object.values(TrunkByID);\n\n    const position = [this.state.lat, this.state.lng];\n    return (\n      <div className={s.map}>\n        <Map ref=\"foo\" center={position} zoom={ZoomLevel}>\n          <TileLayer\n            url={Tile}\n            attribution='&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors'\n            />\n\n          {allTrunk.map((value) => value )}\n\n\n        </Map>\n      </div>\n    );\n  }\n}\n\nexport default RouteMap;\n",
+    "static": true,
+    "longname": "src/components/Map/RouteMap/RouteMap.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 66,
+    "kind": "class",
+    "name": "RouteMap",
+    "memberof": "src/components/Map/RouteMap/RouteMap.js",
+    "static": true,
+    "longname": "src/components/Map/RouteMap/RouteMap.js~RouteMap",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Map/RouteMap/RouteMap.js",
+    "importStyle": "RouteMap",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 67,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/components/Map/RouteMap/RouteMap.js~RouteMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/RouteMap/RouteMap.js~RouteMap#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Map/RouteMap/RouteMap.js~RouteMap",
+    "static": false,
+    "longname": "src/components/Map/RouteMap/RouteMap.js~RouteMap#state",
+    "access": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"lat\": *, \"lng\": *, \"zoom\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "method",
+    "name": "componentDidMount",
+    "memberof": "src/components/Map/RouteMap/RouteMap.js~RouteMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/RouteMap/RouteMap.js~RouteMap#componentDidMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 70,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Map/RouteMap/RouteMap.js~RouteMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/RouteMap/RouteMap.js~RouteMap#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "file",
+    "name": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "content": "import React from 'react';\nimport {render} from 'react-dom';\nimport {Map, Marker, Popup, TileLayer, GeoJSON} from 'react-leaflet';\nimport s from \"./ScenarioMap.css\"\nimport {MapLat, MapLng, ZoomLevel, Tile} from \"../../../config\"\n\nimport uuid from 'uuid'\nimport Browsochrones from 'browsochrones'\n\n\n\n\nconst BOSTON = [42.358056, -71.063611];\nconst BOSTON_COMMON = [42.355, -71.065556];\nconst LIFE_ALIVE = [42.366639, -71.105435];\nconst WORKER_VERSION = 'v1.5.0-65-g1c86762';\n\nconst API_KEY_ID = \"3158ID11NHODSZ2BZX1WY1R4G\";\nconst API_KEY_SECRET = \"5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k\";\nconst TRANSPORT_NETWORK_ID = \"709b3861891d5ea98975ab8317f8f270\";\nconst BASE_URL = \"http://coaxs.mit.edu:9090/api/single\";\nconst AUTH_URL = \"http://coaxs.mit.edu/oauth/token\";\nconst GRID_URL = \"https://analyst-static.s3.amazonaws.com/grids/boston/Jobs_with_earnings__1250_per_month_or_less.grid\";\n\n/** how often will we allow the isochrone to update, in milliseconds */\nconst MAX_UPDATE_INTERVAL_MS = 20; // seems smooth on 2015 Macbook Pro\n\n\nclass ScenarioMap extends React.Component {\n  constructor() {\n    super();\n    this.state = {\n      transitive: null,\n      isochrone: null,\n      isochroneCutoff: 60,\n      key: null,\n      loaded: false,\n      origin: BOSTON_COMMON,\n      destination: LIFE_ALIVE,\n      staticRequest: {\n        jobId: uuid.v4(),\n        transportNetworkId: TRANSPORT_NETWORK_ID,\n        request: {\n          date: '2016-09-27',\n          fromTime: 27000,\n          toTime: 30600,\n          accessModes: 'WALK',\n          directModes: 'WALK',\n          egressModes: 'WALK',\n          transitModes: 'WALK,TRANSIT',\n          walkSpeed: 1.3888888888888888,\n          bikeSpeed: 4.166666666666667,\n          carSpeed: 20,\n          streetTime: 90,\n          maxWalkTime: 20,\n          maxBikeTime: 20,\n          maxCarTime: 45,\n          minBikeTime: 10,\n          minCarTime: 10,\n          suboptimalMinutes: 5,\n          reachabilityThreshold: 0,\n          bikeSafe: 1,\n          bikeSlope: 1,\n          bikeTime: 1,\n          maxRides: 8,\n          bikeTrafficStress: 4,\n          boardingAssumption: 'RANDOM',\n          monteCarloDraws: 220,\n          scenario: process.env.SCENARIO || {\n            id: uuid.v4(),\n            modifications: []\n          }\n        }\n      }\n    };\n    this.fetchMetadata = this.fetchMetadata.bind(this)\n  }\n\n\n  async fetchMetadata() {\n\n    const bs = new Browsochrones();\n\n\n    let {staticRequest} = this.state;\n\n    console.log(API_KEY_ID);\n    // first get a token\n    let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/x-www-form-urlencoded'\n      },\n      body: 'grant_type=client_credentials'\n    }).then(r => r.json());\n\n    let accessToken = response.access_token;\n    console.log(accessToken);\n\n    this.setState({...this.state, accessToken});\n\n\n    Promise.all([\n      fetch(`${BASE_URL}?accessToken=${accessToken}`, {\n        method: 'POST',\n        body: JSON.stringify({\n          type: 'static-metadata',\n          graphId: TRANSPORT_NETWORK_ID,\n          workerVersion: WORKER_VERSION,\n          request: staticRequest\n        })\n      }).then(res => {\n        console.log(res);\n        return res.json()}\n\n      ),\n      fetch(`${BASE_URL}?accessToken=${accessToken}`, {\n        method: 'POST',\n        body: JSON.stringify({\n          type: 'static-stop-trees',\n          graphId: TRANSPORT_NETWORK_ID,\n          workerVersion: WORKER_VERSION,\n          request: staticRequest\n        })\n      }).then(res => {\n        console.log(res);\n        return res.arrayBuffer()}),\n      fetch(GRID_URL).then(res => {\n        console.log(res);\n        return res.arrayBuffer()})\n    ])\n      .then(([metadata, stopTrees, grid]) => {\n\n        Promise.all([\n          bs.setQuery(metadata),\n          bs.setStopTrees(stopTrees),\n          bs.setTransitiveNetwork(metadata.transitiveData),\n          bs.putGrid('grid', grid)\n        ]).then(this.setState({...this.state, loaded: true}))\n      })\n  };\n\n\n\n\n\n\n  componentDidMount() {\n    //  const browsochrones = new Browsochrones();\n    this.fetchMetadata();\n\n  }\n\n  render() {\n    let { transitive, isochrone, key, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, isochroneCutoff } = this.state\n\n    const position = [MapLat, MapLng];\n    return (\n      <div className={s.map}>\n        <Map ref=\"foo\" center={position} zoom={13} detectRetina>\n          <TileLayer\n            url={Tile}\n            attribution='&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors'\n          />\n\n          { isochrone && <GeoJson\n            style={{ fill: '#dfe', fillOpacity: 0.5 }}\n            data={isochrone}\n            key={`iso-${key}`}\n          />}\n\n          { transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`} /> }\n\n        </Map>\n      </div>\n    );\n  }\n}\n\nexport default ScenarioMap;\n",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 72,
+    "kind": "variable",
+    "name": "BOSTON",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~BOSTON",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "variable",
+    "name": "BOSTON_COMMON",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~BOSTON_COMMON",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "variable",
+    "name": "LIFE_ALIVE",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~LIFE_ALIVE",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "variable",
+    "name": "WORKER_VERSION",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~WORKER_VERSION",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "variable",
+    "name": "API_KEY_ID",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~API_KEY_ID",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "variable",
+    "name": "API_KEY_SECRET",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~API_KEY_SECRET",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "variable",
+    "name": "TRANSPORT_NETWORK_ID",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~TRANSPORT_NETWORK_ID",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 79,
+    "kind": "variable",
+    "name": "BASE_URL",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~BASE_URL",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 80,
+    "kind": "variable",
+    "name": "AUTH_URL",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~AUTH_URL",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 81,
+    "kind": "variable",
+    "name": "GRID_URL",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~GRID_URL",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 82,
+    "kind": "variable",
+    "name": "MAX_UPDATE_INTERVAL_MS",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~MAX_UPDATE_INTERVAL_MS",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": null,
+    "description": "how often will we allow the isochrone to update, in milliseconds",
+    "lineNumber": 26,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "class",
+    "name": "ScenarioMap",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/ScenarioMap.js",
+    "importStyle": "ScenarioMap",
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 84,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 85,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap#state",
+    "access": null,
+    "description": null,
+    "lineNumber": 32,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"transitive\": *, \"isochrone\": *, \"isochroneCutoff\": number, \"key\": *, \"loaded\": *, \"origin\": *, \"destination\": *, \"staticRequest\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 86,
+    "kind": "member",
+    "name": "fetchMetadata",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap#fetchMetadata",
+    "access": null,
+    "description": null,
+    "lineNumber": 76,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "method",
+    "name": "fetchMetadata",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap#fetchMetadata",
+    "access": null,
+    "description": null,
+    "lineNumber": 80,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 88,
+    "kind": "method",
+    "name": "componentDidMount",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap#componentDidMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 148,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 89,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/ScenarioMap.js~ScenarioMap#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 154,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "file",
+    "name": "src/components/Map/ScenarioMap/lib/index.js",
+    "content": "/** the main entry point for the Browsochrones example */\n\n\n\nimport React, { Component } from 'react'\nimport { Marker, TileLayer, Map as LeafletMap, GeoJson } from 'react-leaflet'\nimport { Browser } from 'leaflet'\nimport { render } from 'react-dom'\nimport fetch from 'isomorphic-fetch'\nimport uuid from 'uuid'\nimport Browsochrones from 'browsochrones'\nimport TransitiveLayer from './transitive-layer'\nimport debounce from 'debounce'\nimport dbg from 'debug'\n\nconst debug = dbg('browsochrones-example:example')\n\nconst BOSTON = [42.358056, -71.063611]\nconst BOSTON_COMMON = [42.355, -71.065556]\nconst LIFE_ALIVE = [42.366639, -71.105435]\nconst WORKER_VERSION = 'v1.5.0-65-g1c86762'\n\nconst API_KEY_ID=\"3158ID11NHODSZ2BZX1WY1R4G\";\nconst API_KEY_SECRET = \"5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k\";\nconst TRANSPORT_NETWORK_ID = \"709b3861891d5ea98975ab8317f8f270\";\nconst BASE_URL = \"http://coaxs.mit.edu:9090/api/single\";\nconst AUTH_URL = \"http://coaxs.mit.edu/oauth/token\";\nconst GRID_URL = \"https://analyst-static.s3.amazonaws.com/grids/boston/Jobs_with_earnings__1250_per_month_or_less.grid\";\n\n/** how often will we allow the isochrone to update, in milliseconds */\nconst MAX_UPDATE_INTERVAL_MS = 20; // seems smooth on 2015 Macbook Pro\n\nexport default class BrowsochronesExample extends Component {\n  /** This stores the data used to draw the map */\n  state = {\n    transitive: null,\n    isochrone: null,\n    isochroneCutoff: 60,\n    key: null,\n    loaded: false,\n    origin: BOSTON_COMMON,\n    destination: LIFE_ALIVE,\n    staticRequest: {\n      jobId: uuid.v4(),\n      transportNetworkId: TRANSPORT_NETWORK_ID,\n      request: {\n        date: '2016-09-27',\n        fromTime: 27000,\n        toTime: 30600,\n        accessModes: 'WALK',\n        directModes: 'WALK',\n        egressModes: 'WALK',\n        transitModes: 'WALK,TRANSIT',\n        walkSpeed: 1.3888888888888888,\n        bikeSpeed: 4.166666666666667,\n        carSpeed: 20,\n        streetTime: 90,\n        maxWalkTime: 20,\n        maxBikeTime: 20,\n        maxCarTime: 45,\n        minBikeTime: 10,\n        minCarTime: 10,\n        suboptimalMinutes: 5,\n        reachabilityThreshold: 0,\n        bikeSafe: 1,\n        bikeSlope: 1,\n        bikeTime: 1,\n        maxRides: 8,\n        bikeTrafficStress: 4,\n        boardingAssumption: 'RANDOM',\n        monteCarloDraws: 220,\n        scenario: process.env.SCENARIO || {\n          id: uuid.v4(),\n          modifications: []\n        }\n      }\n    }\n  };\n\n  /** The browsochrones instance used to create isochrones */\n  browsochrones = new Browsochrones();\n\n  /** This fetches the stop trees and query metadata */\n  fetchMetadata = async() => {\n    let {staticRequest} = this.state;\n\n    console.log(API_KEY_ID);\n    // first get a token\n    let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/x-www-form-urlencoded'\n      },\n      body: 'grant_type=client_credentials'\n    }).then(r => r.json());\n\n    let accessToken = response.access_token;\n    console.log(accessToken);\n\n    this.setState({...this.state, accessToken});\n\n\n\n\n    Promise.all([\n      fetch(`${BASE_URL}?accessToken=${accessToken}`, {\n        method: 'POST',\n        body: JSON.stringify({\n          type: 'static-metadata',\n          graphId: TRANSPORT_NETWORK_ID,\n          workerVersion: WORKER_VERSION,\n          request: staticRequest\n        })\n      }).then(res => {\n        console.log(res);\n        return res.json()}\n\n      ),\n      fetch(`${BASE_URL}?accessToken=${accessToken}`, {\n        method: 'POST',\n        body: JSON.stringify({\n          type: 'static-stop-trees',\n          graphId: TRANSPORT_NETWORK_ID,\n          workerVersion: WORKER_VERSION,\n          request: staticRequest\n        })\n      }).then(res => {\n        console.log(res);\n        return res.arrayBuffer()}),\n      fetch(GRID_URL).then(res => {\n        console.log(res);\n        return res.arrayBuffer()})\n    ])\n        .then(([metadata, stopTrees, grid]) => {\n          Promise.all([\n            this.browsochrones.setQuery(metadata),\n            this.browsochrones.setStopTrees(stopTrees),\n            this.browsochrones.setTransitiveNetwork(metadata.transitiveData),\n            this.browsochrones.putGrid('grid', grid)\n          ]).then(this.setState({...this.state, loaded: true}))\n        })\n\n  };\n\n\n  moveOrigin = (e) => {\n    let origin = e.target.getLatLng()\n    let { x, y } = this.browsochrones.latLonToOriginPoint(origin)\n    let { staticRequest, accessToken, isochroneCutoff } = this.state\n\n    this.setState({...this.state, origin, isochrone: null, transitive: null, inVehicleTravelTime: null, travelTime: null, waitTime: null, accessibility: null})\n\n    return fetch(`${BASE_URL}?accessToken=${accessToken}`, {\n      method: 'POST',\n      body: JSON.stringify({\n        type: 'static',\n        request: staticRequest,\n        workerVersion: WORKER_VERSION,\n        graphId: TRANSPORT_NETWORK_ID,\n        x,\n        y\n      })\n    }).then(res => res.arrayBuffer())\n        .then(async (buff) => {\n          await this.browsochrones.setOrigin(buff, { x, y })\n          await this.browsochrones.generateSurface()\n          let { isochrone, accessibility } = await this.getIsochroneAndAccessibility(isochroneCutoff)\n\n          this.setState({...this.state, isochrone, key: uuid.v4(), origin, accessibility, transitive: null, inVehicleTravelTime: null, travelTime: null, waitTime: null})\n        })\n  }\n\n  changeIsochroneCutoff = debounce(async (isochroneCutoff) => {\n    isochroneCutoff = parseInt(isochroneCutoff)\n    debug(`setting isochrone cutoff to ${isochroneCutoff}`)\n\n    let data = await this.getIsochroneAndAccessibility(isochroneCutoff)\n    debug(`${isochroneCutoff} accessibility: ${data.accessibility}`)\n    this.setState({...this.state, ...data, isochroneCutoff})\n  }, MAX_UPDATE_INTERVAL_MS)\n\n  /** get an isochrone and an accessibility figure */\n  async getIsochroneAndAccessibility (isochroneCutoff) {\n    let [accessibility, isochrone] = await Promise.all([\n      this.browsochrones.getAccessibilityForGrid('grid', isochroneCutoff),\n      this.browsochrones.getIsochrone(isochroneCutoff)\n    ])\n    return { accessibility, isochrone, key: uuid.v4() }\n  }\n\n  moveDestination = async (e) => {\n    let origin = e.target.getLatLng()\n    let { x, y } = this.browsochrones.latLonToOriginPoint(origin)\n\n    let { transitive, travelTime, waitTime, inVehicleTravelTime } = await this.browsochrones.generateDestinationData({ x, y })\n\n    this.setState({ ...this.state, transitive, travelTime, waitTime, inVehicleTravelTime, key: uuid.v4() })\n  }\n\n\n  componentDidMount () {\n    this.fetchMetadata()\n  }\n\n  render () {\n    let { transitive, isochrone, key, origin, destination, travelTime, waitTime, inVehicleTravelTime, loaded, accessibility, isochroneCutoff } = this.state\n\n\n    return <div className='map'>\n      <LeafletMap center={BOSTON} zoom={13} detectRetina>\n        <TileLayer\n            url={`https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}${Browser.retina ? '@2x' : ''}.png`}\n            attribution='&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors, &copy; <a href=\"https://carto.com/attributions\">CARTO</a>'\n        />\n\n        { isochrone && <GeoJson\n            style={{ fill: '#dfe', fillOpacity: 0.5 }}\n            data={isochrone}\n            key={`iso-${key}`}\n        />}\n\n        { transitive && <TransitiveLayer data={transitive} key={`transitive-${key}`} /> }\n\n        <Marker\n            position={origin}\n            draggable\n            onDragend={this.moveOrigin}\n        />\n        <Marker\n            position={destination}\n            draggable\n            onDragend={this.moveDestination}\n        />\n      </LeafletMap>\n\n      { isochrone && <div className='floatingPanel'>\n        <input type='range' min={0} max={120} value={isochroneCutoff} onChange={(e) => this.changeIsochroneCutoff(e.target.value)} /><br />\n        Reachable within <u>{isochroneCutoff}</u> minutes<br />\n        { accessibility && <span>Accessibility: {Math.round(accessibility / 100) * 100} </span>}<br />\n        { transitive && <span>\n          Total travel time: {travelTime} minutes<br />\n          In-vehicle time: {inVehicleTravelTime} minutes<br />\n          Wait time: {waitTime} minutes<br />\n        </span> }\n      </div> }\n\n    </div>\n  }\n};\nrender(<BrowsochronesExample />, document.getElementById('root'));\n",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 91,
+    "kind": "variable",
+    "name": "debug",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~debug",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "variable",
+    "name": "BOSTON",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BOSTON",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 93,
+    "kind": "variable",
+    "name": "BOSTON_COMMON",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BOSTON_COMMON",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "variable",
+    "name": "LIFE_ALIVE",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~LIFE_ALIVE",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 95,
+    "kind": "variable",
+    "name": "WORKER_VERSION",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~WORKER_VERSION",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 96,
+    "kind": "variable",
+    "name": "API_KEY_ID",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~API_KEY_ID",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "variable",
+    "name": "API_KEY_SECRET",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~API_KEY_SECRET",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "variable",
+    "name": "TRANSPORT_NETWORK_ID",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~TRANSPORT_NETWORK_ID",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 99,
+    "kind": "variable",
+    "name": "BASE_URL",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BASE_URL",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "variable",
+    "name": "AUTH_URL",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~AUTH_URL",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "variable",
+    "name": "GRID_URL",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~GRID_URL",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 102,
+    "kind": "variable",
+    "name": "MAX_UPDATE_INTERVAL_MS",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~MAX_UPDATE_INTERVAL_MS",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": null,
+    "description": "how often will we allow the isochrone to update, in milliseconds",
+    "lineNumber": 31,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 103,
+    "kind": "class",
+    "name": "BrowsochronesExample",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/index.js",
+    "importStyle": "BrowsochronesExample",
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~Component"
+    ]
+  },
+  {
+    "__docId__": 104,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#state",
+    "access": null,
+    "description": "This stores the data used to draw the map",
+    "lineNumber": 35,
+    "type": {
+      "types": [
+        "{\"transitive\": *, \"isochrone\": *, \"isochroneCutoff\": number, \"key\": *, \"loaded\": *, \"origin\": *, \"destination\": *, \"staticRequest\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 105,
+    "kind": "member",
+    "name": "browsochrones",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#browsochrones",
+    "access": null,
+    "description": "The browsochrones instance used to create isochrones",
+    "lineNumber": 81,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 106,
+    "kind": "member",
+    "name": "fetchMetadata",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#fetchMetadata",
+    "access": null,
+    "description": "This fetches the stop trees and query metadata",
+    "lineNumber": 84,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 107,
+    "kind": "member",
+    "name": "moveOrigin",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#moveOrigin",
+    "access": null,
+    "description": null,
+    "lineNumber": 146,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 108,
+    "kind": "member",
+    "name": "changeIsochroneCutoff",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#changeIsochroneCutoff",
+    "access": null,
+    "description": null,
+    "lineNumber": 173,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 109,
+    "kind": "method",
+    "name": "getIsochroneAndAccessibility",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#getIsochroneAndAccessibility",
+    "access": null,
+    "description": "get an isochrone and an accessibility figure",
+    "lineNumber": 183,
+    "params": [
+      {
+        "name": "isochroneCutoff",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"accessibility\": *, \"isochrone\": *, \"key\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 110,
+    "kind": "member",
+    "name": "moveDestination",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#moveDestination",
+    "access": null,
+    "description": null,
+    "lineNumber": 191,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 111,
+    "kind": "method",
+    "name": "componentDidMount",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#componentDidMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 201,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 112,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/index.js~BrowsochronesExample#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 205,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 113,
+    "kind": "file",
+    "name": "src/components/Map/ScenarioMap/lib/transitive-layer.js",
+    "content": "/** A react-leaflet transitive layer */\n\nimport { MapLayer } from 'react-leaflet'\nimport { PropTypes } from 'react'\nimport LTransitiveLayer from 'leaflet-transitivelayer'\nimport Transitive from 'transitive-js'\n\nexport default class TransitiveLayer extends MapLayer {\n  // TODO proptypes\n  static propTypes = {\n    data: PropTypes.object.isRequired\n  }\n\n  componentWillMount () {\n    super.componentWillMount()\n    let { data, ...rest } = this.props\n    this.transitive = new Transitive({ data, ...rest })\n    this.leafletElement = new LTransitiveLayer(this.transitive)\n  }\n\n  componentDidMount () {\n    super.componentDidMount()\n    this.leafletElement._refresh() // leaflet-transitive issue #2\n  }\n\n  // TODO I think we can update a leaflet layer\n}\n",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/transitive-layer.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 114,
+    "kind": "class",
+    "name": "TransitiveLayer",
+    "memberof": "src/components/Map/ScenarioMap/lib/transitive-layer.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/lib/transitive-layer.js",
+    "importStyle": "TransitiveLayer",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react-leaflet~MapLayer"
+    ]
+  },
+  {
+    "__docId__": 115,
+    "kind": "member",
+    "name": "propTypes",
+    "memberof": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer.propTypes",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"data\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 116,
+    "kind": "method",
+    "name": "componentWillMount",
+    "memberof": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer#componentWillMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 117,
+    "kind": "member",
+    "name": "transitive",
+    "memberof": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer#transitive",
+    "access": null,
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 118,
+    "kind": "member",
+    "name": "leafletElement",
+    "memberof": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer#leafletElement",
+    "access": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 119,
+    "kind": "method",
+    "name": "componentDidMount",
+    "memberof": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/lib/transitive-layer.js~TransitiveLayer#componentDidMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 120,
+    "kind": "file",
+    "name": "src/components/Map/ScenarioMap/transitive-layer.js",
+    "content": "/** A react-leaflet transitive layer */\n\nimport { MapLayer } from 'react-leaflet'\nimport { PropTypes } from 'react'\nimport LTransitiveLayer from 'leaflet-transitivelayer'\nimport Transitive from 'transitive-js'\n\nexport default class TransitiveLayer extends MapLayer {\n  // TODO proptypes\n\n  componentWillMount () {\n    super.componentWillMount()\n    let { data, ...rest } = this.props\n    this.transitive = new Transitive({ data, ...rest })\n    this.leafletElement = new LTransitiveLayer(this.transitive)\n  }\n\n  componentDidMount () {\n    super.componentDidMount()\n    this.leafletElement._refresh() // leaflet-transitive issue #2\n  }\n\n  // TODO I think we can update a leaflet layer\n}\n",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/transitive-layer.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 121,
+    "kind": "class",
+    "name": "TransitiveLayer",
+    "memberof": "src/components/Map/ScenarioMap/transitive-layer.js",
+    "static": true,
+    "longname": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/Map/ScenarioMap/transitive-layer.js",
+    "importStyle": "TransitiveLayer",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react-leaflet~MapLayer"
+    ]
+  },
+  {
+    "__docId__": 122,
+    "kind": "method",
+    "name": "componentWillMount",
+    "memberof": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer#componentWillMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 123,
+    "kind": "member",
+    "name": "transitive",
+    "memberof": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer#transitive",
+    "access": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 124,
+    "kind": "member",
+    "name": "leafletElement",
+    "memberof": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer",
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer#leafletElement",
+    "access": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 125,
+    "kind": "method",
+    "name": "componentDidMount",
+    "memberof": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/Map/ScenarioMap/transitive-layer.js~TransitiveLayer#componentDidMount",
+    "access": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 126,
+    "kind": "file",
+    "name": "src/components/NotFound.js",
+    "content": "import React from \"react\";\n\n\n/**\n * The 404 page.\n */\n\n// Not found page component\nclass NotFound extends React.Component {\n  /**\n   * render\n   * @return {ReactElement} page not found\n   */\n\n  render() {\n    return (\n      <div className=\"page-not-found\">\n        <h4>Page not found</h4>\n      </div>\n    );\n  }\n}\n\nexport default NotFound\n",
+    "static": true,
+    "longname": "src/components/NotFound.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 127,
+    "kind": "class",
+    "name": "NotFound",
+    "memberof": "src/components/NotFound.js",
+    "static": true,
+    "longname": "src/components/NotFound.js~NotFound",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/NotFound.js",
+    "importStyle": "NotFound",
+    "description": "The 404 page.",
+    "lineNumber": 9,
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 128,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/NotFound.js~NotFound",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/NotFound.js~NotFound#render",
+    "access": null,
+    "description": "render",
+    "lineNumber": 15,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "ReactElement"
+      ],
+      "spread": false,
+      "description": "page not found"
+    }
+  },
+  {
+    "__docId__": 129,
+    "kind": "file",
+    "name": "src/components/TopleftPanel/TopleftPanel.js",
+    "content": "\nimport React from \"react\";\nimport \"./TopleftPanel.css\"\nimport {IntroTitle, IntroDescription} from \"../../config.js\"\n\n\nclass lefttopPanel extends React.Component {\n  render() {\n    return (\n      <div className=\"topleft\">\n        <h4 className=\"topleftText\">\n          {IntroTitle}\n        </h4>\n        <div className=\"topinfo container\">\n          <div>\n            <h5>{IntroDescription}</h5>\n          </div>\n        </div>\n      </div>\n    );\n  }\n}\n\nexport default lefttopPanel\n",
+    "static": true,
+    "longname": "src/components/TopleftPanel/TopleftPanel.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 130,
+    "kind": "class",
+    "name": "lefttopPanel",
+    "memberof": "src/components/TopleftPanel/TopleftPanel.js",
+    "static": true,
+    "longname": "src/components/TopleftPanel/TopleftPanel.js~lefttopPanel",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/components/TopleftPanel/TopleftPanel.js",
+    "importStyle": "lefttopPanel",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 131,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/components/TopleftPanel/TopleftPanel.js~lefttopPanel",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/components/TopleftPanel/TopleftPanel.js~lefttopPanel#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 132,
+    "kind": "file",
+    "name": "src/config.js",
+    "content": "/**\n * Created by xinzheng on 1/21/17.\n */\n\n\n//Intro panel\n/** Introduction title on the left\n * @type {string} IntroTitle\n */\nexport const IntroTitle = \"CoAXs | Bus Priority\";\n\n/** Introduction description on the left\n * @type {string} IntroDescription\n */\nexport const IntroDescription = \"Showing door-to-door travel, with MBTA weekday morning schedule as baseline.\";\n\n//Map\n/** Center latitude of map\n * @type {number} MapLat\n */\nexport const MapLat = 42.36;\n\n/** Center longitude of map\n * @type {number} MapLat\n */\nexport const MapLng = -71.1;\n\n/** zoom level of map\n * @type {number} ZoomLevel\n */\nexport const ZoomLevel = 13;\n\n/** Map base tile\n * @type {string} Tile\n */\nexport const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';\n\n//Mode\n/** Point to point mode switch\n * @type {boolean} PointToPoint - true: enable point to point mode, false: disable\n */\nexport const PointToPoint = true;\n\n/** Accessibility mode switch\n * @type {boolean} Accessibility - true: enable accessibility mode, false: disable\n */\nexport const Accessibility = true;\n\n\n//Corridor info\nexport const CorridorInfo = {\n  \"A\": {\"name\": \"Mass Ave\", \"color\": \"#555555\", \"id\": \"A\"},\n  \"B\": {\"name\": \"N. Washington St\", \"color\": \"#7DD5ED\", \"id\": \"B\"},\n  \"C\": {\"name\": \"HuntingTon Ave\", \"color\": \"#F3E05E\", \"id\": \"C\"},\n  \"D\": {\"name\": \"Roslindale/Forest Hills\", \"color\": \"#E092DF\", \"id\": \"D\"},\n  \"E\": {\"name\": \"Blue Hill Ave\", \"color\": \"#8D6AA8\", \"id\": \"E\"},\n};\n\n\n//Service Editor\n//Running Time (add more modification function)\nexport const RunningTime = true;\nexport const RunningTimeMin = 0;\nexport const RunningTimeMax = 60;\nexport function modifySpeed(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-speed\") {\n            route.scale = scale;\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n//Dwell Time\nexport const DwellTime = true;\nexport const DwellTimeMin = 0;\nexport const DwellTimeMax = 70;\nexport function ModifyDwells(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-dwell-time\") {\n            route.scale = scale;\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n//Headway\nexport const Headway = true;\nexport const HeadwayMin = 0;\nexport const HeadwayMax = 80;\nexport function modifyHeadway(corridorId, scale, cb) {\n  $http.get('/load/scenario/' + corridorId)\n    .success(function (data, status) {\n      var scenarioJSON = [];\n      data.modifications.forEach(function (route) {\n          if (route.type === \"adjust-frequency\") {\n            route.entries.forEach(function (entry) {\n              entry.headwaySecs = entry.headwaySecs * scale;\n            });\n            scenarioJSON.push(route);\n          }\n        }\n      );\n      cb(scenarioJSON)\n    })\n}\n\n\n\n",
+    "static": true,
+    "longname": "src/config.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 133,
+    "kind": "variable",
+    "name": "IntroTitle",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~IntroTitle",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{IntroTitle}",
+    "description": "Introduction title on the left",
+    "lineNumber": 10,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 134,
+    "kind": "variable",
+    "name": "IntroDescription",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~IntroDescription",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{IntroDescription}",
+    "description": "Introduction description on the left",
+    "lineNumber": 15,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 135,
+    "kind": "variable",
+    "name": "MapLat",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~MapLat",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{MapLat}",
+    "description": "Center latitude of map",
+    "lineNumber": 21,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 136,
+    "kind": "variable",
+    "name": "MapLng",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~MapLng",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{MapLng}",
+    "description": "Center longitude of map",
+    "lineNumber": 26,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 137,
+    "kind": "variable",
+    "name": "ZoomLevel",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~ZoomLevel",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{ZoomLevel}",
+    "description": "zoom level of map",
+    "lineNumber": 31,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 138,
+    "kind": "variable",
+    "name": "Tile",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~Tile",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{Tile}",
+    "description": "Map base tile",
+    "lineNumber": 36,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 139,
+    "kind": "variable",
+    "name": "PointToPoint",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~PointToPoint",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{PointToPoint}",
+    "description": "Point to point mode switch",
+    "lineNumber": 42,
+    "type": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 140,
+    "kind": "variable",
+    "name": "Accessibility",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~Accessibility",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{Accessibility}",
+    "description": "Accessibility mode switch",
+    "lineNumber": 47,
+    "type": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 141,
+    "kind": "variable",
+    "name": "CorridorInfo",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~CorridorInfo",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{CorridorInfo}",
+    "description": null,
+    "lineNumber": 51,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"A\": *, \"B\": *, \"C\": *, \"D\": *, \"E\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 142,
+    "kind": "variable",
+    "name": "RunningTime",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~RunningTime",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{RunningTime}",
+    "description": null,
+    "lineNumber": 62,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 143,
+    "kind": "variable",
+    "name": "RunningTimeMin",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~RunningTimeMin",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{RunningTimeMin}",
+    "description": null,
+    "lineNumber": 63,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 144,
+    "kind": "variable",
+    "name": "RunningTimeMax",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~RunningTimeMax",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{RunningTimeMax}",
+    "description": null,
+    "lineNumber": 64,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 145,
+    "kind": "function",
+    "name": "modifySpeed",
+    "memberof": "src/config.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/config.js~modifySpeed",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{modifySpeed}",
+    "description": null,
+    "lineNumber": 65,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "corridorId",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "scale",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "cb",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 146,
+    "kind": "variable",
+    "name": "DwellTime",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~DwellTime",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{DwellTime}",
+    "description": null,
+    "lineNumber": 81,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 147,
+    "kind": "variable",
+    "name": "DwellTimeMin",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~DwellTimeMin",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{DwellTimeMin}",
+    "description": null,
+    "lineNumber": 82,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 148,
+    "kind": "variable",
+    "name": "DwellTimeMax",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~DwellTimeMax",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{DwellTimeMax}",
+    "description": null,
+    "lineNumber": 83,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 149,
+    "kind": "function",
+    "name": "ModifyDwells",
+    "memberof": "src/config.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/config.js~ModifyDwells",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{ModifyDwells}",
+    "description": null,
+    "lineNumber": 84,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "corridorId",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "scale",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "cb",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 150,
+    "kind": "variable",
+    "name": "Headway",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~Headway",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{Headway}",
+    "description": null,
+    "lineNumber": 100,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 151,
+    "kind": "variable",
+    "name": "HeadwayMin",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~HeadwayMin",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{HeadwayMin}",
+    "description": null,
+    "lineNumber": 101,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 152,
+    "kind": "variable",
+    "name": "HeadwayMax",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~HeadwayMax",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{HeadwayMax}",
+    "description": null,
+    "lineNumber": 102,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 153,
+    "kind": "function",
+    "name": "modifyHeadway",
+    "memberof": "src/config.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/config.js~modifyHeadway",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/config.js",
+    "importStyle": "{modifyHeadway}",
+    "description": null,
+    "lineNumber": 103,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "corridorId",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "scale",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "cb",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 154,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "import \"babel-polyfill\";\nimport React from \"react\";\nimport ReactDOM from \"react-dom\";\nimport { Provider } from \"react-redux\";\nimport { store } from \"./store.js\";\nimport { router } from \"./router.js\";\n\n/**\n * The root container.\n */\n\n\n// render the main component\nReactDOM.render(\n  <Provider store={store}>\n    {router}\n  </Provider>,\n  document.getElementById('app')\n);\n",
+    "static": true,
+    "longname": "src/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 155,
+    "kind": "file",
+    "name": "src/reducers/action.js",
+    "content": "\n/*\n * action types\n */\n\n\n/*\n * action creators\n */\n\n/**\n * handle click corridor\n * @param {object} res\n * @return {object} action - \"clickCorridor\" type and res\n */\nexport function clickCorridor(res) {\n  return {\n    type: \"clickCorridor\",\n    res\n  }\n}\n\n/**\n * handle change map\n * @param {object} res\n * @return {object} action - \"changeMap\" type and res\n */\nexport function changeMap(res) {\n  return {\n    type: \"changeMap\",\n    res\n  }\n}\n\n/**\n * handle save scenario\n * @param {object} res\n * @return {object} action - \"saveScenario\" type and res\n */\nexport function saveScenario(res) {\n  return {\n    type: \"saveScenario\",\n    res\n  }\n}\n",
+    "static": true,
+    "longname": "src/reducers/action.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 156,
+    "kind": "function",
+    "name": "clickCorridor",
+    "memberof": "src/reducers/action.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/reducers/action.js~clickCorridor",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/reducers/action.js",
+    "importStyle": "{clickCorridor}",
+    "description": "handle click corridor",
+    "lineNumber": 16,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "res",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "action - \"clickCorridor\" type and res"
+    }
+  },
+  {
+    "__docId__": 157,
+    "kind": "function",
+    "name": "changeMap",
+    "memberof": "src/reducers/action.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/reducers/action.js~changeMap",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/reducers/action.js",
+    "importStyle": "{changeMap}",
+    "description": "handle change map",
+    "lineNumber": 28,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "res",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "action - \"changeMap\" type and res"
+    }
+  },
+  {
+    "__docId__": 158,
+    "kind": "function",
+    "name": "saveScenario",
+    "memberof": "src/reducers/action.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/reducers/action.js~saveScenario",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/reducers/action.js",
+    "importStyle": "{saveScenario}",
+    "description": "handle save scenario",
+    "lineNumber": 40,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "res",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "action - \"saveScenario\" type and res"
+    }
+  },
+  {
+    "__docId__": 159,
+    "kind": "file",
+    "name": "src/reducers/index.js",
+    "content": "import { combineReducers } from \"redux\";\nimport { routerReducer } from \"react-router-redux\";\nimport { reducer as formReducer } from \"redux-form\";\n\n\n/**\n * reducer\n *\n */\n\n\n/**\n * initialState\n * @type {object}\n * @property {string} currentCor - initial clicked corridor {number} currentMap - initial map displayed 0: scenario map 1: route map\n */\nconst initialState = {currentCor:\"A\", currentMap: 0};\n\n\n/**\n * main reducer\n * @param {object} state {string} action - dispatched in component\n * @return {object} store - new store\n */\nfunction reducer(state = initialState, action) {\n  switch (action.type) {\n    case 'clickCorridor':\n      return {\n        ...state,\n        // \"currentCor\": JSON.parse(action.res)\n        \"currentCor\": action.res\n      };\n    case 'changeMap':\n      return {\n        ...state,\n        // \"currentCor\": JSON.parse(action.res)\n        \"currentMap\": action.res\n      };\n    default:\n      return state\n  }\n}\n\n/**\n * scenario reducer\n * @param {object} state {string} action - dispatched in component\n * @return {object} store - new scenario store\n */\nfunction scenarioStore(state = [], action) {\n  switch (action.type) {\n    case 'saveScenario':\n      return [...state, action.res];\n        // \"currentCor\": JSON.parse(action.res)\n\n    default:\n      return state\n  }\n}\n\n\nexport const reducers = combineReducers({\n  routing: routerReducer,\n  form: formReducer,\n  reducer,\n  scenarioStore,\n});\n",
+    "static": true,
+    "longname": "src/reducers/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 160,
+    "kind": "variable",
+    "name": "initialState",
+    "memberof": "src/reducers/index.js",
+    "static": true,
+    "longname": "src/reducers/index.js~initialState",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/reducers/index.js",
+    "importStyle": null,
+    "description": "initialState",
+    "lineNumber": 17,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "currentCor",
+        "description": "initial clicked corridor {number} currentMap - initial map displayed 0: scenario map 1: route map"
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 161,
+    "kind": "function",
+    "name": "reducer",
+    "memberof": "src/reducers/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/reducers/index.js~reducer",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/reducers/index.js",
+    "importStyle": null,
+    "description": "main reducer",
+    "lineNumber": 25,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "state",
+        "description": "{string} action - dispatched in component"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "store - new store"
+    }
+  },
+  {
+    "__docId__": 162,
+    "kind": "function",
+    "name": "scenarioStore",
+    "memberof": "src/reducers/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/reducers/index.js~scenarioStore",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/reducers/index.js",
+    "importStyle": null,
+    "description": "scenario reducer",
+    "lineNumber": 49,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "state",
+        "description": "{string} action - dispatched in component"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "store - new scenario store"
+    }
+  },
+  {
+    "__docId__": 163,
+    "kind": "variable",
+    "name": "reducers",
+    "memberof": "src/reducers/index.js",
+    "static": true,
+    "longname": "src/reducers/index.js~reducers",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/reducers/index.js",
+    "importStyle": "{reducers}",
+    "description": null,
+    "lineNumber": 61,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 164,
+    "kind": "file",
+    "name": "src/router.js",
+    "content": "import React from \"react\";\nimport { Router, Route, IndexRoute } from \"react-router\";\nimport { history } from \"./store.js\";\nimport Home from \"./components/Home\";\nimport NotFound from \"./components/NotFound\";\n\n/**\n * The router.\n */\n\n// build the router\nconst router = (\n  <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>\n    <Route path=\"/\" component={Home}>\n      <IndexRoute component={Home}/>\n      <Route path=\"*\" component={NotFound}/>\n    </Route>\n  </Router>\n);\n\nexport { router };\n",
+    "static": true,
+    "longname": "src/router.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 165,
+    "kind": "variable",
+    "name": "router",
+    "memberof": "src/router.js",
+    "static": true,
+    "longname": "src/router.js~router",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/router.js",
+    "importStyle": "{router}",
+    "description": "The router.",
+    "lineNumber": 12,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 166,
+    "kind": "file",
+    "name": "src/sagas/index.js",
+    "content": "// main saga generators\nexport function* sagas() {\n  //yield [];\n}\n",
+    "static": true,
+    "longname": "src/sagas/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 167,
+    "kind": "function",
+    "name": "sagas",
+    "memberof": "src/sagas/index.js",
+    "generator": true,
+    "async": false,
+    "static": true,
+    "longname": "src/sagas/index.js~sagas",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/sagas/index.js",
+    "importStyle": "{sagas}",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 168,
+    "kind": "file",
+    "name": "src/store.js",
+    "content": "import { createStore, applyMiddleware, compose } from \"redux\";\nimport { browserHistory } from \"react-router\";\nimport { syncHistoryWithStore, routerMiddleware } from \"react-router-redux\";\nimport createSagaMiddleware from \"redux-saga\";\nimport freeze from \"redux-freeze\";\nimport { reducers } from \"./reducers/index\";\nimport { sagas } from \"./sagas/index\";\n\n// add the middlewares\nlet middlewares = [];\n\n// add the router middleware\nmiddlewares.push(routerMiddleware(browserHistory));\n\n// add the saga middleware\nconst sagaMiddleware = createSagaMiddleware();\nmiddlewares.push(sagaMiddleware);\n\n// add the freeze dev middleware\nif (process.env.NODE_ENV !== 'production') {\n  middlewares.push(freeze);\n}\n\n// apply the middleware\nlet middleware = applyMiddleware(...middlewares);\n\n// add the redux dev tools\nif (process.env.NODE_ENV !== 'production' && window.devToolsExtension) {\n  middleware = compose(middleware, window.devToolsExtension());\n}\n\n// create the store\nconst store = createStore(reducers, middleware);\nconst history = syncHistoryWithStore(browserHistory, store);\nsagaMiddleware.run(sagas);\n\n// export\nexport { store, history };\n",
+    "static": true,
+    "longname": "src/store.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 169,
+    "kind": "variable",
+    "name": "middlewares",
+    "memberof": "src/store.js",
+    "static": true,
+    "longname": "src/store.js~middlewares",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/store.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 170,
+    "kind": "variable",
+    "name": "sagaMiddleware",
+    "memberof": "src/store.js",
+    "static": true,
+    "longname": "src/store.js~sagaMiddleware",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/store.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 171,
+    "kind": "variable",
+    "name": "middleware",
+    "memberof": "src/store.js",
+    "static": true,
+    "longname": "src/store.js~middleware",
+    "access": null,
+    "export": false,
+    "importPath": "CoAXs-React/src/store.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 172,
+    "kind": "variable",
+    "name": "store",
+    "memberof": "src/store.js",
+    "static": true,
+    "longname": "src/store.js~store",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/store.js",
+    "importStyle": "{store}",
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 173,
+    "kind": "variable",
+    "name": "history",
+    "memberof": "src/store.js",
+    "static": true,
+    "longname": "src/store.js~history",
+    "access": null,
+    "export": true,
+    "importPath": "CoAXs-React/src/store.js",
+    "importStyle": "{history}",
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 175,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 176,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 177,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 178,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 179,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 180,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 181,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 182,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 183,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 184,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 185,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 186,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 187,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 188,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 189,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 190,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 191,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 192,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 193,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 194,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 195,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 196,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 197,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 198,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 199,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 200,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 201,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 202,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 203,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 204,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 205,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 206,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 207,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 208,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 209,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 210,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 211,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 212,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 213,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 214,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 215,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 216,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 217,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 218,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 219,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 220,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 221,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "lineNumber": 193,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 223,
+    "kind": "external",
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 224,
+    "kind": "external",
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 225,
+    "kind": "external",
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 226,
+    "kind": "external",
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 227,
+    "kind": "external",
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 228,
+    "kind": "external",
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 229,
+    "kind": "external",
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 230,
+    "kind": "external",
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": "",
+    "lineNumber": 34,
+    "builtinExternal": true
+  }
+]

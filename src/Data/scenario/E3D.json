@@ -1,0 +1,96 @@
+{
+  "id": 0,
+  "description": "Scenarios 5.20 v2",
+  "feedChecksums": {
+    "NORTA": 3069491354,
+    "Jefferson Transit": 2756955444,
+    "RideNOLA": 4211514032
+  },
+  "modifications": [
+    {
+      "type": "adjust-frequency",
+      "route": "RideNOLA:E3D",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "sourceTrip": "RideNOLA:6d854825-9ebc-47eb-8e57-9c89d0dd69cc",
+          "headwaySecs": 1440,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "IB"
+        },
+        {
+          "sourceTrip": "RideNOLA:5be3ed9e-f291-4b50-8140-b72a666d48f5",
+          "headwaySecs": 1440,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "OB"
+        }
+      ],
+      "comment": "E3D"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "NORTA:10464"
+      ],
+      "comment": "16A old 1"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "NORTA:10343"
+      ],
+      "comment": "16A old 2"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "Jefferson Transit:E3"
+      ],
+      "comment": "E3A old"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E3A"
+      ],
+      "comment": "E3A"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E3B"
+      ],
+      "comment": "E3B"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E3C"
+      ],
+      "comment": "E3C"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "Jefferson Transit:E5"
+      ],
+      "comment": "E5A old"
+    }
+  ]
+}

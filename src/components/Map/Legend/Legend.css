@@ -1,0 +1,47 @@
+.topnav {
+  position         : absolute;
+  padding          : 10px;
+  z-index          : 1;
+  width            : 62%;
+  left			   : 20px;
+}
+
+.topnav  .legend {
+  width: 230px;
+  height: 150px;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  margin-top: 50px;
+  margin-left: 12px;
+}
+
+
+.legend .panel {
+  border-radius: 0px
+}
+
+.legend .panel-heading {
+  height: 24px;
+  padding-top: 7px;
+}
+.legend .panel-title {
+  font-size: 0.8em;
+}
+.legend .panel-body {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.legend .panel-body-close {
+  display: none;
+}
+
+.legend .panel-word {
+    margin-left: 8px;
+}
+
+.pull-right {
+  line-height: inherit;
+  cursor: pointer;
+}

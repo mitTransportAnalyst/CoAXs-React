@@ -8,7 +8,7 @@ module.exports = {
   app_root: app_root, // the app root folder, needed by the other webpack configs
   entry: [
     // http://gaearon.github.io/react-hot-loader/getstarted/
-    'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     'babel-polyfill',
     __dirname + '/' + app_root + '/index.js',
@@ -22,7 +22,10 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['react-hot', 'babel'],
+        loader: ["babel-loader"],
+        query: {
+          presets: ['react',"stage-2"]
+        },
         exclude: /node_modules/,
       },
       {
@@ -35,6 +38,10 @@ module.exports = {
         loaders: ['style', 'css'],
       },
       {
+        test: /\.less$/,
+        loaders: ["style", 'css', 'less'],
+      },
+      {
         test: /\.geojson$/,
         loaders: ['json-loader'],
       },
@@ -42,15 +49,8 @@ module.exports = {
         test: /\.json$/,
         loaders: ['json-loader'],
       },
-      // {
-      //   test: /\.(jpe?g|png|gif|svg)$/i,
-      //   loaders: [
-      //     'file?hash=sha512&digest=hex&name=[hash].[ext]',
-      //     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-      //   ],
-      // },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpg|png|gif)$/,
         loader: 'url-loader',
         options: {
           limit: 25000,
@@ -68,4 +68,9 @@ module.exports = {
       dry: false, // true for simulation
     }),
   ],
+  resolve: {
+    alias: {
+      webworkify: 'webworkify-webpack'
+    }
+  },
 };

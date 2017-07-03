@@ -1,0 +1,40 @@
+{
+
+      "16A": {
+        "baseHeadway": 30,
+        "totalTime": 55
+      },
+      "16B": {
+        "baseHeadway": 30,
+        "totalTime": 74.4
+      },
+      "16C": {
+        "baseHeadway": 30,
+        "totalTime": 103.6
+      },
+      "E3A": {
+        "baseHeadway": 24,
+        "totalTime": 88
+      },
+      "E3B": {
+        "baseHeadway": 24,
+        "totalTime": 122
+      },
+      "E3C": {
+        "baseHeadway": 24,
+        "totalTime": 107
+      },
+      "E3D": {
+        "baseHeadway": 24,
+        "totalTime": 97
+      },
+      "E5A": {
+        "baseHeadway": 27,
+        "totalTime": 57
+      },
+      "E5B": {
+        "baseHeadway": 27,
+        "totalTime": 64
+      }
+}
+

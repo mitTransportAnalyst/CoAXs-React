@@ -1,0 +1,27 @@
+.scenarioDashboardPanel{
+  margin-top: 15px;
+}
+
+.btn {
+  border-radius: 0px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+.tiny {
+  background-color: #959595;
+  width: 100%
+}
+
+.frosted-glass{
+  /*display: none;*/
+  background: inherit;
+  -webkit-filter: blur(2.5px);
+  -moz-filter: blur(2.5px);
+  -ms-filter: blur(2.5px);
+  -o-filter: blur(2.5px);
+  filter: blur(2.5px);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=4, MakeShadow=false);
+}
+

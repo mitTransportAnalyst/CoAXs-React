@@ -1,0 +1,54 @@
+
+.scenarioEntries {
+  width: 100%;
+}
+
+.scenarioEntrySel{
+  display: inline-block;
+  white-space: nowrap;
+  width:50%;
+  font-size: 14px;
+  background-color:#eec16f;
+  height: 100%;
+  /*text-align: center;*/
+  /*vertical-align: middle;*/
+  padding-bottom: 5px;
+
+}
+
+.scenarioEntry{
+  display: inline-block;
+  white-space: nowrap;
+  width:50%;
+  font-size: 14px;
+  background-color:#f5f5f3;
+  height: 100%;
+  /*text-align: center;*/
+  /*vertical-align: middle;*/
+  padding-bottom: 5px;
+
+}
+
+
+
+.scenarioEntrySubHead{
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+
+.square {
+  display: inline;
+  color: rgba(255,255,255,1);
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  overflow: hidden;
+  font-size: 10px;
+  text-align: center;
+  margin-bottom: 2px;
+  top: 2px;
+}
+
+

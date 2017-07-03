@@ -1,0 +1,82 @@
+{
+  "id": 0,
+  "description": "Scenarios 5.20 v2",
+  "feedChecksums": {
+    "NORTA": 3069491354,
+    "Jefferson Transit": 2756955444,
+    "RideNOLA": 4211514032
+  },
+  "modifications": [
+    {
+      "type": "adjust-frequency",
+      "route": "RideNOLA:E5A",
+      "retainTripsOutsideFrequencyEntries": false,
+      "entries": [
+        {
+          "sourceTrip": "RideNOLA:934504c8-f850-49c5-a089-d03225901edb",
+          "headwaySecs": 1620,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": false,
+          "saturday": true,
+          "sunday": true,
+          "name": "IB"
+        },
+        {
+          "sourceTrip": "RideNOLA:40d4673e-51b0-48f7-aaea-3d574bbe539b",
+          "headwaySecs": 1620,
+          "startTime": 18000,
+          "endTime": 79200,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": true,
+          "thursday": true,
+          "friday": true,
+          "saturday": true,
+          "sunday": true,
+          "name": "OB"
+        }
+      ],
+      "comment": "E5A"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "NORTA:10464"
+      ],
+      "comment": "16A old 1"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "NORTA:10343"
+      ],
+      "comment": "16A old 2"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "Jefferson Transit:E3"
+      ],
+      "comment": "E3A old"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "Jefferson Transit:E5"
+      ],
+      "comment": "E5A old"
+    },
+    {
+      "type": "remove-trips",
+      "routes": [
+        "RideNOLA:E5B"
+      ],
+      "comment": "E5B"
+    }
+  ]
+}

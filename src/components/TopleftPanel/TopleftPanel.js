@@ -1,7 +1,9 @@
 
 import React from "react";
 import "./TopleftPanel.css"
+// import Graph from "../RightMainPanel/TimeFilter/Graph"
 import {IntroTitle, IntroDescription} from "../../config.js"
+
 
 class lefttopPanel extends React.Component {
   render() {
@@ -10,11 +12,12 @@ class lefttopPanel extends React.Component {
         <h4 className="topleftText">
           {IntroTitle}
         </h4>
-        <div className="topinfo container">
-          <div>
-            <h5>{IntroDescription}</h5>
-          </div>
-        </div>
+        {/*<div className="topinfo container">*/}
+          {/*<div>*/}
+            {/*<h5>{IntroDescription}</h5>*/}
+          {/*</div>*/}
+
+        {/*</div>*/}
       </div>
     );
   }
