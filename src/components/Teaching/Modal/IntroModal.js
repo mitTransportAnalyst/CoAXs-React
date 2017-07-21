@@ -35,15 +35,15 @@ class IntroModal extends React.Component {
             <hr />
 
             {/*<h4>Overflowing text to show scroll behavior</h4>*/}
-            <ul>
-              <li>1 Drag the blue pin to your home or a place you know well, and wait for a few seconds. </li>
-              <li>2 Drag the time slider on the right hand side to see how far you can travel in different amounts of time. Consider how this compares with your experience of your most frequent trips.
+            <p>Please note that the prizes mentioned in the video above are no longer being offered.</p>
+            <ol>
+              <li>Drag the blue pin to your home or a place you know well, and wait for a few seconds. </li>
+              <li>Drag the time slider on the right hand side to see how far you can travel in different amounts of time. Consider how this compares with your experience of your most frequent trips.
               </li>
-              <li>3 Notice how many jobs you can access at different time cutoffs by looking at the graph on the right hand side of the screen.</li>
-              <li>4 Once you’re finished exploring, click the button on the right hand side that says “Click here to go to Step 3” to move on to the next step.
+              <li>Notice how many jobs you can access at different time cutoffs by looking at the graph on the right hand side of the screen.</li>
+              <li>Once you’re finished exploring, click the button on the right hand side that says “Click here to go to Step 3” to move on to the next step.
               </li>
-
-            </ul>
+            </ol>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.closeModal}>Close</Button>
@@ -67,7 +67,3 @@ function mapDispachToProps(dispatch) {
 
 
 export default connect(mapStateToProps, mapDispachToProps)(IntroModal);
-
-
-
-
