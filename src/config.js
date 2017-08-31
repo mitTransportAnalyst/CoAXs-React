@@ -74,13 +74,18 @@ export const WORKER_VERSION = 'v2.4.0';
 export const TRANSPORT_NETWORK_ID = "865ddf414cb74dc7bec10ed5c793d642";  // STG
 
 
-
-
 export const BASE_URL = "http://coaxs.mit.edu/enqueue/single";
 export const AUTH_URL = "";
-export const GRID_URL = "https://s3.amazonaws.com/coaxsus/STG/stgJobjobs_sum.grid";
-// export const GRID_URL = "https://s3.amazonaws.com/coaxsus/ATL/ALTr_totjobs.grid";
+export const GRID_URL = "https://s3.amazonaws.com/coaxsus/STG/stgJobJobs_sum2.grid";
 
+export const GRID_URL_3060 = "https://s3.amazonaws.com/coaxsus/STG/EDU3060Ind30_60.grid";
+export const GRID_URL_6075 = "https://s3.amazonaws.com/coaxsus/STG/EDU6075Ind60_75.grid";
+export const GRID_URL_7590 = "https://s3.amazonaws.com/coaxsus/STG/EDU7599Ind75_99.grid";
+export const GRID_URL_norank = "https://s3.amazonaws.com/coaxsus/STG/EDUnorankNo_ind.grid";
+
+export const GRID_URL_pri = "https://s3.amazonaws.com/coaxsus/STG/HETprivalue2.grid";
+export const GRID_URL_sec = "https://s3.amazonaws.com/coaxsus/STG/HETsecvalue.grid";
+export const GRID_URL_ter = "https://s3.amazonaws.com/coaxsus/STG/HETtervalue.grid";
 
 
 //Service Editor

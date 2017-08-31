@@ -51,7 +51,14 @@ import {
   TRANSPORT_NETWORK_ID,
   BASE_URL,
   AUTH_URL,
-  GRID_URL
+  GRID_URL,
+  GRID_URL_3060,
+  GRID_URL_6075,
+  GRID_URL_7590,
+  GRID_URL_norank,
+  GRID_URL_pri,
+  GRID_URL_sec,
+  GRID_URL_ter,
 } from '../../../config'
 
 
@@ -253,9 +260,44 @@ class ScenarioMap extends React.Component {
         console.log(res);
         this.props.changeProgress(0.7);
         return res.arrayBuffer()
+      }),
+      fetch(GRID_URL_3060).then(res => {
+        console.log(res);
+        this.props.changeProgress(0.7);
+        return res.arrayBuffer()
+      }),
+      fetch(GRID_URL_6075).then(res => {
+        console.log(res);
+        this.props.changeProgress(0.7);
+        return res.arrayBuffer()
+      }),
+      fetch(GRID_URL_7590).then(res => {
+        console.log(res);
+        this.props.changeProgress(0.7);
+        return res.arrayBuffer()
+      }),
+      fetch(GRID_URL_norank).then(res => {
+        console.log(res);
+        this.props.changeProgress(0.7);
+        return res.arrayBuffer()
+      }),
+      fetch(GRID_URL_pri).then(res => {
+        console.log(res);
+        this.props.changeProgress(0.7);
+        return res.arrayBuffer()
+      }),
+      fetch(GRID_URL_sec).then(res => {
+        console.log(res);
+        this.props.changeProgress(0.7);
+        return res.arrayBuffer()
+      }),
+      fetch(GRID_URL_ter).then(res => {
+        console.log(res);
+        this.props.changeProgress(0.7);
+        return res.arrayBuffer()
       })
     ])
-      .then(([metadata, stopTrees, grid]) => {
+      .then(([metadata, stopTrees, grid, grid3060, grid6075, grid7590, gridnorank, gridpri, gridsec, gridter]) => {
 
 
         Promise.all([
@@ -271,6 +313,28 @@ class ScenarioMap extends React.Component {
 
           this.bs2.putGrid({id: 'jobs', grid: grid}),
           this.bs.putGrid({id: 'jobs', grid: grid}),
+
+          this.bs2.putGrid({id: 'edu3060', grid: grid3060}),
+          this.bs.putGrid({id: 'edu3060', grid: grid3060}),
+
+          this.bs2.putGrid({id: 'edu6075', grid: grid6075}),
+          this.bs.putGrid({id: 'edu6075', grid: grid6075}),
+
+          this.bs2.putGrid({id: 'edu7590', grid: grid7590}),
+          this.bs.putGrid({id: 'edu7590', grid: grid7590}),
+
+          this.bs2.putGrid({id: 'edunorank', grid: gridnorank}),
+          this.bs.putGrid({id: 'edunorank', grid: gridnorank}),
+
+          this.bs2.putGrid({id: 'hetpri', grid: gridpri}),
+          this.bs.putGrid({id: 'hetpri', grid: gridpri}),
+
+          this.bs2.putGrid({id: 'hetsec', grid: gridsec}),
+          this.bs.putGrid({id: 'hetsec', grid: gridsec}),
+
+          this.bs2.putGrid({id: 'hetter', grid: gridter}),
+          this.bs.putGrid({id: 'hetter', grid: gridter}),
+
 
 
         ]).then(() => {
@@ -332,7 +396,8 @@ class ScenarioMap extends React.Component {
           console.log("generate surface");
           await this.bs2.setOrigin({data: buff, point: {x, y}});
           await this.bs2.generateSurface({gridId: 'jobs'});
-          let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
+          let {accessibility2, isochrone2, accessibility23060, accessibility26075, accessibility27590,
+            accessibility2norank, accessibility2pri, accessibility2sec, accessibility2ter} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
 
           console.log("done isochrone and accessibility");
@@ -340,10 +405,10 @@ class ScenarioMap extends React.Component {
 
           this.setState({
             ...this.state,
-            isochrone2,
+            accessibility2, isochrone2, accessibility23060, accessibility26075, accessibility27590,
+            accessibility2norank, accessibility2pri, accessibility2sec, accessibility2ter,
             key2: uuid.v4(),
             origin,
-            accessibility2,
             transitive2: null,
             inVehicleTravelTime2: null,
             travelTime2: null,
@@ -374,7 +439,9 @@ class ScenarioMap extends React.Component {
       inVehicleTravelTime: null,
       travelTime: null,
       waitTime: null,
-      accessibility: null
+      accessibility: null,
+      accessibility3060: null, accessibility6075: null, accessibility7590: null,
+      accessibilitynorank: null, accessibilitypri: null, accessibilitysec: null, accessibilityter: null,
     });
 
     this.props.changeProgress(0.2);
@@ -398,7 +465,8 @@ class ScenarioMap extends React.Component {
 
         await this.bs.setOrigin({data: buff, point: {x, y}});
         await this.bs.generateSurface({gridId: 'jobs'});
-        let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
+        let {accessibility, isochrone, accessibility3060, accessibility6075, accessibility7590,
+          accessibilitynorank, accessibilitypri, accessibilitysec, accessibilityter} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
         this.props.changeProgress(0.9);
 
@@ -407,10 +475,10 @@ class ScenarioMap extends React.Component {
 
         this.setState({
           ...this.state,
-          isochrone,
+          accessibility, isochrone, accessibility3060, accessibility6075, accessibility7590,
+          accessibilitynorank, accessibilitypri, accessibilitysec, accessibilityter,
           key: uuid.v4(),
           origin,
-          accessibility,
           transitive: null,
           inVehicleTravelTime: null,
           travelTime: null,
@@ -463,7 +531,8 @@ class ScenarioMap extends React.Component {
           console.log("generate surface");
           await this.bs2.setOrigin({data: buff, point: {x, y}});
           await this.bs2.generateSurface({gridId: 'jobs'});
-          let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
+          let {accessibility2, isochrone2, accessibility23060, accessibility26075, accessibility27590,
+            accessibility2norank, accessibility2pri, accessibility2sec, accessibility2ter} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
 
           console.log("done isochrone and accessibility");
@@ -471,10 +540,10 @@ class ScenarioMap extends React.Component {
 
           this.setState({
             ...this.state,
-            isochrone2,
+            accessibility2, isochrone2, accessibility23060, accessibility26075, accessibility27590,
+            accessibility2norank, accessibility2pri, accessibility2sec, accessibility2ter,
             key2: uuid.v4(),
             origin,
-            accessibility2,
             transitive2: null,
             inVehicleTravelTime2: null,
             travelTime2: null,
@@ -497,7 +566,9 @@ class ScenarioMap extends React.Component {
       inVehicleTravelTime: null,
       travelTime: null,
       waitTime: null,
-      accessibility: null
+      accessibility: null,
+      accessibility3060: null, accessibility6075: null, accessibility7590: null,
+      accessibilitynorank: null, accessibilitypri: null, accessibilitysec: null, accessibilityter: null,
     });
 
     this.props.changeProgress(0.2);
@@ -521,7 +592,8 @@ class ScenarioMap extends React.Component {
 
         await this.bs.setOrigin({data: buff, point: {x, y}});
         await this.bs.generateSurface({gridId: 'jobs'});
-        let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
+        let {accessibility, isochrone, accessibility3060, accessibility6075, accessibility7590,
+          accessibilitynorank, accessibilitypri, accessibilitysec, accessibilityter} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
 
         this.props.changeProgress(0.9);
 
@@ -530,10 +602,10 @@ class ScenarioMap extends React.Component {
 
         this.setState({
           ...this.state,
-          isochrone,
+          accessibility, isochrone, accessibility3060, accessibility6075, accessibility7590,
+          accessibilitynorank, accessibilitypri, accessibilitysec, accessibilityter,
           key: uuid.v4(),
           origin,
-          accessibility,
           transitive: null,
           inVehicleTravelTime: null,
           travelTime: null,
@@ -552,19 +624,37 @@ class ScenarioMap extends React.Component {
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
     // console.log(isochroneCutoff, isBased);
     if (isBased) {
-      let [accessibility2, isochrone2] = await Promise.all([
+      let [accessibility2, isochrone2, accessibility23060, accessibility26075, accessibility27590,
+        accessibility2norank, accessibility2pri, accessibility2sec, accessibility2ter] = await Promise.all([
         this.bs2.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
-        this.bs2.getIsochrone({cutoff: isochroneCutoff})
+        this.bs2.getIsochrone({cutoff: isochroneCutoff}),
+        this.bs2.getAccessibilityForGrid({gridId: 'edu3060', cutoff: isochroneCutoff}),
+        this.bs2.getAccessibilityForGrid({gridId: 'edu6075', cutoff: isochroneCutoff}),
+        this.bs2.getAccessibilityForGrid({gridId: 'edu7590', cutoff: isochroneCutoff}),
+        this.bs2.getAccessibilityForGrid({gridId: 'edunorank', cutoff: isochroneCutoff}),
+        this.bs2.getAccessibilityForGrid({gridId: 'hetpri', cutoff: isochroneCutoff}),
+        this.bs2.getAccessibilityForGrid({gridId: 'hetsec', cutoff: isochroneCutoff}),
+        this.bs2.getAccessibilityForGrid({gridId: 'hetter', cutoff: isochroneCutoff}),
       ]);
-      return {accessibility2, isochrone2, key2: uuid.v4()}
+      return {accessibility2, isochrone2, accessibility23060, accessibility26075, accessibility27590,
+        accessibility2norank, accessibility2pri, accessibility2sec, accessibility2ter, key2: uuid.v4()}
     }
 
     else {
-      let [accessibility, isochrone] = await Promise.all([
+      let [accessibility, isochrone, accessibility3060, accessibility6075, accessibility7590,
+        accessibilitynorank, accessibilitypri, accessibilitysec, accessibilityter] = await Promise.all([
         this.bs.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
-        this.bs.getIsochrone({cutoff: isochroneCutoff})
+        this.bs.getIsochrone({cutoff: isochroneCutoff}),
+        this.bs.getAccessibilityForGrid({gridId: 'edu3060', cutoff: isochroneCutoff}),
+        this.bs.getAccessibilityForGrid({gridId: 'edu6075', cutoff: isochroneCutoff}),
+        this.bs.getAccessibilityForGrid({gridId: 'edu7590', cutoff: isochroneCutoff}),
+        this.bs.getAccessibilityForGrid({gridId: 'edunorank', cutoff: isochroneCutoff}),
+        this.bs.getAccessibilityForGrid({gridId: 'hetpri', cutoff: isochroneCutoff}),
+        this.bs.getAccessibilityForGrid({gridId: 'hetsec', cutoff: isochroneCutoff}),
+        this.bs.getAccessibilityForGrid({gridId: 'hetter', cutoff: isochroneCutoff}),
       ]);
-      return {accessibility, isochrone, key: uuid.v4()}
+      return {accessibility, isochrone, accessibility3060, accessibility6075, accessibility7590,
+        accessibilitynorank, accessibilitypri, accessibilitysec, accessibilityter, key: uuid.v4()}
     }
 
   }
@@ -576,7 +666,9 @@ class ScenarioMap extends React.Component {
 
   componentDidUpdate(nextState) {
     if (this.state.accessibility !== nextState.accessibility) {
-      this.props.changeGridNumber([this.state.accessibility, this.state.accessibility2])
+      this.props.changeGridNumber([this.state.accessibility, this.state.accessibility2, this.state.accessibility3060,
+        this.state.accessibility23060, this.state.accessibility6075, this.state.accessibility26075, this.state.accessibility7590, this.state.accessibility27590,
+        this.state.accessibilitynorank, this.state.accessibility2norank, this.state.accessibilitypri, this.state.accessibility2pri, this.state.accessibilitysec, this.state.accessibility2sec, this.state.accessibilityter, this.state.accessibility2ter])
     }
   }
 
@@ -595,6 +687,10 @@ class ScenarioMap extends React.Component {
         key: null,
         key2: null,
         accessibility: null,
+        accessibility3060: null, accessibility6075: null, accessibility7590: null,
+        accessibilitynorank: null, accessibilitypri: null, accessibilitysec: null, accessibilityter: null,
+        accessibility23060: null, accessibility26075: null, accessibility27590: null,
+        accessibility2norank: null, accessibility2pri: null, accessibility2sec: null, accessibility2ter: null,
         accessibility2: null,
       });
     }
@@ -718,6 +814,19 @@ class ScenarioMap extends React.Component {
             }}
             />
           }
+
+
+          {
+            this.props.scenarioStore[1].A.active  &&
+            <GeoJson data={GeojsonMNA} key={"MNA"} style={{
+              color: CorridorInfo["A"].color,
+              weight: 8,
+              opacity: 1
+            }}
+            />
+          }
+
+
 
           {
             this.props.scenarioStore[1].B.active  &&
