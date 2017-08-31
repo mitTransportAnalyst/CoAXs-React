@@ -104,7 +104,6 @@ class ScenarioMap extends React.Component {
           bikeTime: 1,
           maxRides: 8,
           bikeTrafficStress: 4,
-          boardingAssumption: 'RANDOM',
           monteCarloDraws: 180,
           scenario: {id: 999},
         }
@@ -136,7 +135,6 @@ class ScenarioMap extends React.Component {
           bikeTime: 1,
           maxRides: 8,
           bikeTrafficStress: 4,
-          boardingAssumption: 'RANDOM',
           monteCarloDraws: 180,
           scenario: {
             id: uuid.v4(), modifications: Baseline.modifications
@@ -170,7 +168,6 @@ class ScenarioMap extends React.Component {
           bikeTime: 1,
           maxRides: 8,
           bikeTrafficStress: 4,
-          boardingAssumption: 'RANDOM',
           monteCarloDraws: 180,
           scenario: {id: uuid.v4(), modifications: Baseline.modifications},
         }
@@ -210,24 +207,23 @@ class ScenarioMap extends React.Component {
 
     let {preRequest} = this.state;
     this.props.changeProgress(0.2);
-    console.log(API_KEY_ID);
     // first get a token
-    let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials'
-    }).then(r => r.json());
+    // let response = await fetch(`${AUTH_URL}?key=${encodeURIComponent(API_KEY_ID)}&secret=${encodeURIComponent(API_KEY_SECRET)}`, {
+      // method: 'POST',
+      // headers: {
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+      // },
+      // body: 'grant_type=client_credentials'
+    // }).then(r => r.json());
 
-    let accessToken = response.access_token;
-    console.log(accessToken);
+    // let accessToken = response.access_token;
+    // console.log(accessToken);
 
-    this.setState({...this.state, accessToken});
+    // this.setState({...this.state, accessToken});
 
     this.props.changeProgress(0.4);
     Promise.all([
-      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      fetch(BASE_URL, {
         method: 'POST',
         body: JSON.stringify({
           type: 'static-metadata',
@@ -241,7 +237,7 @@ class ScenarioMap extends React.Component {
           return res.json()
         }
       ),
-      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      fetch(BASE_URL, {
         method: 'POST',
         body: JSON.stringify({
           type: 'static-stop-trees',
@@ -306,7 +302,7 @@ class ScenarioMap extends React.Component {
         originGrid: {x, y}
       });
 
-      let {staticRequest, accessToken, isochroneCutoff,} = this.state;
+      let {staticRequest, isochroneCutoff,} = this.state;
 
       this.setState({
         ...this.state,
@@ -320,8 +316,8 @@ class ScenarioMap extends React.Component {
       });
 
 
-      // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      // return fetch(BASE_URL, {
+      fetch(BASE_URL, {
         method: 'POST',
         body: JSON.stringify({
           type: 'static',
@@ -384,8 +380,8 @@ class ScenarioMap extends React.Component {
     this.props.changeProgress(0.2);
 
 
-    // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-    fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+    // return fetch(BASE_URL, {
+    fetch(BASE_URL, {
       method: 'POST',
       body: JSON.stringify({
         type: 'static',
@@ -451,8 +447,8 @@ class ScenarioMap extends React.Component {
       });
 
 
-      // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-      fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+      // return fetch(BASE_URL, {
+      fetch(BASE_URL, {
         method: 'POST',
         body: JSON.stringify({
           type: 'static',
@@ -507,8 +503,8 @@ class ScenarioMap extends React.Component {
     this.props.changeProgress(0.2);
 
 
-    // return fetch(`${BASE_URL}?accessToken=${accessToken}`, {
-    fetch(`${BASE_URL}?accessToken=${accessToken}`, {
+    // return fetch(BASE_URL, {
+    fetch(BASE_URL, {
       method: 'POST',
       body: JSON.stringify({
         type: 'static',
