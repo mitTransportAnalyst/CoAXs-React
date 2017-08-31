@@ -75,15 +75,13 @@ export const FormControlID = {
 //Browsochrone configuration
 export const INIT_ORIGIN = [37.773972, -122.431297];
 export const INIT_DESTINATION = [37.783972, -122.421297];
-export const WORKER_VERSION = 'v2.0.0-SNAPSHOT';
-export const API_KEY_ID = "3158ID11NHODSZ2BZX1WY1R4G";
-export const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
-export const TRANSPORT_NETWORK_ID = "b421029057a917b425caeea3f902fb9f";  // SF
+export const WORKER_VERSION = 'v2.4.0';
+export const TRANSPORT_NETWORK_ID = "47dbc6862ffa429b9bf79a234b23ffa8";  // SF
 
 
 
-export const BASE_URL = "http://coaxs.mit.edu/api/single";
-export const AUTH_URL = "http://coaxs.mit.edu/oauth/token";
+export const BASE_URL = "http://coaxs.mit.edu/enqueue/single";
+export const AUTH_URL = "";
 export const GRID_URL = "https://s3.amazonaws.com/coaxsus/SF/SFw_totjobs.grid";
 
 

@@ -27,7 +27,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 600,
-          "startTimes": null,
+
           "sourceTrip": "sfmta:7343896"
         }
       ],
@@ -50,7 +50,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 600,
-          "startTimes": null,
+
           "sourceTrip": "sfmta:7343897"
         }
       ],
@@ -73,7 +73,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 3600,
-          "startTimes": null,
+
           "sourceTrip": "ggt_gtfs:5523426"
         },
         {
@@ -88,7 +88,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 3600,
-          "startTimes": null,
+
           "sourceTrip": "ggt_gtfs:5505582"
         }
       ],
@@ -111,7 +111,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 480,
-          "startTimes": null,
+
           "sourceTrip": "sfmta:7373555"
         },
         {
@@ -126,7 +126,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 480,
-          "startTimes": null,
+
           "sourceTrip": "sfmta:7372717"
         },
         {
@@ -141,7 +141,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 600,
-          "startTimes": null,
+
           "sourceTrip": "sfmta:7373352"
         }
       ],
@@ -164,7 +164,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 240,
-          "startTimes": null,
+
           "sourceTrip": "sfmta:7375436"
         },
         {
@@ -179,7 +179,7 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 240,
-          "startTimes": null,
+
           "sourceTrip": "sfmta:7375278"
         }
       ],

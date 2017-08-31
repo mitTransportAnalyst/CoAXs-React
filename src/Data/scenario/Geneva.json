@@ -27,7 +27,6 @@
           "startTime": 21600,
           "endTime": 82800,
           "headwaySecs": 480,
-          "startTimes": null,
           "sourceTrip": "sfmta:7350608"
         },
         {
@@ -42,7 +41,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 480,
-          "startTimes": null,
           "sourceTrip": "sfmta:7350492"
         }
       ],
@@ -65,7 +63,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 420,
-          "startTimes": null,
           "sourceTrip": "sfmta:7437076"
         }
       ],
@@ -88,7 +85,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 360,
-          "startTimes": null,
           "sourceTrip": "sfmta:7440454"
         }
       ],

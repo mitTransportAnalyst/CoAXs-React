@@ -27,7 +27,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 360,
-          "startTimes": null,
           "sourceTrip": "sfmta:7370563"
         }
       ],
@@ -50,7 +49,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 3300,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5523781"
         }
       ],
@@ -73,7 +71,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 720,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5523857"
         }
       ],
@@ -96,7 +93,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 3840,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5523320"
         },
         {
@@ -111,7 +107,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 3840,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5481218"
         }
       ],
@@ -134,7 +129,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 3720,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5523541"
         },
         {
@@ -149,7 +143,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 3720,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5525412"
         }
       ],
@@ -318,7 +311,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 480,
-          "startTimes": null,
           "sourceTrip": "sfmta:7382963"
         },
         {
@@ -333,7 +325,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 480,
-          "startTimes": null,
           "sourceTrip": "sfmta:7383276"
         }
       ],
@@ -356,7 +347,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 480,
-          "startTimes": null,
           "sourceTrip": "sfmta:7380934"
         },
         {
@@ -371,7 +361,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 480,
-          "startTimes": null,
           "sourceTrip": "sfmta:7380878"
         }
       ],
@@ -394,7 +383,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 1800,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5523344"
         },
         {
@@ -409,7 +397,6 @@
           "startTime": 21600,
           "endTime": 39600,
           "headwaySecs": 1800,
-          "startTimes": null,
           "sourceTrip": "ggt_gtfs:5481321"
         }
       ],
