@@ -75,25 +75,11 @@ export const FormControlID = {
 //Browsochrone configuration
 export const INIT_ORIGIN = [29.951065, -90.071533];
 export const INIT_DESTINATION = [29.951065, -90.078533];
-// export const LIFE_ALIVE = [42.366639, -71.105435];
-export const WORKER_VERSION = 'v2.0.0-SNAPSHOT';
+export const WORKER_VERSION = 'v2.4.0';
+export const TRANSPORT_NETWORK_ID = "43fd7623769a4419a7ab05937e7dd399";
 
-export const API_KEY_ID = "3158ID11NHODSZ2BZX1WY1R4G";
-export const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
-// export const TRANSPORT_NETWORK_ID = "709b3861891d5ea98975ab8317f8f270";    //boston
-// export const TRANSPORT_NETWORK_ID = "e2a7898e7c77962d8f747da221ee34dd";  // New Orlean
-export const TRANSPORT_NETWORK_ID = "49f0969a4a04d867e762e44b76978aa5";  // New Orlean
-
-
-// export const TRANSPORT_NETWORK_ID = "29133beb7da12126d184c1ea771fc160";  // New Orlean2
-// export const TRANSPORT_NETWORK_ID = "55d0ff78bbb333cac809636c87a973c1";  // SF
-// export const TRANSPORT_NETWORK_ID = "fa8495a2edcfd9be96b809a06e587c29";  // ATLANTA
-
-
-
-
-export const BASE_URL = "http://coaxs.mit.edu/api/single";
-export const AUTH_URL = "http://coaxs.mit.edu/oauth/token";
+export const BASE_URL = "http://coaxs.mit.edu/enqueue/single";
+export const AUTH_URL = "";
 export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAw_totjobs.grid";
 
 
