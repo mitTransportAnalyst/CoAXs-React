@@ -70,18 +70,12 @@ export const FormControlID = {
 //Browsochrone configuration
 export const INIT_ORIGIN = [-33.4489, -70.5993];
 export const INIT_DESTINATION = [-33.4889, -70.5393];
-export const WORKER_VERSION = 'v2.0.0-SNAPSHOT';
-export const API_KEY_ID = "3158ID11NHODSZ2BZX1WY1R4G";
-export const API_KEY_SECRET = "5+XSmtvA6ZEL5wneeTtOnuk+S8bCVPZs0k2H55GTT7k";
-// export const TRANSPORT_NETWORK_ID = "b421029057a917b425caeea3f902fb9f";  // SF
-// export const TRANSPORT_NETWORK_ID = "1c39a5be72ec603982833f880a785aa7";  // ATL
-export const TRANSPORT_NETWORK_ID = "e696afc57b8b4ca6f18f8c74944e16c4";  // STG
+export const WORKER_VERSION = 'v2.4.0';
+export const TRANSPORT_NETWORK_ID = "865ddf414cb74dc7bec10ed5c793d642";  // STG
 
 
-
-
-export const BASE_URL = "http://coaxs.mit.edu/api/single";
-export const AUTH_URL = "http://coaxs.mit.edu/oauth/token";
+export const BASE_URL = "http://coaxs.mit.edu/enqueue/single";
+export const AUTH_URL = "";
 export const GRID_URL = "https://s3.amazonaws.com/coaxsus/STG/stgJobJobs_sum2.grid";
 
 export const GRID_URL_3060 = "https://s3.amazonaws.com/coaxsus/STG/EDU3060Ind30_60.grid";
@@ -92,9 +86,6 @@ export const GRID_URL_norank = "https://s3.amazonaws.com/coaxsus/STG/EDUnorankNo
 export const GRID_URL_pri = "https://s3.amazonaws.com/coaxsus/STG/HETprivalue2.grid";
 export const GRID_URL_sec = "https://s3.amazonaws.com/coaxsus/STG/HETsecvalue.grid";
 export const GRID_URL_ter = "https://s3.amazonaws.com/coaxsus/STG/HETtervalue.grid";
-
-// export const GRID_URL = "https://s3.amazonaws.com/coaxsus/ATL/ALTr_totjobs.grid";
-
 
 
 //Service Editor
