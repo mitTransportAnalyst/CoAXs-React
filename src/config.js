@@ -12,7 +12,7 @@ export const IntroTitle = "CoAXs | New Orleans";
 /** Introduction description on the left
  * @type {string} IntroDescription
  */
-export const IntroDescription = "Showing door-to-door travel, with public transit Wednesday morning schedule as the baseline";
+// export const IntroDescription = "Showing door-to-door travel, with public transit Wednesday morning schedule as the baseline";
 
 //Map
 /** Center latitude of map
@@ -39,12 +39,12 @@ export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogr
 /** Point to point mode switch
  * @type {boolean} PointToPoint - true: enable point to point mode, false: disable
  */
-export const PointToPoint = true;
+// export const PointToPoint = true;
 
 /** Accessibility mode switch
  * @type {boolean} Accessibility - true: enable accessibility mode, false: disable
  */
-export const Accessibility = true;
+// export const Accessibility = true;
 
 
 //Corridor info
@@ -86,63 +86,20 @@ export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAw_totjobs.gri
 
 //Service Editor
 //Running Time (add more modification function)
-export const RunningTime = true;
-export const RunningTimeMin = 0;
-export const RunningTimeMax = 60;
-export function modifySpeed(corridorId, scale, cb) {
-  $http.get('/load/scenario/' + corridorId)
-    .success(function (data, status) {
-      var scenarioJSON = [];
-      data.modifications.forEach(function (route) {
-          if (route.type === "adjust-speed") {
-            route.scale = scale;
-            scenarioJSON.push(route);
-          }
-        }
-      );
-      cb(scenarioJSON)
-    })
-}
+// export const RunningTime = true;
+// export const RunningTimeMin = 0;
+// export const RunningTimeMax = 60;
 
 //Dwell Time
-export const DwellTime = true;
-export const DwellTimeMin = 0;
-export const DwellTimeMax = 70;
-export function ModifyDwells(corridorId, scale, cb) {
-  $http.get('/load/scenario/' + corridorId)
-    .success(function (data, status) {
-      var scenarioJSON = [];
-      data.modifications.forEach(function (route) {
-          if (route.type === "adjust-dwell-time") {
-            route.scale = scale;
-            scenarioJSON.push(route);
-          }
-        }
-      );
-      cb(scenarioJSON)
-    })
-}
+// export const DwellTime = true;
+// export const DwellTimeMin = 0;
+// export const DwellTimeMax = 70;
 
 //Headway
-export const Headway = true;
-export const HeadwayMin = 0;
-export const HeadwayMax = 80;
-export function modifyHeadway(corridorId, scale, cb) {
-  $http.get('/load/scenario/' + corridorId)
-    .success(function (data, status) {
-      var scenarioJSON = [];
-      data.modifications.forEach(function (route) {
-          if (route.type === "adjust-frequency") {
-            route.entries.forEach(function (entry) {
-              entry.headwaySecs = entry.headwaySecs * scale;
-            });
-            scenarioJSON.push(route);
-          }
-        }
-      );
-      cb(scenarioJSON)
-    })
-}
+// export const Headway = true;
+// export const HeadwayMin = 0;
+// export const HeadwayMax = 80;
+
 
 
 
