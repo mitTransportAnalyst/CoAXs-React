@@ -10,106 +10,18 @@
 
 Then open your [http://localhost:3000/](http://localhost:3000/) to see the app.
 
-# Files structure
 
-```
-src
-├── Data
-│   ├── LoadData.js
-│   ├── corridors.json
-│   ├── lines.geojson
-│   ├── priority.geojson
-│   ├── proposed.geojson
-│   ├── routes.geojson
-│   ├── scenario
-│   │   ├── A.json
-│   │   ├── B.json
-│   │   ├── BaseCombined.json
-│   │   ├── C.json
-│   │   ├── D.json
-│   │   ├── E.json
-│   │   └── UpCombined.json
-│   ├── stations.geojson
-│   ├── stops.geojson
-│   └── trunks.geojson
-├── components
-│   ├── Bottom
-│   │   ├── Bottom.css
-│   │   ├── RightMainPanel.js
-│   │   ├── Common
-│   │   │   └── Slider
-│   │   │       ├── Slider.css
-│   │   │       └── Slider.js
-│   │   ├── RouteSelector
-│   │   │   ├── RouteSelector.css
-│   │   │   └── ScenarioEditor.js
-│   │   ├── RouteTable
-│   │   │   ├── RouteTable.css
-│   │   │   └── RouteTable.js
-│   │   ├── Scenario
-│   │   │   ├── Scenario.css
-│   │   │   └── Scenario.js
-│   │   ├── ServiceEditor
-│   │   │   ├── ServiceEditor.css
-│   │   │   └── ServiceEditor.js
-│   │   └── TimeFilter
-│   │       ├── TimeFilter.css
-│   │       └── TimeFilter.js
-│   ├── IntroModal.js
-│   ├── Map
-│   │   ├── RouteMap
-│   │   │   ├── RouteMap.css
-│   │   │   └── RouteMap.js
-│   │   └── ScenarioMap
-│   │       ├── ScenarioMap.css
-│   │       ├── ScenarioMap.js
-│   │       ├── lib
-│   │       │   ├── index.css
-│   │       │   ├── index.js
-│   │       │   └── transitive-layer.js
-│   │       └── transitive-layer.js
-│   ├── NotFound.js
-│   └── TopleftPanel
-│       ├── TopleftPanel.css
-│       └── PreSurveyAccess.js
-├── config.js
-├── img
-│   ├── alignment.jpg
-│   ├── dwelltime.png
-│   ├── frequency.png
-│   ├── logo.svg
-│   ├── marker-flag-end-shadowed.png
-│   ├── marker-flag-shadow.png
-│   ├── marker-flag-start-shadowed.png
-│   ├── mfc_qr.png
-│   ├── phil
-│   │   ├── brt_black_yellow.svg
-│   │   ├── heart.svg
-│   │   ├── home_icon.svg
-│   │   ├── platform_black_yellow.svg
-│   │   ├── pole_black_yellow.svg
-│   │   └── shopping_cart.svg
-│   ├── runningtime.png
-│   ├── start.png
-│   ├── stop.png
-│   ├── stop0.png
-│   ├── stop1.png
-│   ├── stop2.png
-│   ├── stops
-│   │   ├── 0.png
-│   │   ├── 1.png
-│   │   └── 2.png
-│   ├── userHeart.png
-│   ├── userHome.png
-│   └── userShop.png
-├── index.js
-├── reducers
-│   ├── action.js
-│   └── index.js
-├── router.js
-├── sagas
-│   └── index.js
-├── store.js
-└── style
-    └── main.css
-```
+
+# Start to develop with hot-load
+
+    npm run startdev
+
+Then open your [http://localhost:3000/](http://localhost:3000/) to see the app.
+
+
+
+# Compress and build the production bundle
+
+    npm run build-prod
+
+Then open your [http://localhost:3000/](http://localhost:3000/) to see the app.
