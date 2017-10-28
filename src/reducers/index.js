@@ -8,14 +8,12 @@ import {reducer as formReducer} from "redux-form";
  *
  */
 
-
 /**
  * initialState
  * @type {object}
  * @property {string} currentCor - initial clicked corridor {number} currentMap - initial map displayed 0: scenario map 1: route map
  */
 const initialState = {currentCor: "A", currentMap: 0};
-
 
 /**
  * main reducer
@@ -88,7 +86,6 @@ function scenarioStore(state = [{
   }
 }
 
-
 function timeFilterStore(state = [], action) {
   switch (action.type) {
     case 'changeTimeFilter':
@@ -125,7 +122,6 @@ function GridNumberStore(state = [], action) {
   }
 }
 
-
 function fireUpdate(state = [], action) {
   switch (action.type) {
     case 'fireUpdate':
@@ -137,7 +133,6 @@ function fireUpdate(state = [], action) {
   }
 }
 
-
 function updateButtonState(state = true, action) {
   switch (action.type) {
     case 'pushUpdateButton':
@@ -146,7 +141,6 @@ function updateButtonState(state = true, action) {
       return state
   }
 }
-
 
 function isCompare(state = {isCompare: false}, action) {
   switch (action.type) {
@@ -172,7 +166,6 @@ function BuslineSelectedStore(state = initialBuslineState, action) {
       return state
   }
 }
-
 
 const initialNavState = {
   isdonePreSurvey: true,
@@ -217,7 +210,6 @@ function loadingProgress(state = 0, action) {
   }
 }
 
-
 function ScorecardData(state = 0, action) {
   switch (action.type) {
     case 'changeScorecard':
@@ -226,7 +218,6 @@ function ScorecardData(state = 0, action) {
       return state
   }
 }
-
 
 function HeadwayTime(state = 0, action) {
   switch (action.type) {
@@ -254,7 +245,6 @@ function emailStore(state = null, action) {
       return state
   }
 }
-
 
 export const reducers = combineReducers({
   routing: routerReducer,

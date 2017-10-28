@@ -1,18 +1,11 @@
-
 /*
  * action types
  */
-
 
 /*
  * action creators
  */
 
-/**
- * handle click corridor
- * @param {object} res
- * @return {object} action - "clickCorridor" type and res
- */
 export function clickCorridor(res) {
   return {
     type: "clickCorridor",
@@ -20,11 +13,6 @@ export function clickCorridor(res) {
   }
 }
 
-/**
- * handle change map
- * @param {object} res
- * @return {object} action - "changeMap" type and res
- */
 export function changeMap(res) {
   return {
     type: "changeMap",
@@ -32,18 +20,12 @@ export function changeMap(res) {
   }
 }
 
-/**
- * handle save scenario
- * @param {object} res
- * @return {object} action - "saveScenario" type and res
- */
 export function saveScenario(res) {
   return {
     type: "saveScenario",
     res
   }
 }
-
 
 export function changeTimeFilter(res) {
   return {
@@ -80,7 +62,6 @@ export function fireUpdate(res) {
   }
 }
 
-
 export function pushUpdateButton(res) {
   return {
     type: "pushUpdateButton",
@@ -95,7 +76,6 @@ export function isCompare(res) {
   }
 }
 
-
 export function doneOneScenario(res) {
   return {
     type: "doneOneScenario",
@@ -103,14 +83,12 @@ export function doneOneScenario(res) {
   }
 }
 
-
 export function doneCompareScenario(res) {
   return {
     type: "doneCompareScenario",
     res
   }
 }
-
 
 export function doneExitSurvey(res) {
   return {
@@ -134,7 +112,6 @@ export function changeBusline(res) {
   }
 }
 
-
 export function changeProgress(res) {
   return {
     type: "changeProgress",
@@ -143,7 +120,6 @@ export function changeProgress(res) {
   }
 }
 
-
 export function changeScorecard(res) {
   return {
     type: "changeScorecard",
@@ -151,8 +127,6 @@ export function changeScorecard(res) {
 
   }
 }
-
-
 
 export function changeHeadway(res) {
   return {
@@ -175,6 +149,3 @@ export function addEmail(res) {
     res
   }
 }
-
-
-

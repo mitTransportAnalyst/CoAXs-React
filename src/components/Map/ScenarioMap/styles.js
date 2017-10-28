@@ -8,7 +8,7 @@ var STYLES = {};
 STYLES.segments = {
 
   // override the default stroke color
-  stroke: function(display, segment) {
+  stroke: function (display, segment) {
     if (!segment.focused) return;
 
     switch (segment.type) {
@@ -24,7 +24,7 @@ STYLES.segments = {
   },
 
   // override the default stroke width
-  'stroke-width': function(display, segment, index, utils) {
+  'stroke-width': function (display, segment, index, utils) {
     switch (segment.type) {
       case 'CAR':
         return utils.pixels(display.zoom.scale(), 2, 4, 6) + 'px';
@@ -34,14 +34,14 @@ STYLES.segments = {
       case 'TRANSIT':
         // bus segments:
         if (segment.mode === 3) return utils.pixels(display.zoom.scale(), 2, 4,
-            8) + 'px';
+          8) + 'px';
         // all others:
         return utils.pixels(display.zoom.scale(), 4, 8, 12) + 'px';
     }
   },
 
   // specify the dash-array
-  'stroke-dasharray': function(display, segment) {
+  'stroke-dasharray': function (display, segment) {
     switch (segment.type) {
       case 'CAR':
         return '3,2';
@@ -52,7 +52,7 @@ STYLES.segments = {
   },
 
   // specify the line cap type
-  'stroke-linecap': function(display, segment) {
+  'stroke-linecap': function (display, segment) {
     switch (segment.type) {
       case 'CAR':
         return 'butt';
@@ -93,7 +93,7 @@ STYLES.segments = {
 STYLES.segment_label_containers = {
 
   // specify the fill color for the label bubble
-  fill: function(display, label) {
+  fill: function (display, label) {
     if (!label.isFocused()) return;
 
     return '#008';

@@ -1,5 +1,5 @@
 import React from "react";
-// import s from "./RightMainPanel.css"
+import s from "./RightMainPanel.css"
 import TimeFilter from "./TimeFilter/TimeFilter"
 import Scenario from "./Scenario/Scenario"
 import ScenarioEditor from "./ScenarioEditor/ScenarioEditor"
@@ -13,7 +13,6 @@ class RightMainPanel extends React.Component {
         <ScenarioEditor/>
         <Scenario/>
         <TimeFilter/>
-
       </div>
     );
   }

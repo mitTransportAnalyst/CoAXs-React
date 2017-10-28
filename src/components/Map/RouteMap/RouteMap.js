@@ -1,13 +1,11 @@
+// DEPRECATED !!
+
 import React from 'react';
-import { render } from 'react-dom';
-import { Map, Marker, Popup, TileLayer,GeoJSON } from 'react-leaflet';
+import {render} from 'react-dom';
+import {Map, Marker, Popup, TileLayer, GeoJSON} from 'react-leaflet';
 // import s from "./RouteMap.css"
 import {MapLat, MapLng, ZoomLevel, Tile} from "../../../config"
 import {TrunkByID} from '../../../Data/LoadData'
-
-import TrunkData from '../../../Data/trunks.geojson'
-
-
 
 class RouteMap extends React.Component {
   constructor() {
@@ -25,25 +23,20 @@ class RouteMap extends React.Component {
     this.updatePosition = this.updatePosition.bind(this)
   }
 
-
-
-  componentDidMount(){
+  componentDidMount() {
     this.refs.routeMap.leafletElement.invalidateSize(true);
-
   }
 
-
-  updatePosition ()  {
+  updatePosition() {
     console.log("fafaf");
-    const { lat, lng } = this.refs.marker.leafletElement.getLatLng();
+    const {lat, lng} = this.refs.marker.leafletElement.getLatLng();
     this.setState({
       marker: {lat, lng},
     })
   }
 
-
-  invalidateMap()  {
-      this.refs.routeMap.leafletElement.invalidateSize(true);
+  invalidateMap() {
+    this.refs.routeMap.leafletElement.invalidateSize(true);
   }
 
   render() {
@@ -52,17 +45,13 @@ class RouteMap extends React.Component {
     const markerPosition = [this.state.marker.lat, this.state.marker.lng]
 
     return (
-      <div >
-        <Map ref="routeMap" center={position} zoom={ZoomLevel} onResize={ this.invalidateMap.bind(this)}>
+      <div>
+        <Map ref="routeMap" center={position} zoom={ZoomLevel} onResize={this.invalidateMap.bind(this)}>
           <TileLayer
             url={Tile}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-
-
-          {allTrunk.map((value) => value )}
-
-
+          />
+          {allTrunk.map((value) => value)}
         </Map>
       </div>
     );

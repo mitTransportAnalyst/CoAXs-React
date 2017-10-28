@@ -2,12 +2,10 @@
  * Created by xinzheng on 5/8/17.
  */
 
-
 import React from "react";
 import s from "./PlaceHolder.css";
 import {Modal, Tooltip, Overlay, Popover, OverlayTrigger, Button} from 'react-bootstrap';
 import classNames from "classnames"
-
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -55,15 +53,11 @@ class PlaceHolder extends React.Component {
       "placeholderTextClosed": !this.props.isdoneOneScenario,
     });
 
-
     return (
       <div className={placeHolderStyle}>
-
         <h4 ref="placeholderText" className={placeHolderWordStyle} onClick={this.handleClickPlaceHolder}>
           Click here to go to Step 3
         </h4>
-
-
         <Overlay
           show={this.state.showScenarioPopup}
           target={this.refs.placeholderText}
@@ -81,7 +75,6 @@ class PlaceHolder extends React.Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     isdoneOneScenario: state.navState.isdoneOneScenario,
@@ -94,7 +87,6 @@ function mapStateToProps(state) {
 function mapDispachToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
-
 
 export default connect(mapStateToProps, mapDispachToProps)(PlaceHolder);
 

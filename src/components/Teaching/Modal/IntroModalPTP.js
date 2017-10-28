@@ -10,15 +10,10 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
-/**
- * The main view which include TopleftPanel, map and Bottom component
- */
-
 class IntroModalPTP extends React.Component {
   constructor() {
     super();
   }
-
 
   render() {
     return (
@@ -28,12 +23,9 @@ class IntroModalPTP extends React.Component {
             <Modal.Title>Get to know CoAXs: User instructions</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             <iframe width="100%" height="315" src="https://www.youtube.com/embed/2BEKddeD9hs" frameBorder="0"
-                    allowFullScreen></iframe>
-
-            <hr />
-
+                    allowFullScreen/>
+            <hr/>
             <ul>
               <li>
                 1 Drag the green start pin to your home or a place you know well.
@@ -56,7 +48,6 @@ class IntroModalPTP extends React.Component {
                 5 Once you’re finished exploring, click the button on the right hand side that says “Click here to go to
                 Step 3” to move on to the next step.
               </li>
-
             </ul>
           </Modal.Body>
           <Modal.Footer>
@@ -64,11 +55,9 @@ class IntroModalPTP extends React.Component {
           </Modal.Footer>
         </Modal>
       </div>
-
     );
   }
 }
-
 
 //bind store and function to props
 function mapStateToProps(state) {
@@ -78,7 +67,6 @@ function mapStateToProps(state) {
 function mapDispachToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
-
 
 export default connect(mapStateToProps, mapDispachToProps)(IntroModalPTP);
 
