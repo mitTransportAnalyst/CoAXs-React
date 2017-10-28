@@ -8,7 +8,6 @@ import Scenario from "./Scenario/Scenario"
 import ScenarioEditor from "./ScenarioEditor/ScenarioEditor"
 import PlaceHolder from "./PlaceHolder/PlaceHolder"
 
-
 class RightMainPanelPTP extends React.Component {
   render() {
     return (
@@ -17,7 +16,6 @@ class RightMainPanelPTP extends React.Component {
         <ScenarioEditor/>
         <Scenario/>
         <TimeFilterPTP/>
-
       </div>
     );
   }

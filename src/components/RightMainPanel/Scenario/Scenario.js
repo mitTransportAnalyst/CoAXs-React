@@ -4,7 +4,6 @@ import _ from 'lodash';
 import cloneDeep from 'lodash/cloneDeep'
 import classNames from "classnames"
 
-
 import json16A from "../../../Data/scenario/16A.json"
 import json16B from "../../../Data/scenario/16B.json"
 import json16C from "../../../Data/scenario/16C.json"
@@ -14,7 +13,6 @@ import jsonE3C from "../../../Data/scenario/E3C.json"
 import jsonE3D from "../../../Data/scenario/E3D.json"
 import jsonE5A from "../../../Data/scenario/E5A.json"
 import jsonE5B from "../../../Data/scenario/E5B.json"
-
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -40,12 +38,9 @@ class Scenario extends React.Component {
     };
 
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
-    // this.selectScenario = this.selectScenario.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClickBaselineButton = this.handleClickBaselineButton.bind(this);
     this.handleClickCompareButton = this.handleClickCompareButton.bind(this);
-
-
   }
 
   //Set base scenario
@@ -87,11 +82,9 @@ class Scenario extends React.Component {
     })
   }
 
-
   handleUpdate() {
     this.props.pushUpdateButton();
   }
-
 
   componentWillUpdate(nextProps, nextState) {
     if (this.props.scenarioStore !== nextProps.scenarioStore) {
@@ -143,38 +136,24 @@ class Scenario extends React.Component {
       "btn-default": !this.state.isCompareMode,
     });
 
-
-
     return (
       <div className="scenarioDashboardPanel">
-
-        {/*<div className="placeholder">*/}
-        {/*</div>*/}
-
         <div className="colHead">
           <i className="fa fa-random"/>
           <span>Scenario Summary</span>
         </div>
-
         <div>
-
-
           <div className="scenariosTable">
-
-
             <div className="scenarioEntries">
-
               <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
                              isCompareMode={this.state.isCompareMode} headwayTime={this.state.baselineHeadwayTime}
                              scorecardData={BaselineBuses} selectedScenario={this.state.selectedScenario}/>
               <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
                              isCompareMode={this.state.isCompareMode} headwayTime={this.props.headwayTime}
                              scorecardData={this.props.scorecardData} selectedScenario={this.state.selectedScenario}/>
-
             </div>
 
             <div >
-
               <div className={baselineButton} style={{width: "50%", height: "10%", padding: 2}}
                    onClick={this.handleClickBaselineButton}>
                 <i className="fa fa-eye"/> View the Baseline
@@ -185,21 +164,17 @@ class Scenario extends React.Component {
               </div>
             </div>
 
-
             <div className="btn-group btn-group-justified" onClick={this.handleUpdate}>
-
               <div className="btn btn-info" style={{width: "100%", height: "10%", padding: 2}}>
                 <i className="fa fa-refresh"/> Update
               </div>
             </div>
-
           </div>
         </div>
       </div>
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return {
@@ -213,7 +188,6 @@ function mapStateToProps(state) {
 function mapDispachToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
-
 
 export default connect(mapStateToProps, mapDispachToProps)(Scenario);
 

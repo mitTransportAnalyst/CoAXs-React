@@ -6,27 +6,20 @@ import React from "react";
 import s from "./Legend.css";
 import classNames from "classnames"
 
-//bind redux
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as actionCreators from '../../../reducers/action';
-
-
 class Legend extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showLegend: true,
     };
+
     this.handleClickExpend = this.handleClickExpend.bind(this)
-
-
   }
 
-
-  handleClickExpend(){
+  handleClickExpend() {
     this.setState(
-      {...this.state,
+      {
+        ...this.state,
         showLegend: !this.state.showLegend,
       }
     )
@@ -40,8 +33,6 @@ class Legend extends React.Component {
 
     return (
       <div className="topnav">
-
-
         <div className="legend">
           <div className="panel panel-default">
             <div className="panel-heading">
@@ -50,8 +41,6 @@ class Legend extends React.Component {
                 <i className="fa fa-expand pull-right" onClick={this.handleClickExpend}/>
               </h6>
             </div>
-
-
             <div className={legendPanelClass}>
               <div>
                 <svg height="10" width="20">
@@ -59,7 +48,6 @@ class Legend extends React.Component {
                 </svg>
                 <small className="panel-word">RTA #16 S. Claiborne</small>
               </div>
-
 
               <div>
                 <svg height="10" width="20">
@@ -72,9 +60,8 @@ class Legend extends React.Component {
                 <svg height="10" width="20">
                   <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#8d6aa8", strokeWidth: 5}}/>
                 </svg>
-                <small className="panel-word">JeT #E5 Causeway </small>
+                <small className="panel-word">JeT #E5 Causeway</small>
               </div>
-
 
               <div>
                 <svg width="20" height="20">
@@ -90,35 +77,20 @@ class Legend extends React.Component {
                 <small className="panel-word">New scenario accessiblity area</small>
               </div>
 
-
               <div>
                 <svg height="10" width="20">
                   <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#f1d3e9", strokeWidth: 2}}/>
                 </svg>
                 <small className="panel-word">Transit network</small>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>
-
-
     );
   }
 }
 
-
-function mapStateToProps(state) {
-  return {}
-}
-
-function mapDispachToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
-}
-
-
-export default connect(mapStateToProps, mapDispachToProps)(Legend);
+export default Legend;
 
 

@@ -1,4 +1,4 @@
-.scenarioDashboardPanel{
+.scenarioDashboardPanel {
   margin-top: 15px;
 }
 
@@ -14,8 +14,7 @@
   width: 100%
 }
 
-.frosted-glass{
-  /*display: none;*/
+.frosted-glass {
   background: inherit;
   -webkit-filter: blur(2.5px);
   -moz-filter: blur(2.5px);

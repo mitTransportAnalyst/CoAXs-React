@@ -1,6 +1,5 @@
 import React from "react";
 
-
 /**
  * The 404 page.
  */
@@ -11,7 +10,6 @@ class NotFound extends React.Component {
    * render
    * @return {ReactElement} page not found
    */
-
   render() {
     return (
       <div className="page-not-found">

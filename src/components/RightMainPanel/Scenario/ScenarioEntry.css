@@ -1,46 +1,35 @@
-
 .scenarioEntries {
   width: 100%;
 }
 
-.scenarioEntrySel{
+.scenarioEntrySel {
   display: inline-block;
   white-space: nowrap;
-  width:50%;
+  width: 50%;
   font-size: 14px;
-  background-color:#eec16f;
+  background-color: #eec16f;
   height: 100%;
-  /*text-align: center;*/
-  /*vertical-align: middle;*/
   padding-bottom: 5px;
-
 }
 
-.scenarioEntry{
+.scenarioEntry {
   display: inline-block;
   white-space: nowrap;
-  width:50%;
+  width: 50%;
   font-size: 14px;
-  background-color:#f5f5f3;
+  background-color: #f5f5f3;
   height: 100%;
-  /*text-align: center;*/
-  /*vertical-align: middle;*/
   padding-bottom: 5px;
-
 }
 
-
-
-.scenarioEntrySubHead{
+.scenarioEntrySubHead {
   text-align: center;
   vertical-align: middle;
 }
 
-
-
 .square {
   display: inline;
-  color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 1);
   height: 18px;
   line-height: 18px;
   width: 18px;
