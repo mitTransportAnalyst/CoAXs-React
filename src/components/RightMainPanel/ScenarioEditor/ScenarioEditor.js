@@ -1,6 +1,5 @@
 import React from "react";
 import s from "./ScenarioEditor.css";
-import {Button, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import {corridorInfo} from '../../../Data/LoadData'
 import RouteTable from "./RouteTable/RouteTable"
 import ServiceEditor from "./ServiceEditor/ServiceEditor"
@@ -16,39 +15,26 @@ class ScenarioEditor extends React.Component {
     this.state = {}
   }
 
-
   componenetDidMount() {
     this.props.clickCorridor("A");
   }
-
 
   render() {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
     return (
       <div className="ScenarioEditorCol">
-
-
-        {/*<div className="placeholder">*/}
-        {/*</div>*/}
-
-
         <div className="colHead">
           <i className="fa fa-pencil-square-o"/>
           Service Editor - Editing Route {CorridorInfo[this.props.currentCorridor].name}
         </div>
-
-
-
-
         <div className="routesContainer">
-
           {
             Object.values(corridorInfo).map((corridor) => {
               if (this.props.currentCorridor === corridor.id) {
                 return (
                   <div className="btn routeItemSel" key={corridor.id}
-                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize:12}}
-                       onClick={()=>this.props.clickCorridor(corridor.id)}>
+                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize: 12}}
+                       onClick={() => this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}
 
                   </div>
@@ -57,28 +43,21 @@ class ScenarioEditor extends React.Component {
               else {
                 return (
                   <div className="btn routeItem" key={corridor.id}
-                       style={{"backgroundColor": corridor.color, fontSize:12}}
-                       onClick={()=>this.props.clickCorridor(corridor.id)}>
+                       style={{"backgroundColor": corridor.color, fontSize: 12}}
+                       onClick={() => this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}
-
                   </div>
                 )
-
-
               }
             })
           }
-
         </div>
-
         <RouteTable/>
         <ServiceEditor/>
-
       </div>
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return {
@@ -91,7 +70,6 @@ function mapStateToProps(state) {
 function mapDispachToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
-
 
 export default connect(mapStateToProps, mapDispachToProps)(ScenarioEditor);
 

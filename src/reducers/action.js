@@ -108,7 +108,6 @@ export function changeBusline(res) {
   return {
     type: "changeBusline",
     res
-
   }
 }
 
@@ -116,7 +115,6 @@ export function changeProgress(res) {
   return {
     type: "changeProgress",
     res
-
   }
 }
 
@@ -124,7 +122,6 @@ export function changeScorecard(res) {
   return {
     type: "changeScorecard",
     res
-
   }
 }
 
@@ -132,7 +129,6 @@ export function changeHeadway(res) {
   return {
     type: "changeHeadway",
     res
-
   }
 }
 

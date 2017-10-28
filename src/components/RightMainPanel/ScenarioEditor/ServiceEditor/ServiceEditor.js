@@ -20,16 +20,12 @@ import ScoreCard from "../../../../Data/Scorecard.json"
 
 //import slider component
 import Slider from "../../Common/Slider/Slider"
-
-
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-
+import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 
 //bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../../reducers/action';
-
 
 class ServiceEditor extends React.Component {
   constructor(props) {
@@ -43,8 +39,6 @@ class ServiceEditor extends React.Component {
     this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
     this.changeFeature = this.changeFeature.bind(this);
-
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,33 +51,28 @@ class ServiceEditor extends React.Component {
         ...this.state,
         currentAdjust: temp
       })
-
     }
   }
-
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.currentAdjust !== this.state.currentAdjust) {
       let tempScore = {A: 0, B: 0, C: 0};     // TODO: change to dynamic
-      let tempHeadway = {A: 0, B:0, C:0};
+      let tempHeadway = {A: 0, B: 0, C: 0};
       for (let key in tempScore) {
         tempScore[key] = ScoreCard[nextState.currentAdjust[key].alternative].totalTime / (ScoreCard[nextState.currentAdjust[key].alternative].baseHeadway * (1 - Number(nextState.currentAdjust[key].headway) / 100))
       }
-
       for (let key in tempHeadway) {
         tempHeadway[key] = ScoreCard[nextState.currentAdjust[key].alternative].baseHeadway * (1 - Number(nextState.currentAdjust[key].headway) / 100 )
       }
-
       this.props.changeHeadway(tempHeadway);
       this.props.changeScorecard(tempScore);
       this.props.saveScenario(nextState.currentAdjust);
     }
-
   }
 
   componentDidMount() {
     let tempScore = {A: 0, B: 0, C: 0};     // TODO: change to dynamic
-    let tempHeadway = {A: 0, B:0, C:0};
+    let tempHeadway = {A: 0, B: 0, C: 0};
 
     for (let key in tempScore) {
       tempScore[key] = ScoreCard[this.state.currentAdjust[key].alternative].totalTime / (ScoreCard[this.state.currentAdjust[key].alternative].baseHeadway * (1 - Number(this.state.currentAdjust[key].headway) / 100))
@@ -94,14 +83,12 @@ class ServiceEditor extends React.Component {
     }
     this.props.changeScorecard(tempScore);
     this.props.changeHeadway(tempHeadway);
-
-
   }
 
   componentWillMount() {
     let model = {};
     Object.keys(CorridorInfo).map(
-      (id)=> {
+      (id) => {
         model[id] = {
           "headway": 0,
           "alternative": this.props.currentBusAlternative[id],
@@ -112,10 +99,7 @@ class ServiceEditor extends React.Component {
       "resetAdjust": model,
       "currentAdjust": model,
     });
-
-
   }
-
 
   handlePlaceHolder() {
     this.setState({
@@ -123,12 +107,10 @@ class ServiceEditor extends React.Component {
     })
   }
 
-
   handleSaveButton() {
     this.props.saveScenario(this.state.currentAdjust)
 
   }
-
 
   changeFeature(feature, value) {
     let temp = cloneDeep(this.state.currentAdjust);
@@ -141,73 +123,37 @@ class ServiceEditor extends React.Component {
 
   render() {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
-
     const tooltipforHeadway = (
-      <Tooltip id="tooltipforHeadway"><strong>Refers to the average amount of time between buses at a stop</strong></Tooltip>
+      <Tooltip id="tooltipforHeadway"><strong>Refers to the average amount of time between buses at a
+        stop</strong></Tooltip>
     );
+
     return (
       <div className="serviceEditorPanel">
-
-
-        {/*{ this.state.isOpen ?*/}
-        {/*<div className="placeHolder" onClick={*/}
-        {/*() => {*/}
-        {/*this.handlePlaceHolder();*/}
-        {/*this.props.changeMap(!this.props.currentMap);*/}
-        {/*}}>*/}
-        {/*<div className="bigText">*/}
-        {/*<i className="fa fa-pencil-square-o"/>*/}
-        {/*</div>*/}
-        {/*</div>*/}
-        {/*:*/}
-        {/*null*/}
-        {/*}*/}
-
-        {/*<div className="btn-group btn-group-justified">*/}
-        {/*<div >*/}
-        {/*/!*style="width:300px; color:{{variants[tabnav].color}}; background-color:{{variants[tabnav].color}}"*!/*/}
-        {/*/!*<i className="fa fa-level-down "/>*!/*/}
-        {/*</div>*/}
-
-        {/*<div className="btn btn-info" style={{width: 150, position: "absolute", right: 0}}*/}
-        {/*onClick={this.handleSaveButton}>*/}
-        {/*<i className="fa fa-save"/> Save*/}
-        {/*</div>*/}
-        {/*</div>*/}
-
-
         <div>
-
           <div className="setTimesTitle">
             <OverlayTrigger placement="bottom" overlay={tooltipforHeadway}>
 
-            <div className="subHead">
+              <div className="subHead">
                 Time Between Buses
-            </div>
+              </div>
             </OverlayTrigger>
-
             <div>
-              <div style={{paddingTop: 1 , marginLeft: 10, }}>
-
-
+              <div style={{paddingTop: 1, marginLeft: 10,}}>
                 <div style={{width: "96%", display: "inline-block", marginTop: 2}}>
                   <Slider name="headway" min={HeadwayMin} max={HeadwayMax}
                           value={this.state.currentAdjust[this.props.currentCorridor]["headway"]} step="5"
-                          className="right" changeFunction={this.changeFeature} headwayTime={this.props.headwayStore[this.props.currentCorridor]}/>
+                          className="right" changeFunction={this.changeFeature}
+                          headwayTime={this.props.headwayStore[this.props.currentCorridor]}/>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
-
-
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return {
@@ -221,7 +167,6 @@ function mapStateToProps(state) {
 function mapDispachToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
-
 
 export default connect(mapStateToProps, mapDispachToProps)(ServiceEditor);
 

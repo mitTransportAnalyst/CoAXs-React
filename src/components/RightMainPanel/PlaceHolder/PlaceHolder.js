@@ -23,11 +23,9 @@ class PlaceHolder extends React.Component {
     this.handleClickPlaceHolder = this.handleClickPlaceHolder.bind(this);
   }
 
-
   closeScenarioPopup() {
     this.setState({showScenarioPopup: false});
   }
-
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isdoneOneScenario !== this.props.isdoneOneScenario) {

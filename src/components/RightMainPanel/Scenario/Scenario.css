@@ -15,7 +15,6 @@
 }
 
 .frosted-glass {
-  /*display: none;*/
   background: inherit;
   -webkit-filter: blur(2.5px);
   -moz-filter: blur(2.5px);

@@ -1,22 +1,9 @@
 .ScenarioEditorCol {
-  /*left: 50vw;*/
   width: 100%;
   box-shadow: 0px 0px 0px;
-  /*outline: 1px solid #000000;*/
-
 }
 
-/*.colHead {*/
-  /*background-color: #b4b4b4;*/
-  /*height: 20px;*/
-  /*vertical-align: middle;*/
-  /*text-align: center;*/
-  /*color: #FFFFFF;*/
-
-/*}*/
-
-
-.colHead{
+.colHead {
   height: 24px;
   line-height: 24px;
   background-color: #696969;
@@ -26,9 +13,6 @@
   color: white;
   z-index: 99;
   font-size: 14px;
-
-
-
 }
 
 .routesContainer {

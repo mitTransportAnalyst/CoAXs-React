@@ -2,7 +2,6 @@ import React from "react";
 import s from "./ScenarioEntry.css";
 import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 
-
 //bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
