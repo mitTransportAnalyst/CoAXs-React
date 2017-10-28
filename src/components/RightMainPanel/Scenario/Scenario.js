@@ -92,7 +92,6 @@ class Scenario extends React.Component {
     this.props.pushUpdateButton();
   }
 
-
   componentWillUpdate(nextProps, nextState) {
     if (this.props.scenarioStore !== nextProps.scenarioStore) {
       const corridorObject = {

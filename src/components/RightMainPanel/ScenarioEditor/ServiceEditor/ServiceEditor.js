@@ -22,12 +22,6 @@ import ScoreCard from "../../../../Data/Scorecard.json"
 import Slider from "../../Common/Slider/Slider"
 
 
-//import pictures
-import runningPic from '../../../../img/runningtime.png'
-import dwellPic from '../../../../img/dwelltime.png'
-import headwayPic from '../../../../img/frequency.png'
-
-
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 
