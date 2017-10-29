@@ -57,7 +57,6 @@ function scenarioStore(state = [{
   C: {
     headway: 0,
     alternative: "E5A"
-
   },
 }, {
   A: {
@@ -77,10 +76,7 @@ function scenarioStore(state = [{
 }], action) {
   switch (action.type) {
     case 'saveScenario':
-
       return [state[0], action.res];
-    // "currentCor": JSON.parse(action.res)
-
     default:
       return state
   }
@@ -92,17 +88,6 @@ function timeFilterStore(state = [], action) {
       return {
         ...state,
         "currentTimeFilter": action.res,
-      };
-    default:
-      return state
-  }
-}
-
-function modeStore(state = [], action) {
-  switch (action.type) {
-    case 'changeMode':
-      return {
-        "mode": action.res,
       };
     default:
       return state
@@ -154,7 +139,6 @@ function isCompare(state = {isCompare: false}, action) {
 }
 
 const initialBuslineState = {A: "16A", B: "E3A", C: "E5A"};
-
 function BuslineSelectedStore(state = initialBuslineState, action) {
   switch (action.type) {
     case 'changeBusline':
@@ -173,7 +157,6 @@ const initialNavState = {
   isdoneCompareScenario: false,
   isdoneExitSurvey: false
 };
-
 function navState(state = initialNavState, action) {
   switch (action.type) {
     case 'doneOneScenario':
@@ -252,7 +235,6 @@ export const reducers = combineReducers({
   reducer,
   scenarioStore,
   timeFilterStore,
-  modeStore,
   GridNumberStore,
   fireUpdate,
   updateButtonState,

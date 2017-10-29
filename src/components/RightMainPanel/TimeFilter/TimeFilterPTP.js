@@ -6,8 +6,6 @@ import React from "react";
 import "./TimeFilter.css";
 import GraphPTP from "./GraphPTP"
 
-import {PointToPoint, Accessibility} from "../../../config"
-
 //bind redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -19,15 +17,6 @@ class TimeFilterPTP extends React.Component {
     this.state = {
       currentTimeFilter: 30,
     };
-
-    this.changeFeature = this.changeFeature.bind(this)
-  }
-
-  changeFeature(feature, value) {
-    this.setState({
-      currentTimeFilter: value,
-    });
-    this.props.changeTimeFilter(value);
   }
 
   render() {
@@ -49,14 +38,12 @@ function mapStateToProps(state) {
   return {
     gridNumber: state.GridNumberStore.gridNumber,
     gridNumber1: state.GridNumberStore.gridNumber1,
-
   }
 }
 
 function mapDispachToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
-
 
 export default connect(mapStateToProps, mapDispachToProps)(TimeFilterPTP);
 

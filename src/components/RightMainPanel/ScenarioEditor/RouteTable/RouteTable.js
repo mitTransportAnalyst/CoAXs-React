@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../../reducers/action';
 
-import {RouteByID} from '../../../../Data/LoadData'
+import {CorridorInfo} from "../../../../config"
 
 class RouteTable extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class RouteTable extends React.Component {
     return (
       <div className="routeTable">
         {
-          RouteByID[this.props.currentCorridor].buslines.map((busline, index) => {
+          CorridorInfo[this.props.currentCorridor].buslines.map((busline, index) => {
             if (this.props.BuslineProps[this.props.currentCorridor] === busline.slice(0, 3)) {
               return (
                 <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline}
@@ -54,7 +54,6 @@ function mapStateToProps(state) {
     currentCorridor: state.reducer.currentCor,
     BuslineProps: state.BuslineSelectedStore,
     scorecardData: state.ScorecardData,
-
   }
 }
 

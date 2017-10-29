@@ -1,6 +1,5 @@
 import React from "react";
 import s from "./ScenarioEditor.css";
-import {corridorInfo} from '../../../Data/LoadData'
 import RouteTable from "./RouteTable/RouteTable"
 import ServiceEditor from "./ServiceEditor/ServiceEditor"
 import {CorridorInfo} from "../../../config"
@@ -29,7 +28,7 @@ class ScenarioEditor extends React.Component {
         </div>
         <div className="routesContainer">
           {
-            Object.values(corridorInfo).map((corridor) => {
+            Object.values(CorridorInfo).map((corridor) => {
               if (this.props.currentCorridor === corridor.id) {
                 return (
                   <div className="btn routeItemSel" key={corridor.id}

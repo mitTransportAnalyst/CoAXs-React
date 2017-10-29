@@ -41,9 +41,27 @@ export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogr
  * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
  */
 export const CorridorInfo = {
-  "A": {"name": "16", "color": "#555555", "id": "A", fullName: "RTA #16 S. Claiborne"},
-  "B": {"name": "E3", "color": "#2eadd3", "id": "B", fullName: "JeT #E3 Kenner Local"},
-  "C": {"name": "E5", "color": "#8d6aa8", "id": "C", fullName: "JeT #E5 Causeway "},
+  "A": {
+    name: "16",
+    color: "#555555",
+    id: "A",
+    fullName: "RTA #16 S. Claiborne",
+    buslines: ["16A - Current Route", "16B - Ext to Ochsner", "16C - Ext to Clearview"],
+  },
+  "B": {
+    name: "E3",
+    color: "#2eadd3",
+    id: "B",
+    fullName: "JeT #E3 Kenner Local",
+    buslines: ["E3A - Current route", "E3B - Ext to Orleans", "E3C - COA Re-route", "E3D - Short turn to Ochsner"],
+  },
+  "C": {
+    name: "E5",
+    color: "#8d6aa8",
+    id: "C",
+    fullName: "JeT #E5 Causeway ",
+    buslines: ["E5A - Current route", "E5B - Ext to Ochsner"],
+  },
 };
 
 export const BaselineBuses = {

@@ -13,13 +13,6 @@ export function clickCorridor(res) {
   }
 }
 
-export function changeMap(res) {
-  return {
-    type: "changeMap",
-    res
-  }
-}
-
 export function saveScenario(res) {
   return {
     type: "saveScenario",
@@ -30,20 +23,6 @@ export function saveScenario(res) {
 export function changeTimeFilter(res) {
   return {
     type: "changeTimeFilter",
-    res
-  }
-}
-
-export function changeMode(res) {
-  return {
-    type: "changeMode",
-    res
-  }
-}
-
-export function selectScenario(res) {
-  return {
-    type: "selectScenario",
     res
   }
 }
