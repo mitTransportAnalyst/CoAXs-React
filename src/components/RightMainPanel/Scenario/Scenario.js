@@ -28,58 +28,20 @@ class Scenario extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: true,
-      baseScenario: {},
-      isCompareMode: false,
-      selectedScenario: false,
-      firedScenario: [],
-      // TODO dynamic change
       baselineHeadwayTime: {A: 30, B: 24, C: 27}
     };
 
-    this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClickBaselineButton = this.handleClickBaselineButton.bind(this);
     this.handleClickCompareButton = this.handleClickCompareButton.bind(this);
   }
 
-  //Set base scenario
-  componentWillMount() {
-    let model = {};
-    Object.keys(CorridorInfo).map(
-      (id)=> {
-        model[id] = {
-          "runningTime": 0,
-          "dwellTime": 0,
-          "headway": 0,
-        }
-      }
-    );
-    this.setState({
-      "baseScenario": model,
-    })
-  }
-
-  handlePlaceHolder() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
-
   handleClickCompareButton() {
-    this.props.isCompare(!this.state.isCompareMode);
-    this.setState({
-      isCompareMode: !this.state.isCompareMode,
-      selectedScenario: !this.state.selectedScenario,
-    })
+    this.props.changeCompareMode();
   }
 
   handleClickBaselineButton() {
-    this.props.isCompare(!this.state.isCompareMode);
-    this.setState({
-      isCompareMode: !this.state.isCompareMode,
-      selectedScenario: !this.state.selectedScenario,
-    })
+    this.props.changeCompareMode();
   }
 
   handleUpdate() {
@@ -116,24 +78,19 @@ class Scenario extends React.Component {
 
       this.props.fireUpdate(firedScenario);
     }
-
-    if (this.props.showCompareScenarioModal !== nextProps.showCompareScenarioModal) {
-      this.handleClickCompareButton();
-    }
-
   }
 
   render() {
     const baselineButton = classNames({
       "btn": true,
-      "btn-info": !this.state.isCompareMode,
-      "btn-default": this.state.isCompareMode,
+      "btn-info": !this.props.isCompareMode,
+      "btn-default": this.props.isCompareMode,
     });
 
     const compareButton = classNames({
       "btn": true,
-      "btn-info": this.state.isCompareMode,
-      "btn-default": !this.state.isCompareMode,
+      "btn-info": this.props.isCompareMode,
+      "btn-default": !this.props.isCompareMode,
     });
 
     return (
@@ -146,11 +103,11 @@ class Scenario extends React.Component {
           <div className="scenariosTable">
             <div className="scenarioEntries">
               <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
-                             isCompareMode={this.state.isCompareMode} headwayTime={this.state.baselineHeadwayTime}
-                             scorecardData={BaselineBuses} selectedScenario={this.state.selectedScenario}/>
+                             isCompareMode={this.props.isCompareMode} headwayTime={this.state.baselineHeadwayTime}
+                             scorecardData={BaselineBuses} />
               <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
-                             isCompareMode={this.state.isCompareMode} headwayTime={this.props.headwayTime}
-                             scorecardData={this.props.scorecardData} selectedScenario={this.state.selectedScenario}/>
+                             isCompareMode={this.props.isCompareMode} headwayTime={this.props.headwayTime}
+                             scorecardData={this.props.scorecardData}/>
             </div>
 
             <div >
@@ -182,6 +139,7 @@ function mapStateToProps(state) {
     headwayTime: state.HeadwayTime,
     scorecardData: state.ScorecardData,
     showCompareScenarioModal: state.showCompareScenarioModal,
+    isCompareMode: state.isCompare.isCompare,
   }
 }
 

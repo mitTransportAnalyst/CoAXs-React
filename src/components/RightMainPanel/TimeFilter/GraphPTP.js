@@ -18,7 +18,7 @@ class GraphPTP extends React.Component {
   }
 
   render() {
-    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined) {
+    if (this.props.isCompareMode && this.props.gridNumberNew !== undefined) {
       var data = [
         {name: 'Base Scenario', job: null},
         {name: 'New Scenario', job: null},
@@ -30,9 +30,9 @@ class GraphPTP extends React.Component {
       ];
     }
 
-    data[0].job = this.props.gridNumber;
-    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined) {
-      data[1].job = this.props.gridNumber1;
+    data[0].job = this.props.gridNumberBase;
+    if (this.props.isCompareMode && this.props.gridNumberNew !== undefined) {
+      data[1].job = this.props.gridNumberNew;
     }
 
     const scale = 'ordinal';
@@ -72,8 +72,8 @@ class GraphPTP extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    gridNumber: state.GridNumberStore.gridNumber,
-    gridNumber1: state.GridNumberStore.gridNumber1,
+    gridNumberBase: state.GridNumberStore.gridNumberBase,
+    gridNumberNew: state.GridNumberStore.gridNumberNew,
     isCompareMode: state.isCompare.isCompare,
   }
 }

@@ -7,15 +7,9 @@ import ProgressBar from "react-progressbar.js"
 import Animal from "./animal.gif"
 import s from "./LoadingPage.css"
 
-//bind redux
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as actionCreators from '../../reducers/action';
-
 class LoadingPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render() {
@@ -44,13 +38,5 @@ class LoadingPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {}
-}
-
-function mapDispachToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispachToProps)(LoadingPage);
+export default LoadingPage;
 

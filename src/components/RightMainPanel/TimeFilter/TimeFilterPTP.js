@@ -27,7 +27,7 @@ class TimeFilterPTP extends React.Component {
           Time Map
         </div>
         <div>
-          {this.props.gridNumber !== null ? <GraphPTP/> : null}
+          {this.props.gridNumberBase !== null ? <GraphPTP/> : null}
         </div>
       </div>
     );
@@ -36,8 +36,8 @@ class TimeFilterPTP extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    gridNumber: state.GridNumberStore.gridNumber,
-    gridNumber1: state.GridNumberStore.gridNumber1,
+    gridNumberBase: state.GridNumberStore.gridNumberBase,
+    gridNumberNew: state.GridNumberStore.gridNumberNew,
   }
 }
 

@@ -13,23 +13,31 @@ export function clickCorridor(res) {
   }
 }
 
+export function changeBusline(res) {
+  return {
+    type: "changeBusline",
+    res
+  }
+}
+
+export function changeHeadway(res) {
+  return {
+    type: "changeHeadway",
+    res
+  }
+}
+
+// the number of buese needed
+export function changeScorecard(res) {
+  return {
+    type: "changeScorecard",
+    res
+  }
+}
+
 export function saveScenario(res) {
   return {
     type: "saveScenario",
-    res
-  }
-}
-
-export function changeTimeFilter(res) {
-  return {
-    type: "changeTimeFilter",
-    res
-  }
-}
-
-export function changeGridNumber(res) {
-  return {
-    type: "changeGridNumber",
     res
   }
 }
@@ -48,9 +56,54 @@ export function pushUpdateButton(res) {
   }
 }
 
-export function isCompare(res) {
+export function changeCompareMode(res) {
   return {
-    type: "isCompare",
+    type: "changeCompareMode",
+    res
+  }
+}
+
+export function changeTimeFilter(res) {
+  return {
+    type: "changeTimeFilter",
+    res
+  }
+}
+
+export function changeGridNumber(res) {
+  return {
+    type: "changeGridNumber",
+    res
+  }
+}
+
+export function changeProgress(res) {
+  return {
+    type: "changeProgress",
+    res
+  }
+}
+
+
+
+
+
+
+
+
+
+
+// for navigation bar
+export function fireCompareScenarioModal(res) {
+  return {
+    type: "fireCompareScenarioModal",
+    res
+  }
+}
+
+export function addEmail(res) {
+  return {
+    type: "addEmail",
     res
   }
 }
@@ -79,48 +132,6 @@ export function doneExitSurvey(res) {
 export function donePreSurvey(res) {
   return {
     type: "donePreSurvey",
-    res
-  }
-}
-
-export function changeBusline(res) {
-  return {
-    type: "changeBusline",
-    res
-  }
-}
-
-export function changeProgress(res) {
-  return {
-    type: "changeProgress",
-    res
-  }
-}
-
-export function changeScorecard(res) {
-  return {
-    type: "changeScorecard",
-    res
-  }
-}
-
-export function changeHeadway(res) {
-  return {
-    type: "changeHeadway",
-    res
-  }
-}
-
-export function fireCompareScenarioModal(res) {
-  return {
-    type: "fireCompareScenarioModal",
-    res
-  }
-}
-
-export function addEmail(res) {
-  return {
-    type: "addEmail",
     res
   }
 }

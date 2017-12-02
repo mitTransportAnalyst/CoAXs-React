@@ -46,7 +46,7 @@ class TimeFilter extends React.Component {
               </span>
             </div>
           </div>
-          {this.props.gridNumber !== undefined ? <Graph/> : null}
+          {this.props.gridNumberBase !== undefined ? <Graph/> : null}
         </div>
       </div>
     );
@@ -55,8 +55,7 @@ class TimeFilter extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    gridNumber: state.GridNumberStore.gridNumber,
-    gridNumber1: state.GridNumberStore.gridNumber1,
+    gridNumberBase: state.GridNumberStore.gridNumberBase,
   }
 }
 

@@ -11,11 +11,6 @@ import * as actionCreators from '../../../reducers/action';
 class ScenarioEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
-  }
-
-  componenetDidMount() {
-    this.props.clickCorridor("A");
   }
 
   render() {
@@ -35,7 +30,6 @@ class ScenarioEditor extends React.Component {
                        style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize: 12}}
                        onClick={() => this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}
-
                   </div>
                 )
               }
@@ -60,9 +54,7 @@ class ScenarioEditor extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentCorridor: state.reducer.currentCor,
-    scorecardData: state.ScorecardData,
-    isOpen: state.reducer.currentMap,
+    currentCorridor: state.currentCorridorStore.currentCor,
   }
 }
 

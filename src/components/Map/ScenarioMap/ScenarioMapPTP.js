@@ -1233,7 +1233,7 @@ function mapStateToProps(state) {
     currentTimeFilter: state.timeFilterStore.currentTimeFilter,
     fireScenario: state.fireUpdate.fireScenario,
     isCompareMode: state.isCompare.isCompare,
-    currentCorridor: state.reducer.currentCor,
+    currentCorridor: state.currentCorridorStore.currentCor,
     currentBusline: state.BuslineSelectedStore,
     updateButtonState: state.updateButtonState,
     emailStore: state.emailStore,

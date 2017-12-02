@@ -18,16 +18,11 @@ class RouteTable extends React.Component {
   }
 
   render() {
-    let totalbuses = 0;
-    for (let key in this.props.scorecardData) {
-      totalbuses += Math.ceil(this.props.scorecardData[key])
-    }
-
     return (
       <div className="routeTable">
         {
           CorridorInfo[this.props.currentCorridor].buslines.map((busline, index) => {
-            if (this.props.BuslineProps[this.props.currentCorridor] === busline.slice(0, 3)) {
+            if (this.props.selectedBusline[this.props.currentCorridor] === busline.slice(0, 3)) {
               return (
                 <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline}
                        onClick={() => this.handleBuslineClick(busline)}>
@@ -51,9 +46,8 @@ class RouteTable extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentCorridor: state.reducer.currentCor,
-    BuslineProps: state.BuslineSelectedStore,
-    scorecardData: state.ScorecardData,
+    currentCorridor: state.currentCorridorStore.currentCor,
+    selectedBusline: state.BuslineSelectedStore,
   }
 }
 

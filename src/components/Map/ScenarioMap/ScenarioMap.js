@@ -48,7 +48,7 @@ import {
 } from '../../../config'
 
 /** how often will we allow the isochrone to update, in milliseconds */
-const MAX_UPDATE_INTERVAL_MS = 50; // seems smooth on 2015 Macbook Pro
+const MAX_UPDATE_INTERVAL_MS = 50; // seems smooth on 2017 Macbook Pro
 
 class ScenarioMap extends React.Component {
   constructor() {
@@ -164,39 +164,63 @@ class ScenarioMap extends React.Component {
       },
     };
 
-
     this.fetchMetadata = this.fetchMetadata.bind(this);
     this.moveOrigin = this.moveOrigin.bind(this);
-
     this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
     this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff, MAX_UPDATE_INTERVAL_MS);
     this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
     this.updateScneario = this.updateScneario.bind(this);
 
-
     this.bs = new Browsochrones({webpack: true});
     this.bs2 = new Browsochrones({webpack: true});
-
-
   }
 
+  componentDidMount() {
+    this.fetchMetadata();
+  }
 
-  async changeIsochroneCutoff(isochroneCutoff) {
-    isochroneCutoff = parseInt(isochroneCutoff);
-
-    if (this.props.isCompareMode && this.state.isochrone2 !== null) {
-      var data = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
+  componentDidUpdate(nextState) {
+    if (this.state.accessibility !== nextState.accessibility) {
+      this.props.changeGridNumber([this.state.accessibility, this.state.accessibility2])
     }
-    var data1 = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
-    this.setState({...this.state, ...data, ...data1, isochroneCutoff})
-  };
+  }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentTimeFilter !== nextProps.currentTimeFilter && this.state.key !== null) {
+      this.changeIsochroneCutoff(nextProps.currentTimeFilter);
+    }
+
+    if (this.props.fireScenario !== nextProps.fireScenario) {
+      let staticRequest = this.state.staticRequest;
+      staticRequest.request.scenario.modifications = nextProps.fireScenario;
+      staticRequest.request.scenario.id = uuid.v4();
+
+      this.setState({
+        staticRequest,
+      });
+    }
+
+    if (this.props.isCompareMode !== nextProps.isCompareMode) {
+      this.setState({
+        isochrone: null,
+        isochrone2: null,
+        transitive: null,
+        transitive2: null,
+        key: null,
+        key2: null,
+        accessibility: null,
+        accessibility2: null,
+      });
+    }
+
+    if (this.props.updateButtonState !== nextProps.updateButtonState) {
+      this.updateScneario();
+    }
+  }
 
   async fetchMetadata() {
-
-    let {preRequest} = this.state;
     this.props.changeProgress(0.2);
-
+    let {preRequest} = this.state;
     this.props.changeProgress(0.4);
     Promise.all([
       fetch(BASE_URL, {
@@ -232,12 +256,9 @@ class ScenarioMap extends React.Component {
       })
     ])
       .then(([metadata, stopTrees, grid]) => {
-
-
         Promise.all([
           this.bs2.setQuery(metadata),
           this.bs.setQuery(metadata),
-
 
           this.bs2.setStopTrees(stopTrees.slice(0)),
           this.bs.setStopTrees(stopTrees.slice(0)),
@@ -247,8 +268,6 @@ class ScenarioMap extends React.Component {
 
           this.bs2.putGrid({id: 'jobs', grid: grid}),
           this.bs.putGrid({id: 'jobs', grid: grid}),
-
-
         ]).then(() => {
             console.log("done fetch");
             this.props.changeProgress(1);
@@ -256,30 +275,9 @@ class ScenarioMap extends React.Component {
           }
         )
       })
-
   };
 
-
   moveOrigin(e) {
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "time": new Date(),
-        "email": this.props.emailStore,
-        "ptp": false,
-        "city": "NOLA",
-        origin: this.state.origin,
-        "type": "moveOrigin",
-        "scenario": this.props.scenarioStore,
-        "isCompare": this.props.isCompareMode
-      })
-    });
-
-
     if (this.props.isCompareMode) {
       let origin = e.target.getLatLng();
       console.log(origin);
@@ -302,8 +300,6 @@ class ScenarioMap extends React.Component {
         accessibility2: null
       });
 
-
-      // return fetch(BASE_URL, {
       fetch(BASE_URL, {
         method: 'POST',
         body: JSON.stringify({
@@ -342,11 +338,11 @@ class ScenarioMap extends React.Component {
 
 
     let origin = e.target.getLatLng();
-    console.log(origin)
+    console.log(origin);
 
     let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
 
-    console.log({x, y})
+    console.log({x, y});
     let {staticRequestBase, isochroneCutoff} = this.state;
     this.setState({
       ...this.state,
@@ -406,24 +402,6 @@ class ScenarioMap extends React.Component {
   };
 
   updateScneario() {
-    fetch('https://api.mlab.com/api/1/databases/tdm/collections/log?apiKey=9zaMF9-feKwS1ZliH769u7LranDon3cC', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "time": Date(),
-        "email": this.props.emailStore,
-        "ptp": false,
-        "city": "NOLA",
-        origin: this.state.origin,
-        "type": "updateScenario",
-        "scenario": this.props.scenarioStore,
-        "isCompare": this.props.isCompareMode
-      })
-    });
-
     if (this.props.isCompareMode) {
       let origin = this.state.origin;
       let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
@@ -440,8 +418,6 @@ class ScenarioMap extends React.Component {
         accessibility2: null
       });
 
-
-      // return fetch(BASE_URL, {
       fetch(BASE_URL, {
         method: 'POST',
         body: JSON.stringify({
@@ -459,7 +435,6 @@ class ScenarioMap extends React.Component {
           await this.bs2.generateSurface({gridId: 'jobs'});
           let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
 
-
           console.log("done isochrone and accessibility");
           this.props.doneCompareScenario(" ");
 
@@ -475,9 +450,7 @@ class ScenarioMap extends React.Component {
             waitTime2: null
           })
         })
-
     }
-
 
     let origin = this.state.origin;
     let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
@@ -496,8 +469,6 @@ class ScenarioMap extends React.Component {
 
     this.props.changeProgress(0.2);
 
-
-    // return fetch(BASE_URL, {
     fetch(BASE_URL, {
       method: 'POST',
       body: JSON.stringify({
@@ -535,12 +506,20 @@ class ScenarioMap extends React.Component {
         });
 
         this.props.changeProgress(1);
-
       });
 
 
   };
 
+  async changeIsochroneCutoff(isochroneCutoff) {
+    isochroneCutoff = parseInt(isochroneCutoff);
+
+    if (this.props.isCompareMode && this.state.isochrone2 !== null) {
+      var data = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
+    }
+    var data1 = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
+    this.setState({...this.state, ...data, ...data1, isochroneCutoff})
+  };
 
   /** get an isochrone and an accessibility figure */
   async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
@@ -561,49 +540,6 @@ class ScenarioMap extends React.Component {
       return {accessibility, isochrone, key: uuid.v4()}
     }
 
-  }
-
-  componentDidMount() {
-    this.fetchMetadata();
-  }
-
-  componentDidUpdate(nextState) {
-    if (this.state.accessibility !== nextState.accessibility) {
-      this.props.changeGridNumber([this.state.accessibility, this.state.accessibility2])
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.currentTimeFilter !== nextProps.currentTimeFilter && this.state.key !== null) {
-      this.changeIsochroneCutoff(nextProps.currentTimeFilter);
-    }
-
-    if (this.props.fireScenario !== nextProps.fireScenario) {
-      let staticRequest = this.state.staticRequest;
-      staticRequest.request.scenario.modifications = nextProps.fireScenario;
-      staticRequest.request.scenario.id = uuid.v4();
-
-      this.setState({
-        staticRequest,
-      });
-    }
-
-    if (this.props.isCompareMode !== nextProps.isCompareMode) {
-      this.setState({
-        isochrone: null,
-        isochrone2: null,
-        transitive: null,
-        transitive2: null,
-        key: null,
-        key2: null,
-        accessibility: null,
-        accessibility2: null,
-      });
-    }
-
-    if (this.props.updateButtonState !== nextProps.updateButtonState) {
-      this.updateScneario();
-    }
   }
 
   render() {
@@ -834,7 +770,7 @@ function mapStateToProps(state) {
     currentTimeFilter: state.timeFilterStore.currentTimeFilter,
     fireScenario: state.fireUpdate.fireScenario,
     isCompareMode: state.isCompare.isCompare,
-    currentCorridor: state.reducer.currentCor,
+    currentCorridor: state.currentCorridorStore.currentCor,
     currentBusline: state.BuslineSelectedStore,
     updateButtonState: state.updateButtonState,
     emailStore: state.emailStore,
