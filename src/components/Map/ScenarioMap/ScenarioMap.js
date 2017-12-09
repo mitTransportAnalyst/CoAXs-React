@@ -44,11 +44,15 @@ import {
   TRANSPORT_NETWORK_ID,
   BASE_URL,
   AUTH_URL,
-  GRID_URL
+  GRID_URL,
+  API_KEY,
 } from '../../../config'
 
 /** how often will we allow the isochrone to update, in milliseconds */
 const MAX_UPDATE_INTERVAL_MS = 50; // seems smooth on 2017 Macbook Pro
+const SURFACE_HEADER_LENGTH = 9;
+const SURFACE_HEADER_TITLE = 'ACCESSGR';
+
 
 class ScenarioMap extends React.Component {
   constructor() {
@@ -164,20 +168,18 @@ class ScenarioMap extends React.Component {
       },
     };
 
-    this.fetchMetadata = this.fetchMetadata.bind(this);
     this.moveOrigin = this.moveOrigin.bind(this);
     this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
     this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff, MAX_UPDATE_INTERVAL_MS);
     this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
     this.updateScneario = this.updateScneario.bind(this);
+    this.responseToSurface = this.responseToSurface.bind(this);
+    this.intToString = this.intToString.bind(this);
 
     this.bs = new Browsochrones({webpack: true});
     this.bs2 = new Browsochrones({webpack: true});
   }
 
-  componentDidMount() {
-    this.fetchMetadata();
-  }
 
   componentDidUpdate(nextState) {
     if (this.state.accessibility !== nextState.accessibility) {
@@ -218,188 +220,196 @@ class ScenarioMap extends React.Component {
     }
   }
 
-  async fetchMetadata() {
-    this.props.changeProgress(0.2);
-    let {preRequest} = this.state;
-    this.props.changeProgress(0.4);
-    Promise.all([
-      fetch(BASE_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          type: 'static-metadata',
-          graphId: TRANSPORT_NETWORK_ID,
-          workerVersion: WORKER_VERSION,
-          request: preRequest
-        })
-      }).then(res => {
-          console.log(res);
-          this.props.changeProgress(0.6);
-          return res.json()
-        }
-      ),
-      fetch(BASE_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          type: 'static-stop-trees',
-          graphId: TRANSPORT_NETWORK_ID,
-          workerVersion: WORKER_VERSION,
-          request: preRequest
-        })
-      }).then(res => {
-        console.log(res);
-        return res.arrayBuffer()
-      }),
-      fetch(GRID_URL).then(res => {
-        console.log(res);
-        this.props.changeProgress(0.7);
-        return res.arrayBuffer()
-      })
-    ])
-      .then(([metadata, stopTrees, grid]) => {
-        Promise.all([
-          this.bs2.setQuery(metadata),
-          this.bs.setQuery(metadata),
-
-          this.bs2.setStopTrees(stopTrees.slice(0)),
-          this.bs.setStopTrees(stopTrees.slice(0)),
-
-          this.bs2.setTransitiveNetwork(metadata.transitiveData),
-          this.bs.setTransitiveNetwork(metadata.transitiveData),
-
-          this.bs2.putGrid({id: 'jobs', grid: grid}),
-          this.bs.putGrid({id: 'jobs', grid: grid}),
-        ]).then(() => {
-            console.log("done fetch");
-            this.props.changeProgress(1);
-            this.setState({...this.state, loaded: true});
-          }
-        )
-      })
-  };
 
   moveOrigin(e) {
     if (this.props.isCompareMode) {
-      let origin = e.target.getLatLng();
-      console.log(origin);
-      let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
-      this.setState({
-        ...this.state,
-        originGrid: {x, y}
-      });
-
-      let {staticRequest, isochroneCutoff,} = this.state;
-
-      this.setState({
-        ...this.state,
-        origin,
-        isochrone2: null,
-        transitive2: null,
-        inVehicleTravelTime2: null,
-        travelTime2: null,
-        waitTime2: null,
-        accessibility2: null
-      });
+      // let origin = e.target.getLatLng();
+      // console.log(origin);
+      // let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
+      // this.setState({
+      //   ...this.state,
+      //   originGrid: {x, y}
+      // });
+      //
+      // let {staticRequest, isochroneCutoff,} = this.state;
+      //
+      // this.setState({
+      //   ...this.state,
+      //   origin,
+      //   isochrone2: null,
+      //   transitive2: null,
+      //   inVehicleTravelTime2: null,
+      //   travelTime2: null,
+      //   waitTime2: null,
+      //   accessibility2: null
+      // });
 
       fetch(BASE_URL, {
         method: 'POST',
-        body: JSON.stringify({
-          type: 'static',
-          request: staticRequest,
-          workerVersion: WORKER_VERSION,
-          graphId: TRANSPORT_NETWORK_ID,
-          x,
-          y
-        })
-      }).then(res => res.arrayBuffer())
-        .then(async (buff) => {
-          console.log("generate surface");
-          await this.bs2.setOrigin({data: buff, point: {x, y}});
-          await this.bs2.generateSurface({gridId: 'jobs'});
-          let {isochrone2, accessibility2} = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
+        headers: new Headers({
+          "Content-Type": "application/json",
+          "Authorization": API_KEY,
+        }),
+        body: JSON.stringify(
+          {
+            "date": "2017-12-08",
+            "fromTime": 25200,
+            "toTime": 32400,
+            "accessModes": "WALK",
+            "directModes": "WALK",
+            "egressModes": "WALK",
+            "transitModes": "BUS,TRAM,RAIL,SUBWAY",
+            "walkSpeed": 1.3888888888888888,
+            "bikeSpeed": 4.166666666666667,
+            "monteCarloDraws": 200,
+            "maxRides": 4,
+            "fromLat": 29.98646043083785,
+            "fromLon": -90.13526916503908,
+            "workerVersion": "v3.2.0",
+            "projectId": "5a29eca1896fd005dc77a631",
+            "variantIndex": 0
+          }
+        )
+      }).then(res => console.log(res))
 
-
-          console.log("done isochrone and accessibility");
-          this.props.doneCompareScenario(" ");
-
-          this.setState({
-            ...this.state,
-            isochrone2,
-            key2: uuid.v4(),
-            origin,
-            accessibility2,
-            transitive2: null,
-            inVehicleTravelTime2: null,
-            travelTime2: null,
-            waitTime2: null
-          })
-        })
 
     }
 
 
-    let origin = e.target.getLatLng();
-    console.log(origin);
-
-    let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
-
-    console.log({x, y});
-    let {staticRequestBase, isochroneCutoff} = this.state;
-    this.setState({
-      ...this.state,
-      originGrid: {x, y}
-    });
-
-    this.setState({
-      ...this.state,
-      origin,
-      isochrone: null,
-      transitive: null,
-      inVehicleTravelTime: null,
-      travelTime: null,
-      waitTime: null,
-      accessibility: null
-    });
+    // let origin = e.target.getLatLng();
+    // console.log(origin);
+    //
+    // let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
+    //
+    // console.log({x, y});
+    // let {staticRequestBase, isochroneCutoff} = this.state;
+    // this.setState({
+    //   ...this.state,
+    //   originGrid: {x, y}
+    // });
+    //
+    // this.setState({
+    //   ...this.state,
+    //   origin,
+    //   isochrone: null,
+    //   transitive: null,
+    //   inVehicleTravelTime: null,
+    //   travelTime: null,
+    //   waitTime: null,
+    //   accessibility: null
+    // });
 
     this.props.changeProgress(0.2);
 
-    fetch(BASE_URL, {
+    fetch("http://localhost:8000/api", {
       method: 'POST',
-      body: JSON.stringify({
-        type: 'static',
-        request: staticRequestBase,
-        workerVersion: WORKER_VERSION,
-        graphId: TRANSPORT_NETWORK_ID,
-        x,
-        y
-      })
-    }).then(res => res.arrayBuffer())
-      .then(async (buff) => {
-        console.log("generate surface");
-        this.props.changeProgress(0.6);
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          "date": "2017-12-08",
+          "fromTime": 25200,
+          "toTime": 32400,
+          "accessModes": "WALK",
+          "directModes": "WALK",
+          "egressModes": "WALK",
+          "transitModes": "BUS,TRAM,RAIL,SUBWAY",
+          "walkSpeed": 1.3888888888888888,
+          "bikeSpeed": 4.166666666666667,
+          "monteCarloDraws": 200,
+          "maxRides": 4,
+          "fromLat": 29.98646043083785,
+          "fromLon": -90.13526916503908,
+          "workerVersion": "v3.2.0",
+          "projectId": "5a29eca1896fd005dc77a631",
+          "variantIndex": 0
+        }
+      )
+    })
+      .then(res => res.arrayBuffer())
+      .then(buff => console.log(this.responseToSurface(buff)))
 
-        await this.bs.setOrigin({data: buff, point: {x, y}});
-        await this.bs.generateSurface({gridId: 'jobs'});
-        let {isochrone, accessibility} = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
-
-        this.props.changeProgress(0.9);
-
-        console.log("done isochrone and accessibility");
-        this.props.doneOneScenario(" ");
-
-        this.setState({
-          ...this.state,
-          isochrone,
-          key: uuid.v4(),
-          origin,
-          accessibility,
-          transitive: null,
-          inVehicleTravelTime: null,
-          travelTime: null,
-          waitTime: null
-        });
-        this.props.changeProgress(1);
-      });
   };
+
+  intToString (val) {
+    return (
+      String.fromCharCode(val & 0xff) +
+      String.fromCharCode((val >> 8) & 0xff) +
+      String.fromCharCode((val >> 16) & 0xff) +
+      String.fromCharCode((val >> 24) & 0xff)
+    )
+  }
+
+  responseToSurface (response) {
+    if (response[0] && response[0].title) {
+      // this is a list of errors from the backend
+      return {
+        errors: response,
+        warnings: []
+      }
+    } else {
+      // First read the header to figure out how big the binary portion is, then
+      // read the full binary portion, then read the sidecar metadata at the end.
+      const header = new Int32Array(response, 0, SURFACE_HEADER_LENGTH);
+      console.log(this.intToString(header[0]) + this.intToString(header[1]));
+      console.log(header);
+      // validate header and version
+      if (this.intToString(header[0]) + this.intToString(header[1]) !== SURFACE_HEADER_TITLE) {
+        throw new Error('Invalid header in travel time surface')
+      }
+      if (header[2] !== 0) {
+        throw new Error(`Unsupported version ${header[2]} of travel time surface`)
+      }
+      const zoom = header[3];
+      const west = header[4];
+      const north = header[5];
+      const width = header[6];
+      const height = header[7];
+      const nSamples = header[8];
+
+      // 9 ints of header, each four bytes wide
+      const data = new Int32Array(
+        response,
+        SURFACE_HEADER_LENGTH * 4,
+        width * height * nSamples
+      );
+
+      // de delta code data
+      for (let y = 0, pixel = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          // pixels are delta coded individually
+          for (let sample = 0, val = 0; sample < nSamples; sample++, pixel++) {
+            data[pixel] = val += data[pixel]
+          }
+        }
+      }
+
+      // read metadata
+      // TODO cross browser compatibility
+      const decoder = new TextDecoder('utf-8') // utf-8 is Jackson default
+      const rawMetadata = new Uint8Array(
+        response,
+        (SURFACE_HEADER_LENGTH + width * height * nSamples) * 4
+      );
+      const metadata = JSON.parse(decoder.decode(rawMetadata));
+
+      return {
+        zoom,
+        west,
+        north,
+        width,
+        height,
+        nSamples,
+        errors: [], // no errors - we got a result
+        warnings: metadata.projectApplicationWarnings || [],
+        get (x: number, y: number) {
+          const index1d = (y * width + x) * nSamples
+          return data.slice(index1d, index1d + nSamples)
+        }
+      }
+    }
+  }
 
   updateScneario() {
     if (this.props.isCompareMode) {

@@ -83,26 +83,9 @@ export const INIT_DESTINATION = [29.951065, -90.078533];
 export const WORKER_VERSION = 'v2.4.0';
 export const TRANSPORT_NETWORK_ID = "43fd7623769a4419a7ab05937e7dd399";
 
-export const BASE_URL = "http://coaxs.mit.edu/enqueue/single";
+export const BASE_URL = "https://analysis.conveyal.com/api/analysis";
 export const AUTH_URL = "";
 export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAw_totjobs.grid";
-
-//Service Editor
-//Running Time (add more modification function)
-// export const RunningTime = true;
-// export const RunningTimeMin = 0;
-// export const RunningTimeMax = 60;
-
-//Dwell Time
-// export const DwellTime = true;
-// export const DwellTimeMin = 0;
-// export const DwellTimeMax = 70;
-
-//Headway
-// export const Headway = true;
-// export const HeadwayMin = 0;
-// export const HeadwayMax = 80;
-
 
 
 

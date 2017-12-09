@@ -28,7 +28,7 @@ class Home extends React.Component {
         <Navbar/>
         <TopleftPanel/>
         <MapLegend/>
-        <LoadingPage progress={this.props.loadingProgress}/>
+        {/*<LoadingPage progress={this.props.loadingProgress}/>*/}
         <ScenarioMap/>
         <RightMainPanel/>
       </div>
