@@ -70,7 +70,7 @@ function scenarioStore(state = initialScenario, action) {
   }
 }
 
-function timeFilterStore(state = [], action) {
+function timeFilterStore(state = {currentTimeFilter: 30}, action) {
   switch (action.type) {
     case 'changeTimeFilter':
       return {

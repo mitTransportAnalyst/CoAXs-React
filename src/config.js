@@ -9,11 +9,6 @@
  */
 export const IntroTitle = "CoAXs | New Orleans";
 
-/** Introduction description on the left
- * @type {string} IntroDescription
- */
-// export const IntroDescription = "Showing door-to-door travel, with public transit Wednesday morning schedule as the baseline";
-
 //Map
 /** Center latitude of map
  * @type {number} MapLat
@@ -71,8 +66,6 @@ export const BaselineBuses = {
 };
 
 //Browsochrone configuration
-export const INIT_ORIGIN = [29.951065, -90.071533];
-export const INIT_DESTINATION = [29.951065, -90.078533];
 export const WORKER_VERSION = 'v2.4.0';
 export const TRANSPORT_NETWORK_ID = "43fd7623769a4419a7ab05937e7dd399";
 
@@ -81,7 +74,7 @@ export const AUTH_URL = "";
 export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAw_totjobs.grid";
 
 //Conveyal API request configurations
-export const baselineRequest = {
+export const BaselineRequest = {
   "date": "2017-12-08",
   "fromTime": 25200,
   "toTime": 32400,
@@ -100,7 +93,7 @@ export const baselineRequest = {
   "variantIndex": 0
 };
 
-export const newScenarioRequest = {
+export const NewScenarioRequest = {
   "date": "2017-12-08",
   "fromTime": 25200,
   "toTime": 32400,
@@ -119,5 +112,6 @@ export const newScenarioRequest = {
   "variantIndex": 0
 };
 
+export const GRID_REGION_ID = "5a29e7d3896fd005dc77a617";
 
-
+export const GRID_NAME = "Jobs_total";

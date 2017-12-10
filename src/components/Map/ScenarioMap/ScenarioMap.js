@@ -1,11 +1,18 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer} from 'react-leaflet';
-import {Map as LeafletMap} from 'leaflet';
-import jsolines from 'jsolines';
+import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl} from 'react-leaflet';
+import {
+  responseToSurface,
+  computeIsochrone,
+  computeSingleValuedSurface,
+  changeIsochroneCutoff,
+  computeAccessibility,
+  processGrid,
+} from "./utils"
 
 import s from "./ScenarioMap.css"
 
+//import busline Geojson
 import Geojson16A from '../../../Data/busline/16A.geojson'
 import Geojson16B from '../../../Data/busline/16B.geojson'
 import Geojson16C from '../../../Data/busline/16C.geojson'
@@ -18,11 +25,8 @@ import GeojsonE5B from '../../../Data/busline/E5B.geojson'
 import GeojsonJeT from '../../../Data/busline/JeT.geojson'
 import GeojsonNORTA from '../../../Data/busline/NORTA.geojson'
 
-import Baseline from '../../../Data/scenario/Baseline.json'
-
 import uuid from 'uuid'
 import Browsochrones from 'browsochrones'
-import debounce from 'debounce'
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -36,63 +40,66 @@ import {
   ZoomLevel,
   Tile,
   CorridorInfo,
-  INIT_ORIGIN,
-  INIT_DESTINATION,
   WORKER_VERSION,
   TRANSPORT_NETWORK_ID,
   BASE_URL,
   GRID_URL,
+  GRID_REGION_ID,
+  GRID_NAME,
+  BaselineRequest,
+  NewScenarioRequest,
 } from '../../../config'
-
-/** how often will we allow the isochrone to update, in milliseconds */
-const MAX_UPDATE_INTERVAL_MS = 50; // seems smooth on 2017 Macbook Pro
-const SURFACE_HEADER_LENGTH = 9;
-const SURFACE_HEADER_TITLE = 'ACCESSGR';
-const TRAVEL_TIME_PERCENTILES = [5, 25, 50, 75, 95];
-const POSITION = TRAVEL_TIME_PERCENTILES.indexOf(50)
-
 
 class ScenarioMap extends React.Component {
   constructor() {
     super();
     this.state = {
-      transitive: null,
+      surface: null,
+      grid: null,
+      singleValuedSurface: null,
       isochrone: null,
-      transitive2: null,
       isochrone2: null,
-      isochroneCutoff: 30,
       key: null,
       key2: null,
-      loaded: false,
       origin: {lat: MapLat, lng: MapLng},
-      destination: INIT_DESTINATION,
       originGrid: null,
+      opportunityValue: null,
+      opportunityValueForNew: null,
     };
 
     this.moveOrigin = this.moveOrigin.bind(this);
-    this.getIsochroneAndAccessibility = this.getIsochroneAndAccessibility.bind(this);
-    this.changeIsochroneCutoffDebounce = debounce(this.changeIsochroneCutoff, MAX_UPDATE_INTERVAL_MS);
-    this.changeIsochroneCutoff = this.changeIsochroneCutoff.bind(this);
     this.updateScneario = this.updateScneario.bind(this);
-    this.responseToSurface = this.responseToSurface.bind(this);
-    this.intToString = this.intToString.bind(this);
-    this.computeSingleValuedSurface = this.computeSingleValuedSurface.bind(this);
-    this.computeIsochrone = this.computeIsochrone.bind(this);
 
     this.bs = new Browsochrones({webpack: true});
     this.bs2 = new Browsochrones({webpack: true});
   }
 
-
-  componentDidUpdate(nextState) {
-    if (this.state.accessibility !== nextState.accessibility) {
-      this.props.changeGridNumber([this.state.accessibility, this.state.accessibility2])
-    }
+  componentDidMount() {
+    // fetch the opportunity grid file
+    fetch("http://localhost:8000/grid", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          gridRegionID: GRID_REGION_ID,
+          gridName: GRID_NAME,
+        }
+      )
+    })
+      .then(res => res.json())
+      .then(res => fetch(res.url, {method: 'GET',}))
+      .then(res => res.arrayBuffer())
+      .then(grid => this.setState({grid: processGrid(grid)}))
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.currentTimeFilter !== nextProps.currentTimeFilter && this.state.key !== null) {
-      this.changeIsochroneCutoff(nextProps.currentTimeFilter);
+      let isochrone = changeIsochroneCutoff(nextProps.currentTimeFilter, this.state.singleValuedSurface);
+      let opportunityValue = computeAccessibility(this.state.surface, this.props.currentTimeFilter, this.state.grid);
+      this.setState({isochrone, opportunityValue, key: uuid.v4()});
+      this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValueForNew]);
     }
 
     if (this.props.fireScenario !== nextProps.fireScenario) {
@@ -109,8 +116,6 @@ class ScenarioMap extends React.Component {
       this.setState({
         isochrone: null,
         isochrone2: null,
-        transitive: null,
-        transitive2: null,
         key: null,
         key2: null,
         accessibility: null,
@@ -126,82 +131,17 @@ class ScenarioMap extends React.Component {
 
   moveOrigin(e) {
     if (this.props.isCompareMode) {
-      // let origin = e.target.getLatLng();
-      // console.log(origin);
-      // let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
-      // this.setState({
-      //   ...this.state,
-      //   originGrid: {x, y}
-      // });
-      //
-      // let {staticRequest, isochroneCutoff,} = this.state;
-      //
-      // this.setState({
-      //   ...this.state,
-      //   origin,
-      //   isochrone2: null,
-      //   transitive2: null,
-      //   inVehicleTravelTime2: null,
-      //   travelTime2: null,
-      //   waitTime2: null,
-      //   accessibility2: null
-      // });
 
-      fetch(BASE_URL, {
-        method: 'POST',
-        headers: new Headers({
-          "Content-Type": "application/json",
-        }),
-        body: JSON.stringify(
-          {
-            "date": "2017-12-08",
-            "fromTime": 25200,
-            "toTime": 32400,
-            "accessModes": "WALK",
-            "directModes": "WALK",
-            "egressModes": "WALK",
-            "transitModes": "BUS,TRAM,RAIL,SUBWAY",
-            "walkSpeed": 1.3888888888888888,
-            "bikeSpeed": 4.166666666666667,
-            "monteCarloDraws": 200,
-            "maxRides": 4,
-            "fromLat": 29.98646043083785,
-            "fromLon": -90.13526916503908,
-            "workerVersion": "v3.2.0",
-            "projectId": "5a29eca1896fd005dc77a631",
-            "variantIndex": 0
-          }
-        )
-      }).then(res => console.log(res))
-
-
+      //TODO
     }
 
-
-    // let origin = e.target.getLatLng();
-    // console.log(origin);
-    //
-    // let {x, y} = this.bs.latLonToOriginPoint({lat: origin.lat, lon: origin.lng});
-    //
-    // console.log({x, y});
-    // let {staticRequestBase, isochroneCutoff} = this.state;
-    // this.setState({
-    //   ...this.state,
-    //   originGrid: {x, y}
-    // });
-    //
-    // this.setState({
-    //   ...this.state,
-    //   origin,
-    //   isochrone: null,
-    //   transitive: null,
-    //   inVehicleTravelTime: null,
-    //   travelTime: null,
-    //   waitTime: null,
-    //   accessibility: null
-    // });
-
-    this.props.changeProgress(0.2);
+    let origin = e.target.getLatLng();
+    this.setState({
+      ...this.state,
+      origin,
+      isochrone: null,
+      opportunityValue: null,
+    });
 
     fetch("http://localhost:8000/api", {
       method: 'POST',
@@ -210,149 +150,27 @@ class ScenarioMap extends React.Component {
       },
       body: JSON.stringify(
         {
-          "date": "2017-12-08",
-          "fromTime": 25200,
-          "toTime": 32400,
-          "accessModes": "WALK",
-          "directModes": "WALK",
-          "egressModes": "WALK",
-          "transitModes": "BUS,TRAM,RAIL,SUBWAY",
-          "walkSpeed": 1.3888888888888888,
-          "bikeSpeed": 4.166666666666667,
-          "monteCarloDraws": 200,
-          "maxRides": 4,
-          "fromLat": 29.98646043083785,
-          "fromLon": -90.13526916503908,
-          "workerVersion": "v3.2.0",
-          "projectId": "5a29eca1896fd005dc77a631",
-          "variantIndex": 0
+          ...BaselineRequest,
+          fromLat: origin.lat,
+          fromLon: origin.lng,
         }
       )
     })
       .then(res => res.arrayBuffer())
-      .then(buff => this.responseToSurface(buff))
-      .then(surface => this.computeSingleValuedSurface(surface))
-      .then(singleValuedSurface => this.setState({isochrone: this.computeIsochrone(singleValuedSurface, 20)}))
+      .then(buff => responseToSurface(buff))
+      .then(surface => {
+        let singleValuedSurface = computeSingleValuedSurface(surface);
+        let opportunityValue = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
+        this.setState({
+          surface,
+          singleValuedSurface,
+          isochrone: computeIsochrone(singleValuedSurface, 20),
+          opportunityValue,
+          key: uuid.v4()
+        });
+        this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValueForNew]);
+      })
   };
-
-  intToString (val) {
-    return (
-      String.fromCharCode(val & 0xff) +
-      String.fromCharCode((val >> 8) & 0xff) +
-      String.fromCharCode((val >> 16) & 0xff) +
-      String.fromCharCode((val >> 24) & 0xff)
-    )
-  }
-
-  responseToSurface (response) {
-    if (response[0] && response[0].title) {
-      // this is a list of errors from the backend
-      return {
-        errors: response,
-        warnings: []
-      }
-    } else {
-      // First read the header to figure out how big the binary portion is, then
-      // read the full binary portion, then read the sidecar metadata at the end.
-      const header = new Int32Array(response, 0, SURFACE_HEADER_LENGTH);
-      console.log(this.intToString(header[0]) + this.intToString(header[1]));
-      console.log(header);
-      // validate header and version
-      if (this.intToString(header[0]) + this.intToString(header[1]) !== SURFACE_HEADER_TITLE) {
-        throw new Error('Invalid header in travel time surface')
-      }
-      if (header[2] !== 0) {
-        throw new Error(`Unsupported version ${header[2]} of travel time surface`)
-      }
-      const zoom = header[3];
-      const west = header[4];
-      const north = header[5];
-      const width = header[6];
-      const height = header[7];
-      const nSamples = header[8];
-
-      // 9 ints of header, each four bytes wide
-      const data = new Int32Array(
-        response,
-        SURFACE_HEADER_LENGTH * 4,
-        width * height * nSamples
-      );
-
-      // de delta code data
-      for (let y = 0, pixel = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          // pixels are delta coded individually
-          for (let sample = 0, val = 0; sample < nSamples; sample++, pixel++) {
-            data[pixel] = val += data[pixel]
-          }
-        }
-      }
-
-      // read metadata
-      // TODO cross browser compatibility
-      const decoder = new TextDecoder('utf-8') // utf-8 is Jackson default
-      const rawMetadata = new Uint8Array(
-        response,
-        (SURFACE_HEADER_LENGTH + width * height * nSamples) * 4
-      );
-      const metadata = JSON.parse(decoder.decode(rawMetadata));
-
-      return {
-        zoom,
-        west,
-        north,
-        width,
-        height,
-        nSamples,
-        errors: [], // no errors - we got a result
-        warnings: metadata.projectApplicationWarnings || [],
-        get (x: number, y: number) {
-          const index1d = (y * width + x) * nSamples
-          return data.slice(index1d, index1d + nSamples)
-        }
-      }
-    }
-  }
-
-  computeSingleValuedSurface (travelTimeSurface) {
-    if (travelTimeSurface == null) return null
-    const surface = new Uint8Array(
-      travelTimeSurface.width * travelTimeSurface.height
-    )
-
-    // y on outside, loop in order, hope the CPU figures this out and prefetches
-    for (let y = 0; y < travelTimeSurface.height; y++) {
-      for (let x = 0; x < travelTimeSurface.width; x++) {
-        const index = y * travelTimeSurface.width + x
-        surface[index] = travelTimeSurface.get(x, y)[POSITION]
-      }
-    }
-
-    return {
-      ...travelTimeSurface,
-      surface
-    }
-  }
-
-  computeIsochrone (singleValuedSurface, cutoff) {
-    if (singleValuedSurface == null) return null;
-
-    const {surface, width, height, west, north, zoom} = singleValuedSurface;
-
-    return jsolines({
-      surface,
-      width,
-      height,
-      cutoff,
-      project: ([x, y]) => {
-        const {lat, lng} = LeafletMap.prototype.unproject(
-          [x + west, y + north],
-          zoom
-        )
-        return [lng, lat]
-      }
-    })
-  }
 
   updateScneario() {
     if (this.props.isCompareMode) {
@@ -364,7 +182,6 @@ class ScenarioMap extends React.Component {
         ...this.state,
         origin,
         isochrone2: null,
-        transitive2: null,
         inVehicleTravelTime2: null,
         travelTime2: null,
         waitTime2: null,
@@ -397,7 +214,6 @@ class ScenarioMap extends React.Component {
             key2: uuid.v4(),
             origin,
             accessibility2,
-            transitive2: null,
             inVehicleTravelTime2: null,
             travelTime2: null,
             waitTime2: null
@@ -413,7 +229,6 @@ class ScenarioMap extends React.Component {
       ...this.state,
       origin,
       isochrone: null,
-      transitive: null,
       inVehicleTravelTime: null,
       travelTime: null,
       waitTime: null,
@@ -452,7 +267,6 @@ class ScenarioMap extends React.Component {
           key: uuid.v4(),
           origin,
           accessibility,
-          transitive: null,
           inVehicleTravelTime: null,
           travelTime: null,
           waitTime: null
@@ -463,37 +277,6 @@ class ScenarioMap extends React.Component {
 
 
   };
-
-  async changeIsochroneCutoff(isochroneCutoff) {
-    isochroneCutoff = parseInt(isochroneCutoff);
-
-    if (this.props.isCompareMode && this.state.isochrone2 !== null) {
-      var data = await this.getIsochroneAndAccessibility(isochroneCutoff, true);
-    }
-    var data1 = await this.getIsochroneAndAccessibility(isochroneCutoff, false);
-    this.setState({...this.state, ...data, ...data1, isochroneCutoff})
-  };
-
-  /** get an isochrone and an accessibility figure */
-  async getIsochroneAndAccessibility(isochroneCutoff, isBased) {
-    // console.log(isochroneCutoff, isBased);
-    if (isBased) {
-      let [accessibility2, isochrone2] = await Promise.all([
-        this.bs2.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
-        this.bs2.getIsochrone({cutoff: isochroneCutoff})
-      ]);
-      return {accessibility2, isochrone2, key2: uuid.v4()}
-    }
-
-    else {
-      let [accessibility, isochrone] = await Promise.all([
-        this.bs.getAccessibilityForGrid({gridId: 'jobs', cutoff: isochroneCutoff}),
-        this.bs.getIsochrone({cutoff: isochroneCutoff})
-      ]);
-      return {accessibility, isochrone, key: uuid.v4()}
-    }
-
-  }
 
   render() {
     let {isochrone, isochrone2, key, key2, origin} = this.state;
