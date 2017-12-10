@@ -1,7 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Map, Marker, Popup, TileLayer, GeoJson, ZoomControl, MapLayer} from 'react-leaflet';
-import Leaflet from 'leaflet'
+import {Map as LeafletMap} from 'leaflet';
+import jsolines from 'jsolines';
 
 import s from "./ScenarioMap.css"
 
@@ -35,30 +36,26 @@ import {
   ZoomLevel,
   Tile,
   CorridorInfo,
-  isPTP,
   INIT_ORIGIN,
   INIT_DESTINATION,
   WORKER_VERSION,
-  API_KEY_ID,
-  API_KEY_SECRET,
   TRANSPORT_NETWORK_ID,
   BASE_URL,
-  AUTH_URL,
   GRID_URL,
-  API_KEY,
 } from '../../../config'
 
 /** how often will we allow the isochrone to update, in milliseconds */
 const MAX_UPDATE_INTERVAL_MS = 50; // seems smooth on 2017 Macbook Pro
 const SURFACE_HEADER_LENGTH = 9;
 const SURFACE_HEADER_TITLE = 'ACCESSGR';
+const TRAVEL_TIME_PERCENTILES = [5, 25, 50, 75, 95];
+const POSITION = TRAVEL_TIME_PERCENTILES.indexOf(50)
 
 
 class ScenarioMap extends React.Component {
   constructor() {
     super();
     this.state = {
-      isPTP: false,
       transitive: null,
       isochrone: null,
       transitive2: null,
@@ -70,102 +67,6 @@ class ScenarioMap extends React.Component {
       origin: {lat: MapLat, lng: MapLng},
       destination: INIT_DESTINATION,
       originGrid: null,
-
-      preRequest: {
-        jobId: uuid.v4(),
-        transportNetworkId: TRANSPORT_NETWORK_ID,
-        request: {
-          date: '2017-04-18',
-          fromTime: 25200,
-          toTime: 32400,
-          accessModes: 'WALK',
-          directModes: 'WALK',
-          egressModes: 'WALK',
-          transitModes: 'TRANSIT',
-          walkSpeed: 1.11,
-          bikeSpeed: 4.1,
-          carSpeed: 20,
-          streetTime: 90,
-          maxWalkTime: 60,
-          maxBikeTime: 20,
-          maxCarTime: 45,
-          minBikeTime: 10,
-          minCarTime: 10,
-          suboptimalMinutes: 5,
-          reachabilityThreshold: 0,
-          bikeSafe: 1,
-          bikeSlope: 1,
-          bikeTime: 1,
-          maxRides: 8,
-          bikeTrafficStress: 4,
-          monteCarloDraws: 720,
-          scenario: {id: 999},
-        }
-      },
-      staticRequest: {
-        jobId: uuid.v4(),
-        transportNetworkId: TRANSPORT_NETWORK_ID,
-        request: {
-          date: '2017-04-18',
-          fromTime: 25200,
-          toTime: 32400,
-          accessModes: 'WALK',
-          directModes: 'WALK',
-          egressModes: 'WALK',
-          transitModes: 'TRANSIT',
-          walkSpeed: 1.11,
-          bikeSpeed: 4.1,
-          carSpeed: 20,
-          streetTime: 90,
-          maxWalkTime: 60,
-          maxBikeTime: 20,
-          maxCarTime: 45,
-          minBikeTime: 10,
-          minCarTime: 10,
-          suboptimalMinutes: 5,
-          reachabilityThreshold: 0,
-          bikeSafe: 1,
-          bikeSlope: 1,
-          bikeTime: 1,
-          maxRides: 8,
-          bikeTrafficStress: 4,
-          monteCarloDraws: 720,
-          scenario: {
-            id: uuid.v4(), modifications: Baseline.modifications
-          },
-        }
-      },
-      staticRequestBase: {
-        jobId: uuid.v4(),
-        transportNetworkId: TRANSPORT_NETWORK_ID,
-        request: {
-          date: '2017-04-18',
-          fromTime: 25200,
-          toTime: 32400,
-          accessModes: 'WALK',
-          directModes: 'WALK',
-          egressModes: 'WALK',
-          transitModes: 'TRANSIT',
-          walkSpeed: 1.11,
-          bikeSpeed: 4.1,
-          carSpeed: 20,
-          streetTime: 90,
-          maxWalkTime: 60,
-          maxBikeTime: 20,
-          maxCarTime: 45,
-          minBikeTime: 10,
-          minCarTime: 10,
-          suboptimalMinutes: 5,
-          reachabilityThreshold: 0,
-          bikeSafe: 1,
-          bikeSlope: 1,
-          bikeTime: 1,
-          maxRides: 8,
-          bikeTrafficStress: 4,
-          monteCarloDraws: 720,
-          scenario: {id: uuid.v4(), modifications: Baseline.modifications},
-        }
-      },
     };
 
     this.moveOrigin = this.moveOrigin.bind(this);
@@ -175,6 +76,8 @@ class ScenarioMap extends React.Component {
     this.updateScneario = this.updateScneario.bind(this);
     this.responseToSurface = this.responseToSurface.bind(this);
     this.intToString = this.intToString.bind(this);
+    this.computeSingleValuedSurface = this.computeSingleValuedSurface.bind(this);
+    this.computeIsochrone = this.computeIsochrone.bind(this);
 
     this.bs = new Browsochrones({webpack: true});
     this.bs2 = new Browsochrones({webpack: true});
@@ -248,7 +151,6 @@ class ScenarioMap extends React.Component {
         method: 'POST',
         headers: new Headers({
           "Content-Type": "application/json",
-          "Authorization": API_KEY,
         }),
         body: JSON.stringify(
           {
@@ -328,8 +230,9 @@ class ScenarioMap extends React.Component {
       )
     })
       .then(res => res.arrayBuffer())
-      .then(buff => console.log(this.responseToSurface(buff)))
-
+      .then(buff => this.responseToSurface(buff))
+      .then(surface => this.computeSingleValuedSurface(surface))
+      .then(singleValuedSurface => this.setState({isochrone: this.computeIsochrone(singleValuedSurface, 20)}))
   };
 
   intToString (val) {
@@ -409,6 +312,46 @@ class ScenarioMap extends React.Component {
         }
       }
     }
+  }
+
+  computeSingleValuedSurface (travelTimeSurface) {
+    if (travelTimeSurface == null) return null
+    const surface = new Uint8Array(
+      travelTimeSurface.width * travelTimeSurface.height
+    )
+
+    // y on outside, loop in order, hope the CPU figures this out and prefetches
+    for (let y = 0; y < travelTimeSurface.height; y++) {
+      for (let x = 0; x < travelTimeSurface.width; x++) {
+        const index = y * travelTimeSurface.width + x
+        surface[index] = travelTimeSurface.get(x, y)[POSITION]
+      }
+    }
+
+    return {
+      ...travelTimeSurface,
+      surface
+    }
+  }
+
+  computeIsochrone (singleValuedSurface, cutoff) {
+    if (singleValuedSurface == null) return null;
+
+    const {surface, width, height, west, north, zoom} = singleValuedSurface;
+
+    return jsolines({
+      surface,
+      width,
+      height,
+      cutoff,
+      project: ([x, y]) => {
+        const {lat, lng} = LeafletMap.prototype.unproject(
+          [x + west, y + north],
+          zoom
+        )
+        return [lng, lat]
+      }
+    })
   }
 
   updateScneario() {
@@ -558,7 +501,7 @@ class ScenarioMap extends React.Component {
 
     return (
       <div className={s.map}>
-        <Map center={position} zoom={12} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
+        <Map center={position} zoom={ZoomLevel} detectRetina zoomControl={false} ref='map' minZoom={12} maxZoom={15}>
           <ZoomControl position="bottomleft"/>
           <TileLayer
             url={Tile}

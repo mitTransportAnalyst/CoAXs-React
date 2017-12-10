@@ -70,13 +70,6 @@ export const BaselineBuses = {
   C: 3,
 };
 
-//For online survey contact123
-export const FormControlID = {
-  ptpEntry: "control28805034",
-  singleEntry: "control28770612",
-  exit: "control28766436",
-};
-
 //Browsochrone configuration
 export const INIT_ORIGIN = [29.951065, -90.071533];
 export const INIT_DESTINATION = [29.951065, -90.078533];
@@ -86,6 +79,45 @@ export const TRANSPORT_NETWORK_ID = "43fd7623769a4419a7ab05937e7dd399";
 export const BASE_URL = "https://analysis.conveyal.com/api/analysis";
 export const AUTH_URL = "";
 export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAw_totjobs.grid";
+
+//Conveyal API request configurations
+export const baselineRequest = {
+  "date": "2017-12-08",
+  "fromTime": 25200,
+  "toTime": 32400,
+  "accessModes": "WALK",
+  "directModes": "WALK",
+  "egressModes": "WALK",
+  "transitModes": "BUS,TRAM,RAIL,SUBWAY",
+  "walkSpeed": 1.3888888888888888,
+  "bikeSpeed": 4.166666666666667,
+  "monteCarloDraws": 200,
+  "maxRides": 4,
+  "fromLat": 29.98646043083785,
+  "fromLon": -90.13526916503908,
+  "workerVersion": "v3.2.0",
+  "projectId": "5a29eca1896fd005dc77a631",
+  "variantIndex": 0
+};
+
+export const newScenarioRequest = {
+  "date": "2017-12-08",
+  "fromTime": 25200,
+  "toTime": 32400,
+  "accessModes": "WALK",
+  "directModes": "WALK",
+  "egressModes": "WALK",
+  "transitModes": "BUS,TRAM,RAIL,SUBWAY",
+  "walkSpeed": 1.3888888888888888,
+  "bikeSpeed": 4.166666666666667,
+  "monteCarloDraws": 200,
+  "maxRides": 4,
+  "fromLat": 29.98646043083785,
+  "fromLon": -90.13526916503908,
+  "workerVersion": "v3.2.0",
+  "projectId": "5a29eca1896fd005dc77a631",
+  "variantIndex": 0
+};
 
 
 
