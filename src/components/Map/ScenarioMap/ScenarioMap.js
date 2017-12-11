@@ -74,6 +74,7 @@ class ScenarioMap extends React.Component {
 
   componentDidMount() {
     // fetch the opportunity grid file first
+    this.props.changeProgress(0.2);
     fetch(GRID_URL, {
       method: 'POST',
       headers: {
@@ -86,10 +87,19 @@ class ScenarioMap extends React.Component {
         }
       )
     })
-      .then(res => res.json())
+      .then(res => {
+        this.props.changeProgress(0.6);
+        return res.json();
+      })
       .then(res => fetch(res.url, {method: 'GET',}))
-      .then(res => res.arrayBuffer())
-      .then(grid => this.setState({grid: processGrid(grid)}));
+      .then(res => {
+        this.props.changeProgress(0.8);
+        return res.arrayBuffer();
+      })
+      .then(grid => {
+        this.setState({grid: processGrid(grid)});
+        this.props.changeProgress(1);
+      });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -139,23 +149,28 @@ class ScenarioMap extends React.Component {
     });
 
     if (this.props.isCompareMode) {
+      this.props.changeProgress(0.2);
       updateModification(PROJECT_ID, this.props.headwayStore)
-        .then(() => fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(
-            {
-              ...NewScenarioRequest,
-              fromLat: origin.lat,
-              fromLon: origin.lng,
-            }
-          )
-        }))
+        .then(() => {
+          this.props.changeProgress(0.4);
+          return fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(
+              {
+                ...NewScenarioRequest,
+                fromLat: origin.lat,
+                fromLon: origin.lng,
+              }
+            )
+          })
+        })
         .then(res => res.arrayBuffer())
         .then(buff => responseToSurface(buff))
         .then(surface => {
+          this.props.changeProgress(0.7);
           let singleValuedSurface2 = computeSingleValuedSurface(surface);
           let opportunityValue2 = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
           this.setState({
@@ -166,6 +181,7 @@ class ScenarioMap extends React.Component {
             key2: uuid.v4()
           });
           this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
+          this.props.changeProgress(1);
         })
     }
 
@@ -211,23 +227,28 @@ class ScenarioMap extends React.Component {
     });
 
     if (this.props.isCompareMode) {
+      this.props.changeProgress(0.2);
       updateModification(PROJECT_ID, this.props.headwayStore)
-        .then(() => fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(
-            {
-              ...NewScenarioRequest,
-              fromLat: origin.lat,
-              fromLon: origin.lng,
-            }
-          )
-        }))
+        .then(() => {
+          this.props.changeProgress(0.4);
+          return fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(
+              {
+                ...NewScenarioRequest,
+                fromLat: origin.lat,
+                fromLon: origin.lng,
+              }
+            )
+          })
+        })
         .then(res => res.arrayBuffer())
         .then(buff => responseToSurface(buff))
         .then(surface => {
+          this.props.changeProgress(0.7);
           let singleValuedSurface2 = computeSingleValuedSurface(surface);
           let opportunityValue2 = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
           this.setState({
@@ -238,6 +259,7 @@ class ScenarioMap extends React.Component {
             key2: uuid.v4()
           });
           this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
+          this.props.changeProgress(1);
         })
     }
 
