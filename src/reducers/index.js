@@ -26,15 +26,15 @@ const initialScenario = [{
   },
 }, {
   A: {
-    headway: 0,
+    headway: 30,
     alternative: "16A"
   },
   B: {
-    headway: 0,
+    headway: 24,
     alternative: "E3A"
   },
   C: {
-    headway: 0,
+    headway: 27,
     alternative: "E5A"
   },
 }];
@@ -88,17 +88,6 @@ function GridNumberStore(state = [], action) {
       return {
         "gridNumberBase": action.res[0],
         "gridNumberNew": action.res[1],
-      };
-    default:
-      return state
-  }
-}
-
-function fireUpdate(state = [], action) {
-  switch (action.type) {
-    case 'fireUpdate':
-      return {
-        "fireScenario": action.res,
       };
     default:
       return state
@@ -216,7 +205,6 @@ export const reducers = combineReducers({
   scenarioStore,
   timeFilterStore,
   GridNumberStore,
-  fireUpdate,
   updateButtonState,
   isCompare,
   navState,

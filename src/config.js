@@ -2,6 +2,7 @@
  * Created by xinzheng on 1/21/17.
  */
 
+const ENVIRONMENT = "PROD";    //"DEV" for development mode. change to "PROD" when you build and push to Heroku
 
 //Intro panel
 /** Introduction title on the left
@@ -65,15 +66,12 @@ export const BaselineBuses = {
   C: 3,
 };
 
-//Browsochrone configuration
-export const WORKER_VERSION = 'v2.4.0';
-export const TRANSPORT_NETWORK_ID = "43fd7623769a4419a7ab05937e7dd399";
-
-export const BASE_URL = "https://analysis.conveyal.com/api/analysis";
-export const AUTH_URL = "";
-export const GRID_URL = "https://s3.amazonaws.com/coaxsus/NOLA/NOLAw_totjobs.grid";
-
 //Conveyal API request configurations
+export const API_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/api" : "/api";
+export const GRID_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/grid" : "/grid";
+export const GET_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/getModifications" : "/getModifications";
+export const UPDATE_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/updateModifications" : "/updateModifications";
+
 export const BaselineRequest = {
   "date": "2017-12-08",
   "fromTime": 25200,
@@ -90,7 +88,7 @@ export const BaselineRequest = {
   "fromLon": -90.13526916503908,
   "workerVersion": "v3.2.0",
   "projectId": "5a29eca1896fd005dc77a631",
-  "variantIndex": 0
+  "variantIndex": -1,
 };
 
 export const NewScenarioRequest = {
@@ -109,9 +107,11 @@ export const NewScenarioRequest = {
   "fromLon": -90.13526916503908,
   "workerVersion": "v3.2.0",
   "projectId": "5a29eca1896fd005dc77a631",
-  "variantIndex": 0
+  "variantIndex": 0,
 };
 
 export const GRID_REGION_ID = "5a29e7d3896fd005dc77a617";
 
 export const GRID_NAME = "Jobs_total";
+
+export const PROJECT_ID = "5a29eca1896fd005dc77a631";

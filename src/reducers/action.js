@@ -42,13 +42,6 @@ export function saveScenario(res) {
   }
 }
 
-export function fireUpdate(res) {
-  return {
-    type: "fireUpdate",
-    res
-  }
-}
-
 export function pushUpdateButton(res) {
   return {
     type: "pushUpdateButton",

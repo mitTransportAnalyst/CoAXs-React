@@ -1,12 +1,17 @@
 import {Map as LeafletMap} from 'leaflet';
 import jsolines from 'jsolines';
+//import configuration file
+import {
+  GET_MODIFICATIONS_URL,
+  UPDATE_MODIFICATIONS_URL,
+} from '../../../config'
 
 const SURFACE_HEADER_LENGTH = 9;
 const SURFACE_HEADER_TITLE = 'ACCESSGR';
 const TRAVEL_TIME_PERCENTILES = [5, 25, 50, 75, 95];
 const POSITION = TRAVEL_TIME_PERCENTILES.indexOf(50);
 
-export function responseToSurface (response) {
+export function responseToSurface(response) {
   if (response[0] && response[0].title) {
     // this is a list of errors from the backend
     return {
@@ -65,7 +70,7 @@ export function responseToSurface (response) {
       nSamples,
       errors: [], // no errors - we got a result
       warnings: metadata.projectApplicationWarnings || [],
-      get (x, y) {
+      get(x, y) {
         const index1d = (y * width + x) * nSamples;
         return data.slice(index1d, index1d + nSamples)
       }
@@ -76,7 +81,7 @@ export function responseToSurface (response) {
 /**
  * Convert a four-byte int to a four-char string
  */
-function intToString (val) {
+function intToString(val) {
   return (
     String.fromCharCode(val & 0xff) +
     String.fromCharCode((val >> 8) & 0xff) +
@@ -89,7 +94,7 @@ function intToString (val) {
  * SingleValuedSurface, width, height all come from selector defined below and
  * thus must be passed in one argument.
  */
-export function computeIsochrone (singleValuedSurface, cutoff) {
+export function computeIsochrone(singleValuedSurface, cutoff) {
   if (singleValuedSurface == null) return null;
 
   const {surface, width, height, west, north, zoom} = singleValuedSurface;
@@ -115,7 +120,7 @@ export function computeIsochrone (singleValuedSurface, cutoff) {
  * can be saved when the isochrone cutoff changes when put in a separate
  * selector, memoization will handle this for us.
  */
-export function computeSingleValuedSurface (travelTimeSurface) {
+export function computeSingleValuedSurface(travelTimeSurface) {
   if (travelTimeSurface == null) return null;
   const surface = new Uint8Array(
     travelTimeSurface.width * travelTimeSurface.height
@@ -141,11 +146,9 @@ export function changeIsochroneCutoff(isochroneCutoff, singleValuedSurface) {
   return computeIsochrone(singleValuedSurface, isochroneCutoff);
 }
 
-export function computeAccessibility (
-  travelTimeSurface,
-  isochroneCutoff,
-  opportunityDataset
-) {
+export function computeAccessibility(travelTimeSurface,
+                                     isochroneCutoff,
+                                     opportunityDataset) {
   if (travelTimeSurface == null || opportunityDataset == null || opportunityDataset == null) return null;
   let accessibility = 0
   // y on outside, loop in order, hope the CPU figures this out and prefetches
@@ -170,8 +173,7 @@ export function computeAccessibility (
   return accessibility
 }
 
-
-export function processGrid (data) {
+export function processGrid(data) {
   const array = new Int32Array(data, 4 * 5);
   const header = new Int32Array(data);
 
@@ -197,8 +199,46 @@ export function processGrid (data) {
     data: array,
     min,
     max,
-    contains (x, y) {
+    contains(x, y) {
       return x >= 0 && x < width && y >= 0 && y < height
     }
   }
+}
+
+// update modification
+export function updateModification(projectID, scenario) {
+  //fetch modifications in this project
+  return fetch(GET_MODIFICATIONS_URL, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(
+      {
+        projectID: projectID,
+      }
+    )
+  }).then(res => res.json())
+    .then(oldModifications => oldModifications.map(
+      oldModification => {
+        let updatedEntries = oldModification.entries.map(entry => {
+          return {...entry, headwaySecs: scenario[oldModification.name] * 60}
+        });
+        return {
+          ...oldModification, entries: updatedEntries,
+        }
+      }
+    )).then(newModifications => Promise.all(newModifications.map(newModification =>
+    fetch(UPDATE_MODIFICATIONS_URL, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          newModification,
+        }
+      )
+    })))
+  );
 }
