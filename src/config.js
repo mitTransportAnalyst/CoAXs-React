@@ -31,18 +31,20 @@ const ENVIRONMENT = "DEV";    //"DEV" for development mode. change to "PROD" whe
 /** Introduction title on the left
  * @type {string} IntroTitle
  */
-export const IntroTitle = "CoAXs | New Orleans";
+export const IntroTitle = "CoAXs | Pretoria";
 
 //Map
 /** Center latitude of map
  * @type {number} MapLat
  */
-export const MapLat = 29.971065;
+export const MapLat = -25.747096; //Pretoria
+// export const MapLat = 29.971065; //NOLA
 
 /** Center longitude of map
  * @type {number} MapLat
  */
-export const MapLng = -90.111533;
+export const MapLng = 28.228373; //Pretoria
+// export const MapLng = -90.111533; //NOLA
 
 /** zoom level of map
  * @type {number} ZoomLevel
@@ -54,11 +56,11 @@ export const ZoomLevel = 13;
  */
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
-export const GRID_REGION_ID = "5a29e7d3896fd005dc77a617";
+export const GRID_REGION_ID = "ae8ce7fb-3967-4910-af09-5cc93ecaf60e";
 
-export const GRID_NAME = "Jobs_total";
+export const GRID_NAME = "TZjobs_Tot_Jobs";//Get this from Convayal analysis, use the file name when click "download .grid file"
 
-export const PROJECT_ID = "5a29eca1896fd005dc77a631";
+export const PROJECT_ID = "5a730511896fd065902bb1f4";
 
 //Thiago - Network info
 /** Network info
