@@ -58,9 +58,9 @@ export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogr
 
 export const GRID_REGION_ID = "ae8ce7fb-3967-4910-af09-5cc93ecaf60e";
 
-export const GRID_NAME = "TZjobs_Tot_Jobs";//Get this from Convayal analysis, use the file name when click "download .grid file"
+export const GRID_NAME = "TZjobs_Tot_Jobs";//Get this from Conveyal analysis, use the file name when click "download .grid file"
 
-export const PROJECT_ID = "5a730511896fd065902bb1f4";
+export const PROJECT_ID = "5a9ea55c896fd02e4fd761c4";
 
 //Thiago - Network info
 /** Network info
