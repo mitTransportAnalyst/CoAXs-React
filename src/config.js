@@ -195,7 +195,7 @@ export const GET_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8
 export const UPDATE_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/updateModifications" : "/updateModifications";
 
 export const BaselineRequest = {
-  "date": "2017-12-08",
+  "date": "2018-03-06",
   "fromTime": 25200,
   "toTime": 32400,
   "accessModes": "WALK",
@@ -215,7 +215,7 @@ export const BaselineRequest = {
 };
 
 export const NewScenarioRequest = {
-  "date": "2017-12-08",
+  "date": "2018-03-06",
   "fromTime": 25200,
   "toTime": 32400,
   "accessModes": "WALK",
