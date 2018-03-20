@@ -13,33 +13,16 @@ const initialCorridor = {currentCor: "A"};
 const initialScenario = [{
   A: {
     headway: 0,
-    alternative: "16A"
-  },
-  B: {
-    headway: 0,
-    alternative: "E3A"
-
-  },
-  C: {
-    headway: 0,
-    alternative: "E5A"
+    alternative: "Existing"
   },
 }, {
   A: {
     headway: 30,
-    alternative: "16A"
-  },
-  B: {
-    headway: 24,
-    alternative: "E3A"
-  },
-  C: {
-    headway: 27,
-    alternative: "E5A"
+    alternative: "Existing"
   },
 }];
 
-const initialBuslineState = {A: "16A", B: "E3A", C: "E5A"};
+const initialBuslineState = {A: "Existing"};
 
 const initialNavState = {
   isdonePreSurvey: true,

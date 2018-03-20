@@ -33,7 +33,7 @@ app.post('/api', function (request, response) {
 app.post('/grid', function (request, response) {
   let gridRegionID = request.body.gridRegionID;
   let gridName = request.body.gridName;
-  console.log(process.env.API_TOKEN);
+  // console.log(process.env.API_TOKEN);
   fetch("https://analysis.conveyal.com/api/opportunities/" + gridRegionID + "/" + gridName, {
     method: 'GET',
     headers: {

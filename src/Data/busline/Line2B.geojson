@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "OBJECTID": 8, "Shape_Leng": 0.1497872366, "shape_id": "f694a300-7e55-4511-887f-ca904eb67f47", "route_id": "ROUTE_98af8393-34f1-421f-9b7a-203476777af8", "agency_id": "PTA_BRT_summit", "route_shor": "Line2B_ROW", "route_long": "Line2B_dedicated bus lane", "route_desc": "Line 2B with a dedicated bus lane.", "route_type": 3, "route_ty_1": "Bus", "route_url": null, "route_colo": null, "route_co_1": null, "route_text": null, "route_te_1": null, "frequency": 7, "speed": 25, "length_km": 17 }, "geometry": { "type": "LineString", "coordinates": [ [ 28.28484, -25.78523 ], [ 28.28563, -25.78373 ], [ 28.28035, -25.7826 ], [ 28.27531, -25.78054 ], [ 28.2707, -25.77756 ], [ 28.26748, -25.77416 ], [ 28.26344, -25.77106 ], [ 28.25827, -25.76721 ], [ 28.25525, -25.76245 ], [ 28.2511, -25.76158 ], [ 28.24279, -25.75942 ], [ 28.22948, -25.75644 ], [ 28.22359, -25.75572 ], [ 28.22948, -25.75644 ], [ 28.24279, -25.75942 ], [ 28.2511, -25.76158 ], [ 28.25529, -25.76233 ], [ 28.25827, -25.76721 ], [ 28.26344, -25.77106 ], [ 28.26782, -25.77427 ], [ 28.27091, -25.77782 ], [ 28.27531, -25.78054 ], [ 28.27782, -25.78166 ], [ 28.27739, -25.78382 ], [ 28.27675, -25.78626 ], [ 28.27984, -25.78711 ], [ 28.28336, -25.78814 ], [ 28.28484, -25.78523 ] ] } }
+]
+}

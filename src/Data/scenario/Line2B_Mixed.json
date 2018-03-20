@@ -1,0 +1,210 @@
+{
+	"description": "Pretoria_0307-Line2B_Mixed",
+	"feedChecksums": {
+		"8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00": 3494322689,
+		"8f05fb49-6600-441c-ac51-e4d1cdcd6ea8": 1925365423
+	},
+	"_id": 0,
+	"modifications": [
+		{
+			"_id": "5aa04021896fd02e4fd76375",
+			"name": "RemoveBaselineROW",
+			"nonce": "5aa0402a896fd02e4fd76378",
+			"createdAt": 1520451617976,
+			"updatedAt": 1520451626759,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				true
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_0d9297ba-4b5b-4b96-b1f0-059515bae1d6"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		},
+		{
+			"_id": "5aa04066896fd02e4fd76379",
+			"name": "RemoveBaselineROW1",
+			"nonce": "5aa0406b896fd02e4fd7637c",
+			"createdAt": 1520451686531,
+			"updatedAt": 1520451691751,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				true
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_b1e144a7-a169-4126-a9f9-5345e6d51cd6"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		},
+		{
+			"_id": "5aa0407e896fd02e4fd7637d",
+			"name": "RemoveBaselineROW2",
+			"nonce": "5aa04089896fd02e4fd7637f",
+			"createdAt": 1520451710690,
+			"updatedAt": 1520451721104,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				true
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_faf090b9-f8c5-42d9-baae-f053f4862f8b"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		},
+		{
+			"_id": "5aa040a8896fd02e4fd76382",
+			"name": "RemoveBaselineROW3",
+			"nonce": "5aa040b2896fd02e4fd76386",
+			"createdAt": 1520451752737,
+			"updatedAt": 1520451762884,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				true
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_a7ddea9c-06e6-4bcc-90df-4118841159df"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		},
+		{
+			"_id": "5aa040b6896fd02e4fd76387",
+			"name": "RemoveBaselineROW4",
+			"nonce": "5aa040bb896fd02e4fd7638b",
+			"createdAt": 1520451766085,
+			"updatedAt": 1520451771730,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				true
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_4bec2762-1b91-4690-aba1-6641bb368075"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		},
+		{
+			"_id": "5aa040bd896fd02e4fd7638c",
+			"name": "RemoveBaselineROW5",
+			"nonce": "5aa040c2896fd02e4fd7638f",
+			"createdAt": 1520451773440,
+			"updatedAt": 1520451778625,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				true
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_d5b81a11-0086-4942-8511-7663fc0f1cb7"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		},
+		{
+			"_id": "5aa040c4896fd02e4fd76390",
+			"name": "RemoveBaselineROW6",
+			"nonce": "5aa040c9896fd02e4fd76393",
+			"createdAt": 1520451780539,
+			"updatedAt": 1520451785101,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				true
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_fce5bf61-5cb6-445b-bed6-b92d4ec5d1c2"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		},
+		{
+			"_id": "5aa04121896fd02e4fd7639b",
+			"name": "Remove2BROW",
+			"nonce": "5aa0412b896fd02e4fd7639e",
+			"createdAt": 1520451873238,
+			"updatedAt": 1520451883384,
+			"accessGroup": "puc-brt",
+			"createdBy": "lixinhui90@gmail.com",
+			"updatedBy": "lixinhui90@gmail.com",
+			"projectId": "5aa03fe6896fd02e4fd76370",
+			"variants": [
+				true,
+				true,
+				false
+			],
+			"showOnMap": true,
+			"description": null,
+			"feed": "8d86cb04-ada9-4d30-b06b-fbc3dc0d5c00",
+			"routes": [
+				"ROUTE_98af8393-34f1-421f-9b7a-203476777af8"
+			],
+			"patterns": null,
+			"trips": null,
+			"type": "remove-trips"
+		}
+	]
+}
