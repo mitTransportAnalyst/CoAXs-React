@@ -208,6 +208,8 @@ export function processGrid(data) {
 // update modification
 export function updateModification(projectID, scenario) {
   //fetch modifications in this project
+  console.log(scenario);
+
   return fetch(GET_MODIFICATIONS_URL, {
     method: 'POST',
     headers: {

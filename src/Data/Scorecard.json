@@ -1,14 +1,14 @@
 {
       "Existing": {
-        "baseHeadway": 27,
+        "baseHeadway": 30,
         "totalTime": 64
       },
       "2BM": {
-        "baseHeadway": 27,
+        "baseHeadway": 30,
         "totalTime": 64
       },
       "2BR": {
-        "baseHeadway": 27,
+        "baseHeadway": 30,
         "totalTime": 40
       }
 }
