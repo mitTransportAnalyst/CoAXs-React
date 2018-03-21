@@ -206,9 +206,9 @@ export function processGrid(data) {
 }
 
 // update modification
-export function updateModification(projectID, scenario) {
+export function updateModification(projectID, scenarioID) {
   //fetch modifications in this project
-  console.log(scenario);
+  console.log(scenarioID);
 
   return fetch(GET_MODIFICATIONS_URL, {
     method: 'POST',
@@ -223,8 +223,9 @@ export function updateModification(projectID, scenario) {
   }).then(res => res.json())
     .then(oldModifications => oldModifications.map(
       oldModification => {
+        console.log(oldModification);
         let updatedEntries = oldModification.entries.map(entry => {
-          return {...entry, headwaySecs: scenario[oldModification.name] * 60}
+          return {...entry, variantIndex: scenarioID}
         });
         return {
           ...oldModification, entries: updatedEntries,
