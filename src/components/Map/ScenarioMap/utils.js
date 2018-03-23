@@ -224,11 +224,12 @@ export function updateModification(projectID, scenarioID) {
     .then(oldModifications => oldModifications.map(
       oldModification => {
         console.log(oldModification);
-        let updatedEntries = oldModification.entries.map(entry => {
-          return {...entry, variantIndex: scenarioID}
-        });
+        let updatedEntries = oldModification.variants;
+        // let updatedEntries = oldModification.entries.map(entry => {
+        //   return {...entry, variantIndex: scenarioID}
+        // });
         return {
-          ...oldModification, entries: updatedEntries,
+          ...oldModification, variants: updatedEntries,
         }
       }
     )).then(newModifications => Promise.all(newModifications.map(newModification =>

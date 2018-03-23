@@ -211,7 +211,7 @@ export const BaselineRequest = {
   "percentiles": [5, 25, 50, 75, 95],
   "workerVersion": "v3.4.1",
   "projectId": PROJECT_ID,
-  "variantIndex": -1,
+  "variantIndex": 0,
 };
 
 export const NewScenarioRequest = {

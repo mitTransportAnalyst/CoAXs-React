@@ -140,9 +140,9 @@ class ScenarioMap extends React.Component {
     if (this.props.isCompareMode) {
       this.props.changeProgress(0.2);
       let variantIndex = 0;
-      if (this.props.currentBusline === "2BM"){
+      if (this.props.currentBusline.A === "2BM"){
         variantIndex = 1;
-      } else if (this.props.currentBusline === "2BR") {
+      } else if (this.props.currentBusline.A === "2BR") {
         variantIndex = 2;
       }
       updateModification(PROJECT_ID, variantIndex)
@@ -158,6 +158,7 @@ class ScenarioMap extends React.Component {
                 ...NewScenarioRequest,
                 fromLat: origin.lat,
                 fromLon: origin.lng,
+                variantIndex: variantIndex,
               }
             )
           })
@@ -224,9 +225,9 @@ class ScenarioMap extends React.Component {
     if (this.props.isCompareMode) {
       this.props.changeProgress(0.2);
       let variantIndex = 0;
-      if (this.props.currentBusline === "2BM"){
+      if (this.props.currentBusline.A === "2BM"){
         variantIndex = 1;
-      } else if (this.props.currentBusline === "2BR") {
+      } else if (this.props.currentBusline.A === "2BR") {
         variantIndex = 2;
       }
       updateModification(PROJECT_ID, variantIndex)
@@ -242,6 +243,7 @@ class ScenarioMap extends React.Component {
                 ...NewScenarioRequest,
                 fromLat: origin.lat,
                 fromLon: origin.lng,
+                variantIndex: variantIndex,
               }
             )
           })
