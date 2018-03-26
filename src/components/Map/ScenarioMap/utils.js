@@ -206,9 +206,9 @@ export function processGrid(data) {
 }
 
 // update modification
-export function updateModification(projectID, scenarioID) {
+export function updateModification(projectID, bool) {
   //fetch modifications in this project
-  console.log(scenarioID);
+  console.log(bool);
 
   return fetch(GET_MODIFICATIONS_URL, {
     method: 'POST',
@@ -223,13 +223,17 @@ export function updateModification(projectID, scenarioID) {
   }).then(res => res.json())
     .then(oldModifications => oldModifications.map(
       oldModification => {
-        console.log(oldModification);
-        let updatedEntries = oldModification.variants;
-        // let updatedEntries = oldModification.entries.map(entry => {
+        let updatedVariants = oldModification.variants;
+        updatedVariants[updatedVariants.length - 1] = true;
+        if (bool) {
+          updatedVariants[updatedVariants.length - 1] = false;
+        }
+        console.log(updatedVariants);
+        // let updatedVariants = oldModification.variants.map(entry => {
         //   return {...entry, variantIndex: scenarioID}
         // });
         return {
-          ...oldModification, variants: updatedEntries,
+          ...oldModification, variants: updatedVariants,
         }
       }
     )).then(newModifications => Promise.all(newModifications.map(newModification =>

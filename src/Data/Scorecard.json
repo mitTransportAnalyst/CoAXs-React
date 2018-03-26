@@ -10,5 +10,29 @@
       "2BR": {
         "baseHeadway": 30,
         "totalTime": 40
+      },
+      "F1": {
+        "baseHeadway": 30,
+        "totalTime": 40
+      },
+      "F2": {
+        "baseHeadway": 30,
+        "totalTime": 40
+      },
+      "F3": {
+        "baseHeadway": 30,
+        "totalTime": 40
+      },
+      "F4": {
+        "baseHeadway": 30,
+        "totalTime": 40
+      },
+      "F5": {
+        "baseHeadway": 30,
+        "totalTime": 40
+      },
+      "F6": {
+        "baseHeadway": 30,
+        "totalTime": 40
       }
 }

@@ -63,9 +63,10 @@ export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogr
 
 export const GRID_REGION_ID = "ae8ce7fb-3967-4910-af09-5cc93ecaf60e";
 
-export const GRID_NAME = "TZjobs_Tot_Jobs";//Get this from Conveyal analysis, use the file name when click "download .grid file"
+export const GRID_NAME = "Jobs_TZjobs_0326";//Get this from Conveyal analysis, use the file name when click "download .grid file"
 
-export const PROJECT_ID = "5a9ea55c896fd02e4fd761c4";
+export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
+// export const PROJECT_ID = "5a9ea55c896fd02e4fd761c4"; //Pretoria_0307
 
 //Thiago - Network info
 /** Network info
@@ -117,13 +118,32 @@ export const PROJECT_ID = "5a9ea55c896fd02e4fd761c4";
       name: "2B",
       color: "#555555",
       id: "A",
-      fullName: "Line2B Scenarios",
+      fullName: "Line2B Trunk",
       buslines: [
-        { key: "Existing", name: "No Line2B", data: GeojsonExisting, scenarioData: jsonExisting },
-        { key: "2BM", name: "2B - Mixed Traffic", data: Geojson2B, scenarioData: json2BMixed },
-        { key: "2BR", name: "2B - Dedicated Lane", data: Geojson2B, scenarioData: json2BROW }],
+        { key: "Existing", name: "No Line2B", data: GeojsonExisting},
+        { key: "2BM", name: "2B - Mixed Traffic", data: Geojson2B},
+        { key: "2BR", name: "2B - Dedicated Lane", data: Geojson2B}],
       baselineBuses: 2,
       baselineHeadwayTime: 30,
+      weightOn: 8,
+      weightOff: 5,
+      opacityOn: 1,
+      opacityOff: 0.5
+    },
+    B: {
+      name: "Feeders",
+      color: "#2eadd3",
+      id: "B",
+      fullName: "Line2B Feeders",
+      buslines: [
+        { key: "F1", name: "Feeder 1", data: Geojson2B },
+        { key: "F2", name: "Feeder 2", data: Geojson2B, scenarioData: jsonExisting },
+        { key: "F3", name: "Feeder 3", data: Geojson2B, scenarioData: jsonExisting },
+        { key: "F4", name: "Feeder 4", data: Geojson2B, scenarioData: jsonExisting },
+        { key: "F5", name: "Feeder 5", data: Geojson2B, scenarioData: jsonExisting },
+        { key: "F6", name: "Feeder 6", data: Geojson2B, scenarioData: jsonExisting }],
+      baselineBuses: 4,
+      baselineHeadwayTime: 24,
       weightOn: 8,
       weightOff: 5,
       opacityOn: 1,
@@ -195,7 +215,7 @@ export const GET_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8
 export const UPDATE_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/updateModifications" : "/updateModifications";
 
 export const BaselineRequest = {
-  "date": "2018-03-06",
+  "date": "2018-03-26",
   "fromTime": 25200,
   "toTime": 32400,
   "accessModes": "WALK",
@@ -211,11 +231,11 @@ export const BaselineRequest = {
   "percentiles": [5, 25, 50, 75, 95],
   "workerVersion": "v3.4.1",
   "projectId": PROJECT_ID,
-  "variantIndex": 0,
+  "variantIndex": 0, //-1: baseline on Analysis, 0: Scenario 1
 };
 
 export const NewScenarioRequest = {
-  "date": "2018-03-06",
+  "date": "2018-03-26",
   "fromTime": 25200,
   "toTime": 32400,
   "accessModes": "WALK",
@@ -231,7 +251,7 @@ export const NewScenarioRequest = {
   "percentiles": [5, 25, 50, 75, 95],
   "workerVersion": "v3.4.1",
   "projectId": PROJECT_ID,
-  "variantIndex": 0,
+  "variantIndex": 1,
 };
 
 

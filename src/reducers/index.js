@@ -16,13 +16,13 @@ const initialScenario = [{
     alternative: "Existing"
   },
 }, {
-  A: {
+  B: {
     headway: 30,
-    alternative: "Existing"
+    alternative: "F1"
   },
 }];
 
-const initialBuslineState = {A: "Existing"};
+const initialBuslineState = {A: "Existing", B: "F1"};
 
 const initialNavState = {
   isdonePreSurvey: true,
