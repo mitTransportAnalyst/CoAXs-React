@@ -28,12 +28,12 @@ export function changeHeadway(res) {
 }
 
 // the number of buese needed
-export function changeScorecard(res) {
-  return {
-    type: "changeScorecard",
-    res
-  }
-}
+// export function changeScorecard(res) {
+//   return {
+//     type: "changeScorecard",
+//     res
+//   }
+// }
 
 export function saveScenario(res) {
   return {

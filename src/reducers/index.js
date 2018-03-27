@@ -118,14 +118,14 @@ function loadingProgress(state = 0, action) {
   }
 }
 
-function ScorecardData(state = 0, action) {
-  switch (action.type) {
-    case 'changeScorecard':
-      return action.res;
-    default:
-      return state
-  }
-}
+// function ScorecardData(state = 0, action) {
+//   switch (action.type) {
+//     case 'changeScorecard':
+//       return action.res;
+//     default:
+//       return state
+//   }
+// }
 
 function HeadwayTime(state = 0, action) {
   switch (action.type) {
@@ -193,7 +193,6 @@ export const reducers = combineReducers({
   navState,
   BuslineSelectedStore,
   loadingProgress,
-  ScorecardData,
   HeadwayTime,
   showCompareScenarioModal,
   emailStore,

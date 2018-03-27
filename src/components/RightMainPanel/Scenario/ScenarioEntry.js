@@ -16,22 +16,22 @@ class ScenarioEntry extends React.Component {
   }
 
   render() {
-    let totalbuses = 0;
-    for (let key in this.props.scorecardData) {
-      totalbuses += Math.ceil(this.props.scorecardData[key])
-    }
+    // let totalbuses = 0;
+    // for (let key in this.props.scorecardData) {
+    //   totalbuses += Math.ceil(this.props.scorecardData[key])
+    // }
 
     const tooltipforAlter = (
       <Tooltip id="tooltipforAlter"><strong>Route Alternative</strong></Tooltip>
     );
 
-    const tooltipforHeadwayValue = (
-      <Tooltip id="tooltipforHeadwayValue"><strong>Time Between Buses</strong></Tooltip>
-    );
+    // const tooltipforHeadwayValue = (
+    //   <Tooltip id="tooltipforHeadwayValue"><strong>Time Between Buses</strong></Tooltip>
+    // );
 
-    const tooltipforBuses = (
-      <Tooltip id="tooltipforBuses"><strong>Number of vehicles needed</strong></Tooltip>
-    );
+    // const tooltipforBuses = (
+    //   <Tooltip id="tooltipforBuses"><strong>Number of vehicles needed</strong></Tooltip>
+    // );
 
     const ScenarioValue = Object.keys(this.props.data).map((corridorKey) => {
         return (
@@ -45,14 +45,6 @@ class ScenarioEntry extends React.Component {
               <OverlayTrigger placement="bottom" overlay={tooltipforAlter}>
                 <span>{this.props.data[corridorKey].alternative} </span>
               </OverlayTrigger>
-              |
-              <OverlayTrigger placement="bottom" overlay={tooltipforHeadwayValue}>
-                <span>{Math.ceil(this.props.headwayTime[corridorKey])} min</span>
-              </OverlayTrigger>
-              |
-              <OverlayTrigger placement="bottom" overlay={tooltipforBuses}>
-                <span>#Veh: {Math.ceil(this.props.scorecardData[corridorKey])}</span>
-              </OverlayTrigger>
             </small>
           </div>
         )
@@ -64,7 +56,7 @@ class ScenarioEntry extends React.Component {
         <div className="scenarioEntrySel">
           <div className="" style={{margin: 0, padding: 0}}>
             <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#e9bc69"}}>
-              {this.props.index === 0 ? `Base Scenario -- Total #veh: ${totalbuses}` : `New Scenario -- Total #veh: ${totalbuses}`}
+              {this.props.index === 0 ? `Base Scenario` : `New Scenario`}
             </div>
             {ScenarioValue}
           </div>
@@ -76,7 +68,7 @@ class ScenarioEntry extends React.Component {
         <div className="scenarioEntry">
           <div className="" style={{margin: 0, padding: 0}}>
             <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#eec16f"}}>
-              {this.props.index === 0 ? `Base Scenario -- Total #veh: ${totalbuses}` : `New Scenario -- Total #veh: ${totalbuses}`}
+              {this.props.index === 0 ? `Base Scenario` : `New Scenario`}
             </div>
             {ScenarioValue}
           </div>
@@ -89,7 +81,7 @@ class ScenarioEntry extends React.Component {
 function mapStateToProps(state) {
   return {
     newScenario: state.scenarioStore,
-    headwayTime: state.HeadwayTime,
+    // headwayTime: state.HeadwayTime,
   }
 }
 
@@ -99,5 +91,3 @@ function mapDispachToProps(dispatch) {
 
 // export default connect(mapStateToProps, mapDispachToProps)(ScenarioEntry);
 export default ScenarioEntry;
-
-

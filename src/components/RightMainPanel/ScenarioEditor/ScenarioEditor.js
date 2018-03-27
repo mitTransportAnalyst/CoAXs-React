@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./ScenarioEditor.css";
 import RouteTable from "./RouteTable/RouteTable"
-import ServiceEditor from "./ServiceEditor/ServiceEditor"
+// import ServiceEditor from "./ServiceEditor/ServiceEditor"
 import {CorridorInfo} from "../../../config"
 
 import {bindActionCreators} from 'redux';
@@ -46,7 +46,6 @@ class ScenarioEditor extends React.Component {
           }
         </div>
         <RouteTable/>
-        <ServiceEditor/>
       </div>
     );
   }
@@ -63,5 +62,3 @@ function mapDispachToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(ScenarioEditor);
-
-

@@ -29,17 +29,17 @@ import ScenarioEntry from "./ScenarioEntry"
 class Scenario extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-      baselineHeadwayTime: {},
-    };
+    // this.state = {
+    //
+    //   baselineHeadwayTime: {},
+    // };
 
 // thiago - baselineHeadwayTime is read from config.js
 
       Object.values(CorridorInfo).map((corridor) => {
           let corridorId = corridor.id
-          let corridorBaselineHeadwayTime = corridor.baselineHeadwayTime
-          this.state.baselineHeadwayTime[corridorId] = corridorBaselineHeadwayTime
+          // let corridorBaselineHeadwayTime = corridor.baselineHeadwayTime
+          // this.state.baselineHeadwayTime[corridorId] = corridorBaselineHeadwayTime
           //console.log(this.state.baselineHeadwayTime)
         })
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -82,11 +82,9 @@ class Scenario extends React.Component {
           <div className="scenariosTable">
             <div className="scenarioEntries">
               <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
-                             isCompareMode={this.props.isCompareMode} headwayTime={this.state.baselineHeadwayTime}
-                             scorecardData={BaselineBuses} />
+                             isCompareMode={this.props.isCompareMode}/>
               <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
-                             isCompareMode={this.props.isCompareMode} headwayTime={this.props.headwayTime}
-                             scorecardData={this.props.scorecardData}/>
+                             isCompareMode={this.props.isCompareMode}/>
             </div>
 
             <div >
@@ -115,8 +113,8 @@ class Scenario extends React.Component {
 function mapStateToProps(state) {
   return {
     scenarioStore: state.scenarioStore,
-    headwayTime: state.HeadwayTime,
-    scorecardData: state.ScorecardData,
+    // headwayTime: state.HeadwayTime,
+    // scorecardData: state.ScorecardData,
     showCompareScenarioModal: state.showCompareScenarioModal,
     isCompareMode: state.isCompare.isCompare,
   }
