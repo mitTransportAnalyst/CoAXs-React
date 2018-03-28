@@ -20,6 +20,13 @@ export function changeBusline(res) {
   }
 }
 
+export function toggleBusline(res) {
+  return {
+    type: "toggleBusline",
+    res
+  }
+}
+
 export function changeHeadway(res) {
   return {
     type: "changeHeadway",

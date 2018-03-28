@@ -14,7 +14,11 @@ class RouteTable extends React.Component {
   }
 
   handleBuslineClick(busline) {
-    this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
+    if (this.props.currentCorridor === 'A'){
+      this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
+    } else {
+      this.props.toggleBusline({corridor: this.props.currentCorridor, busline: busline})
+    }
   }
 
 // Thiago: changed render to reflect the new specification of buslines
@@ -58,5 +62,3 @@ function mapDispachToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(RouteTable);
-
-

@@ -12,17 +12,15 @@ const initialCorridor = {currentCor: "A"};
 
 const initialScenario = [{
   A: {
-    headway: 0,
     alternative: "Existing"
   },
 }, {
   B: {
-    headway: 30,
-    alternative: "F1"
+    alternative: []
   },
 }];
 
-const initialBuslineState = {A: "Existing", B: "F1"};
+const initialBuslineState = {A: "Existing", B: []};
 
 const initialNavState = {
   isdonePreSurvey: true,
@@ -104,6 +102,18 @@ function BuslineSelectedStore(state = initialBuslineState, action) {
         ...state,
         [action.res.corridor]: action.res.busline.slice(0, 3),
       };
+    case 'toggleBusline':
+      if (state[action.res.corridor].indexOf(action.res.busline)> -1){
+        return {
+          ...state,
+          [action.res.corridor]: state[action.res.corridor].filter(item => item !== action.res.busline),
+        }
+      } else {
+        return {
+          ...state,
+          [action.res.corridor]: state[action.res.corridor].concat(action.res.busline),
+        }
+      }
     default:
       return state
   }
