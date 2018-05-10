@@ -88,6 +88,7 @@ export const BaselineRequest = {
   "fromLon": -90.13526916503908,
   "workerVersion": "v3.2.0",
   "projectId": "5a29eca1896fd005dc77a631",
+  "workerVersion": "v4.0.0",
   "variantIndex": -1,
 };
 
@@ -107,6 +108,7 @@ export const NewScenarioRequest = {
   "fromLon": -90.13526916503908,
   "workerVersion": "v3.2.0",
   "projectId": "5a29eca1896fd005dc77a631",
+  "workerVersion": "v4.0.0",
   "variantIndex": 0,
 };
 
