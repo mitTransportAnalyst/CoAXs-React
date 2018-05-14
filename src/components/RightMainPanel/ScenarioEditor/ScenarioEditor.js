@@ -1,6 +1,5 @@
 import React from "react";
 import s from "./ScenarioEditor.css";
-import {corridorInfo} from '../../../Data/LoadData'
 import RouteTable from "./RouteTable/RouteTable"
 import ServiceEditor from "./ServiceEditor/ServiceEditor"
 import {CorridorInfo} from "../../../config"
@@ -12,11 +11,6 @@ import * as actionCreators from '../../../reducers/action';
 class ScenarioEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
-  }
-
-  componenetDidMount() {
-    this.props.clickCorridor("A");
   }
 
   render() {
@@ -29,14 +23,13 @@ class ScenarioEditor extends React.Component {
         </div>
         <div className="routesContainer">
           {
-            Object.values(corridorInfo).map((corridor) => {
+            Object.values(CorridorInfo).map((corridor) => {
               if (this.props.currentCorridor === corridor.id) {
                 return (
                   <div className="btn routeItemSel" key={corridor.id}
                        style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize: 12}}
                        onClick={() => this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}
-
                   </div>
                 )
               }
@@ -61,9 +54,7 @@ class ScenarioEditor extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentCorridor: state.reducer.currentCor,
-    scorecardData: state.ScorecardData,
-    isOpen: state.reducer.currentMap,
+    currentCorridor: state.currentCorridorStore.currentCor,
   }
 }
 

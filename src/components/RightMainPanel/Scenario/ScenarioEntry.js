@@ -33,7 +33,7 @@ class ScenarioEntry extends React.Component {
       <Tooltip id="tooltipforBuses"><strong>Number of vehicles needed</strong></Tooltip>
     );
 
-    var ScenarioValue = Object.keys(this.props.data).map((corridorKey) => {
+    const ScenarioValue = Object.keys(this.props.data).map((corridorKey) => {
         return (
           <div style={{width: 150, position: "relative", marginTop: 2, marginLeft: 8}} key={corridorKey}>
             <div className="square"
@@ -59,7 +59,7 @@ class ScenarioEntry extends React.Component {
       }
     );
 
-    if (this.props.selectedScenario === this.props.index) {
+    if (this.props.isCompareMode == this.props.index) {
       return (
         <div className="scenarioEntrySel">
           <div className="" style={{margin: 0, padding: 0}}>

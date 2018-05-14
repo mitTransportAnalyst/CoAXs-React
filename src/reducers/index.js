@@ -2,91 +2,75 @@ import {combineReducers} from "redux";
 import {routerReducer} from "react-router-redux";
 import {reducer as formReducer} from "redux-form";
 
-
 /**
  * reducer
  *
  */
 
-/**
- * initialState
- * @type {object}
- * @property {string} currentCor - initial clicked corridor {number} currentMap - initial map displayed 0: scenario map 1: route map
- */
-const initialState = {currentCor: "A", currentMap: 0};
+//Initialization
+const initialCorridor = {currentCor: "A"};
 
-/**
- * main reducer
- * @param {object} state {string} action - dispatched in component
- * @return {object} store - new store
- */
-function reducer(state = initialState, action) {
+const initialScenario = [{
+  A: {
+    headway: 0,
+    alternative: "16A"
+  },
+  B: {
+    headway: 0,
+    alternative: "E3A"
+
+  },
+  C: {
+    headway: 0,
+    alternative: "E5A"
+  },
+}, {
+  A: {
+    headway: 30,
+    alternative: "16A"
+  },
+  B: {
+    headway: 24,
+    alternative: "E3A"
+  },
+  C: {
+    headway: 27,
+    alternative: "E5A"
+  },
+}];
+
+const initialBuslineState = {A: "16A", B: "E3A", C: "E5A"};
+
+const initialNavState = {
+  isdonePreSurvey: true,
+  isdoneOneScenario: false,
+  isdoneCompareScenario: false,
+  isdoneExitSurvey: false
+};
+
+
+function currentCorridorStore(state = initialCorridor, action) {
   switch (action.type) {
     case 'clickCorridor':
       return {
         ...state,
-        // "currentCor": JSON.parse(action.res)
         "currentCor": action.res
       };
-    case 'changeMap':
-      return {
-        ...state,
-        // "currentCor": JSON.parse(action.res)
-        "currentMap": action.res
-      };
     default:
       return state
   }
 }
 
-/**
- * scenario reducer
- * @param {object} state {string} action - dispatched in component
- * @return {object} store - new scenario store
- */
-function scenarioStore(state = [{
-  A: {
-    headway: 0,
-    alternative: "16A"
-  },
-  B: {
-    headway: 0,
-    alternative: "E3A"
-
-  },
-  C: {
-    headway: 0,
-    alternative: "E5A"
-
-  },
-}, {
-  A: {
-    headway: 0,
-    alternative: "16A"
-  },
-  B: {
-    headway: 0,
-    alternative: "E3A"
-
-  },
-  C: {
-    headway: 0,
-    alternative: "E5A"
-
-  },
-}], action) {
+function scenarioStore(state = initialScenario, action) {
   switch (action.type) {
     case 'saveScenario':
-
       return [state[0], action.res];
-    // "currentCor": JSON.parse(action.res)
-
     default:
       return state
   }
 }
 
-function timeFilterStore(state = [], action) {
+function timeFilterStore(state = {currentTimeFilter: 30}, action) {
   switch (action.type) {
     case 'changeTimeFilter':
       return {
@@ -98,35 +82,12 @@ function timeFilterStore(state = [], action) {
   }
 }
 
-function modeStore(state = [], action) {
-  switch (action.type) {
-    case 'changeMode':
-      return {
-        "mode": action.res,
-      };
-    default:
-      return state
-  }
-}
-
 function GridNumberStore(state = [], action) {
   switch (action.type) {
     case 'changeGridNumber':
       return {
-        "gridNumber": action.res[0],
-        "gridNumber1": action.res[1],
-
-      };
-    default:
-      return state
-  }
-}
-
-function fireUpdate(state = [], action) {
-  switch (action.type) {
-    case 'fireUpdate':
-      return {
-        "fireScenario": action.res,
+        "gridNumberBase": action.res[0],
+        "gridNumberNew": action.res[1],
       };
     default:
       return state
@@ -144,16 +105,14 @@ function updateButtonState(state = true, action) {
 
 function isCompare(state = {isCompare: false}, action) {
   switch (action.type) {
-    case 'isCompare':
+    case 'changeCompareMode':
       return {
-        "isCompare": action.res,
+        "isCompare": !state.isCompare,
       };
     default:
       return state
   }
 }
-
-const initialBuslineState = {A: "16A", B: "E3A", C: "E5A"};
 
 function BuslineSelectedStore(state = initialBuslineState, action) {
   switch (action.type) {
@@ -161,40 +120,6 @@ function BuslineSelectedStore(state = initialBuslineState, action) {
       return {
         ...state,
         [action.res.corridor]: action.res.busline.slice(0, 3),
-      };
-    default:
-      return state
-  }
-}
-
-const initialNavState = {
-  isdonePreSurvey: true,
-  isdoneOneScenario: false,
-  isdoneCompareScenario: false,
-  isdoneExitSurvey: false
-};
-
-function navState(state = initialNavState, action) {
-  switch (action.type) {
-    case 'doneOneScenario':
-      return {
-        ...state,
-        isdoneOneScenario: true,
-      };
-    case 'doneCompareScenario':
-      return {
-        ...state,
-        isdoneCompareScenario: true,
-      };
-    case 'doneExitSurvey':
-      return {
-        ...state,
-        isdoneExitSurvey: true,
-      };
-    case 'donePreSurvey':
-      return {
-        ...state,
-        isdonePreSurvey: true,
       };
     default:
       return state
@@ -246,15 +171,40 @@ function emailStore(state = null, action) {
   }
 }
 
+function navState(state = initialNavState, action) {
+  switch (action.type) {
+    case 'doneOneScenario':
+      return {
+        ...state,
+        isdoneOneScenario: true,
+      };
+    case 'doneCompareScenario':
+      return {
+        ...state,
+        isdoneCompareScenario: true,
+      };
+    case 'doneExitSurvey':
+      return {
+        ...state,
+        isdoneExitSurvey: true,
+      };
+    case 'donePreSurvey':
+      return {
+        ...state,
+        isdonePreSurvey: true,
+      };
+    default:
+      return state
+  }
+}
+
 export const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
-  reducer,
+  currentCorridorStore,
   scenarioStore,
   timeFilterStore,
-  modeStore,
   GridNumberStore,
-  fireUpdate,
   updateButtonState,
   isCompare,
   navState,

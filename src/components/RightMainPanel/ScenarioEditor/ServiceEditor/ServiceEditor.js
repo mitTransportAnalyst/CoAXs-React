@@ -31,95 +31,74 @@ class ServiceEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: true,
-      resetAdjust: {},
-      currentAdjust: {},
+      currentScenario: {},
     };
 
-    this.handlePlaceHolder = this.handlePlaceHolder.bind(this);
-    this.handleSaveButton = this.handleSaveButton.bind(this);
     this.changeFeature = this.changeFeature.bind(this);
   }
 
+  //Initialize the scenario
+  componentWillMount() {
+    const initialScenario = {};
+    const initialScore = {};
+    const initialHeadway = {};
+
+    Object.keys(CorridorInfo).map(
+      (key) => {
+        initialScenario[key] = {
+          "headway": 0,
+          "alternative": this.props.selectedBusline[key],
+        };
+        initialScore[key] = ScoreCard[this.props.selectedBusline[key]].totalTime / (ScoreCard[this.props.selectedBusline[key]].baseHeadway);
+        initialHeadway[key] = ScoreCard[this.props.selectedBusline[key]].baseHeadway;
+      }
+    );
+    this.setState({
+      "currentScenario": initialScenario,
+    });
+    this.props.changeScorecard(initialScore);
+    this.props.changeHeadway(initialHeadway);
+  }
+
+  //When busline change
   componentWillReceiveProps(nextProps) {
-    if (this.props.currentBusAlternative !== nextProps.currentBusAlternative) {
-      let temp = cloneDeep(this.state.currentAdjust);
-      for (let key in nextProps.currentBusAlternative) {
-        temp[key].alternative = nextProps.currentBusAlternative[key];
+    if (this.props.selectedBusline !== nextProps.selectedBusline) {
+      let nextScenario = cloneDeep(this.state.currentScenario);
+      for (let key in nextProps.selectedBusline) {
+        nextScenario[key].alternative = nextProps.selectedBusline[key];
       }
       this.setState({
         ...this.state,
-        currentAdjust: temp
+        currentScenario: nextScenario
       })
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.currentAdjust !== this.state.currentAdjust) {
-      let tempScore = {A: 0, B: 0, C: 0};     // TODO: change to dynamic
-      let tempHeadway = {A: 0, B: 0, C: 0};
-      for (let key in tempScore) {
-        tempScore[key] = ScoreCard[nextState.currentAdjust[key].alternative].totalTime / (ScoreCard[nextState.currentAdjust[key].alternative].baseHeadway * (1 - Number(nextState.currentAdjust[key].headway) / 100))
-      }
-      for (let key in tempHeadway) {
-        tempHeadway[key] = ScoreCard[nextState.currentAdjust[key].alternative].baseHeadway * (1 - Number(nextState.currentAdjust[key].headway) / 100 )
-      }
-      this.props.changeHeadway(tempHeadway);
-      this.props.changeScorecard(tempScore);
-      this.props.saveScenario(nextState.currentAdjust);
-    }
-  }
-
-  componentDidMount() {
-    let tempScore = {A: 0, B: 0, C: 0};     // TODO: change to dynamic
-    let tempHeadway = {A: 0, B: 0, C: 0};
-
-    for (let key in tempScore) {
-      tempScore[key] = ScoreCard[this.state.currentAdjust[key].alternative].totalTime / (ScoreCard[this.state.currentAdjust[key].alternative].baseHeadway * (1 - Number(this.state.currentAdjust[key].headway) / 100))
-    }
-
-    for (let key in tempHeadway) {
-      tempHeadway[key] = ScoreCard[this.state.currentAdjust[key].alternative].baseHeadway * (1 - Number(this.state.currentAdjust[key].headway) / 100 )
-    }
-    this.props.changeScorecard(tempScore);
-    this.props.changeHeadway(tempHeadway);
-  }
-
-  componentWillMount() {
-    let model = {};
-    Object.keys(CorridorInfo).map(
-      (id) => {
-        model[id] = {
-          "headway": 0,
-          "alternative": this.props.currentBusAlternative[id],
-        }
-      }
-    );
-    this.setState({
-      "resetAdjust": model,
-      "currentAdjust": model,
-    });
-  }
-
-  handlePlaceHolder() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
-
-  handleSaveButton() {
-    this.props.saveScenario(this.state.currentAdjust)
-
-  }
-
+  //When headway change
   changeFeature(feature, value) {
-    let temp = cloneDeep(this.state.currentAdjust);
-    temp[this.props.currentCorridor][feature] = value;
+    let nextScenario = cloneDeep(this.state.currentScenario);
+    nextScenario[this.props.currentCorridor][feature] = value;
     this.setState({
-      currentAdjust: temp,
+      currentScenario: nextScenario,
     })
   }
 
+  // When scenario change (headway or busline), update the score, headway and save scenario
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.currentScenario !== this.state.currentScenario) {
+      const nextScore = {};
+      const nextHeadway = {};
+      Object.keys(CorridorInfo).map(
+        (key) => {
+          nextScore[key] = ScoreCard[nextState.currentScenario[key].alternative].totalTime / (ScoreCard[nextState.currentScenario[key].alternative].baseHeadway * (1 - Number(nextState.currentScenario[key].headway) / 100));
+          nextHeadway[key] = ScoreCard[nextState.currentScenario[key].alternative].baseHeadway * (1 - Number(nextState.currentScenario[key].headway) / 100 );
+        }
+      );
+      this.props.changeHeadway(nextHeadway);
+      this.props.changeScorecard(nextScore);
+      this.props.saveScenario(nextState.currentScenario);
+    }
+  }
 
   render() {
     let currentCorridor = CorridorInfo[this.props.currentCorridor];
@@ -133,7 +112,6 @@ class ServiceEditor extends React.Component {
         <div>
           <div className="setTimesTitle">
             <OverlayTrigger placement="bottom" overlay={tooltipforHeadway}>
-
               <div className="subHead">
                 Time Between Buses
               </div>
@@ -142,7 +120,7 @@ class ServiceEditor extends React.Component {
               <div style={{paddingTop: 1, marginLeft: 10,}}>
                 <div style={{width: "96%", display: "inline-block", marginTop: 2}}>
                   <Slider name="headway" min={HeadwayMin} max={HeadwayMax}
-                          value={this.state.currentAdjust[this.props.currentCorridor]["headway"]} step="5"
+                          value={this.state.currentScenario[this.props.currentCorridor]["headway"]} step="5"
                           className="right" changeFunction={this.changeFeature}
                           headwayTime={this.props.headwayStore[this.props.currentCorridor]}/>
                 </div>
@@ -157,9 +135,8 @@ class ServiceEditor extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentCorridor: state.reducer.currentCor,
-    currentMap: state.reducer.currentMap,
-    currentBusAlternative: state.BuslineSelectedStore,
+    currentCorridor: state.currentCorridorStore.currentCor,
+    selectedBusline: state.BuslineSelectedStore,
     headwayStore: state.HeadwayTime,
   }
 }

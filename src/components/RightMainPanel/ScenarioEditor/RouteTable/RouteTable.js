@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../../reducers/action';
 
-import {RouteByID} from '../../../../Data/LoadData'
+import {CorridorInfo} from "../../../../config"
 
 class RouteTable extends React.Component {
   constructor(props) {
@@ -17,28 +17,25 @@ class RouteTable extends React.Component {
     this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
   }
 
+// Thiago: changed render to reflect the new specification of buslines
   render() {
-    let totalbuses = 0;
-    for (let key in this.props.scorecardData) {
-      totalbuses += Math.ceil(this.props.scorecardData[key])
-    }
-
     return (
       <div className="routeTable">
         {
-          RouteByID[this.props.currentCorridor].buslines.map((busline, index) => {
-            if (this.props.BuslineProps[this.props.currentCorridor] === busline.slice(0, 3)) {
+          CorridorInfo[this.props.currentCorridor].buslines.map((busline, index) => {
+            let buslineName = CorridorInfo[this.props.currentCorridor].buslines[index].name
+            if (this.props.selectedBusline[this.props.currentCorridor] === busline.key) {
               return (
-                <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline}
+                <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline.key}
                        onClick={() => this.handleBuslineClick(busline)}>
-                  {busline}
+                  {buslineName}
                 </label>
               )
             }
             else {
               return (
-                <label className="btn btn-xs card" key={busline} onClick={() => this.handleBuslineClick(busline)}>
-                  {busline}
+                <label className="btn btn-xs card" key={busline.key} onClick={() => this.handleBuslineClick(busline.key)}>
+                  {buslineName}
                 </label>
               )
             }
@@ -51,10 +48,8 @@ class RouteTable extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentCorridor: state.reducer.currentCor,
-    BuslineProps: state.BuslineSelectedStore,
-    scorecardData: state.ScorecardData,
-
+    currentCorridor: state.currentCorridorStore.currentCor,
+    selectedBusline: state.BuslineSelectedStore,
   }
 }
 

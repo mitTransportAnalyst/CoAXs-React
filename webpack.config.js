@@ -61,6 +61,9 @@ module.exports = {
   devServer: {
     contentBase: __dirname + '/public',
   },
+  node: {
+    fs: 'empty'
+  },
   plugins: [
     new CleanWebpackPlugin(['css/main.css', 'js/bundle.js'], {
       root: __dirname + '/public',

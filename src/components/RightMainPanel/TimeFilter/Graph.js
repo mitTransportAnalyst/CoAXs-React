@@ -15,7 +15,6 @@ import * as actionCreators from '../../../reducers/action';
 class Graph extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render() {
@@ -23,27 +22,22 @@ class Graph extends React.Component {
       <Tooltip id="tooltipforJob"><strong>The total number of jobs that can be reached is based on U.S. census
         data</strong></Tooltip>
     );
-    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined) {
-      var data = [
-        {name: 'Base Scenario', job: null},
-        {name: 'New Scenario', job: null},
-      ];
-    }
-    else {
-      var data = [
-        {name: 'Baseline Scenario', job: null},
-      ];
-    }
 
-    data[0].job = this.props.gridNumber;
-    if (this.props.isCompareMode && this.props.gridNumber1 !== undefined) {
-      data[1].job = this.props.gridNumber1;
+    let data = [
+      {name: 'Base Scenario', job: this.props.gridNumberBase},
+    ];
+
+    if (this.props.isCompareMode && this.props.gridNumberNew !== undefined) {
+      data = [
+        {name: 'Base Scenario', job: this.props.gridNumberBase},
+        {name: 'New Scenario', job: this.props.gridNumberNew},
+      ];
     }
 
     const scale = 'ordinal';
     const axisFormatter = (value) => (value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     return (
-      <div >
+      <div>
         <br/>
         <div style={{marginTop: -20, marginLeft: 8}}>
 
@@ -60,7 +54,7 @@ class Graph extends React.Component {
             <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label={<GraphLabel/>} layout="vertical">
               {
                 data.map((entry, index) => (
-                  <Cell fill={index === 0 ? '#2eadd3' : '#facd7a' } key={`cell-${index}`}/>
+                  <Cell fill={index === 0 ? '#2eadd3' : '#facd7a'} key={`cell-${index}`}/>
                 ))
               }
             </Bar>
@@ -73,8 +67,8 @@ class Graph extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    gridNumber: state.GridNumberStore.gridNumber,
-    gridNumber1: state.GridNumberStore.gridNumber1,
+    gridNumberBase: state.GridNumberStore.gridNumberBase,
+    gridNumberNew: state.GridNumberStore.gridNumberNew,
     isCompareMode: state.isCompare.isCompare,
   }
 }

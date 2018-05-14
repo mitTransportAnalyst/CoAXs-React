@@ -17,10 +17,10 @@ class TimeFilter extends React.Component {
       currentTimeFilter: 30,
     };
 
-    this.changeFeature = this.changeFeature.bind(this)
+    this.changeTimeFilter = this.changeTimeFilter.bind(this)
   }
 
-  changeFeature(feature, value) {
+  changeTimeFilter(feature, value) {
     this.setState({
       currentTimeFilter: value,
     });
@@ -40,13 +40,13 @@ class TimeFilter extends React.Component {
             <div className="">
               <span >
              <Slider name="timeSlider" min={5} max={90} value={this.state.currentTimeFilter} step={5}
-                     className="right" changeFunction={this.changeFeature}/>
+                     className="right" changeFunction={this.changeTimeFilter}/>
                 <div>
                 </div>
               </span>
             </div>
           </div>
-          {this.props.gridNumber !== undefined ? <Graph/> : null}
+          {this.props.gridNumberBase !== undefined ? <Graph/> : null}
         </div>
       </div>
     );
@@ -55,9 +55,7 @@ class TimeFilter extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    gridNumber: state.GridNumberStore.gridNumber,
-    gridNumber1: state.GridNumberStore.gridNumber1,
-
+    gridNumberBase: state.GridNumberStore.gridNumberBase,
   }
 }
 

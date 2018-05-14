@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import {store} from "./store.js";
 import {router} from "./router.js";
 
+
 /**
  * The root container.
  */
@@ -16,3 +17,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 );
+

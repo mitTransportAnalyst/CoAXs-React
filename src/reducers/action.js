@@ -13,9 +13,24 @@ export function clickCorridor(res) {
   }
 }
 
-export function changeMap(res) {
+export function changeBusline(res) {
   return {
-    type: "changeMap",
+    type: "changeBusline",
+    res
+  }
+}
+
+export function changeHeadway(res) {
+  return {
+    type: "changeHeadway",
+    res
+  }
+}
+
+// the number of buese needed
+export function changeScorecard(res) {
+  return {
+    type: "changeScorecard",
     res
   }
 }
@@ -27,23 +42,23 @@ export function saveScenario(res) {
   }
 }
 
+export function pushUpdateButton(res) {
+  return {
+    type: "pushUpdateButton",
+    res
+  }
+}
+
+export function changeCompareMode(res) {
+  return {
+    type: "changeCompareMode",
+    res
+  }
+}
+
 export function changeTimeFilter(res) {
   return {
     type: "changeTimeFilter",
-    res
-  }
-}
-
-export function changeMode(res) {
-  return {
-    type: "changeMode",
-    res
-  }
-}
-
-export function selectScenario(res) {
-  return {
-    type: "selectScenario",
     res
   }
 }
@@ -55,23 +70,33 @@ export function changeGridNumber(res) {
   }
 }
 
-export function fireUpdate(res) {
+export function changeProgress(res) {
   return {
-    type: "fireUpdate",
+    type: "changeProgress",
     res
   }
 }
 
-export function pushUpdateButton(res) {
+
+
+
+
+
+
+
+
+
+// for navigation bar
+export function fireCompareScenarioModal(res) {
   return {
-    type: "pushUpdateButton",
+    type: "fireCompareScenarioModal",
     res
   }
 }
 
-export function isCompare(res) {
+export function addEmail(res) {
   return {
-    type: "isCompare",
+    type: "addEmail",
     res
   }
 }
@@ -100,48 +125,6 @@ export function doneExitSurvey(res) {
 export function donePreSurvey(res) {
   return {
     type: "donePreSurvey",
-    res
-  }
-}
-
-export function changeBusline(res) {
-  return {
-    type: "changeBusline",
-    res
-  }
-}
-
-export function changeProgress(res) {
-  return {
-    type: "changeProgress",
-    res
-  }
-}
-
-export function changeScorecard(res) {
-  return {
-    type: "changeScorecard",
-    res
-  }
-}
-
-export function changeHeadway(res) {
-  return {
-    type: "changeHeadway",
-    res
-  }
-}
-
-export function fireCompareScenarioModal(res) {
-  return {
-    type: "fireCompareScenarioModal",
-    res
-  }
-}
-
-export function addEmail(res) {
-  return {
-    type: "addEmail",
     res
   }
 }
