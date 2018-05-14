@@ -31,18 +31,18 @@ const ENVIRONMENT = "DEV";    //"DEV" for development mode. change to "PROD" whe
 /** Introduction title on the left
  * @type {string} IntroTitle
  */
-export const IntroTitle = "CoAXs | New Orleans";
+export const IntroTitle = "CoAXs | Concepción";
 
 //Map
 /** Center latitude of map
  * @type {number} MapLat
  */
-export const MapLat = 29.971065;
+export const MapLat = -36.801566;
 
 /** Center longitude of map
  * @type {number} MapLat
  */
-export const MapLng = -90.111533;
+export const MapLng = -73.067919;
 
 /** zoom level of map
  * @type {number} ZoomLevel
@@ -54,11 +54,11 @@ export const ZoomLevel = 13;
  */
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
-export const GRID_REGION_ID = "5a29e7d3896fd005dc77a617";
+export const GRID_REGION_ID = "eb987d48-d382-4adf-9519-646820a4b042";
 
-export const GRID_NAME = "Jobs_total";
+export const GRID_NAME = "FactorExpa_Trabajos"; //see analysis.conveyal.com > web inspector > Network > analysis > opportunityDatasetKey
 
-export const PROJECT_ID = "5a29eca1896fd005dc77a631";
+export const PROJECT_ID = "5ae9d7ca896fd06143cc42a3";
 
 //Thiago - Network info
 /** Network info

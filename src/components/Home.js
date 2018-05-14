@@ -6,7 +6,7 @@ import React from "react";
 import TopleftPanel from "./TopleftPanel/TopleftPanel"
 import RightMainPanel from "./RightMainPanel/RightMainPanel"
 import ScenarioMap from "./Map/ScenarioMap/ScenarioMap"
-import Navbar from "./Teaching/Navbar/Navbar"
+// import Navbar from "./Teaching/Navbar/Navbar"
 import LoadingPage from "./LoadingPage/LoadingPage"
 import MapLegend from "./Map/Legend/Legend"
 import {FormControlID} from "../config"
@@ -25,7 +25,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="page-home">
-        <Navbar/>
+        {/* <Navbar/> */}
         <TopleftPanel/>
         <MapLegend/>
         <LoadingPage progress={this.props.loadingProgress}/>
