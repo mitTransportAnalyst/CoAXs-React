@@ -43,13 +43,12 @@ export function responseToSurface(response) {
       width * height * nSamples
     );
 
-    // de delta code data
-    for (let y = 0, pixel = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        // pixels are delta coded individually
-        for (let sample = 0, val = 0; sample < nSamples; sample++, pixel++) {
-          data[pixel] = val += data[pixel]
-        }
+    // de delta-code
+    for (let i = 0, position = 0; i < nSamples; i++){
+      let previous = 0
+      for (let j = 0; j < width * height; j++, position++){
+        data[position] = data[position] + previous
+        previous = data[position]
       }
     }
 
@@ -70,9 +69,9 @@ export function responseToSurface(response) {
       nSamples,
       errors: [], // no errors - we got a result
       warnings: metadata.projectApplicationWarnings || [],
-      get(x, y) {
-        const index1d = (y * width + x) * nSamples;
-        return data.slice(index1d, index1d + nSamples)
+      get(x, y, z) {
+        const index1d = ((z * width * height) + y * width + x);
+        return data[index1d]
       }
     }
   }
@@ -130,7 +129,7 @@ export function computeSingleValuedSurface(travelTimeSurface) {
   for (let y = 0; y < travelTimeSurface.height; y++) {
     for (let x = 0; x < travelTimeSurface.width; x++) {
       const index = y * travelTimeSurface.width + x;
-      surface[index] = travelTimeSurface.get(x, y)[POSITION]
+      surface[index] = travelTimeSurface.get(x, y,POSITION)
     }
   }
 
@@ -162,7 +161,7 @@ export function computeAccessibility(travelTimeSurface,
       // converted from seconds to minutes, so a travel time of 59m59s will have
       // a value of 59, not 60.
       if (
-        travelTimeSurface.get(travelTimeX, travelTimeY)[POSITION] <
+        travelTimeSurface.get(travelTimeX, travelTimeY,POSITION) <
         isochroneCutoff
       ) {
         accessibility += opportunityDataset.data[y * opportunityDataset.width + x]
