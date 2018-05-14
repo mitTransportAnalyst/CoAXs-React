@@ -4,15 +4,15 @@ import _ from 'lodash';
 import cloneDeep from 'lodash/cloneDeep'
 import classNames from "classnames"
 
-import json16A from "../../../Data/scenario/16A.json"
-import json16B from "../../../Data/scenario/16B.json"
-import json16C from "../../../Data/scenario/16C.json"
-import jsonE3A from "../../../Data/scenario/E3A.json"
-import jsonE3B from "../../../Data/scenario/E3B.json"
-import jsonE3C from "../../../Data/scenario/E3C.json"
-import jsonE3D from "../../../Data/scenario/E3D.json"
-import jsonE5A from "../../../Data/scenario/E5A.json"
-import jsonE5B from "../../../Data/scenario/E5B.json"
+// import json16A from "../../../Data/scenario/16A.json"
+// import json16B from "../../../Data/scenario/16B.json"
+// import json16C from "../../../Data/scenario/16C.json"
+// import jsonE3A from "../../../Data/scenario/E3A.json"
+// import jsonE3B from "../../../Data/scenario/E3B.json"
+// import jsonE3C from "../../../Data/scenario/E3C.json"
+// import jsonE3D from "../../../Data/scenario/E3D.json"
+// import jsonE5A from "../../../Data/scenario/E5A.json"
+// import jsonE5B from "../../../Data/scenario/E5B.json"
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -24,13 +24,24 @@ import {CorridorInfo, BaselineBuses} from "../../../config"
 
 import ScenarioEntry from "./ScenarioEntry"
 
+
+
 class Scenario extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      baselineHeadwayTime: {A: 30, B: 24, C: 27}
+
+      baselineHeadwayTime: {},
     };
 
+// thiago - baselineHeadwayTime is read from config.js
+
+      Object.values(CorridorInfo).map((corridor) => {
+          let corridorId = corridor.id
+          let corridorBaselineHeadwayTime = corridor.baselineHeadwayTime
+          this.state.baselineHeadwayTime[corridorId] = corridorBaselineHeadwayTime
+          //console.log(this.state.baselineHeadwayTime)
+        })
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClickBaselineButton = this.handleClickBaselineButton.bind(this);
     this.handleClickCompareButton = this.handleClickCompareButton.bind(this);
@@ -116,5 +127,3 @@ function mapDispachToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(Scenario);
-
-

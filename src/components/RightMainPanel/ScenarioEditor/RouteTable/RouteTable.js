@@ -17,23 +17,25 @@ class RouteTable extends React.Component {
     this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
   }
 
+// Thiago: changed render to reflect the new specification of buslines
   render() {
     return (
       <div className="routeTable">
         {
           CorridorInfo[this.props.currentCorridor].buslines.map((busline, index) => {
-            if (this.props.selectedBusline[this.props.currentCorridor] === busline.slice(0, 3)) {
+            let buslineName = CorridorInfo[this.props.currentCorridor].buslines[index].name
+            if (this.props.selectedBusline[this.props.currentCorridor] === busline.key) {
               return (
-                <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline}
+                <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline.key}
                        onClick={() => this.handleBuslineClick(busline)}>
-                  {busline}
+                  {buslineName}
                 </label>
               )
             }
             else {
               return (
-                <label className="btn btn-xs card" key={busline} onClick={() => this.handleBuslineClick(busline)}>
-                  {busline}
+                <label className="btn btn-xs card" key={busline.key} onClick={() => this.handleBuslineClick(busline.key)}>
+                  {buslineName}
                 </label>
               )
             }
