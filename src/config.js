@@ -229,9 +229,9 @@ export const BaselineRequest = {
   "fromLat": 29.98646043083785,
   "fromLon": -90.13526916503908,
   "percentiles": [5, 25, 50, 75, 95],
-  "workerVersion": "v3.4.1",
+  "workerVersion": "v4.0.0",
   "projectId": PROJECT_ID,
-  "variantIndex": 0, //-1: baseline on Analysis, 0: Scenario 1, 1: Scenario 2 
+  "variantIndex": 0, //-1: baseline on Analysis, 0: Scenario 1, 1: Scenario 2
 };
 
 export const NewScenarioRequest = {
@@ -249,7 +249,7 @@ export const NewScenarioRequest = {
   "fromLat": 29.98646043083785,
   "fromLon": -90.13526916503908,
   "percentiles": [5, 25, 50, 75, 95],
-  "workerVersion": "v3.4.1",
+  "workerVersion": "v4.0.0",
   "projectId": PROJECT_ID,
   "variantIndex": 1,
 };
