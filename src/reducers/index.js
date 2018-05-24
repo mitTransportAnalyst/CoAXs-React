@@ -102,18 +102,22 @@ function BuslineSelectedStore(state = initialBuslineState, action) {
         ...state,
         [action.res.corridor]: action.res.busline.slice(0, 3),
       };
+      break;
     case 'toggleBusline':
       if (state[action.res.corridor].indexOf(action.res.busline)> -1){
+        console.log(state[action.res.corridor].filter(item => item !== action.res.busline));
         return {
           ...state,
           [action.res.corridor]: state[action.res.corridor].filter(item => item !== action.res.busline),
         }
       } else {
+        console.log(state[action.res.corridor].concat(action.res.busline));
         return {
           ...state,
           [action.res.corridor]: state[action.res.corridor].concat(action.res.busline),
         }
       }
+      break;
     default:
       return state
   }

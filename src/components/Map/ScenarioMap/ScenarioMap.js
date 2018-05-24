@@ -140,14 +140,14 @@ class ScenarioMap extends React.Component {
     if (this.props.isCompareMode) {
       this.props.changeProgress(0.2);
       let variantIndex = 0;
-      let testBool = false;
+      let updateBool = false;
       if (this.props.currentBusline.A === "2BM"){
         variantIndex = 1;
       } else if (this.props.currentBusline.A === "2BR") {
         variantIndex = 1;
-        testBool = true;
+        updateBool = true;
       }
-      updateModification(PROJECT_ID, testBool)
+      updateModification(PROJECT_ID, updateBool)
         .then(() => {
           this.props.changeProgress(0.4);
           return fetch(API_URL, {

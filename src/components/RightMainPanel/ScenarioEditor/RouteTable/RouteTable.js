@@ -14,10 +14,13 @@ class RouteTable extends React.Component {
   }
 
   handleBuslineClick(busline) {
+    // console.log(this.props.currentCorridor);
+
     if (this.props.currentCorridor === 'A'){
       this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
     } else {
-      this.props.toggleBusline({corridor: this.props.currentCorridor, busline: busline})
+      this.props.toggleBusline({corridor: this.props.currentCorridor, busline: busline});
+      // console.log(busline);
     }
   }
 

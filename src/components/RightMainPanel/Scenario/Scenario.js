@@ -72,6 +72,8 @@ class Scenario extends React.Component {
       "btn-default": !this.props.isCompareMode,
     });
 
+    console.log(this.props.scenarioStore);
+
     return (
       <div className="scenarioDashboardPanel">
         <div className="colHead">

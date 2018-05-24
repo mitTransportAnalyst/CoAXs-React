@@ -21,6 +21,7 @@ export function changeBusline(res) {
 }
 
 export function toggleBusline(res) {
+  // console.log(res);
   return {
     type: "toggleBusline",
     res
