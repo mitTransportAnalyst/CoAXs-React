@@ -31,17 +31,18 @@ class RouteTable extends React.Component {
         {
           CorridorInfo[this.props.currentCorridor].buslines.map((busline, index) => {
             let buslineName = CorridorInfo[this.props.currentCorridor].buslines[index].name
-            if (this.props.selectedBusline[this.props.currentCorridor] === busline.key) {
+            if (this.props.selectedBusline[this.props.currentCorridor].includes(busline.key)) {
               return (
-                <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline.key}
-                       onClick={() => this.handleBuslineClick(busline)}>
+                <label className="btn btn-xs card highlighted" key={busline.key}
+                       onClick={() => this.handleBuslineClick(busline.key)}>
                   {buslineName}
                 </label>
               )
             }
             else {
               return (
-                <label className="btn btn-xs card" key={busline.key} onClick={() => this.handleBuslineClick(busline.key)}>
+                <label className="btn btn-xs card" key={busline.key}
+                        onClick={() => this.handleBuslineClick(busline.key)}>
                   {buslineName}
                 </label>
               )

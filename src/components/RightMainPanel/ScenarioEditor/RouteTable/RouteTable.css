@@ -20,3 +20,9 @@
   vertical-align: middle;
   border-radius: 5px;
 }
+
+.highlighted {
+  border-width: 3px;
+  border-style: solid;
+  border-color: #eec16f;
+}

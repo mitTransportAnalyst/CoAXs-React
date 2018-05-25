@@ -136,7 +136,7 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
       id: "B",
       fullName: "Line2B Feeders",
       buslines: [
-        { key: "F1", name: "Feeder 1", data: Geojson2B },
+        { key: "F1", name: "Feeder 1", data: Geojson2B},
         { key: "F2", name: "Feeder 2", data: Geojson2B, scenarioData: jsonExisting },
         { key: "F3", name: "Feeder 3", data: Geojson2B, scenarioData: jsonExisting },
         { key: "F4", name: "Feeder 4", data: Geojson2B, scenarioData: jsonExisting },
