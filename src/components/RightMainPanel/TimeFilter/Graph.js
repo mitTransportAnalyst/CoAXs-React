@@ -24,13 +24,13 @@ class Graph extends React.Component {
     );
 
     let data = [
-      {name: 'Base Scenario', job: this.props.gridNumberBase},
+      {name: 'Base', job: this.props.gridNumberBase},
     ];
 
     if (this.props.isCompareMode && this.props.gridNumberNew !== undefined) {
       data = [
-        {name: 'Base Scenario', job: this.props.gridNumberBase},
-        {name: 'New Scenario', job: this.props.gridNumberNew},
+        {name: 'Base', job: this.props.gridNumberBase},
+        {name: 'Escenario', job: this.props.gridNumberNew},
       ];
     }
 
@@ -41,7 +41,7 @@ class Graph extends React.Component {
         <br/>
         <div style={{marginTop: -20, marginLeft: 8}}>
 
-          <h5>Jobs Reachable
+          <h5>Oportunidades Accesibles
             <OverlayTrigger placement="bottom" overlay={tooltipforJob}>
               <i className="fa fa-question-circle-o questionMark"/>
             </OverlayTrigger>

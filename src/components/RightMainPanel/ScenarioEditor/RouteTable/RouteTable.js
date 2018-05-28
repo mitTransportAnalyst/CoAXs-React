@@ -26,7 +26,7 @@ class RouteTable extends React.Component {
             let buslineName = CorridorInfo[this.props.currentCorridor].buslines[index].name
             if (this.props.selectedBusline[this.props.currentCorridor] === busline.key) {
               return (
-                <label className="btn btn-xs card" style={{border: "3px solid #eec16f"}} key={busline.key}
+                <label className="btn btn-xs card" style={{border: "3px solid #FFFFFF"}} key={busline.key}
                        onClick={() => this.handleBuslineClick(busline)}>
                   {buslineName}
                 </label>

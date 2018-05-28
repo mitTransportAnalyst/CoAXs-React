@@ -68,7 +68,7 @@ class LegendPTP extends React.Component {
                 <svg height="10" width="20">
                   <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#f1d3e9", strokeWidth: 2}}/>
                 </svg>
-                <small className="panel-word">Transit network</small>
+                <small className="panel-word">Transporte Público</small>
               </div>
             </div>
           </div>

@@ -75,8 +75,8 @@ class Scenario extends React.Component {
     return (
       <div className="scenarioDashboardPanel">
         <div className="colHead">
-          <i className="fa fa-random"/>
-          <span>Scenario Summary</span>
+          {/* <i className="fa fa-random"/> */}
+          <span>Isocronas</span>
         </div>
         <div>
           <div className="scenariosTable">
@@ -92,17 +92,17 @@ class Scenario extends React.Component {
             <div >
               <div className={baselineButton} style={{width: "50%", height: "10%", padding: 2}}
                    onClick={this.handleClickBaselineButton}>
-                <i className="fa fa-eye"/> View the Baseline
+                <i className="fa fa-eye"/> Base
               </div>
               <div className={compareButton} style={{width: "50%", height: "10%", padding: 2}}
                    onClick={this.handleClickCompareButton}>
-                <i className="fa fa-balance-scale"/> Compare with Baseline
+                <i className="fa fa-balance-scale"/> Comparar
               </div>
             </div>
 
             <div className="btn-group btn-group-justified" onClick={this.handleUpdate}>
               <div className="btn btn-info" style={{width: "100%", height: "10%", padding: 2}}>
-                <i className="fa fa-refresh"/> Update
+                <i className="fa fa-refresh"/> Actualizar
               </div>
             </div>
           </div>

@@ -18,8 +18,8 @@ class ScenarioEditor extends React.Component {
     return (
       <div className="ScenarioEditorCol">
         <div className="colHead">
-          <i className="fa fa-pencil-square-o"/>
-          Service Editor - Editing Route {CorridorInfo[this.props.currentCorridor].name}
+          {/* <i className="fa fa-pencil-square-o"/> */}
+           Visualizar Corredores {CorridorInfo[this.props.currentCorridor].name}
         </div>
         <div className="routesContainer">
           {
@@ -27,7 +27,7 @@ class ScenarioEditor extends React.Component {
               if (this.props.currentCorridor === corridor.id) {
                 return (
                   <div className="btn routeItemSel" key={corridor.id}
-                       style={{border: "3px solid #eec16f", "backgroundColor": corridor.color, fontSize: 12}}
+                       style={{border: "3px solid #696969", "backgroundColor": corridor.color, fontSize: 12}}
                        onClick={() => this.props.clickCorridor(corridor.id)}>
                     {corridor.fullName}
                   </div>

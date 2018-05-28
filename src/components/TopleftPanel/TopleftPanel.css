@@ -5,7 +5,7 @@
   overflow         : hidden;
   z-index: 10;
   background-color : #696969;
-  height:35px;
+  height:40px;
 }
 
 .topleftText {
@@ -16,7 +16,7 @@
   overflow         : hidden;
   z-index: 10;
   background-color : #696969;
-  height: 17px;
+  height: 20px;
 }
 
 .topinfo {

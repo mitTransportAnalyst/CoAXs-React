@@ -138,10 +138,10 @@ class ScenarioMap extends React.Component {
     });
 
     if (this.props.isCompareMode) {
-      this.props.changeProgress(0.2);
-      updateModification(PROJECT_ID, this.props.headwayStore)
-        .then(() => {
-          this.props.changeProgress(0.4);
+      // this.props.changeProgress(0.2);
+      // updateModification(PROJECT_ID, this.props.headwayStore)
+      //   .then(() => {
+      //     this.props.changeProgress(0.4);
           return fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -154,7 +154,7 @@ class ScenarioMap extends React.Component {
                 fromLon: origin.lng,
               }
             )
-          })
+          // })
         })
         .then(res => res.arrayBuffer())
         .then(buff => responseToSurface(buff))
@@ -304,6 +304,16 @@ class ScenarioMap extends React.Component {
               />)
             })
           }
+          {/* {//jleape - displays corridors
+            Object.values(CorridorInfo.A).map((corridor, idx1) => {
+              return (<GeoJson data={corridor.data} key={corridor.name} style={{
+                color: corridor.color,
+                weight: corridor.weightOn,
+                opacity: corridor.opacityOn
+              }}
+            />)
+          })
+        } */}
           {isochrone && <GeoJson
             style={{
               stroke: true,
