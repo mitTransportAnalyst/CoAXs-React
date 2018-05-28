@@ -3,28 +3,33 @@
  */
 
 // Geojson files
- import Geojson16A from './Data/busline/16A.geojson'
- import Geojson16B from './Data/busline/16B.geojson'
- import Geojson16C from './Data/busline/16C.geojson'
- import GeojsonE3A from './Data/busline/E3A.geojson'
- import GeojsonE3B from './Data/busline/E3B.geojson'
- import GeojsonE3C from './Data/busline/E3C.geojson'
- import GeojsonE3D from './Data/busline/E3D.geojson'
- import GeojsonE5A from './Data/busline/E5A.geojson'
- import GeojsonE5B from './Data/busline/E5B.geojson'
- import GeojsonJeT from './Data/busline/JeT.geojson'
- import GeojsonNORTA from './Data/busline/NORTA.geojson'
+import GeojsonGTFS from './Data/busline/GTFS.geojson'
+import GeojsonBase from './Data/busline/Base.geojson'
+import GeojsonEscenario1 from './Data/busline/Escenario1.geojson'
+
+// 1. Talcahuano - Hualpén Tramo 1
+// 2. Talcahuano - Hualpén Tramo 2
+// 3. Talcahuano - Hualpén Tramo 3
+// 4. Talcahuano - Hualpén Tramo 4
+// 5. Autopista CCP - THNO
+// 6. Palcaví
+// 7. Pedro Aguirre Cerda
+// 8. Corredor Coronel Tramo 1
+// 9. Corredor Coronel Tramo 2
+// 10. Corredor Coronel Tramo 3
+// 11. Corredor Coronel Tramo 4
+// 12. Corredor Chiguayante
+// 13. Corredor Collao
+// 14. Ruta 150
+// 15. Ruta 160
+// 16. Avenida Carrera
+// 17. Calle O'Higgins
+// 18. Calle Prat
+// 19. Camilo Henríquez
 
 // Scenario files
- import json16A from "./Data/scenario/16A.json"
- import json16B from "./Data/scenario/16B.json"
- import json16C from "./Data/scenario/16C.json"
- import jsonE3A from "./Data/scenario/E3A.json"
- import jsonE3B from "./Data/scenario/E3B.json"
- import jsonE3C from "./Data/scenario/E3C.json"
- import jsonE3D from "./Data/scenario/E3D.json"
- import jsonE5A from "./Data/scenario/E5A.json"
- import jsonE5B from "./Data/scenario/E5B.json"
+ import jsonBase from "./Data/scenario/Base.json"
+ import jsonEscenario1 from "./Data/scenario/Escenario1.json"
 
 const ENVIRONMENT = "DEV";    //"DEV" for development mode. change to "PROD" when you build and push to Heroku
 
@@ -54,11 +59,11 @@ export const ZoomLevel = 13;
  */
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
-export const GRID_REGION_ID = "eb987d48-d382-4adf-9519-646820a4b042";
+export const GRID_REGION_ID = "5ab9046b896fd02e6b156a5f";
 
-export const GRID_NAME = "FactorExpa_Trabajos"; //see analysis.conveyal.com > web inspector > Network > analysis > opportunityDatasetKey
+export const GRID_NAME = "FactorExpa_Conce_trabajos"; //see analysis.conveyal.com > web inspector > Network > analysis > opportunityDatasetKey
 
-export const PROJECT_ID = "5ae9d7ca896fd06143cc42a3";
+export const PROJECT_ID = "5b037c2837ed81159a8e5db9";
 
 //Thiago - Network info
 /** Network info
@@ -67,38 +72,29 @@ export const PROJECT_ID = "5ae9d7ca896fd06143cc42a3";
  */
 
 export const NetworkInfo = {
-   "JeT": {
-     name: "JeT",
+   "GTFS": {
+     name: "GTFS",
      color: "#f1d3e9",
      weight: 1,
      opacity: 0.5,
-     data: GeojsonJeT
-   },
-   "NORTA": {
-     name: "NORTA",
-     color: "#f1d3e9",
-     weight: 1,
-     opacity: 0.5,
-     data: GeojsonNORTA
+     data: GeojsonGTFS
    }
  }
 
  //Corridor info
  /** Corridor info
-  * @type {object} CorridorInfo
-  * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
-  */
+//   * @type {object} CorridorInfo
+//   * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
+//   */
 
 export const CorridorInfo = {
   A: {
-    name: "16",
-    color: "#555555",
+    name: "Base",
+    color: "#97ceed",
     id: "A",
-    fullName: "RTA #16 S. Claiborne",
+    fullName: "Base",
     buslines: [
-      { key: "16A", name: "16A - Current Route", data: Geojson16A, scenarioData: json16A },
-      { key: "16B", name: "16B - Ext to Ochsner", data: Geojson16B, scenarioData: json16B },
-      { key: "16C", name: "16C - Ext to Clearview", data: Geojson16C, scenarioData: json16C }],
+      { key: "Base", name: "Base", data: GeojsonBase, scenarioData: jsonBase }],
     baselineBuses: 2,
     baselineHeadwayTime: 30,
     weightOn: 8,
@@ -107,15 +103,12 @@ export const CorridorInfo = {
     opacityOff: 0.5
     },
   B: {
-    name: "E3",
-    color: "#2eadd3",
+    name: "Escenario1",
+    color: "#f4ba44",
     id: "B",
-    fullName: "JeT #E3 Kenner Local",
+    fullName: "Escenario 1",
     buslines: [
-      { key: "E3A", name: "E3A - Current Route", data: GeojsonE3A, scenarioData: jsonE3A },
-      { key: "E3B", name: "E3B - Ext ot Orleans", data: GeojsonE3B, scenarioData: jsonE3B },
-      { key: "E3C", name: "E3C - COA Re-route", data: GeojsonE3C, scenarioData: jsonE3C },
-      { key: "E3D", name: "E3D - Short turn to Ochsner", data: GeojsonE3D, scenarioData: jsonE3D }],
+      { key: "Escenario1", name: "Escenario1", data: GeojsonEscenario1, scenarioData: jsonEscenario1 }],
     baselineBuses: 4,
     baselineHeadwayTime: 24,
     weightOn: 8,
@@ -123,28 +116,27 @@ export const CorridorInfo = {
     opacityOn: 1,
     opacityOff: 0.5
     },
-  C: {
-    name: "E5",
-    color: "#8d6aa8",
-    id: "C",
-    fullName: "JeT #E5 Causeway ",
-    buslines: [
-      { key: "E5A", name: "E5A - Current route", data: GeojsonE5A, scenarioData: jsonE5A },
-      { key: "E5B", name: "E5B - Ext to Ochsner", data: GeojsonE5B, scenarioData: jsonE5B }],
-    baselineBuses: 3,
-    baselineHeadwayTime: 27,
-    weightOn: 8,
-    weightOff: 5,
-    opacityOn: 1,
-    opacityOff: 0.5
-    }
+  // C: {
+  //   name: "Escenario2",
+  //   color: "#FFFFF",
+  //   id: "C",
+  //   fullName: "Escenario 2",
+  //   buslines: [
+  //     { key: "Escenario2", name: "Escenario2", data: GeojsonEscenario1, scenarioData: jsonEscenario1 }],
+  //   baselineBuses: 4,
+  //   baselineHeadwayTime: 24,
+  //   weightOn: 8,
+  //   weightOff: 5,
+  //   opacityOn: 1,
+  //   opacityOff: 0.5
+  //   }
 }
 
 // to be deprecated
 export const BaselineBuses = {
   A: 2,
   B: 4,
-  C: 3,
+  // C: 6,
 };
 
 //Conveyal API request configurations
@@ -154,7 +146,7 @@ export const GET_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8
 export const UPDATE_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/updateModifications" : "/updateModifications";
 
 export const BaselineRequest = {
-  "date": "2017-12-08",
+  "date": "2017-11-10",
   "fromTime": 25200,
   "toTime": 32400,
   "accessModes": "WALK",
@@ -165,8 +157,8 @@ export const BaselineRequest = {
   "bikeSpeed": 4.166666666666667,
   "monteCarloDraws": 200,
   "maxRides": 4,
-  "fromLat": 29.98646043083785,
-  "fromLon": -90.13526916503908,
+  "fromLat": -36.801566,
+  "fromLon": -73.067919,
   "percentiles": [5, 25, 50, 75, 95],
   "workerVersion": "v4.0.0",
   "projectId": PROJECT_ID,
@@ -174,7 +166,7 @@ export const BaselineRequest = {
 };
 
 export const NewScenarioRequest = {
-  "date": "2017-12-08",
+  "date": "2017-11-10",
   "fromTime": 25200,
   "toTime": 32400,
   "accessModes": "WALK",
@@ -185,14 +177,11 @@ export const NewScenarioRequest = {
   "bikeSpeed": 4.166666666666667,
   "monteCarloDraws": 200,
   "maxRides": 4,
-  "fromLat": 29.98646043083785,
-  "fromLon": -90.13526916503908,
+  "fromLat": -36.801566,
+  "fromLon": -73.067919,
   "percentiles": [5, 25, 50, 75, 95],
   "workerVersion": "v4.0.0",
   "projectId": PROJECT_ID,
   "variantIndex": 0,
 };
 
-
-
-// GeoJSON files for Buslines
