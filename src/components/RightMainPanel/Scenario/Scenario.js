@@ -80,14 +80,14 @@ class Scenario extends React.Component {
         </div>
         <div>
           <div className="scenariosTable">
-            <div className="scenarioEntries">
+            {/* <div className="scenarioEntries">
               <ScenarioEntry data={this.props.scenarioStore[0]} index={0} key={0} name="scenario"
                              isCompareMode={this.props.isCompareMode} headwayTime={this.state.baselineHeadwayTime}
                              scorecardData={BaselineBuses} />
               <ScenarioEntry data={this.props.scenarioStore[1]} index={1} key={1} name="scenario"
                              isCompareMode={this.props.isCompareMode} headwayTime={this.props.headwayTime}
                              scorecardData={this.props.scorecardData}/>
-            </div>
+            </div> */}
 
             <div >
               <div className={baselineButton} style={{width: "50%", height: "10%", padding: 2}}

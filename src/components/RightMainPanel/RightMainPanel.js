@@ -9,7 +9,7 @@ class RightMainPanel extends React.Component {
     return (
       <div className="rightMainPanel">
         <ScenarioEditor/>
-        {/* <Scenario/> */}
+        <Scenario/>
         <TimeFilter/>
       </div>
     );
