@@ -24,15 +24,15 @@ class Graph extends React.Component {
     );
 
     let data = [
-      {name: 'Base', job: this.props.gridNumberBase},
-    ];
+    //   {name: 'Base', job: this.props.gridNumberBase},
+    // ];
 
-    if (this.props.isCompareMode && this.props.gridNumberNew !== undefined) {
-      data = [
+    // if (this.props.isCompareMode && this.props.gridNumberNew !== undefined) {
+    //   data = [
         {name: 'Base', job: this.props.gridNumberBase},
         {name: 'Escenario', job: this.props.gridNumberNew},
       ];
-    }
+    // }
 
     const scale = 'ordinal';
     const axisFormatter = (value) => (value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -42,9 +42,9 @@ class Graph extends React.Component {
         <div style={{marginTop: -20, marginLeft: 8}}>
 
           <h5>Oportunidades Accesibles
-            <OverlayTrigger placement="bottom" overlay={tooltipforJob}>
+            {/* <OverlayTrigger placement="bottom" overlay={tooltipforJob}>
               <i className="fa fa-question-circle-o questionMark"/>
-            </OverlayTrigger>
+            </OverlayTrigger> */}
           </h5>
 
           <BarChart width={392} height={200} data={data} layout="vertical">

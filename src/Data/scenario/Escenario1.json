@@ -6,11 +6,563 @@
 	"_id": 0,
 	"modifications": [
 		{
+			"_id": "5b0c7f0437ed814a93d44299",
+			"name": "v_4",
+			"nonce": "5b0ca99037ed814a93d44309",
+			"createdAt": 1527545604202,
+			"updatedAt": 1527556496396,
+			"accessGroup": "puc-brt",
+			"createdBy": "jleape@mit.edu",
+			"updatedBy": "jleape@mit.edu",
+			"projectId": "5b037c2837ed81159a8e5db9",
+			"variants": [
+				false,
+				true
+			],
+			"showOnMap": false,
+			"description": null,
+			"feed": "918c70df-fbf2-4e1d-9429-31692ffeb045",
+			"routes": [
+				"3081",
+				"3096",
+				"3354",
+				"3353",
+				"3192",
+				"3032",
+				"3030",
+				"3130",
+				"3134",
+				"3048",
+				"3169",
+				"3193",
+				"3235",
+				"3234",
+				"3050",
+				"3057",
+				"3054",
+				"3039",
+				"3186",
+				"3044",
+				"3173",
+				"3355",
+				"3171",
+				"3178",
+				"3175",
+				"3271",
+				"3273"
+			],
+			"trips": null,
+			"hops": null,
+			"scale": 2.16,
+			"type": "adjust-speed"
+		},
+		{
+			"_id": "5b0c5cb637ed814a93d44221",
+			"name": "Ruta_160_e1",
+			"nonce": "5b0cb8e837ed814a93d4434e",
+			"createdAt": 1527536822599,
+			"updatedAt": 1527560424976,
+			"accessGroup": "puc-brt",
+			"createdBy": "jleape@mit.edu",
+			"updatedBy": "jleape@mit.edu",
+			"projectId": "5b037c2837ed81159a8e5db9",
+			"variants": [
+				false,
+				true
+			],
+			"showOnMap": false,
+			"description": null,
+			"segments": [
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.1597489397973,
+								-36.96877173201809
+							],
+							[
+								-73.1598,
+								-36.96878
+							],
+							[
+								-73.15976,
+								-36.9682
+							],
+							[
+								-73.15964,
+								-36.96748
+							],
+							[
+								-73.15926,
+								-36.96596
+							],
+							[
+								-73.15699,
+								-36.95638
+							],
+							[
+								-73.15702406689526,
+								-36.95636949142462
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.15702406689526,
+								-36.95636949142462
+							],
+							[
+								-73.15699,
+								-36.95638
+							],
+							[
+								-73.15664,
+								-36.95491
+							],
+							[
+								-73.15438,
+								-36.94577
+							],
+							[
+								-73.15319,
+								-36.94069
+							],
+							[
+								-73.15318037755789,
+								-36.94068559003866
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.15318037755789,
+								-36.94068559003866
+							],
+							[
+								-73.15319,
+								-36.94069
+							],
+							[
+								-73.15248,
+								-36.93767
+							],
+							[
+								-73.14622,
+								-36.91167
+							],
+							[
+								-73.14624,
+								-36.91166
+							],
+							[
+								-73.14628634601833,
+								-36.91168136475779
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.14628634601833,
+								-36.91168136475779
+							],
+							[
+								-73.14624,
+								-36.91166
+							],
+							[
+								-73.14622,
+								-36.91167
+							],
+							[
+								-73.14377,
+								-36.90147
+							],
+							[
+								-73.14377169124784,
+								-36.9014654480689
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.14377169124784,
+								-36.9014654480689
+							],
+							[
+								-73.14377,
+								-36.90147
+							],
+							[
+								-73.14277,
+								-36.89724
+							],
+							[
+								-73.1422,
+								-36.89502
+							],
+							[
+								-73.14194,
+								-36.89451
+							],
+							[
+								-73.14166,
+								-36.89337
+							],
+							[
+								-73.14129,
+								-36.89171
+							],
+							[
+								-73.14134320244194,
+								-36.891699585817506
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.14134320244194,
+								-36.891699585817506
+							],
+							[
+								-73.14129,
+								-36.89171
+							],
+							[
+								-73.14077,
+								-36.8896
+							],
+							[
+								-73.14091,
+								-36.88957
+							],
+							[
+								-73.13999,
+								-36.88587
+							],
+							[
+								-73.13937,
+								-36.88322
+							],
+							[
+								-73.139316290617,
+								-36.88322173193271
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": "918c70df-fbf2-4e1d-9429-31692ffeb045:35271",
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.139316290617,
+								-36.88322173193271
+							],
+							[
+								-73.13937,
+								-36.88322
+							],
+							[
+								-73.13617,
+								-36.86993
+							],
+							[
+								-73.1361072865184,
+								-36.8699346638324
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": "918c70df-fbf2-4e1d-9429-31692ffeb045:35271",
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.1361072865184,
+								-36.8699346638324
+							],
+							[
+								-73.13617,
+								-36.86993
+							],
+							[
+								-73.13257,
+								-36.85499
+							],
+							[
+								-73.13254023436458,
+								-36.85499375565421
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.13254023436458,
+								-36.85499375565421
+							],
+							[
+								-73.13257,
+								-36.85499
+							],
+							[
+								-73.13151,
+								-36.85063
+							],
+							[
+								-73.13146,
+								-36.85033
+							],
+							[
+								-73.13093,
+								-36.84807
+							],
+							[
+								-73.13089972827584,
+								-36.84807231181113
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.13089972827584,
+								-36.84807231181113
+							],
+							[
+								-73.13093,
+								-36.84807
+							],
+							[
+								-73.13032,
+								-36.84548
+							],
+							[
+								-73.1297,
+								-36.84294
+							],
+							[
+								-73.12955,
+								-36.84241
+							],
+							[
+								-73.12911,
+								-36.8416
+							],
+							[
+								-73.12903,
+								-36.8415
+							],
+							[
+								-73.12901899684222,
+								-36.8414938098387
+							]
+						]
+					}
+				},
+				{
+					"stopAtStart": true,
+					"stopAtEnd": true,
+					"fromStopId": null,
+					"toStopId": null,
+					"spacing": 0,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								-73.12901899684222,
+								-36.8414938098387
+							],
+							[
+								-73.12903,
+								-36.8415
+							],
+							[
+								-73.12861,
+								-36.84098
+							],
+							[
+								-73.12806,
+								-36.84018
+							],
+							[
+								-73.12756,
+								-36.8397
+							],
+							[
+								-73.12622,
+								-36.83885
+							],
+							[
+								-73.12571,
+								-36.83859
+							],
+							[
+								-73.12513,
+								-36.83835
+							],
+							[
+								-73.12388,
+								-36.83794
+							],
+							[
+								-73.12344,
+								-36.83784
+							],
+							[
+								-73.12314,
+								-36.83778
+							],
+							[
+								-73.12184,
+								-36.83761
+							],
+							[
+								-73.12153,
+								-36.83753
+							],
+							[
+								-73.12121,
+								-36.8375
+							],
+							[
+								-73.12058,
+								-36.83752
+							],
+							[
+								-73.11877,
+								-36.83762
+							],
+							[
+								-73.11876378022134,
+								-36.83763844882021
+							]
+						]
+					}
+				}
+			],
+			"bidirectional": true,
+			"timetables": [
+				{
+					"_id": "e3db3a7a-5943-464f-aed8-c3fb34b81f8f",
+					"monday": true,
+					"tuesday": true,
+					"wednesday": true,
+					"thursday": true,
+					"friday": true,
+					"saturday": false,
+					"sunday": false,
+					"name": "DL_PM",
+					"startTime": 25200,
+					"endTime": 30600,
+					"headwaySecs": 600,
+					"exactTimes": false,
+					"phaseAtStop": null,
+					"phaseFromTimetable": null,
+					"phaseFromStop": null,
+					"phaseSeconds": 0,
+					"dwellTime": 10,
+					"segmentSpeeds": [
+						80,
+						80,
+						80,
+						80,
+						80,
+						80,
+						80,
+						80,
+						80,
+						80,
+						80
+					],
+					"dwellTimes": []
+				}
+			],
+			"type": "add-trip-pattern"
+		},
+		{
 			"_id": "5b08f44637ed814a93d42500",
 			"name": "v_8",
-			"nonce": "5b0b7ad437ed814a93d44174",
+			"nonce": "5b0cb71037ed814a93d4432e",
 			"createdAt": 1527313478631,
-			"updatedAt": 1527478996282,
+			"updatedAt": 1527559952607,
 			"accessGroup": "puc-brt",
 			"createdBy": "jleape@mit.edu",
 			"updatedBy": "jleape@mit.edu",
@@ -103,15 +655,15 @@
 					"45007"
 				]
 			],
-			"scale": 0.65,
+			"scale": 1.04,
 			"type": "adjust-speed"
 		},
 		{
 			"_id": "5b08ca0737ed814a93d424f4",
 			"name": "v_6",
-			"nonce": "5b0b798a37ed814a93d4415d",
+			"nonce": "5b0cb6c037ed814a93d4432c",
 			"createdAt": 1527302663451,
-			"updatedAt": 1527478666778,
+			"updatedAt": 1527559872641,
 			"accessGroup": "puc-brt",
 			"createdBy": "jleape@mit.edu",
 			"updatedBy": "jleape@mit.edu",
@@ -241,57 +793,6 @@
 				]
 			],
 			"scale": 1.14,
-			"type": "adjust-speed"
-		},
-		{
-			"_id": "5b08c7f337ed814a93d424e8",
-			"name": "v_4",
-			"nonce": "5b0b75e337ed814a93d44110",
-			"createdAt": 1527302131781,
-			"updatedAt": 1527477731981,
-			"accessGroup": "puc-brt",
-			"createdBy": "jleape@mit.edu",
-			"updatedBy": "jleape@mit.edu",
-			"projectId": "5b037c2837ed81159a8e5db9",
-			"variants": [
-				false,
-				true
-			],
-			"showOnMap": false,
-			"description": null,
-			"feed": "918c70df-fbf2-4e1d-9429-31692ffeb045",
-			"routes": [
-				"3081",
-				"3096",
-				"3354",
-				"3353",
-				"3192",
-				"3032",
-				"3030",
-				"3130",
-				"3134",
-				"3048",
-				"3169",
-				"3193",
-				"3235",
-				"3234",
-				"3050",
-				"3057",
-				"3054",
-				"3039",
-				"3186",
-				"3044",
-				"3173",
-				"3355",
-				"3171",
-				"3178",
-				"3175",
-				"3271",
-				"3273"
-			],
-			"trips": null,
-			"hops": null,
-			"scale": 2.16,
 			"type": "adjust-speed"
 		},
 		{

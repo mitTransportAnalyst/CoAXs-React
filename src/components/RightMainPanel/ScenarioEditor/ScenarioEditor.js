@@ -3,6 +3,7 @@ import s from "./ScenarioEditor.css";
 // import RouteTable from "./RouteTable/RouteTable"
 // import ServiceEditor from "./ServiceEditor/ServiceEditor"
 import {CorridorInfo} from "../../../config"
+import {OppInfo} from "../../../config"
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -14,11 +15,13 @@ class ScenarioEditor extends React.Component {
   }
 
   render() {
-    let currentCorridor = CorridorInfo[this.props.currentCorridor];
+    // let currentCorridor = CorridorInfo[this.props.currentCorridor];
+    let currentOpp = OppInfo[this.props.currentOpp];
+    console.log(currentOpp)
     return (
       <div className="ScenarioEditorCol">
-        <div className="colHead">
-          {/* <i className="fa fa-pencil-square-o"/> */}
+        {/* <div className="colHead">
+          <i className="fa fa-pencil-square-o"/>
           Corredores: {CorridorInfo[this.props.currentCorridor].name}
         </div>
         <div className="routesContainer">
@@ -43,30 +46,30 @@ class ScenarioEditor extends React.Component {
                 )
               }
             })
-          }
-        </div>
+          } 
+        </div> */}
         <div className="colHead">
           {/* <i className="fa fa-pencil-square-o"/> */}
            Oportunidades
         </div>
         <div className="oppsContainer">
           {
-            Object.values(CorridorInfo).map((corridor) => {
-              if (this.props.currentCorridor === corridor.id) {
+            Object.values(OppInfo).map((opp) => {
+              if (this.props.currentOpp === opp.id) {
                 return (
-                  <div className="btn routeItemSel" key={corridor.id}
-                       style={{border: "3px solid #696969", "backgroundColor": corridor.color, fontSize: 12}}
-                       onClick={() => this.props.clickCorridor(corridor.id)}>
-                    {corridor.fullName}
+                  <div className="btn routeItemSel" key={opp.id}
+                       style={{border: "3px solid #696969", "backgroundColor": opp.color, fontSize: 12}}
+                       onClick={() => this.props.clickOpp(opp.id)}>
+                    {opp.fullName}
                   </div>
                 )
               }
               else {
                 return (
-                  <div className="btn routeItem" key={corridor.id}
-                       style={{"backgroundColor": corridor.color, fontSize: 12}}
-                       onClick={() => this.props.clickCorridor(corridor.id)}>
-                    {corridor.fullName}
+                  <div className="btn routeItem" key={opp.id}
+                       style={{"backgroundColor": opp.color, fontSize: 12}}
+                       onClick={() => this.props.clickOpp(opp.id)}>
+                    {opp.fullName}
                   </div>
                 )
               }
@@ -83,6 +86,7 @@ class ScenarioEditor extends React.Component {
 function mapStateToProps(state) {
   return {
     currentCorridor: state.currentCorridorStore.currentCor,
+    currentOpp: state.currentOppStore.currentOpp
   }
 }
 

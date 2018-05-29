@@ -58,7 +58,7 @@ class ScenarioMap extends React.Component {
     };
 
     this.moveOrigin = this.moveOrigin.bind(this);
-    this.updateScneario = this.updateScneario.bind(this);
+    // this.updateScenario = this.updateScenario.bind(this);
   }
 
   componentDidMount() {
@@ -97,11 +97,11 @@ class ScenarioMap extends React.Component {
       let isochrone = changeIsochroneCutoff(nextProps.currentTimeFilter, this.state.singleValuedSurface);
       let opportunityValue = computeAccessibility(this.state.surface, this.props.currentTimeFilter, this.state.grid);
       this.setState({isochrone, opportunityValue, key: uuid.v4()});
-      if (this.props.isCompareMode) {
+      // if (this.props.isCompareMode) {
         let isochrone2 = changeIsochroneCutoff(nextProps.currentTimeFilter, this.state.singleValuedSurface2);
         let opportunityValue2 = computeAccessibility(this.state.surface2, this.props.currentTimeFilter, this.state.grid);
         this.setState({isochrone2, opportunityValue2, key2: uuid.v4()});
-      }
+      // }
       this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
     }
 
@@ -119,7 +119,7 @@ class ScenarioMap extends React.Component {
 
     // when push the update button
     if (this.props.updateButtonState !== nextProps.updateButtonState) {
-      this.updateScneario();
+      this.updateScenario();
     }
   }
 
@@ -137,12 +137,13 @@ class ScenarioMap extends React.Component {
       opportunityValue2: null,
     });
 
-    if (this.props.isCompareMode) {
+    //jleape - always Compare
+    // if (this.props.isCompareMode) {
       // this.props.changeProgress(0.2);
       // updateModification(PROJECT_ID, this.props.headwayStore)
       //   .then(() => {
       //     this.props.changeProgress(0.4);
-          return fetch(API_URL, {
+          fetch(API_URL, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -172,8 +173,8 @@ class ScenarioMap extends React.Component {
           this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
           this.props.changeProgress(1);
         })
-    }
-
+    // }
+    
     fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -203,83 +204,83 @@ class ScenarioMap extends React.Component {
       })
   };
 
-  updateScneario() {
-    let {origin} = this.state;
-    this.setState({
-      ...this.state,
-      surface: null,
-      surface2: null,
-      isochrone: null,
-      isochrone2: null,
-      opportunityValue: null,
-      opportunityValue2: null,
-    });
+  // updateScenario() {
+  //   let {origin} = this.state;
+  //   this.setState({
+  //     ...this.state,
+  //     surface: null,
+  //     surface2: null,
+  //     isochrone: null,
+  //     isochrone2: null,
+  //     opportunityValue: null,
+  //     opportunityValue2: null,
+  //   });
 
-    if (this.props.isCompareMode) {
-      this.props.changeProgress(0.2);
-      updateModification(PROJECT_ID, this.props.headwayStore)
-        .then(() => {
-          this.props.changeProgress(0.4);
-          return fetch(API_URL, {
-            method: 'POST',
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(
-              {
-                ...NewScenarioRequest,
-                fromLat: origin.lat,
-                fromLon: origin.lng,
-              }
-            )
-          })
-        })
-        .then(res => res.arrayBuffer())
-        .then(buff => responseToSurface(buff))
-        .then(surface => {
-          this.props.changeProgress(0.7);
-          let singleValuedSurface2 = computeSingleValuedSurface(surface);
-          let opportunityValue2 = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
-          this.setState({
-            surface2: surface,
-            singleValuedSurface2,
-            isochrone2: computeIsochrone(singleValuedSurface2, this.props.currentTimeFilter),
-            opportunityValue2,
-            key2: uuid.v4()
-          });
-          this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
-          this.props.changeProgress(1);
-        })
-    }
+    // if (this.props.isCompareMode) {
+    //   this.props.changeProgress(0.2);
+    //   updateModification(PROJECT_ID) //, this.props.headwayStore)
+    //     .then(() => {
+    //       this.props.changeProgress(0.4);
+    //       return fetch(API_URL, {
+    //         method: 'POST',
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(
+    //           {
+    //             ...NewScenarioRequest,
+    //             fromLat: origin.lat,
+    //             fromLon: origin.lng,
+    //           }
+    //         )
+    //       })
+    //     })
+    //     .then(res => res.arrayBuffer())
+    //     .then(buff => responseToSurface(buff))
+    //     .then(surface => {
+    //       this.props.changeProgress(0.7);
+    //       let singleValuedSurface2 = computeSingleValuedSurface(surface);
+    //       let opportunityValue2 = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
+    //       this.setState({
+    //         surface2: surface,
+    //         singleValuedSurface2,
+    //         isochrone2: computeIsochrone(singleValuedSurface2, this.props.currentTimeFilter),
+    //         opportunityValue2,
+    //         key2: uuid.v4()
+    //       });
+    //       this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
+    //       this.props.changeProgress(1);
+    //     })
+    // }
 
-    fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(
-        {
-          ...BaselineRequest,
-          fromLat: origin.lat,
-          fromLon: origin.lng,
-        }
-      )
-    })
-      .then(res => res.arrayBuffer())
-      .then(buff => responseToSurface(buff))
-      .then(surface => {
-        let singleValuedSurface = computeSingleValuedSurface(surface);
-        let opportunityValue = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
-        this.setState({
-          surface,
-          singleValuedSurface,
-          isochrone: computeIsochrone(singleValuedSurface, this.props.currentTimeFilter),
-          opportunityValue,
-          key: uuid.v4()
-        });
-        this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
-      })
-  };
+  //   fetch(API_URL, {
+  //     method: 'POST',
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(
+  //       {
+  //         ...BaselineRequest,
+  //         fromLat: origin.lat,
+  //         fromLon: origin.lng,
+  //       }
+  //     )
+  //   })
+  //     .then(res => res.arrayBuffer())
+  //     .then(buff => responseToSurface(buff))
+  //     .then(surface => {
+  //       let singleValuedSurface = computeSingleValuedSurface(surface);
+  //       let opportunityValue = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
+  //       this.setState({
+  //         surface,
+  //         singleValuedSurface,
+  //         isochrone: computeIsochrone(singleValuedSurface, this.props.currentTimeFilter),
+  //         opportunityValue,
+  //         key: uuid.v4()
+  //       });
+  //       this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
+  //     })
+  // };
 
   render() {
     let {isochrone, isochrone2, key, key2, origin} = this.state;
@@ -304,18 +305,27 @@ class ScenarioMap extends React.Component {
               />)
             })
           }
-          {//jleape display corridors
+          { //jleape highlight selected corridors
             Object.values(CorridorInfo).map((corridor, idx1) => {
-              // var currCorridorData = corridor[idx1].data
-              console.log(corridor.data);
-              return (<GeoJson data={corridor.data} key={corridor.name} style={{
-                color: corridor.color,
-                weight: corridor.weightOn,
-                opacity: corridor.opacityOn
-              }}
-            />)
-          })
+              if (this.props.currentCorridor === corridor.id) { // (this.props.currentCorridor === corridor.id) {
+                return (<GeoJson data={corridor.data} key={corridor.name} style={{
+                  color: corridor.color,
+                  weight: corridor.weightOn,
+                  opacity: corridor.opacityOn
+                  }}
+                />)
+              }
+              else {
+                return(<GeoJson data={corridor.data} key={corridor.name} style={{
+                  color: corridor.color,
+                  weight: corridor.weightOff,
+                  opacity: corridor.opacityOff
+                  }}
+                />)
+              }
+            })
           }
+          
           {isochrone && <GeoJson
             style={{
               stroke: true,
@@ -328,7 +338,8 @@ class ScenarioMap extends React.Component {
             data={isochrone}
             key={`iso-${key}`}
           />}
-          {this.props.isCompareMode && isochrone2 && <GeoJson
+          {/* {this.props.isCompareMode && isochrone2 && <GeoJson */}
+          {isochrone2 && <GeoJson
             style={{
               stroke: true,
               fillColor: '#FDB813',
@@ -346,41 +357,6 @@ class ScenarioMap extends React.Component {
             onDragend={this.moveOrigin}
             ref='markerOrigin'
           />
-          {/* { //thiago - retrieves style information directly from settings within config.js
-            Object.values(CorridorInfo).map((corridor, idx1) => {
-              // let geojsonBusLines = ''
-              // let geojsonBusLinesInc = ''
-              // return (corridor.buslines.map((busline, idx2) => {
-              return (corridor.map((corridor, idx2) => {
-              let currCorridor = corridor[idx2].key
-              let currCorridorData = corridor.buslines[idx2].data
-              //console.log(this.props.currentCorridor, corridor.id, this.props.currentBusline[corridor.id], currBusLine);
-              if (this.props.currentCorridor === corridor.id) //jleape && this.props.currentBusline[corridor.id] === currBusLine)
-                {
-                  //jleape let currBusLineKey = currBusLine + "1"
-                  //console.log(currBusLineData)
-                  //console.log(currBusLine)
-                    return (<GeoJson data={currBusLineData} key={currBusLineKey} style={{
-                    color: corridor.color,
-                    weight: corridor.weightOn,
-                    opacity: corridor.opacityOn
-                  }}
-                />)
-                }
-                else {
-                  let currBusLineKey = currBusLine + "2"
-                  return(<GeoJson data={currBusLineData} key={currBusLineKey} style={{
-                    color: corridor.color,
-                    weight: corridor.weightOff,
-                    opacity: corridor.opacityOff
-                  }}
-                />)
-              }
-            }))
-            })
-          } */}
-
-
 
         </Map>
       </div>
@@ -391,12 +367,13 @@ class ScenarioMap extends React.Component {
 function mapStateToProps(state) {
   return {
     currentTimeFilter: state.timeFilterStore.currentTimeFilter,
-    isCompareMode: state.isCompare.isCompare,
+    // isCompareMode: state.isCompare.isCompare,
     currentCorridor: state.currentCorridorStore.currentCor,
-    currentBusline: state.BuslineSelectedStore,
-    updateButtonState: state.updateButtonState,
+    currentOpp: state.currentOppStore.currentOpp,
+    // currentBusline: state.BuslineSelectedStore,
+    // updateButtonState: state.updateButtonState,
     emailStore: state.emailStore,
-    headwayStore: state.HeadwayTime,
+    // headwayStore: state.HeadwayTime,
   }
 }
 

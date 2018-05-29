@@ -6,6 +6,13 @@
  * action creators
  */
 
+export function clickOpp(res) {
+  return {
+    type: "clickOpp",
+    res
+  }
+}
+
 export function clickCorridor(res) {
   return {
     type: "clickCorridor",

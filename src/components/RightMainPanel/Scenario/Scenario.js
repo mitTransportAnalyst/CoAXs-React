@@ -4,15 +4,8 @@ import _ from 'lodash';
 import cloneDeep from 'lodash/cloneDeep'
 import classNames from "classnames"
 
-// import json16A from "../../../Data/scenario/16A.json"
-// import json16B from "../../../Data/scenario/16B.json"
-// import json16C from "../../../Data/scenario/16C.json"
-// import jsonE3A from "../../../Data/scenario/E3A.json"
-// import jsonE3B from "../../../Data/scenario/E3B.json"
-// import jsonE3C from "../../../Data/scenario/E3C.json"
-// import jsonE3D from "../../../Data/scenario/E3D.json"
-// import jsonE5A from "../../../Data/scenario/E5A.json"
-// import jsonE5B from "../../../Data/scenario/E5B.json"
+// import jsonBase from "../../../Data/scenario/Base.json"
+// import jsonEscenario1 from "../../../Data/scenario/Escenario1.json"
 
 //bind redux
 import {bindActionCreators} from 'redux';
@@ -20,29 +13,26 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../../reducers/action';
 
 //import configuration file
-import {CorridorInfo, BaselineBuses} from "../../../config"
+import {CorridorInfo} from "../../../config"
 
-import ScenarioEntry from "./ScenarioEntry"
-
-
+// import ScenarioEntry from "./ScenarioEntry"
 
 class Scenario extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-      baselineHeadwayTime: {},
-    };
+//     this.state = {
+//       baselineHeadwayTime: {},
+//     };
 
 // thiago - baselineHeadwayTime is read from config.js
 
-      Object.values(CorridorInfo).map((corridor) => {
-          let corridorId = corridor.id
-          let corridorBaselineHeadwayTime = corridor.baselineHeadwayTime
-          this.state.baselineHeadwayTime[corridorId] = corridorBaselineHeadwayTime
-          //console.log(this.state.baselineHeadwayTime)
-        })
-    this.handleUpdate = this.handleUpdate.bind(this);
+    //   Object.values(CorridorInfo).map((corridor) => {
+    //       let corridorId = corridor.id
+    //       let corridorBaselineHeadwayTime = corridor.baselineHeadwayTime
+    //       this.state.baselineHeadwayTime[corridorId] = corridorBaselineHeadwayTime
+    //       //console.log(this.state.baselineHeadwayTime)
+    //     })
+    // this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClickBaselineButton = this.handleClickBaselineButton.bind(this);
     this.handleClickCompareButton = this.handleClickCompareButton.bind(this);
   }
@@ -55,9 +45,9 @@ class Scenario extends React.Component {
     this.props.changeCompareMode();
   }
 
-  handleUpdate() {
-    this.props.pushUpdateButton();
-  }
+  // handleUpdate() {
+  //   this.props.pushUpdateButton();
+  // }
 
   render() {
     const baselineButton = classNames({
@@ -115,8 +105,8 @@ class Scenario extends React.Component {
 function mapStateToProps(state) {
   return {
     scenarioStore: state.scenarioStore,
-    headwayTime: state.HeadwayTime,
-    scorecardData: state.ScorecardData,
+    // headwayTime: state.HeadwayTime,
+    // scorecardData: state.ScorecardData,
     showCompareScenarioModal: state.showCompareScenarioModal,
     isCompareMode: state.isCompare.isCompare,
   }

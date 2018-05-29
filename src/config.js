@@ -61,7 +61,7 @@ export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogr
 
 export const GRID_REGION_ID = "5ab9046b896fd02e6b156a5f";
 
-export const GRID_NAME = "FactorExpa_Conce_trabajos"; //see analysis.conveyal.com > web inspector > Network > analysis > opportunityDatasetKey
+export const GRID_NAME = "conveyal_Conce_trabajos"; //see analysis.conveyal.com > web inspector > Network > analysis > opportunityDatasetKey
 
 export const PROJECT_ID = "5b037c2837ed81159a8e5db9";
 
@@ -81,8 +81,7 @@ export const NetworkInfo = {
    }
  }
 
- //Corridor info
- /** Corridor info
+/** Corridor info
 //   * @type {object} CorridorInfo
 //   * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
 //   */
@@ -100,7 +99,7 @@ export const CorridorInfo = {
     data: GeojsonBase,
     scenarioData: jsonBase,
     weightOn: 8,
-    weightOff: 5,
+    weightOff: 8,
     opacityOn: 1,
     opacityOff: 0.5
     },
@@ -109,39 +108,93 @@ export const CorridorInfo = {
     color: "#f4ba44",
     id: "B",
     fullName: "Escenario 1",
-    // buslines: [
-    //   { key: "Escenario1", name: "Escenario1", data: GeojsonEscenario1, scenarioData: jsonEscenario1 }],
-    // baselineBuses: 4,
-    // baselineHeadwayTime: 24,
     data: GeojsonEscenario1,
     scenarioData: jsonEscenario1,
     weightOn: 8,
-    weightOff: 5,
+    weightOff: 8,
     opacityOn: 1,
     opacityOff: 0.5
+    }
+}
+
+/** Opportunity info
+//   * @type {object} OppInfo
+//   * @property {string} name - corridor name {string} color - corridor color on the map and corridor table {string} id - corridor ID
+//   */
+
+export const OppInfo = {
+  A: {
+    name: "areasVerdes",
+    color: "#907AD6",
+    id: "A",
+    fullName: "Áreas Verdes",
+    gridName: "conveyal_Conce_areasVerdes",
+    // data: GeojsonTrabajos,
     },
-  // C: {
-  //   name: "Escenario2",
-  //   color: "#FFFFF",
-  //   id: "C",
-  //   fullName: "Escenario 2",
-  //   buslines: [
-  //     { key: "Escenario2", name: "Escenario2", data: GeojsonEscenario1, scenarioData: jsonEscenario1 }],
-  //   baselineBuses: 4,
-  //   baselineHeadwayTime: 24,
-  //   weightOn: 8,
-  //   weightOff: 5,
-  //   opacityOn: 1,
-  //   opacityOff: 0.5
-  //   }
+  B: {
+    name: "educacion",
+    color: "#907AD6",
+    id: "B",
+    fullName: "Educación",
+    gridName: "conveyal_Conce_educacion",
+    // data: GeojsonTrabajos,
+    },
+  C: {
+    name: "ferias",
+    color: "#907AD6",
+    id: "C",
+    fullName: "Ferias",
+    gridName: "conveyal_Conce_ferias",
+    // data: GeojsonTrabajos,
+    },
+  D: {
+    name: "saludPrimaria",
+    color: "#907AD6",
+    id: "D",
+    fullName: "Salud Primaria",
+    gridName: "conveyal_Conce_saludPrimaria",
+    // data: GeojsonTrabajos,
+    },
+  E: {
+    name: "saludSecundaria",
+    color: "#907AD6",
+    id: "E",
+    fullName: "Salud Secundaria",
+    gridName: "conveyal_Conce_saludSecundaria",
+    // data: GeojsonTrabajos,
+    },
+  F: {
+    name: "saludTerciaria",
+    color: "#907AD6",
+    id: "F",
+    fullName: "Salud Terciaria",
+    gridName: "conveyal_Conce_saludTerciaria",
+    // data: GeojsonTrabajos,
+    },
+  G: {
+    name: "supermercados",
+    color: "#907AD6",
+    id: "G",
+    fullName: "Supermercados",
+    gridName: "conveyal_Conce_supermercados",
+    // data: GeojsonTrabajos,
+    },
+  H: {
+    name: "trabajos",
+    color: "#907AD6",
+    id: "H",
+    fullName: "Trabajos",
+    gridName: "conveyal_Conce_trabajos",
+    // data: GeojsonTrabajos,
+    },
 }
 
 // to be deprecated
-export const BaselineBuses = {
-  A: 2,
-  B: 4,
-  // C: 6,
-};
+// export const BaselineBuses = {
+//   A: 2,
+//   B: 4,
+//   // C: 6,
+// };
 
 //Conveyal API request configurations
 export const API_URL = ENVIRONMENT === "DEV" ? "http://localhost:8000/api" : "/api";
@@ -152,27 +205,7 @@ export const UPDATE_MODIFICATIONS_URL = ENVIRONMENT === "DEV" ? "http://localhos
 export const BaselineRequest = {
   "date": "2017-11-10",
   "fromTime": 25200,
-  "toTime": 32400,
-  "accessModes": "WALK",
-  "directModes": "WALK",
-  "egressModes": "WALK",
-  "transitModes": "BUS,TRAM,RAIL,SUBWAY",
-  "walkSpeed": 1.3888888888888888,
-  "bikeSpeed": 4.166666666666667,
-  "monteCarloDraws": 200,
-  "maxRides": 4,
-  "fromLat": -36.801566,
-  "fromLon": -73.067919,
-  "percentiles": [5, 25, 50, 75, 95],
-  "workerVersion": "v4.0.0",
-  "projectId": PROJECT_ID,
-  "variantIndex": -1,
-};
-
-export const NewScenarioRequest = {
-  "date": "2017-11-10",
-  "fromTime": 25200,
-  "toTime": 32400,
+  "toTime": 30600,
   "accessModes": "WALK",
   "directModes": "WALK",
   "egressModes": "WALK",
@@ -187,5 +220,25 @@ export const NewScenarioRequest = {
   "workerVersion": "v4.0.0",
   "projectId": PROJECT_ID,
   "variantIndex": 0,
+};
+
+export const NewScenarioRequest = {
+  "date": "2017-11-10",
+  "fromTime": 25200,
+  "toTime": 30600,
+  "accessModes": "WALK",
+  "directModes": "WALK",
+  "egressModes": "WALK",
+  "transitModes": "BUS,TRAM,RAIL,SUBWAY",
+  "walkSpeed": 1.3888888888888888,
+  "bikeSpeed": 4.166666666666667,
+  "monteCarloDraws": 200,
+  "maxRides": 4,
+  "fromLat": -36.801566,
+  "fromLon": -73.067919,
+  "percentiles": [5, 25, 50, 75, 95],
+  "workerVersion": "v4.0.0",
+  "projectId": PROJECT_ID,
+  "variantIndex": 1,
 };
 

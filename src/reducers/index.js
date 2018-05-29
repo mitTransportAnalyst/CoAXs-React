@@ -9,6 +9,7 @@ import {reducer as formReducer} from "redux-form";
 
 //Initialization
 const initialCorridor = {currentCor: "A"};
+const initialOpp = {currentOpp: "A"};
 
 const initialScenario = [{
   A: {
@@ -18,7 +19,6 @@ const initialScenario = [{
   B: {
     headway: 0,
     alternative: "E3A"
-
   },
   C: {
     headway: 0,
@@ -48,6 +48,17 @@ const initialNavState = {
   isdoneExitSurvey: false
 };
 
+function currentOppStore(state = initialOpp, action) {
+  switch (action.type) {
+    case 'clickOpp':
+      return {
+        ...state,
+        "currentOpp": action.res
+      };
+    default:
+      return state
+  }
+}
 
 function currentCorridorStore(state = initialCorridor, action) {
   switch (action.type) {
@@ -201,6 +212,7 @@ function navState(state = initialNavState, action) {
 export const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
+  currentOppStore,
   currentCorridorStore,
   scenarioStore,
   timeFilterStore,
