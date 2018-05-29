@@ -31,7 +31,7 @@ import GeojsonEscenario1 from './Data/busline/Escenario1.geojson'
  import jsonBase from "./Data/scenario/Base.json"
  import jsonEscenario1 from "./Data/scenario/Escenario1.json"
 
-const ENVIRONMENT = "DEV";    //"DEV" for development mode. change to "PROD" when you build and push to Heroku
+const ENVIRONMENT = "PROD";    //"DEV" for development mode. change to "PROD" when you build and push to Heroku
 
 /** Introduction title on the left
  * @type {string} IntroTitle
@@ -61,7 +61,7 @@ export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogr
 
 export const GRID_REGION_ID = "5ab9046b896fd02e6b156a5f";
 
-export const GRID_NAME = "conveyal_Conce_trabajos"; //see analysis.conveyal.com > web inspector > Network > analysis > opportunityDatasetKey
+// export const GRID_NAME = "conveyal_Conce_trabajos"; //see analysis.conveyal.com > web inspector > Network > analysis > opportunityDatasetKey
 
 export const PROJECT_ID = "5b037c2837ed81159a8e5db9";
 

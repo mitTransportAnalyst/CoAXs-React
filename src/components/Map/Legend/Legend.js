@@ -61,14 +61,14 @@ class Legend extends React.Component {
                 <svg width="20" height="20">
                   <rect width="20" height="20" style={{fill: "#89cff0", strokeWidth: 3, stroke: "#45b3e7"}}/>
                 </svg>
-                <small className="panel-word">Area accesible: Base</small>
+                <small className="panel-word">Área accesible: Base</small>
               </div>
 
               <div>
                 <svg width="20" height="20">
                   <rect width="20" height="20" style={{fill: "#FDB813", strokeWidth: 3, stroke: "#F68B1F"}}/>
                 </svg>
-                <small className="panel-word">Area accesible: Escenario 1</small>
+                <small className="panel-word">Área accesible: Escenario 1</small>
               </div>
 
               <div>

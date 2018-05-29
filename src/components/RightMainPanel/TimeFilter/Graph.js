@@ -24,22 +24,17 @@ class Graph extends React.Component {
     );
 
     let data = [
-    //   {name: 'Base', job: this.props.gridNumberBase},
-    // ];
-
-    // if (this.props.isCompareMode && this.props.gridNumberNew !== undefined) {
-    //   data = [
         {name: 'Base', job: this.props.gridNumberBase},
-        {name: 'Escenario', job: this.props.gridNumberNew},
+        {name: 'Esc 1', job: this.props.gridNumberNew},
       ];
-    // }
-
+    
+    let scaleX = Math.round(1.2 * Math.max(data[0].job, data[1].job));
     const scale = 'ordinal';
     const axisFormatter = (value) => (value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     return (
       <div>
         <br/>
-        <div style={{marginTop: -20, marginLeft: 8}}>
+        <div style={{marginTop: -10, marginLeft: 8}}>
 
           <h5>Oportunidades Accesibles
             {/* <OverlayTrigger placement="bottom" overlay={tooltipforJob}>
@@ -48,7 +43,7 @@ class Graph extends React.Component {
           </h5>
 
           <BarChart width={392} height={200} data={data} layout="vertical">
-            <XAxis stroke="black" type="number" domain={[0, 400000]} tickFormatter={axisFormatter}/>
+            <XAxis stroke="black" type="number" domain={[0, scaleX]} tickFormatter={axisFormatter}/>
             <YAxis dataKey="name" stroke="black" type="category"/>
             <CartesianGrid strokeDasharray="3 3"/>
             <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label={<GraphLabel/>} layout="vertical">

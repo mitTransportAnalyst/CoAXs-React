@@ -17,7 +17,6 @@ class ScenarioEditor extends React.Component {
   render() {
     // let currentCorridor = CorridorInfo[this.props.currentCorridor];
     let currentOpp = OppInfo[this.props.currentOpp];
-    console.log(currentOpp)
     return (
       <div className="ScenarioEditorCol">
         {/* <div className="colHead">

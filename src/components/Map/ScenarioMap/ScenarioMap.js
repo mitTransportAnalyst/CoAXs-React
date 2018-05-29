@@ -28,9 +28,10 @@ import {
   Tile,
   NetworkInfo,
   CorridorInfo,
+  OppInfo,
   PROJECT_ID,
   GRID_REGION_ID,
-  GRID_NAME,
+  // GRID_NAME,
   BaselineRequest,
   NewScenarioRequest,
   API_URL,
@@ -64,6 +65,8 @@ class ScenarioMap extends React.Component {
   componentDidMount() {
     // fetch the opportunity grid file first
     this.props.changeProgress(0.2);
+    let GRID_NAME = OppInfo[this.props.currentOpp].gridName;
+    console.log(GRID_NAME);
     fetch(GRID_URL, {
       method: 'POST',
       headers: {
@@ -92,35 +95,75 @@ class ScenarioMap extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // when time cut off change
+    // when time cut off changes
     if (this.props.currentTimeFilter !== nextProps.currentTimeFilter && this.state.key !== null) {
       let isochrone = changeIsochroneCutoff(nextProps.currentTimeFilter, this.state.singleValuedSurface);
-      let opportunityValue = computeAccessibility(this.state.surface, this.props.currentTimeFilter, this.state.grid);
+      let opportunityValue = computeAccessibility(this.state.surface, nextProps.currentTimeFilter, this.state.grid);
       this.setState({isochrone, opportunityValue, key: uuid.v4()});
-      // if (this.props.isCompareMode) {
+      let isochrone2 = changeIsochroneCutoff(nextProps.currentTimeFilter, this.state.singleValuedSurface2);
+      let opportunityValue2 = computeAccessibility(this.state.surface2, nextProps.currentTimeFilter, this.state.grid);
+      this.setState({isochrone2, opportunityValue2, key2: uuid.v4()});
+      // this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
+      console.log(opportunityValue, opportunityValue2)
+      this.props.changeGridNumber([opportunityValue, opportunityValue2]);
+    }
+
+    // when opportunity changes
+    if (this.props.currentOpp !== nextProps.currentOpp && this.state.key !== null) {
+      this.props.changeProgress(0.2);
+      let GRID_NAME = OppInfo[nextProps.currentOpp].gridName;
+      console.log(GRID_NAME);
+      fetch(GRID_URL, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          {
+            gridRegionID: GRID_REGION_ID,
+            gridName: GRID_NAME,
+          }
+        )
+      })
+        .then(res => {
+          this.props.changeProgress(0.6);
+          return res.json();
+        })
+        .then(res => fetch(res.url, {method: 'GET',}))
+        .then(res => {
+          this.props.changeProgress(0.8);
+          return res.arrayBuffer();
+        })
+        .then(grid => {
+          this.setState({grid: processGrid(grid)});
+          this.props.changeProgress(1);
+        });
+        // update accessibility data
+        let isochrone = changeIsochroneCutoff(nextProps.currentTimeFilter, this.state.singleValuedSurface);
+        let opportunityValue = computeAccessibility(nextProps.surface, nextProps.currentTimeFilter, nextProps.grid);
+        this.setState({isochrone, opportunityValue, key: uuid.v4()});
         let isochrone2 = changeIsochroneCutoff(nextProps.currentTimeFilter, this.state.singleValuedSurface2);
-        let opportunityValue2 = computeAccessibility(this.state.surface2, this.props.currentTimeFilter, this.state.grid);
+        let opportunityValue2 = computeAccessibility(nextProps.surface2, nextProps.currentTimeFilter, nextProps.grid);
         this.setState({isochrone2, opportunityValue2, key2: uuid.v4()});
-      // }
-      this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
+        this.props.changeGridNumber([opportunityValue, opportunityValue2]);
     }
 
     // when toggle between the "view the baseline" and "compare with baseline"
-    if (this.props.isCompareMode !== nextProps.isCompareMode) {
-      this.setState({
-        isochrone: null,
-        isochrone2: null,
-        key: null,
-        key2: null,
-        accessibility: null,
-        accessibility2: null,
-      });
-    }
+  //   if (this.props.isCompareMode !== nextProps.isCompareMode) {
+  //     this.setState({
+  //       isochrone: null,
+  //       isochrone2: null,
+  //       key: null,
+  //       key2: null,
+  //       accessibility: null,
+  //       accessibility2: null,
+  //     });
+  //   }
 
-    // when push the update button
-    if (this.props.updateButtonState !== nextProps.updateButtonState) {
-      this.updateScenario();
-    }
+  //   // when push the update button
+  //   if (this.props.updateButtonState !== nextProps.updateButtonState) {
+  //     this.updateScenario();
+  //   }
   }
 
 
@@ -138,24 +181,18 @@ class ScenarioMap extends React.Component {
     });
 
     //jleape - always Compare
-    // if (this.props.isCompareMode) {
-      // this.props.changeProgress(0.2);
-      // updateModification(PROJECT_ID, this.props.headwayStore)
-      //   .then(() => {
-      //     this.props.changeProgress(0.4);
-          fetch(API_URL, {
-            method: 'POST',
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(
-              {
-                ...NewScenarioRequest,
-                fromLat: origin.lat,
-                fromLon: origin.lng,
-              }
-            )
-          // })
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          {
+            ...NewScenarioRequest,
+            fromLat: origin.lat,
+            fromLon: origin.lng,
+          }
+        )
         })
         .then(res => res.arrayBuffer())
         .then(buff => responseToSurface(buff))
@@ -173,7 +210,6 @@ class ScenarioMap extends React.Component {
           this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
           this.props.changeProgress(1);
         })
-    // }
     
     fetch(API_URL, {
       method: 'POST',
@@ -203,84 +239,6 @@ class ScenarioMap extends React.Component {
         this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
       })
   };
-
-  // updateScenario() {
-  //   let {origin} = this.state;
-  //   this.setState({
-  //     ...this.state,
-  //     surface: null,
-  //     surface2: null,
-  //     isochrone: null,
-  //     isochrone2: null,
-  //     opportunityValue: null,
-  //     opportunityValue2: null,
-  //   });
-
-    // if (this.props.isCompareMode) {
-    //   this.props.changeProgress(0.2);
-    //   updateModification(PROJECT_ID) //, this.props.headwayStore)
-    //     .then(() => {
-    //       this.props.changeProgress(0.4);
-    //       return fetch(API_URL, {
-    //         method: 'POST',
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(
-    //           {
-    //             ...NewScenarioRequest,
-    //             fromLat: origin.lat,
-    //             fromLon: origin.lng,
-    //           }
-    //         )
-    //       })
-    //     })
-    //     .then(res => res.arrayBuffer())
-    //     .then(buff => responseToSurface(buff))
-    //     .then(surface => {
-    //       this.props.changeProgress(0.7);
-    //       let singleValuedSurface2 = computeSingleValuedSurface(surface);
-    //       let opportunityValue2 = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
-    //       this.setState({
-    //         surface2: surface,
-    //         singleValuedSurface2,
-    //         isochrone2: computeIsochrone(singleValuedSurface2, this.props.currentTimeFilter),
-    //         opportunityValue2,
-    //         key2: uuid.v4()
-    //       });
-    //       this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
-    //       this.props.changeProgress(1);
-    //     })
-    // }
-
-  //   fetch(API_URL, {
-  //     method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(
-  //       {
-  //         ...BaselineRequest,
-  //         fromLat: origin.lat,
-  //         fromLon: origin.lng,
-  //       }
-  //     )
-  //   })
-  //     .then(res => res.arrayBuffer())
-  //     .then(buff => responseToSurface(buff))
-  //     .then(surface => {
-  //       let singleValuedSurface = computeSingleValuedSurface(surface);
-  //       let opportunityValue = computeAccessibility(surface, this.props.currentTimeFilter, this.state.grid);
-  //       this.setState({
-  //         surface,
-  //         singleValuedSurface,
-  //         isochrone: computeIsochrone(singleValuedSurface, this.props.currentTimeFilter),
-  //         opportunityValue,
-  //         key: uuid.v4()
-  //       });
-  //       this.props.changeGridNumber([this.state.opportunityValue, this.state.opportunityValue2]);
-  //     })
-  // };
 
   render() {
     let {isochrone, isochrone2, key, key2, origin} = this.state;
