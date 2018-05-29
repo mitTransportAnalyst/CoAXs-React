@@ -93,10 +93,12 @@ export const CorridorInfo = {
     color: "#97ceed",
     id: "A",
     fullName: "Base",
-    buslines: [
-      { key: "Base", name: "Base", data: GeojsonBase, scenarioData: jsonBase }],
-    baselineBuses: 2,
-    baselineHeadwayTime: 30,
+    // buslines: [
+    //   { key: "Base", name: "Base", data: GeojsonBase, scenarioData: jsonBase }],
+    // baselineBuses: 2,
+    // baselineHeadwayTime: 30,
+    data: GeojsonBase,
+    scenarioData: jsonBase,
     weightOn: 8,
     weightOff: 5,
     opacityOn: 1,
@@ -107,10 +109,12 @@ export const CorridorInfo = {
     color: "#f4ba44",
     id: "B",
     fullName: "Escenario 1",
-    buslines: [
-      { key: "Escenario1", name: "Escenario1", data: GeojsonEscenario1, scenarioData: jsonEscenario1 }],
-    baselineBuses: 4,
-    baselineHeadwayTime: 24,
+    // buslines: [
+    //   { key: "Escenario1", name: "Escenario1", data: GeojsonEscenario1, scenarioData: jsonEscenario1 }],
+    // baselineBuses: 4,
+    // baselineHeadwayTime: 24,
+    data: GeojsonEscenario1,
+    scenarioData: jsonEscenario1,
     weightOn: 8,
     weightOff: 5,
     opacityOn: 1,

@@ -304,8 +304,10 @@ class ScenarioMap extends React.Component {
               />)
             })
           }
-          {/* {//jleape - displays corridors
-            Object.values(CorridorInfo.A).map((corridor, idx1) => {
+          {//jleape display corridors
+            Object.values(CorridorInfo).map((corridor, idx1) => {
+              // var currCorridorData = corridor[idx1].data
+              console.log(corridor.data);
               return (<GeoJson data={corridor.data} key={corridor.name} style={{
                 color: corridor.color,
                 weight: corridor.weightOn,
@@ -313,7 +315,7 @@ class ScenarioMap extends React.Component {
               }}
             />)
           })
-        } */}
+          }
           {isochrone && <GeoJson
             style={{
               stroke: true,
@@ -344,18 +346,18 @@ class ScenarioMap extends React.Component {
             onDragend={this.moveOrigin}
             ref='markerOrigin'
           />
-
-          { //thiago - retrieves style information directly from settings within config.js
+          {/* { //thiago - retrieves style information directly from settings within config.js
             Object.values(CorridorInfo).map((corridor, idx1) => {
-              let geojsonBusLines = ''
-              let geojsonBusLinesInc = ''
-              return (corridor.buslines.map((busline, idx2) => {
-              let currBusLine = corridor.buslines[idx2].key
-              let currBusLineData = corridor.buslines[idx2].data
+              // let geojsonBusLines = ''
+              // let geojsonBusLinesInc = ''
+              // return (corridor.buslines.map((busline, idx2) => {
+              return (corridor.map((corridor, idx2) => {
+              let currCorridor = corridor[idx2].key
+              let currCorridorData = corridor.buslines[idx2].data
               //console.log(this.props.currentCorridor, corridor.id, this.props.currentBusline[corridor.id], currBusLine);
-              if (this.props.currentCorridor === corridor.id && this.props.currentBusline[corridor.id] === currBusLine)
+              if (this.props.currentCorridor === corridor.id) //jleape && this.props.currentBusline[corridor.id] === currBusLine)
                 {
-                  let currBusLineKey = currBusLine + "1"
+                  //jleape let currBusLineKey = currBusLine + "1"
                   //console.log(currBusLineData)
                   //console.log(currBusLine)
                     return (<GeoJson data={currBusLineData} key={currBusLineKey} style={{
@@ -368,15 +370,15 @@ class ScenarioMap extends React.Component {
                 else {
                   let currBusLineKey = currBusLine + "2"
                   return(<GeoJson data={currBusLineData} key={currBusLineKey} style={{
-                  color: corridor.color,
-                  weight: corridor.weightOff,
-                  opacity: corridor.opacityOff
-                }}
-              />)
-            }
-          }))
+                    color: corridor.color,
+                    weight: corridor.weightOff,
+                    opacity: corridor.opacityOff
+                  }}
+                />)
+              }
+            }))
             })
-          }
+          } */}
 
 
 

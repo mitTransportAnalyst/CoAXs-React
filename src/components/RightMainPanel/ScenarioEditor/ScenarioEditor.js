@@ -19,9 +19,37 @@ class ScenarioEditor extends React.Component {
       <div className="ScenarioEditorCol">
         <div className="colHead">
           {/* <i className="fa fa-pencil-square-o"/> */}
-           Visualizar Corredores {CorridorInfo[this.props.currentCorridor].name}
+          Corredores: {CorridorInfo[this.props.currentCorridor].name}
         </div>
         <div className="routesContainer">
+          {
+            Object.values(CorridorInfo).map((corridor) => {
+              if (this.props.currentCorridor === corridor.id) {
+                return (
+                  <div className="btn routeItemSel" key={corridor.id}
+                       style={{border: "3px solid #696969", "backgroundColor": corridor.color, fontSize: 12}}
+                       onClick={() => this.props.clickCorridor(corridor.id)}>
+                    {corridor.fullName}
+                  </div>
+                )
+              }
+              else {
+                return (
+                  <div className="btn routeItem" key={corridor.id}
+                       style={{"backgroundColor": corridor.color, fontSize: 12}}
+                       onClick={() => this.props.clickCorridor(corridor.id)}>
+                    {corridor.fullName}
+                  </div>
+                )
+              }
+            })
+          }
+        </div>
+        <div className="colHead">
+          {/* <i className="fa fa-pencil-square-o"/> */}
+           Oportunidades
+        </div>
+        <div className="oppsContainer">
           {
             Object.values(CorridorInfo).map((corridor) => {
               if (this.props.currentCorridor === corridor.id) {
