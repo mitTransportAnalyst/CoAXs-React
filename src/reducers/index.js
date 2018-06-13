@@ -14,7 +14,13 @@ const initialScenario = [{
   A: {
     alternative: "Existing"
   },
+  B: {
+    alternative:[]
+  }
 }, {
+  A: {
+    alternative: "Existing"
+  },
   B: {
     alternative: []
   },
@@ -100,7 +106,7 @@ function BuslineSelectedStore(state = initialBuslineState, action) {
     case 'changeBusline':
       return {
         ...state,
-        [action.res.corridor]: action.res.busline.slice(0, 3),
+        [action.res.corridor]: action.res.busline,
       };
       break;
     case 'toggleBusline':

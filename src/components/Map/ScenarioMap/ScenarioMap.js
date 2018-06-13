@@ -139,15 +139,16 @@ class ScenarioMap extends React.Component {
 
     if (this.props.isCompareMode) {
       this.props.changeProgress(0.2);
-      let variantIndex = 0;
-      let updateBool = false;
-      if (this.props.currentBusline.A === "2BM"){
-        variantIndex = 1;
-      } else if (this.props.currentBusline.A === "2BR") {
-        variantIndex = 1;
-        updateBool = true;
-      }
-      updateModification(PROJECT_ID, updateBool)
+      let variantIndex = 1;
+      // let updateBool = false;
+      // if (this.props.currentBusline.A === "2BM"){
+      //   variantIndex = 1;
+      // } else if (this.props.currentBusline.A === "2BR") {
+      //   variantIndex = 1;
+      //   updateBool = true;
+      // }
+      // console.log(this.props.currentBusline);
+      updateModification(PROJECT_ID, this.props.currentBusline)
         .then(() => {
           this.props.changeProgress(0.4);
           return fetch(API_URL, {
@@ -226,16 +227,16 @@ class ScenarioMap extends React.Component {
 
     if (this.props.isCompareMode) {
       this.props.changeProgress(0.2);
-      let variantIndex = 0;
-      let testBool = false;
-      if (this.props.currentBusline.A === "2BM"){
-        variantIndex = 1;
-      } else if (this.props.currentBusline.A === "2BR") {
-        variantIndex = 1;
-        testBool = true;
-      }
-      console.log(variantIndex);
-      updateModification(PROJECT_ID, testBool)
+      let variantIndex = 1;
+      // let testBool = false;
+      // if (this.props.currentBusline.A === "2BM"){
+      //   variantIndex = 1;
+      // } else if (this.props.currentBusline.A === "2BR") {
+      //   variantIndex = 1;
+      //   testBool = true;
+      // }
+      // console.log(variantIndex);
+      updateModification(PROJECT_ID, this.props.currentBusline)
         .then(() => {
           this.props.changeProgress(0.4);
           return fetch(API_URL, {

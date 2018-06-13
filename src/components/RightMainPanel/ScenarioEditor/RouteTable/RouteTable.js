@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./RouteTable.css";
+import cloneDeep from 'lodash/cloneDeep'
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -11,6 +12,9 @@ class RouteTable extends React.Component {
   constructor(props) {
     super(props);
     this.handleBuslineClick = this.handleBuslineClick.bind(this);
+    this.state = {
+      currentScenario: {},
+    };
   }
 
   handleBuslineClick(busline) {
@@ -21,6 +25,43 @@ class RouteTable extends React.Component {
     } else {
       this.props.toggleBusline({corridor: this.props.currentCorridor, busline: busline});
       // console.log(busline);
+    }
+  }
+
+  //Initialize the scenario
+  componentWillMount() {
+    const initialScenario = {};
+
+    Object.keys(CorridorInfo).map(
+      (key) => {
+        initialScenario[key] = {
+          "alternative": this.props.selectedBusline[key],
+        };
+      }
+    );
+    this.setState({
+      "currentScenario": initialScenario,
+    });
+  }
+
+  //When busline change
+  componentWillReceiveProps(nextProps) {
+    if (this.props.selectedBusline !== nextProps.selectedBusline) {
+      let nextScenario = cloneDeep(this.state.currentScenario);
+      for (let key in nextProps.selectedBusline) {
+        nextScenario[key].alternative = nextProps.selectedBusline[key];
+      }
+      this.setState({
+        ...this.state,
+        currentScenario: nextScenario
+      })
+    }
+  }
+
+  // When scenario change (headway or busline), update the score, headway and save scenario
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.currentScenario !== this.state.currentScenario) {
+      this.props.saveScenario(nextState.currentScenario);
     }
   }
 
@@ -58,6 +99,7 @@ function mapStateToProps(state) {
   return {
     currentCorridor: state.currentCorridorStore.currentCor,
     selectedBusline: state.BuslineSelectedStore,
+    scenarioStore: state.scenarioStore,
   }
 }
 

@@ -204,10 +204,32 @@ export function processGrid(data) {
   }
 }
 
+const modificationLookup = [
+  {busline: "F1", modification: "removeLine2B_F1"},
+  {busline: "F2", modification: "removeLine2B_F2"},
+  {busline: "F3", modification: "removeLine2B_F3"},
+  {busline: "F4", modification: "removeLine2B_F4"},
+  {busline: "F5", modification: "removeLine2B_F5"},
+  {busline: "F6", modification: "removeLine2B_F6"},
+  {busline: "2BM", modification: "removeLine2B_M"},
+  {busline: "2BR", modification: "removeLine2B_R"},
+]
+
 // update modification
-export function updateModification(projectID, bool) {
+export function updateModification(projectID, busline) {
   //fetch modifications in this project
-  console.log(bool);
+  // console.log(busline);
+  let buslineArray = busline.B.concat(busline.A);
+  console.log(buslineArray); //Turns busline object into one array
+  let modificationArray = [];
+  buslineArray.forEach(function(item){
+    modificationLookup.forEach(function(row){
+      if (row.busline === item){
+        modificationArray.push(row.modification);
+      }
+    });
+  });
+  console.log(modificationArray); //Creates an array of modifications to be turned off
 
   return fetch(GET_MODIFICATIONS_URL, {
     method: 'POST',
@@ -222,9 +244,10 @@ export function updateModification(projectID, bool) {
   }).then(res => res.json())
     .then(oldModifications => oldModifications.map(
       oldModification => {
+        // console.log(oldModification);
         let updatedVariants = oldModification.variants;
         updatedVariants[updatedVariants.length - 1] = true;
-        if (bool) {
+        if (modificationArray.includes(oldModification.name)) {
           updatedVariants[updatedVariants.length - 1] = false;
         }
         console.log(updatedVariants);

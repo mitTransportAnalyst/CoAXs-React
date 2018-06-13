@@ -115,6 +115,7 @@ class Scenario extends React.Component {
 function mapStateToProps(state) {
   return {
     scenarioStore: state.scenarioStore,
+    selectedBusline: state.BuslineSelectedStore,
     // headwayTime: state.HeadwayTime,
     // scorecardData: state.ScorecardData,
     showCompareScenarioModal: state.showCompareScenarioModal,
