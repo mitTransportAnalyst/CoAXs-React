@@ -16,6 +16,12 @@
  // import GeojsonNORTA from './Data/busline/NORTA.geojson'
 import GeojsonExisting from './Data/busline/Existing.geojson'
 import Geojson2B from './Data/busline/Line2B.geojson'
+import GeojsonF1 from './Data/busline/feeder1.geojson'
+import GeojsonF2 from './Data/busline/feeder2.geojson'
+import GeojsonF3 from './Data/busline/feeder3.geojson'
+import GeojsonF4 from './Data/busline/feeder4.geojson'
+import GeojsonF5 from './Data/busline/feeder5.geojson'
+import GeojsonF6 from './Data/busline/feeder6.geojson'
 
 // Scenario files
  // import json16A from "./Data/scenario/16A.json"
@@ -125,8 +131,8 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
         { key: "2BR", name: "2B - Dedicated Lane", data: Geojson2B}],
       baselineBuses: 2,
       baselineHeadwayTime: 30,
-      weightOn: 8,
-      weightOff: 5,
+      weightOn: 6,
+      weightOff: 3,
       opacityOn: 1,
       opacityOff: 0.5
     },
@@ -136,16 +142,16 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
       id: "B",
       fullName: "Line2B Feeders",
       buslines: [
-        { key: "F1", name: "Feeder 1", data: Geojson2B},
-        { key: "F2", name: "Feeder 2", data: Geojson2B, scenarioData: jsonExisting },
-        { key: "F3", name: "Feeder 3", data: Geojson2B, scenarioData: jsonExisting },
-        { key: "F4", name: "Feeder 4", data: Geojson2B, scenarioData: jsonExisting },
-        { key: "F5", name: "Feeder 5", data: Geojson2B, scenarioData: jsonExisting },
-        { key: "F6", name: "Feeder 6", data: Geojson2B, scenarioData: jsonExisting }],
+        { key: "F1", name: "Feeder 1", data: GeojsonF1},
+        { key: "F2", name: "Feeder 2", data: GeojsonF2},
+        { key: "F3", name: "Feeder 3", data: GeojsonF3},
+        { key: "F4", name: "Feeder 4", data: GeojsonF4},
+        { key: "F5", name: "Feeder 5", data: GeojsonF5},
+        { key: "F6", name: "Feeder 6", data: GeojsonF6}],
       baselineBuses: 4,
       baselineHeadwayTime: 24,
-      weightOn: 8,
-      weightOff: 5,
+      weightOn: 4,
+      weightOff: 2,
       opacityOn: 1,
       opacityOff: 0.5
       }

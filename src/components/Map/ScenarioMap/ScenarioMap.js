@@ -362,8 +362,8 @@ class ScenarioMap extends React.Component {
               return (corridor.buslines.map((busline, idx2) => {
               let currBusLine = corridor.buslines[idx2].key
               let currBusLineData = corridor.buslines[idx2].data
-              //console.log(this.props.currentCorridor, corridor.id, this.props.currentBusline[corridor.id], currBusLine);
-              if (this.props.currentCorridor === corridor.id && this.props.currentBusline[corridor.id] === currBusLine)
+              // console.log(this.props.currentCorridor, corridor.id, this.props.currentBusline[corridor.id], currBusLine);
+              if (this.props.currentCorridor === corridor.id && this.props.currentBusline[corridor.id].includes(currBusLine))
                 {
                   let currBusLineKey = currBusLine + "1"
                   //console.log(currBusLineData)
