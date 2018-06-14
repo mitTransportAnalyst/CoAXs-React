@@ -37,7 +37,7 @@ import jsonExisting from "./Data/scenario/Existing.json"
 import json2BMixed from "./Data/scenario/Line2B_Mixed.json"
 import json2BROW from "./Data/scenario/Line2B_ROW.json"
 
-const ENVIRONMENT = "DEV";    //"DEV" for development mode. change to "PROD" when you build and push to Heroku
+const ENVIRONMENT = "PROD";    //"DEV" for development mode. change to "PROD" when you build and push to Heroku
 
 /** Introduction title on the left
  * @type {string} IntroTitle
