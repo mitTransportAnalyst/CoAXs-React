@@ -65,7 +65,7 @@ export const ZoomLevel = 13;
 /** Map base tile
  * @type {string} Tile
  */
-export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
+export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/cjivrlmdj13zm2rpfz067fvex/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
 export const GRID_REGION_ID = "ae8ce7fb-3967-4910-af09-5cc93ecaf60e";
 

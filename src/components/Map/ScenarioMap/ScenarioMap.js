@@ -306,11 +306,12 @@ class ScenarioMap extends React.Component {
 
     return (
       <div className={s.map}>
-        <Map id='coaxsmap' center={[MapLat, MapLng]} zoom={ZoomLevel} detectRetina zoomControl={false} ref='map' minZoom={12}
+        <Map id='coaxsmap' center={[MapLat, MapLng]} zoom={ZoomLevel} detectRetina={true} zoomControl={false} ref='map' minZoom={12}
              maxZoom={15}>
           <ZoomControl position="bottomleft"/>
           <TileLayer
             url={Tile}
+            // detectRetina={true}
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {//thiago - retrieves style information directly from settings within config.js
