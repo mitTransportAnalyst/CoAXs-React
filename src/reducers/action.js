@@ -20,6 +20,13 @@ export function changeBusline(res) {
   }
 }
 
+export function resetBusline(res) {
+  return {
+    type: "resetBusline",
+    res
+  }
+}
+
 export function toggleBusline(res) {
   // console.log(res);
   return {

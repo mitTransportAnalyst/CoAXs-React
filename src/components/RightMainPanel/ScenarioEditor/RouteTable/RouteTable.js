@@ -20,7 +20,9 @@ class RouteTable extends React.Component {
   handleBuslineClick(busline) {
     // console.log(this.props.currentCorridor);
 
-    if (this.props.currentCorridor === 'A'){
+    if (this.props.currentCorridor === 'A' && busline === 'Existing'){
+      this.props.resetBusline({corridor: this.props.currentCorridor, busline: busline})
+    } else if (this.props.currentCorridor === 'A'){
       this.props.changeBusline({corridor: this.props.currentCorridor, busline: busline})
     } else {
       this.props.toggleBusline({corridor: this.props.currentCorridor, busline: busline});
@@ -72,7 +74,12 @@ class RouteTable extends React.Component {
         {
           CorridorInfo[this.props.currentCorridor].buslines.map((busline, index) => {
             let buslineName = CorridorInfo[this.props.currentCorridor].buslines[index].name
-            if (this.props.selectedBusline[this.props.currentCorridor].includes(busline.key)) {
+            if (this.props.selectedBusline["A"] === "Existing" && this.props.currentCorridor === "B"){
+              return (
+                <p key = "no trunk"> Please select a trunk route scenario first. </p>
+              )
+            }
+            else if (this.props.selectedBusline[this.props.currentCorridor].includes(busline.key)) {
               return (
                 <label className="btn btn-xs card highlighted" key={busline.key}
                        onClick={() => this.handleBuslineClick(busline.key)}>
