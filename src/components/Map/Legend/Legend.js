@@ -5,7 +5,7 @@
 import React from "react"
 import s from "./Legend.css"
 import classNames from "classnames"
-import {CorridorInfo, Color} from "../../../config"
+import {NetworkInfo, CorridorInfo, Color} from "../../../config"
 
 class Legend extends React.Component {
   constructor(props) {
@@ -32,13 +32,24 @@ class Legend extends React.Component {
       "panel-body": this.state.showLegend,
     });
 
-    const legendItems = Object.values(CorridorInfo).map((corridor) => { 
+    const legendItems = Object.values(CorridorInfo).map((corridor) => {
       return (
         <div>
           <svg height="10" width="20">
-            <line x1="0" y1="5" x2="20" y2="5" style={{stroke: corridor.color, strokeWidth: 5}}/>
+            <line x1="0" y1="5" x2="20" y2="5" style={{stroke: corridor.color, strokeWidth: 4}}/>
           </svg>
           <small className="panel-word">{corridor.fullName}</small>
+        </div>
+        )
+    })
+
+    const legendItemsNetwork = Object.values(NetworkInfo).map((network) => {
+      return (
+        <div>
+          <svg height="10" width="20" >
+            <line x1="0" y1="5" x2="20" y2="5" style={{stroke: network.color, strokeWidth: 3}}/>
+          </svg>
+          <small className="panel-word">{network.name}</small>
         </div>
         )
     })
@@ -71,12 +82,8 @@ class Legend extends React.Component {
                 <small className="panel-word">New scenario accessiblity area</small>
               </div>
 
-              <div>
-                <svg height="10" width="20">
-                  <line x1="0" y1="5" x2="20" y2="5" style={{stroke: "#f1d3e9", strokeWidth: 2}}/>
-                </svg>
-                <small className="panel-word">Transit network </small>
-              </div>
+              {legendItemsNetwork}
+
             </div>
           </div>
         </div>
@@ -86,5 +93,3 @@ class Legend extends React.Component {
 }
 
 export default Legend;
-
-

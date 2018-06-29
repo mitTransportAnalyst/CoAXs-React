@@ -21,9 +21,9 @@ class ScenarioEntry extends React.Component {
     //   totalbuses += Math.ceil(this.props.scorecardData[key])
     // }
 
-    const tooltipforAlter = (
-      <Tooltip id="tooltipforAlter"><strong>Route Alternative</strong></Tooltip>
-    );
+    // const tooltipforAlter = (
+    //   <Tooltip id="tooltipforAlter"><strong>Route Alternative</strong></Tooltip>
+    // );
 
     // const tooltipforHeadwayValue = (
     //   <Tooltip id="tooltipforHeadwayValue"><strong>Time Between Buses</strong></Tooltip>
@@ -34,6 +34,9 @@ class ScenarioEntry extends React.Component {
     // );
 
     const ScenarioValue = Object.keys(this.props.data).map((corridorKey) => {
+      let selectedBuslines = CorridorInfo[corridorKey].buslines.filter(busline => this.props.data[corridorKey].alternative.includes(busline.key))
+      let selectedBuslineNames = " "+selectedBuslines.map(busline => busline.name)
+      // console.log(selectedBuslineName)
         return (
           <div style={{width: 150, position: "relative", marginTop: 2, marginLeft: 8}} key={corridorKey}>
             <div className="square"
@@ -41,11 +44,9 @@ class ScenarioEntry extends React.Component {
               {CorridorInfo[corridorKey].name}
             </div>
 
-            <small style={{fontSize: 14,}}>
-              <OverlayTrigger placement="bottom" overlay={tooltipforAlter}>
-                <span>{this.props.data[corridorKey].alternative} </span>
-              </OverlayTrigger>
-            </small>
+            <div className="name">
+              {selectedBuslineNames}
+            </div>
           </div>
         )
       }
@@ -54,8 +55,8 @@ class ScenarioEntry extends React.Component {
     if (this.props.isCompareMode == this.props.index) {
       return (
         <div className="scenarioEntrySel">
-          <div className="" style={{margin: 0, padding: 0}}>
-            <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#e9bc69"}}>
+          <div className="entryContainer">
+            <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#888888"}}>
               {this.props.index === 0 ? `Base Scenario` : `New Scenario`}
             </div>
             {ScenarioValue}
@@ -66,8 +67,8 @@ class ScenarioEntry extends React.Component {
     else {
       return (
         <div className="scenarioEntry">
-          <div className="" style={{margin: 0, padding: 0}}>
-            <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#eec16f"}}>
+          <div className="entryContainer">
+            <div className="subHead scenarioEntrySubHead" style={{color: "white", backgroundColor: "#9d9d9d"}}>
               {this.props.index === 0 ? `Base Scenario` : `New Scenario`}
             </div>
             {ScenarioValue}

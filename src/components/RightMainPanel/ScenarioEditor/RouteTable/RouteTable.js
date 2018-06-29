@@ -76,7 +76,7 @@ class RouteTable extends React.Component {
             let buslineName = CorridorInfo[this.props.currentCorridor].buslines[index].name
             if (this.props.selectedBusline["A"] === "Existing" && this.props.currentCorridor === "B"){
               return (
-                <p key = "no trunk"> Please select a trunk route scenario first. </p>
+                <p className="no-trunk-warning" key="no trunk"> Please select a trunk route scenario first. </p>
               )
             }
             else if (this.props.selectedBusline[this.props.currentCorridor].includes(busline.key)) {

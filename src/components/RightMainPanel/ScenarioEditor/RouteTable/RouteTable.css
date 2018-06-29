@@ -12,7 +12,7 @@
   width: 25px;
   height: 25px;
   display: inline-table;
-  background-color: #959595;
+  background-color: #a1a1a1;
   background-size: 100%;
   background-repeat: no-repeat;
   margin: 5px 5px 5px 5px;
@@ -24,5 +24,10 @@
 .highlighted {
   border-width: 3px;
   border-style: solid;
-  border-color: #eec16f;
+  border-color: #fbb233;
+}
+
+.no-trunk-warning {
+  text-align: center;
+  line-height: 80px;
 }

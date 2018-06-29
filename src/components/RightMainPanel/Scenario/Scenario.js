@@ -62,13 +62,13 @@ class Scenario extends React.Component {
   render() {
     const baselineButton = classNames({
       "btn": true,
-      "btn-info": !this.props.isCompareMode,
+      "btn-warning": !this.props.isCompareMode,
       "btn-default": this.props.isCompareMode,
     });
 
     const compareButton = classNames({
       "btn": true,
-      "btn-info": this.props.isCompareMode,
+      "btn-warning": this.props.isCompareMode,
       "btn-default": !this.props.isCompareMode,
     });
 
@@ -101,7 +101,7 @@ class Scenario extends React.Component {
             </div>
 
             <div className="btn-group btn-group-justified" onClick={this.handleUpdate}>
-              <div className="btn btn-info" style={{width: "100%", height: "10%", padding: 2}}>
+              <div className="btn btn-warning" style={{width: "100%", height: "10%", padding: 2}}>
                 <i className="fa fa-refresh"/> Update
               </div>
             </div>

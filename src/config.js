@@ -14,7 +14,8 @@
  // import GeojsonE5B from './Data/busline/E5B.geojson'
  // import GeojsonJeT from './Data/busline/JeT.geojson'
  // import GeojsonNORTA from './Data/busline/NORTA.geojson'
-import GeojsonExisting from './Data/busline/Existing.geojson'
+import GeojsonExisting from './Data/busline/baseline_trunks.geojson'
+import GeojsonExiFeeder from './Data/busline/baseline_feeders.geojson'
 import Geojson2B from './Data/busline/Line2B.geojson'
 import GeojsonF1 from './Data/busline/feeder1.geojson'
 import GeojsonF2 from './Data/busline/feeder2.geojson'
@@ -98,19 +99,19 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
 //  }
 
  export const NetworkInfo = {
-    "Existing": {
-      name: "Existing",
-      color: "#f1d3e9",
-      weight: 1,
-      opacity: 0.5,
+    "Existing BRT Trunk": {
+      name: "Existing BRT Trunks",
+      color: "#60879b",
+      weight: 4,
+      opacity: 0.75,
       data: GeojsonExisting
     },
-    "Line2B": {
-      name: "Line2B",
-      color: "#f1d3e9",
-      weight: 1,
-      opacity: 0.5,
-      data: Geojson2B
+    "Existing BRT Feeders": {
+      name: "Existing Feeders",
+      color: "#8aafbe",
+      weight: 2,
+      opacity: 0.75,
+      data: GeojsonExiFeeder
     }
   }
 
@@ -121,12 +122,12 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
   */
   export const CorridorInfo = {
     A: {
-      name: "2B",
-      color: "#555555",
+      name: "2B Trunk",
+      color: "#8f85b5",
       id: "A",
       fullName: "Line2B Trunk",
       buslines: [
-        { key: "Existing", name: "No Line2B", data: GeojsonExisting},
+        { key: "Existing", name: "No Line2B", data: null},
         { key: "2BM", name: "2B - Mixed Traffic", data: Geojson2B},
         { key: "2BR", name: "2B - Dedicated Lane", data: Geojson2B}],
       baselineBuses: 2,
@@ -137,8 +138,8 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
       opacityOff: 0.5
     },
     B: {
-      name: "Feeders",
-      color: "#2eadd3",
+      name: "2B Feeders",
+      color: "#c48bcb",
       id: "B",
       fullName: "Line2B Feeders",
       buslines: [
@@ -154,7 +155,7 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
       weightOff: 2,
       opacityOn: 1,
       opacityOff: 0.5
-      }
+    }
   }
 // export const CorridorInfo = {
 //   A: {
