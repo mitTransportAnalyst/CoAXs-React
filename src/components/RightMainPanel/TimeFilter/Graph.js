@@ -54,7 +54,7 @@ class Graph extends React.Component {
             <Bar dataKey="job" fill="#facd7a" isAnimationActive={false} label={<GraphLabel/>} layout="vertical">
               {
                 data.map((entry, index) => (
-                  <Cell fill={index === 0 ? '#2eadd3' : '#facd7a'} key={`cell-${index}`}/>
+                  <Cell fill={index === 0 ? '#2eadd3' : '#FDB813'} key={`cell-${index}`}/>
                 ))
               }
             </Bar>
@@ -78,4 +78,3 @@ function mapDispachToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(Graph);
-

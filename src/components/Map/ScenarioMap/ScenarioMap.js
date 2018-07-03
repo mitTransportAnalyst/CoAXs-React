@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Map, Marker, TileLayer, GeoJson, ZoomControl} from 'react-leaflet';
+import {Map, Marker, TileLayer, GeoJson, ZoomControl, CircleMarker} from 'react-leaflet';
+import L from 'leaflet';
 import {
   responseToSurface,
   computeIsochrone,
@@ -301,6 +302,24 @@ class ScenarioMap extends React.Component {
       })
   };
 
+  pointToLayerOn = (feature, latlng) => {
+    return L.circleMarker(latlng, {
+      color: feature.color,
+      fillColor: feature.color,
+      fillOpacity: 0.5,
+      radius: 3
+    })
+  }
+
+  pointToLayerOff = (feature, latlng) => {
+    return L.circleMarker(latlng, {
+      color: feature.color,
+      fillColor: feature.color,
+      fillOpacity: 0.3,
+      radius: 1.5
+    })
+  }
+
   render() {
     let {isochrone, isochrone2, key, key2, origin} = this.state;
 
@@ -322,6 +341,13 @@ class ScenarioMap extends React.Component {
                   weight: network.weight,
                   opacity: network.opacity
                 }}
+              />)
+            })
+          }
+          {
+            Object.values(NetworkInfo).map((network, idx1) => {
+                var currNetworkStops = network.data_s
+                return (<GeoJson data={currNetworkStops} key={network.name+"1"} pointToLayer={this.pointToLayerOff.bind(this)}
               />)
             })
           }
@@ -363,6 +389,7 @@ class ScenarioMap extends React.Component {
               return (corridor.buslines.map((busline, idx2) => {
               let currBusLine = corridor.buslines[idx2].key
               let currBusLineData = corridor.buslines[idx2].data
+              let currBuslineStops = corridor.buslines[idx2].data_s
               // console.log(this.props.currentCorridor, corridor.id, this.props.currentBusline[corridor.id], currBusLine);
               if (this.props.currentCorridor === corridor.id && this.props.currentBusline[corridor.id].includes(currBusLine))
                 {
@@ -374,7 +401,8 @@ class ScenarioMap extends React.Component {
                     weight: corridor.weightOn,
                     opacity: corridor.opacityOn
                   }}
-                />)
+                />
+              )
                 }
                 else {
                   let currBusLineKey = currBusLine + "2"
@@ -389,7 +417,32 @@ class ScenarioMap extends React.Component {
             })
           }
 
-
+          {
+            Object.values(CorridorInfo).map((corridor, idx1) => {
+              let geojsonBusLines = ''
+              let geojsonBusLinesInc = ''
+              return (corridor.buslines.map((busline, idx2) => {
+              let currBusLine = corridor.buslines[idx2].key
+              let currBuslineStops = corridor.buslines[idx2].data_s
+              // console.log(this.props.currentCorridor, corridor.id, this.props.currentBusline[corridor.id], currBusLine);
+              if (this.props.currentCorridor === corridor.id && this.props.currentBusline[corridor.id].includes(currBusLine))
+                {
+                  let currBusLineKey = currBusLine + "1"
+                  //console.log(currBusLineData)
+                  //console.log(currBusLine)
+                    return (
+                <GeoJson data={currBuslineStops} key={currBusLineKey} pointToLayer={this.pointToLayerOn.bind(this)}/>
+              )
+                }
+                else {
+                  let currBusLineKey = currBusLine + "2"
+                  return(
+              <GeoJson data={currBuslineStops} key={currBusLineKey} pointToLayer={this.pointToLayerOff.bind(this)}/>
+            )
+            }
+          }))
+            })
+          }
 
         </Map>
       </div>

@@ -24,6 +24,14 @@ import GeojsonF4 from './Data/busline/feeder4.geojson'
 import GeojsonF5 from './Data/busline/feeder5.geojson'
 import GeojsonF6 from './Data/busline/feeder6.geojson'
 
+import Geojson2Bstops from './Data/busline/Line2B_stops.geojson'
+import GeojsonExiStops from './Data/busline/baseline_stops.geojson'
+import GeojsonF1Stops from './Data/busline/feeder1_stops.geojson'
+import GeojsonF2Stops from './Data/busline/feeder2_stops.geojson'
+import GeojsonF3Stops from './Data/busline/feeder3_stops.geojson'
+import GeojsonF4Stops from './Data/busline/feeder4_stops.geojson'
+import GeojsonF5Stops from './Data/busline/feeder5_stops.geojson'
+import GeojsonF6Stops from './Data/busline/feeder6_stops.geojson'
 // Scenario files
  // import json16A from "./Data/scenario/16A.json"
  // import json16B from "./Data/scenario/16B.json"
@@ -104,7 +112,8 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
       color: "#60879b",
       weight: 4,
       opacity: 0.75,
-      data: GeojsonExisting
+      data: GeojsonExisting,
+      data_s: GeojsonExiStops
     },
     "Existing BRT Feeders": {
       name: "Existing Feeders",
@@ -127,9 +136,9 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
       id: "A",
       fullName: "Line2B Trunk",
       buslines: [
-        { key: "Existing", name: "No Line2B", data: null},
-        { key: "2BM", name: "2B - Mixed Traffic", data: Geojson2B},
-        { key: "2BR", name: "2B - Dedicated Lane", data: Geojson2B}],
+        { key: "Existing", name: "No Line2B", data: null, data_s: null},
+        { key: "2BM", name: "2B - Mixed Traffic", data: Geojson2B, data_s: Geojson2Bstops},
+        { key: "2BR", name: "2B - Dedicated Lane", data: Geojson2B, data_s: Geojson2Bstops}],
       baselineBuses: 2,
       baselineHeadwayTime: 30,
       weightOn: 6,
@@ -143,12 +152,12 @@ export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
       id: "B",
       fullName: "Line2B Feeders",
       buslines: [
-        { key: "F1", name: "Feeder 1", data: GeojsonF1},
-        { key: "F2", name: "Feeder 2", data: GeojsonF2},
-        { key: "F3", name: "Feeder 3", data: GeojsonF3},
-        { key: "F4", name: "Feeder 4", data: GeojsonF4},
-        { key: "F5", name: "Feeder 5", data: GeojsonF5},
-        { key: "F6", name: "Feeder 6", data: GeojsonF6}],
+        { key: "F1", name: "Feeder 1", data: GeojsonF1, data_s: GeojsonF1Stops},
+        { key: "F2", name: "Feeder 2", data: GeojsonF2, data_s: GeojsonF2Stops},
+        { key: "F3", name: "Feeder 3", data: GeojsonF3, data_s: GeojsonF3Stops},
+        { key: "F4", name: "Feeder 4", data: GeojsonF4, data_s: GeojsonF4Stops},
+        { key: "F5", name: "Feeder 5", data: GeojsonF5, data_s: GeojsonF5Stops},
+        { key: "F6", name: "Feeder 6", data: GeojsonF6, data_s: GeojsonF6Stops}],
       baselineBuses: 4,
       baselineHeadwayTime: 24,
       weightOn: 4,
