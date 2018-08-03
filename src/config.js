@@ -54,9 +54,7 @@ export const ZoomLevel = 13;
  */
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
-export const GRID_REGION_ID = "5a29e7d3896fd005dc77a617";
-
-export const GRID_NAME = "Jobs_total";
+export const OPPORTUNITY_DATASET_ID = "12345ABCDE"
 
 export const PROJECT_ID = "5a29eca1896fd005dc77a631";
 
