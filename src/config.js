@@ -54,6 +54,7 @@ export const ZoomLevel = 13;
  */
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/civ2rkezr00042ilnogrj4zjm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
+// Use the _id value for the desired opportunity dataset, which  can be determined by inspecting the response to a request to load the Opportunity Dataset page in Conveyal Analysis.
 export const OPPORTUNITY_DATASET_ID = "12345ABCDE"
 
 export const PROJECT_ID = "5a29eca1896fd005dc77a631";
