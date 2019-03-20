@@ -31,9 +31,8 @@ app.post('/api', function (request, response) {
 });
 
 app.post('/grid', function (request, response) {
-  let gridRegionID = request.body.gridRegionID;
-  let gridName = request.body.gridName;
-  fetch("https://analysis.conveyal.com/api/opportunities/" + gridRegionID + "/" + gridName, {
+  let id = request.body.opportunityDatasetId;
+  fetch("https://analysis.conveyal.com/api/opportunities/" + id, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
