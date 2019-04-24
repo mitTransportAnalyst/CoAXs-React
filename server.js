@@ -31,10 +31,11 @@ app.post('/api', function (request, response) {
 });
 
 app.post('/grid', function (request, response) {
-  let gridRegionID = request.body.gridRegionID;
-  let gridName = request.body.gridName;
+  // let gridRegionID = request.body.gridRegionID;
+  // let gridName = request.body.gridName;
+  let id = request.body.opportunityDatasetId;
   // console.log(process.env.API_TOKEN);
-  fetch("https://analysis.conveyal.com/api/opportunities/" + gridRegionID + "/" + gridName, {
+  fetch("https://analysis.conveyal.com/api/opportunities/" + id, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",

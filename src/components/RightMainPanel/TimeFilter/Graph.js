@@ -19,7 +19,7 @@ class Graph extends React.Component {
 
   render() {
     const tooltipforJob = (
-      <Tooltip id="tooltipforJob"><strong>The total number of jobs that can be reached is based on U.S. census
+      <Tooltip id="tooltipforJob"><strong>The total number of jobs that can be reached is based on 2014 Tshwane census
         data</strong></Tooltip>
     );
 

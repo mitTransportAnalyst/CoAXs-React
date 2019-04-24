@@ -30,8 +30,9 @@ import {
   NetworkInfo,
   CorridorInfo,
   PROJECT_ID,
-  GRID_REGION_ID,
-  GRID_NAME,
+  // GRID_REGION_ID,
+  // GRID_NAME,
+  OPPORTUNITY_DATASET_ID,
   BaselineRequest,
   NewScenarioRequest,
   API_URL,
@@ -72,8 +73,9 @@ class ScenarioMap extends React.Component {
       },
       body: JSON.stringify(
         {
-          gridRegionID: GRID_REGION_ID,
-          gridName: GRID_NAME,
+          // gridRegionID: GRID_REGION_ID,
+          // gridName: GRID_NAME,
+          opportunityDatasetId: OPPORTUNITY_DATASET_ID,
         }
       )
     })

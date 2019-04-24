@@ -76,9 +76,11 @@ export const ZoomLevel = 13;
  */
 export const Tile = 'https://api.mapbox.com/styles/v1/ctrob/cjivrlmdj13zm2rpfz067fvex/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY3Ryb2IiLCJhIjoiY2lrZTh5ajZkMDAzcnZmbHo4ZzBjdTBiaSJ9.vcZYiN_V3wV-VS3-KMoQdg';
 
-export const GRID_REGION_ID = "ae8ce7fb-3967-4910-af09-5cc93ecaf60e";
-
-export const GRID_NAME = "Jobs_Jobs_0326";//Get this from Conveyal analysis, use the file name when click "download .grid file"
+// export const GRID_REGION_ID = "ae8ce7fb-3967-4910-af09-5cc93ecaf60e";
+//
+// export const GRID_NAME = "Jobs_Jobs_0326";//Get this from Conveyal analysis, use the file name when click "download .grid file"
+// Use the _id value for the desired opportunity dataset, which  can be determined by inspecting the response to a request to load the Opportunity Dataset page in Conveyal Analysis.
+export const OPPORTUNITY_DATASET_ID = "5b6afe1f50c63e060453b252"
 
 export const PROJECT_ID = "5ab914c5896fd02e6b156a9d"; //Pretoria_0326
 // export const PROJECT_ID = "5a9ea55c896fd02e4fd761c4"; //Pretoria_0307
